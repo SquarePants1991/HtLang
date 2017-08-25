@@ -39,34 +39,86 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     DoubleLiteral = 258,
-     Add = 259,
-     Sub = 260,
-     Mul = 261,
-     Div = 262,
-     CR = 263
+     IntLiteral = 258,
+     DoubleLiteral = 259,
+     BoolLiteral = 260,
+     IDENTIFIER = 261,
+     ExpressionValue = 262,
+     EQ = 263,
+     INT = 264,
+     DOUBLE = 265,
+     BOOL = 266,
+     SEMI = 267,
+     COMMA = 268,
+     COLON = 269,
+     IF = 270,
+     FOR = 271,
+     FUNC = 272,
+     ADD = 273,
+     SUB = 274,
+     MUL = 275,
+     DIV = 276,
+     LB = 277,
+     RB = 278,
+     LCB = 279,
+     RCB = 280,
+     GT = 281,
+     LT = 282,
+     GE = 283,
+     LE = 284,
+     RANGE_UNCLOSE = 285,
+     RANGE_CLOSE = 286,
+     IN = 287,
+     COMMENT_ONE_LINE = 288
    };
 #endif
 /* Tokens.  */
-#define DoubleLiteral 258
-#define Add 259
-#define Sub 260
-#define Mul 261
-#define Div 262
-#define CR 263
+#define IntLiteral 258
+#define DoubleLiteral 259
+#define BoolLiteral 260
+#define IDENTIFIER 261
+#define ExpressionValue 262
+#define EQ 263
+#define INT 264
+#define DOUBLE 265
+#define BOOL 266
+#define SEMI 267
+#define COMMA 268
+#define COLON 269
+#define IF 270
+#define FOR 271
+#define FUNC 272
+#define ADD 273
+#define SUB 274
+#define MUL 275
+#define DIV 276
+#define LB 277
+#define RB 278
+#define LCB 279
+#define RCB 280
+#define GT 281
+#define LT 282
+#define GE 283
+#define LE 284
+#define RANGE_UNCLOSE 285
+#define RANGE_CLOSE 286
+#define IN 287
+#define COMMENT_ONE_LINE 288
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 7 "bison.y"
+#line 8 "./bison.y"
 {
-    int     intValue;
+    HTExpression expressionValue;
+    int intValue;
     double  doubleValue;
+    unsigned char boolValue;
 }
 /* Line 1529 of yacc.c.  */
-#line 70 "bison.tab.h"
+#line 122 "./src/bison.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

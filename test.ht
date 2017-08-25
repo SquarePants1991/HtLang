@@ -1,0 +1,14 @@
+int a = 4;
+int b;
+int c;
+if 33 {
+    int c = 4 + 3;
+}
+for i in 0..<5 {
+
+}
+
+func add(int a, int b): int {
+    int c = a + b;
+    print(c);
+}
