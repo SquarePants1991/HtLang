@@ -5,7 +5,7 @@ if 33 {
     int c = 4 + 3;
 }
 for i in 0..<5 {
-
+	int a = 2;
 }
 
 func add(int a, int b): int {

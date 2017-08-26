@@ -10,73 +10,65 @@ Terminals which are not used
    COMMENT_ONE_LINE
 
 
-State 0 conflicts: 9 shift/reduce
-State 41 conflicts: 9 shift/reduce
-State 65 conflicts: 9 shift/reduce
-State 78 conflicts: 9 shift/reduce
-State 82 conflicts: 9 shift/reduce
-
-
 Grammar
 
     0 $accept: statementList $end
 
     1 statementList: statement
     2              | statementList statement
-    3              | /* empty */
 
-    4 statement: expression SEMI
-    5          | assignStatement
-    6          | defineStatement
-    7          | ifStatement
-    8          | forStatement
-    9          | funcDefStatement
-   10          | funcCallStatement
+    3 statement: expression SEMI
+    4          | assignStatement
+    5          | defineStatement
+    6          | ifStatement
+    7          | forStatement
+    8          | funcDefStatement
+    9          | funcCallStatement
 
-   11 assignStatement: IDENTIFIER EQ expression SEMI
+   10 assignStatement: IDENTIFIER EQ expression SEMI
 
-   12 defineStatement: dataType IDENTIFIER SEMI
-   13                | dataType IDENTIFIER EQ expression SEMI
+   11 defineStatement: dataType IDENTIFIER SEMI
+   12                | dataType IDENTIFIER EQ expression SEMI
 
-   14 ifStatement: IF expression LCB statementList RCB
+   13 ifStatement: IF expression LCB statementList RCB
 
-   15 forStatement: FOR IDENTIFIER IN rangeExpression LCB statementList RCB
+   14 forStatement: FOR IDENTIFIER IN rangeExpression LCB statementList RCB
 
-   16 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB statementList RCB
-   17                 | FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB
+   15 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB statementList RCB
+   16                 | FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB
 
-   18 funcCallStatement: IDENTIFIER LB parameterList RB SEMI
+   17 funcCallStatement: IDENTIFIER LB parameterList RB SEMI
 
-   19 parameterDefList: parameterDef
-   20                 | parameterDefList parameterDef
+   18 parameterDefList: parameterDef
+   19                 | parameterDefList parameterDef
 
-   21 parameterDef: INT IDENTIFIER
-   22             | INT IDENTIFIER COMMA
+   20 parameterDef: INT IDENTIFIER
+   21             | INT IDENTIFIER COMMA
 
-   23 parameterList: parameter
-   24              | parameterList parameter
+   22 parameterList: parameter
+   23              | parameterList parameter
 
-   25 parameter: IDENTIFIER
-   26          | IDENTIFIER COMMA
+   24 parameter: IDENTIFIER
+   25          | IDENTIFIER COMMA
 
-   27 rangeExpression: expression RANGE_UNCLOSE expression
-   28                | expression RANGE_CLOSE expression
+   26 rangeExpression: expression RANGE_UNCLOSE expression
+   27                | expression RANGE_CLOSE expression
 
-   29 expression: term
-   30           | expression ADD term
-   31           | expression SUB term
+   28 expression: term
+   29           | expression ADD term
+   30           | expression SUB term
 
-   32 term: primaryExpression
-   33     | term MUL primaryExpression
-   34     | term DIV primaryExpression
+   31 term: primaryExpression
+   32     | term MUL primaryExpression
+   33     | term DIV primaryExpression
 
-   35 primaryExpression: ExpressionValue
-   36                  | IDENTIFIER
-   37                  | LB expression RB
+   34 primaryExpression: ExpressionValue
+   35                  | IDENTIFIER
+   36                  | LB expression RB
 
-   38 dataType: INT
-   39         | DOUBLE
-   40         | BOOL
+   37 dataType: INT
+   38         | DOUBLE
+   39         | BOOL
 
 
 Terminals, with rules where they appear
@@ -86,33 +78,33 @@ error (256)
 IntLiteral (258)
 DoubleLiteral (259)
 BoolLiteral (260)
-IDENTIFIER (261) 11 12 13 15 16 17 18 21 22 25 26 36
-ExpressionValue (262) 35
-EQ (263) 11 13
-INT (264) 21 22 38
-DOUBLE (265) 39
-BOOL (266) 40
-SEMI (267) 4 11 12 13 18
-COMMA (268) 22 26
-COLON (269) 17
-IF (270) 14
-FOR (271) 15
-FUNC (272) 16 17
-ADD (273) 30
-SUB (274) 31
-MUL (275) 33
-DIV (276) 34
-LB (277) 16 17 18 37
-RB (278) 16 17 18 37
-LCB (279) 14 15 16 17
-RCB (280) 14 15 16 17
+IDENTIFIER (261) 10 11 12 14 15 16 17 20 21 24 25 35
+ExpressionValue (262) 34
+EQ (263) 10 12
+INT (264) 20 21 37
+DOUBLE (265) 38
+BOOL (266) 39
+SEMI (267) 3 10 11 12 17
+COMMA (268) 21 25
+COLON (269) 16
+IF (270) 13
+FOR (271) 14
+FUNC (272) 15 16
+ADD (273) 29
+SUB (274) 30
+MUL (275) 32
+DIV (276) 33
+LB (277) 15 16 17 36
+RB (278) 15 16 17 36
+LCB (279) 13 14 15 16
+RCB (280) 13 14 15 16
 GT (281)
 LT (282)
 GE (283)
 LE (284)
-RANGE_UNCLOSE (285) 27
-RANGE_CLOSE (286) 28
-IN (287) 15
+RANGE_UNCLOSE (285) 26
+RANGE_CLOSE (286) 27
+IN (287) 14
 COMMENT_ONE_LINE (288)
 
 
@@ -121,39 +113,39 @@ Nonterminals, with rules where they appear
 $accept (34)
     on left: 0
 statementList (35)
-    on left: 1 2 3, on right: 0 2 14 15 16 17
+    on left: 1 2, on right: 0 2 13 14 15 16
 statement (36)
-    on left: 4 5 6 7 8 9 10, on right: 1 2
+    on left: 3 4 5 6 7 8 9, on right: 1 2
 assignStatement (37)
-    on left: 11, on right: 5
+    on left: 10, on right: 4
 defineStatement (38)
-    on left: 12 13, on right: 6
+    on left: 11 12, on right: 5
 ifStatement (39)
-    on left: 14, on right: 7
+    on left: 13, on right: 6
 forStatement (40)
-    on left: 15, on right: 8
+    on left: 14, on right: 7
 funcDefStatement (41)
-    on left: 16 17, on right: 9
+    on left: 15 16, on right: 8
 funcCallStatement (42)
-    on left: 18, on right: 10
+    on left: 17, on right: 9
 parameterDefList (43)
-    on left: 19 20, on right: 17 20
+    on left: 18 19, on right: 16 19
 parameterDef (44)
-    on left: 21 22, on right: 19 20
+    on left: 20 21, on right: 18 19
 parameterList (45)
-    on left: 23 24, on right: 16 18 24
+    on left: 22 23, on right: 15 17 23
 parameter (46)
-    on left: 25 26, on right: 23 24
+    on left: 24 25, on right: 22 23
 rangeExpression (47)
-    on left: 27 28, on right: 15
+    on left: 26 27, on right: 14
 expression (48)
-    on left: 29 30 31, on right: 4 11 13 14 27 28 30 31 37
+    on left: 28 29 30, on right: 3 10 12 13 26 27 29 30 36
 term (49)
-    on left: 32 33 34, on right: 29 30 31 33 34
+    on left: 31 32 33, on right: 28 29 30 32 33
 primaryExpression (50)
-    on left: 35 36 37, on right: 32 33 34
+    on left: 34 35 36, on right: 31 32 33
 dataType (51)
-    on left: 38 39 40, on right: 12 13 17
+    on left: 37 38 39, on right: 11 12 16
 
 
 state 0
@@ -169,17 +161,6 @@ state 0
     FOR              shift, and go to state 7
     FUNC             shift, and go to state 8
     LB               shift, and go to state 9
-
-    IDENTIFIER       [reduce using rule 3 (statementList)]
-    ExpressionValue  [reduce using rule 3 (statementList)]
-    INT              [reduce using rule 3 (statementList)]
-    DOUBLE           [reduce using rule 3 (statementList)]
-    BOOL             [reduce using rule 3 (statementList)]
-    IF               [reduce using rule 3 (statementList)]
-    FOR              [reduce using rule 3 (statementList)]
-    FUNC             [reduce using rule 3 (statementList)]
-    LB               [reduce using rule 3 (statementList)]
-    $default         reduce using rule 3 (statementList)
 
     statementList      go to state 10
     statement          go to state 11
@@ -197,47 +178,47 @@ state 0
 
 state 1
 
-   11 assignStatement: IDENTIFIER . EQ expression SEMI
-   18 funcCallStatement: IDENTIFIER . LB parameterList RB SEMI
-   36 primaryExpression: IDENTIFIER .
+   10 assignStatement: IDENTIFIER . EQ expression SEMI
+   17 funcCallStatement: IDENTIFIER . LB parameterList RB SEMI
+   35 primaryExpression: IDENTIFIER .
 
     EQ  shift, and go to state 22
     LB  shift, and go to state 23
 
-    $default  reduce using rule 36 (primaryExpression)
+    $default  reduce using rule 35 (primaryExpression)
 
 
 state 2
 
-   35 primaryExpression: ExpressionValue .
+   34 primaryExpression: ExpressionValue .
 
-    $default  reduce using rule 35 (primaryExpression)
+    $default  reduce using rule 34 (primaryExpression)
 
 
 state 3
 
-   38 dataType: INT .
+   37 dataType: INT .
 
-    $default  reduce using rule 38 (dataType)
+    $default  reduce using rule 37 (dataType)
 
 
 state 4
 
-   39 dataType: DOUBLE .
+   38 dataType: DOUBLE .
 
-    $default  reduce using rule 39 (dataType)
+    $default  reduce using rule 38 (dataType)
 
 
 state 5
 
-   40 dataType: BOOL .
+   39 dataType: BOOL .
 
-    $default  reduce using rule 40 (dataType)
+    $default  reduce using rule 39 (dataType)
 
 
 state 6
 
-   14 ifStatement: IF . expression LCB statementList RCB
+   13 ifStatement: IF . expression LCB statementList RCB
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -250,22 +231,22 @@ state 6
 
 state 7
 
-   15 forStatement: FOR . IDENTIFIER IN rangeExpression LCB statementList RCB
+   14 forStatement: FOR . IDENTIFIER IN rangeExpression LCB statementList RCB
 
     IDENTIFIER  shift, and go to state 26
 
 
 state 8
 
-   16 funcDefStatement: FUNC . IDENTIFIER LB parameterList RB LCB statementList RCB
-   17                 | FUNC . IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB
+   15 funcDefStatement: FUNC . IDENTIFIER LB parameterList RB LCB statementList RCB
+   16                 | FUNC . IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB
 
     IDENTIFIER  shift, and go to state 27
 
 
 state 9
 
-   37 primaryExpression: LB . expression RB
+   36 primaryExpression: LB . expression RB
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -314,51 +295,51 @@ state 11
 
 state 12
 
-    5 statement: assignStatement .
+    4 statement: assignStatement .
 
-    $default  reduce using rule 5 (statement)
+    $default  reduce using rule 4 (statement)
 
 
 state 13
 
-    6 statement: defineStatement .
+    5 statement: defineStatement .
 
-    $default  reduce using rule 6 (statement)
+    $default  reduce using rule 5 (statement)
 
 
 state 14
 
-    7 statement: ifStatement .
+    6 statement: ifStatement .
 
-    $default  reduce using rule 7 (statement)
+    $default  reduce using rule 6 (statement)
 
 
 state 15
 
-    8 statement: forStatement .
+    7 statement: forStatement .
 
-    $default  reduce using rule 8 (statement)
+    $default  reduce using rule 7 (statement)
 
 
 state 16
 
-    9 statement: funcDefStatement .
+    8 statement: funcDefStatement .
 
-    $default  reduce using rule 9 (statement)
+    $default  reduce using rule 8 (statement)
 
 
 state 17
 
-   10 statement: funcCallStatement .
+    9 statement: funcCallStatement .
 
-    $default  reduce using rule 10 (statement)
+    $default  reduce using rule 9 (statement)
 
 
 state 18
 
-    4 statement: expression . SEMI
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+    3 statement: expression . SEMI
+   29 expression: expression . ADD term
+   30           | expression . SUB term
 
     SEMI  shift, and go to state 31
     ADD   shift, and go to state 32
@@ -367,34 +348,34 @@ state 18
 
 state 19
 
-   29 expression: term .
-   33 term: term . MUL primaryExpression
-   34     | term . DIV primaryExpression
+   28 expression: term .
+   32 term: term . MUL primaryExpression
+   33     | term . DIV primaryExpression
 
     MUL  shift, and go to state 34
     DIV  shift, and go to state 35
 
-    $default  reduce using rule 29 (expression)
+    $default  reduce using rule 28 (expression)
 
 
 state 20
 
-   32 term: primaryExpression .
+   31 term: primaryExpression .
 
-    $default  reduce using rule 32 (term)
+    $default  reduce using rule 31 (term)
 
 
 state 21
 
-   12 defineStatement: dataType . IDENTIFIER SEMI
-   13                | dataType . IDENTIFIER EQ expression SEMI
+   11 defineStatement: dataType . IDENTIFIER SEMI
+   12                | dataType . IDENTIFIER EQ expression SEMI
 
     IDENTIFIER  shift, and go to state 36
 
 
 state 22
 
-   11 assignStatement: IDENTIFIER EQ . expression SEMI
+   10 assignStatement: IDENTIFIER EQ . expression SEMI
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -407,7 +388,7 @@ state 22
 
 state 23
 
-   18 funcCallStatement: IDENTIFIER LB . parameterList RB SEMI
+   17 funcCallStatement: IDENTIFIER LB . parameterList RB SEMI
 
     IDENTIFIER  shift, and go to state 38
 
@@ -417,16 +398,16 @@ state 23
 
 state 24
 
-   36 primaryExpression: IDENTIFIER .
+   35 primaryExpression: IDENTIFIER .
 
-    $default  reduce using rule 36 (primaryExpression)
+    $default  reduce using rule 35 (primaryExpression)
 
 
 state 25
 
-   14 ifStatement: IF expression . LCB statementList RCB
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   13 ifStatement: IF expression . LCB statementList RCB
+   29 expression: expression . ADD term
+   30           | expression . SUB term
 
     ADD  shift, and go to state 32
     SUB  shift, and go to state 33
@@ -435,24 +416,24 @@ state 25
 
 state 26
 
-   15 forStatement: FOR IDENTIFIER . IN rangeExpression LCB statementList RCB
+   14 forStatement: FOR IDENTIFIER . IN rangeExpression LCB statementList RCB
 
     IN  shift, and go to state 42
 
 
 state 27
 
-   16 funcDefStatement: FUNC IDENTIFIER . LB parameterList RB LCB statementList RCB
-   17                 | FUNC IDENTIFIER . LB parameterDefList RB COLON dataType LCB statementList RCB
+   15 funcDefStatement: FUNC IDENTIFIER . LB parameterList RB LCB statementList RCB
+   16                 | FUNC IDENTIFIER . LB parameterDefList RB COLON dataType LCB statementList RCB
 
     LB  shift, and go to state 43
 
 
 state 28
 
-   30 expression: expression . ADD term
-   31           | expression . SUB term
-   37 primaryExpression: LB expression . RB
+   29 expression: expression . ADD term
+   30           | expression . SUB term
+   36 primaryExpression: LB expression . RB
 
     ADD  shift, and go to state 32
     SUB  shift, and go to state 33
@@ -475,14 +456,14 @@ state 30
 
 state 31
 
-    4 statement: expression SEMI .
+    3 statement: expression SEMI .
 
-    $default  reduce using rule 4 (statement)
+    $default  reduce using rule 3 (statement)
 
 
 state 32
 
-   30 expression: expression ADD . term
+   29 expression: expression ADD . term
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -494,7 +475,7 @@ state 32
 
 state 33
 
-   31 expression: expression SUB . term
+   30 expression: expression SUB . term
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -506,7 +487,7 @@ state 33
 
 state 34
 
-   33 term: term MUL . primaryExpression
+   32 term: term MUL . primaryExpression
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -517,7 +498,7 @@ state 34
 
 state 35
 
-   34 term: term DIV . primaryExpression
+   33 term: term DIV . primaryExpression
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -528,8 +509,8 @@ state 35
 
 state 36
 
-   12 defineStatement: dataType IDENTIFIER . SEMI
-   13                | dataType IDENTIFIER . EQ expression SEMI
+   11 defineStatement: dataType IDENTIFIER . SEMI
+   12                | dataType IDENTIFIER . EQ expression SEMI
 
     EQ    shift, and go to state 49
     SEMI  shift, and go to state 50
@@ -537,9 +518,9 @@ state 36
 
 state 37
 
-   11 assignStatement: IDENTIFIER EQ expression . SEMI
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   10 assignStatement: IDENTIFIER EQ expression . SEMI
+   29 expression: expression . ADD term
+   30           | expression . SUB term
 
     SEMI  shift, and go to state 51
     ADD   shift, and go to state 32
@@ -548,18 +529,18 @@ state 37
 
 state 38
 
-   25 parameter: IDENTIFIER .
-   26          | IDENTIFIER . COMMA
+   24 parameter: IDENTIFIER .
+   25          | IDENTIFIER . COMMA
 
     COMMA  shift, and go to state 52
 
-    $default  reduce using rule 25 (parameter)
+    $default  reduce using rule 24 (parameter)
 
 
 state 39
 
-   18 funcCallStatement: IDENTIFIER LB parameterList . RB SEMI
-   24 parameterList: parameterList . parameter
+   17 funcCallStatement: IDENTIFIER LB parameterList . RB SEMI
+   23 parameterList: parameterList . parameter
 
     IDENTIFIER  shift, and go to state 38
     RB          shift, and go to state 53
@@ -569,14 +550,14 @@ state 39
 
 state 40
 
-   23 parameterList: parameter .
+   22 parameterList: parameter .
 
-    $default  reduce using rule 23 (parameterList)
+    $default  reduce using rule 22 (parameterList)
 
 
 state 41
 
-   14 ifStatement: IF expression LCB . statementList RCB
+   13 ifStatement: IF expression LCB . statementList RCB
 
     IDENTIFIER       shift, and go to state 1
     ExpressionValue  shift, and go to state 2
@@ -587,17 +568,6 @@ state 41
     FOR              shift, and go to state 7
     FUNC             shift, and go to state 8
     LB               shift, and go to state 9
-
-    IDENTIFIER       [reduce using rule 3 (statementList)]
-    ExpressionValue  [reduce using rule 3 (statementList)]
-    INT              [reduce using rule 3 (statementList)]
-    DOUBLE           [reduce using rule 3 (statementList)]
-    BOOL             [reduce using rule 3 (statementList)]
-    IF               [reduce using rule 3 (statementList)]
-    FOR              [reduce using rule 3 (statementList)]
-    FUNC             [reduce using rule 3 (statementList)]
-    LB               [reduce using rule 3 (statementList)]
-    $default         reduce using rule 3 (statementList)
 
     statementList      go to state 55
     statement          go to state 11
@@ -615,7 +585,7 @@ state 41
 
 state 42
 
-   15 forStatement: FOR IDENTIFIER IN . rangeExpression LCB statementList RCB
+   14 forStatement: FOR IDENTIFIER IN . rangeExpression LCB statementList RCB
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -629,8 +599,8 @@ state 42
 
 state 43
 
-   16 funcDefStatement: FUNC IDENTIFIER LB . parameterList RB LCB statementList RCB
-   17                 | FUNC IDENTIFIER LB . parameterDefList RB COLON dataType LCB statementList RCB
+   15 funcDefStatement: FUNC IDENTIFIER LB . parameterList RB LCB statementList RCB
+   16                 | FUNC IDENTIFIER LB . parameterDefList RB COLON dataType LCB statementList RCB
 
     IDENTIFIER  shift, and go to state 38
     INT         shift, and go to state 58
@@ -643,16 +613,28 @@ state 43
 
 state 44
 
-   37 primaryExpression: LB expression RB .
+   36 primaryExpression: LB expression RB .
 
-    $default  reduce using rule 37 (primaryExpression)
+    $default  reduce using rule 36 (primaryExpression)
 
 
 state 45
 
-   30 expression: expression ADD term .
-   33 term: term . MUL primaryExpression
-   34     | term . DIV primaryExpression
+   29 expression: expression ADD term .
+   32 term: term . MUL primaryExpression
+   33     | term . DIV primaryExpression
+
+    MUL  shift, and go to state 34
+    DIV  shift, and go to state 35
+
+    $default  reduce using rule 29 (expression)
+
+
+state 46
+
+   30 expression: expression SUB term .
+   32 term: term . MUL primaryExpression
+   33     | term . DIV primaryExpression
 
     MUL  shift, and go to state 34
     DIV  shift, and go to state 35
@@ -660,35 +642,23 @@ state 45
     $default  reduce using rule 30 (expression)
 
 
-state 46
-
-   31 expression: expression SUB term .
-   33 term: term . MUL primaryExpression
-   34     | term . DIV primaryExpression
-
-    MUL  shift, and go to state 34
-    DIV  shift, and go to state 35
-
-    $default  reduce using rule 31 (expression)
-
-
 state 47
 
-   33 term: term MUL primaryExpression .
+   32 term: term MUL primaryExpression .
 
-    $default  reduce using rule 33 (term)
+    $default  reduce using rule 32 (term)
 
 
 state 48
 
-   34 term: term DIV primaryExpression .
+   33 term: term DIV primaryExpression .
 
-    $default  reduce using rule 34 (term)
+    $default  reduce using rule 33 (term)
 
 
 state 49
 
-   13 defineStatement: dataType IDENTIFIER EQ . expression SEMI
+   12 defineStatement: dataType IDENTIFIER EQ . expression SEMI
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -701,43 +671,43 @@ state 49
 
 state 50
 
-   12 defineStatement: dataType IDENTIFIER SEMI .
+   11 defineStatement: dataType IDENTIFIER SEMI .
 
-    $default  reduce using rule 12 (defineStatement)
+    $default  reduce using rule 11 (defineStatement)
 
 
 state 51
 
-   11 assignStatement: IDENTIFIER EQ expression SEMI .
+   10 assignStatement: IDENTIFIER EQ expression SEMI .
 
-    $default  reduce using rule 11 (assignStatement)
+    $default  reduce using rule 10 (assignStatement)
 
 
 state 52
 
-   26 parameter: IDENTIFIER COMMA .
+   25 parameter: IDENTIFIER COMMA .
 
-    $default  reduce using rule 26 (parameter)
+    $default  reduce using rule 25 (parameter)
 
 
 state 53
 
-   18 funcCallStatement: IDENTIFIER LB parameterList RB . SEMI
+   17 funcCallStatement: IDENTIFIER LB parameterList RB . SEMI
 
     SEMI  shift, and go to state 63
 
 
 state 54
 
-   24 parameterList: parameterList parameter .
+   23 parameterList: parameterList parameter .
 
-    $default  reduce using rule 24 (parameterList)
+    $default  reduce using rule 23 (parameterList)
 
 
 state 55
 
     2 statementList: statementList . statement
-   14 ifStatement: IF expression LCB statementList . RCB
+   13 ifStatement: IF expression LCB statementList . RCB
 
     IDENTIFIER       shift, and go to state 1
     ExpressionValue  shift, and go to state 2
@@ -765,17 +735,17 @@ state 55
 
 state 56
 
-   15 forStatement: FOR IDENTIFIER IN rangeExpression . LCB statementList RCB
+   14 forStatement: FOR IDENTIFIER IN rangeExpression . LCB statementList RCB
 
     LCB  shift, and go to state 65
 
 
 state 57
 
-   27 rangeExpression: expression . RANGE_UNCLOSE expression
-   28                | expression . RANGE_CLOSE expression
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   26 rangeExpression: expression . RANGE_UNCLOSE expression
+   27                | expression . RANGE_CLOSE expression
+   29 expression: expression . ADD term
+   30           | expression . SUB term
 
     ADD            shift, and go to state 32
     SUB            shift, and go to state 33
@@ -785,16 +755,16 @@ state 57
 
 state 58
 
-   21 parameterDef: INT . IDENTIFIER
-   22             | INT . IDENTIFIER COMMA
+   20 parameterDef: INT . IDENTIFIER
+   21             | INT . IDENTIFIER COMMA
 
     IDENTIFIER  shift, and go to state 68
 
 
 state 59
 
-   17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList . RB COLON dataType LCB statementList RCB
-   20 parameterDefList: parameterDefList . parameterDef
+   16 funcDefStatement: FUNC IDENTIFIER LB parameterDefList . RB COLON dataType LCB statementList RCB
+   19 parameterDefList: parameterDefList . parameterDef
 
     INT  shift, and go to state 58
     RB   shift, and go to state 69
@@ -804,15 +774,15 @@ state 59
 
 state 60
 
-   19 parameterDefList: parameterDef .
+   18 parameterDefList: parameterDef .
 
-    $default  reduce using rule 19 (parameterDefList)
+    $default  reduce using rule 18 (parameterDefList)
 
 
 state 61
 
-   16 funcDefStatement: FUNC IDENTIFIER LB parameterList . RB LCB statementList RCB
-   24 parameterList: parameterList . parameter
+   15 funcDefStatement: FUNC IDENTIFIER LB parameterList . RB LCB statementList RCB
+   23 parameterList: parameterList . parameter
 
     IDENTIFIER  shift, and go to state 38
     RB          shift, and go to state 71
@@ -822,9 +792,9 @@ state 61
 
 state 62
 
-   13 defineStatement: dataType IDENTIFIER EQ expression . SEMI
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   12 defineStatement: dataType IDENTIFIER EQ expression . SEMI
+   29 expression: expression . ADD term
+   30           | expression . SUB term
 
     SEMI  shift, and go to state 72
     ADD   shift, and go to state 32
@@ -833,21 +803,21 @@ state 62
 
 state 63
 
-   18 funcCallStatement: IDENTIFIER LB parameterList RB SEMI .
+   17 funcCallStatement: IDENTIFIER LB parameterList RB SEMI .
 
-    $default  reduce using rule 18 (funcCallStatement)
+    $default  reduce using rule 17 (funcCallStatement)
 
 
 state 64
 
-   14 ifStatement: IF expression LCB statementList RCB .
+   13 ifStatement: IF expression LCB statementList RCB .
 
-    $default  reduce using rule 14 (ifStatement)
+    $default  reduce using rule 13 (ifStatement)
 
 
 state 65
 
-   15 forStatement: FOR IDENTIFIER IN rangeExpression LCB . statementList RCB
+   14 forStatement: FOR IDENTIFIER IN rangeExpression LCB . statementList RCB
 
     IDENTIFIER       shift, and go to state 1
     ExpressionValue  shift, and go to state 2
@@ -858,17 +828,6 @@ state 65
     FOR              shift, and go to state 7
     FUNC             shift, and go to state 8
     LB               shift, and go to state 9
-
-    IDENTIFIER       [reduce using rule 3 (statementList)]
-    ExpressionValue  [reduce using rule 3 (statementList)]
-    INT              [reduce using rule 3 (statementList)]
-    DOUBLE           [reduce using rule 3 (statementList)]
-    BOOL             [reduce using rule 3 (statementList)]
-    IF               [reduce using rule 3 (statementList)]
-    FOR              [reduce using rule 3 (statementList)]
-    FUNC             [reduce using rule 3 (statementList)]
-    LB               [reduce using rule 3 (statementList)]
-    $default         reduce using rule 3 (statementList)
 
     statementList      go to state 73
     statement          go to state 11
@@ -886,7 +845,7 @@ state 65
 
 state 66
 
-   27 rangeExpression: expression RANGE_UNCLOSE . expression
+   26 rangeExpression: expression RANGE_UNCLOSE . expression
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -899,7 +858,7 @@ state 66
 
 state 67
 
-   28 rangeExpression: expression RANGE_CLOSE . expression
+   27 rangeExpression: expression RANGE_CLOSE . expression
 
     IDENTIFIER       shift, and go to state 24
     ExpressionValue  shift, and go to state 2
@@ -912,46 +871,46 @@ state 67
 
 state 68
 
-   21 parameterDef: INT IDENTIFIER .
-   22             | INT IDENTIFIER . COMMA
+   20 parameterDef: INT IDENTIFIER .
+   21             | INT IDENTIFIER . COMMA
 
     COMMA  shift, and go to state 76
 
-    $default  reduce using rule 21 (parameterDef)
+    $default  reduce using rule 20 (parameterDef)
 
 
 state 69
 
-   17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB . COLON dataType LCB statementList RCB
+   16 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB . COLON dataType LCB statementList RCB
 
     COLON  shift, and go to state 77
 
 
 state 70
 
-   20 parameterDefList: parameterDefList parameterDef .
+   19 parameterDefList: parameterDefList parameterDef .
 
-    $default  reduce using rule 20 (parameterDefList)
+    $default  reduce using rule 19 (parameterDefList)
 
 
 state 71
 
-   16 funcDefStatement: FUNC IDENTIFIER LB parameterList RB . LCB statementList RCB
+   15 funcDefStatement: FUNC IDENTIFIER LB parameterList RB . LCB statementList RCB
 
     LCB  shift, and go to state 78
 
 
 state 72
 
-   13 defineStatement: dataType IDENTIFIER EQ expression SEMI .
+   12 defineStatement: dataType IDENTIFIER EQ expression SEMI .
 
-    $default  reduce using rule 13 (defineStatement)
+    $default  reduce using rule 12 (defineStatement)
 
 
 state 73
 
     2 statementList: statementList . statement
-   15 forStatement: FOR IDENTIFIER IN rangeExpression LCB statementList . RCB
+   14 forStatement: FOR IDENTIFIER IN rangeExpression LCB statementList . RCB
 
     IDENTIFIER       shift, and go to state 1
     ExpressionValue  shift, and go to state 2
@@ -979,9 +938,21 @@ state 73
 
 state 74
 
-   27 rangeExpression: expression RANGE_UNCLOSE expression .
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   26 rangeExpression: expression RANGE_UNCLOSE expression .
+   29 expression: expression . ADD term
+   30           | expression . SUB term
+
+    ADD  shift, and go to state 32
+    SUB  shift, and go to state 33
+
+    $default  reduce using rule 26 (rangeExpression)
+
+
+state 75
+
+   27 rangeExpression: expression RANGE_CLOSE expression .
+   29 expression: expression . ADD term
+   30           | expression . SUB term
 
     ADD  shift, and go to state 32
     SUB  shift, and go to state 33
@@ -989,28 +960,16 @@ state 74
     $default  reduce using rule 27 (rangeExpression)
 
 
-state 75
-
-   28 rangeExpression: expression RANGE_CLOSE expression .
-   30 expression: expression . ADD term
-   31           | expression . SUB term
-
-    ADD  shift, and go to state 32
-    SUB  shift, and go to state 33
-
-    $default  reduce using rule 28 (rangeExpression)
-
-
 state 76
 
-   22 parameterDef: INT IDENTIFIER COMMA .
+   21 parameterDef: INT IDENTIFIER COMMA .
 
-    $default  reduce using rule 22 (parameterDef)
+    $default  reduce using rule 21 (parameterDef)
 
 
 state 77
 
-   17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON . dataType LCB statementList RCB
+   16 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON . dataType LCB statementList RCB
 
     INT     shift, and go to state 3
     DOUBLE  shift, and go to state 4
@@ -1021,7 +980,7 @@ state 77
 
 state 78
 
-   16 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB . statementList RCB
+   15 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB . statementList RCB
 
     IDENTIFIER       shift, and go to state 1
     ExpressionValue  shift, and go to state 2
@@ -1032,17 +991,6 @@ state 78
     FOR              shift, and go to state 7
     FUNC             shift, and go to state 8
     LB               shift, and go to state 9
-
-    IDENTIFIER       [reduce using rule 3 (statementList)]
-    ExpressionValue  [reduce using rule 3 (statementList)]
-    INT              [reduce using rule 3 (statementList)]
-    DOUBLE           [reduce using rule 3 (statementList)]
-    BOOL             [reduce using rule 3 (statementList)]
-    IF               [reduce using rule 3 (statementList)]
-    FOR              [reduce using rule 3 (statementList)]
-    FUNC             [reduce using rule 3 (statementList)]
-    LB               [reduce using rule 3 (statementList)]
-    $default         reduce using rule 3 (statementList)
 
     statementList      go to state 81
     statement          go to state 11
@@ -1060,14 +1008,14 @@ state 78
 
 state 79
 
-   15 forStatement: FOR IDENTIFIER IN rangeExpression LCB statementList RCB .
+   14 forStatement: FOR IDENTIFIER IN rangeExpression LCB statementList RCB .
 
-    $default  reduce using rule 15 (forStatement)
+    $default  reduce using rule 14 (forStatement)
 
 
 state 80
 
-   17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType . LCB statementList RCB
+   16 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType . LCB statementList RCB
 
     LCB  shift, and go to state 82
 
@@ -1075,7 +1023,7 @@ state 80
 state 81
 
     2 statementList: statementList . statement
-   16 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB statementList . RCB
+   15 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB statementList . RCB
 
     IDENTIFIER       shift, and go to state 1
     ExpressionValue  shift, and go to state 2
@@ -1103,7 +1051,7 @@ state 81
 
 state 82
 
-   17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB . statementList RCB
+   16 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB . statementList RCB
 
     IDENTIFIER       shift, and go to state 1
     ExpressionValue  shift, and go to state 2
@@ -1114,17 +1062,6 @@ state 82
     FOR              shift, and go to state 7
     FUNC             shift, and go to state 8
     LB               shift, and go to state 9
-
-    IDENTIFIER       [reduce using rule 3 (statementList)]
-    ExpressionValue  [reduce using rule 3 (statementList)]
-    INT              [reduce using rule 3 (statementList)]
-    DOUBLE           [reduce using rule 3 (statementList)]
-    BOOL             [reduce using rule 3 (statementList)]
-    IF               [reduce using rule 3 (statementList)]
-    FOR              [reduce using rule 3 (statementList)]
-    FUNC             [reduce using rule 3 (statementList)]
-    LB               [reduce using rule 3 (statementList)]
-    $default         reduce using rule 3 (statementList)
 
     statementList      go to state 84
     statement          go to state 11
@@ -1142,15 +1079,15 @@ state 82
 
 state 83
 
-   16 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB statementList RCB .
+   15 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB statementList RCB .
 
-    $default  reduce using rule 16 (funcDefStatement)
+    $default  reduce using rule 15 (funcDefStatement)
 
 
 state 84
 
     2 statementList: statementList . statement
-   17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList . RCB
+   16 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList . RCB
 
     IDENTIFIER       shift, and go to state 1
     ExpressionValue  shift, and go to state 2
@@ -1178,6 +1115,6 @@ state 84
 
 state 85
 
-   17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB .
+   16 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB .
 
-    $default  reduce using rule 17 (funcDefStatement)
+    $default  reduce using rule 16 (funcDefStatement)
