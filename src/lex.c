@@ -490,7 +490,7 @@ char *yytext;
 #line 2 "./lex.l"
 
 #include <stdio.h>
-#include "../HTInterpreter.h"
+#include "../src/interpreter/HTInterpreter.h"
 #include "bison.h"
 
 int yywrap(void) {
@@ -902,14 +902,14 @@ YY_RULE_SETUP
     double doubleVal;
     sscanf(yytext, "%lf", &doubleVal);
     yylval.expressionValue = HTExpressionCreateDouble(doubleVal);
-    return ExpressionValue;
+    return Literal;
 }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
 #line 54 "./lex.l"
 {
-    yylval.expressionValue = HTExpressionCreateDouble(2);
+    yylval.expressionValue = HTExpressionCreateIdentifier(HTStringCreate(yytext));
     return IDENTIFIER;
 }
 	YY_BREAK

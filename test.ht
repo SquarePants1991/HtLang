@@ -1,6 +1,7 @@
 int a = 4;
 int b;
 int c;
+a = 5;
 if 33 {
     int c = 4 + 3;
 }

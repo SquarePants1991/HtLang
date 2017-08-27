@@ -43,33 +43,34 @@
      DoubleLiteral = 259,
      BoolLiteral = 260,
      IDENTIFIER = 261,
-     ExpressionValue = 262,
-     EQ = 263,
-     INT = 264,
-     DOUBLE = 265,
-     BOOL = 266,
-     SEMI = 267,
-     COMMA = 268,
-     COLON = 269,
-     IF = 270,
-     FOR = 271,
-     FUNC = 272,
-     ADD = 273,
-     SUB = 274,
-     MUL = 275,
-     DIV = 276,
-     LB = 277,
-     RB = 278,
-     LCB = 279,
-     RCB = 280,
-     GT = 281,
-     LT = 282,
-     GE = 283,
-     LE = 284,
-     RANGE_UNCLOSE = 285,
-     RANGE_CLOSE = 286,
-     IN = 287,
-     COMMENT_ONE_LINE = 288
+     Literal = 262,
+     Statement = 263,
+     EQ = 264,
+     INT = 265,
+     DOUBLE = 266,
+     BOOL = 267,
+     SEMI = 268,
+     COMMA = 269,
+     COLON = 270,
+     IF = 271,
+     FOR = 272,
+     FUNC = 273,
+     ADD = 274,
+     SUB = 275,
+     MUL = 276,
+     DIV = 277,
+     LB = 278,
+     RB = 279,
+     LCB = 280,
+     RCB = 281,
+     GT = 282,
+     LT = 283,
+     GE = 284,
+     LE = 285,
+     RANGE_UNCLOSE = 286,
+     RANGE_CLOSE = 287,
+     IN = 288,
+     COMMENT_ONE_LINE = 289
    };
 #endif
 /* Tokens.  */
@@ -77,33 +78,34 @@
 #define DoubleLiteral 259
 #define BoolLiteral 260
 #define IDENTIFIER 261
-#define ExpressionValue 262
-#define EQ 263
-#define INT 264
-#define DOUBLE 265
-#define BOOL 266
-#define SEMI 267
-#define COMMA 268
-#define COLON 269
-#define IF 270
-#define FOR 271
-#define FUNC 272
-#define ADD 273
-#define SUB 274
-#define MUL 275
-#define DIV 276
-#define LB 277
-#define RB 278
-#define LCB 279
-#define RCB 280
-#define GT 281
-#define LT 282
-#define GE 283
-#define LE 284
-#define RANGE_UNCLOSE 285
-#define RANGE_CLOSE 286
-#define IN 287
-#define COMMENT_ONE_LINE 288
+#define Literal 262
+#define Statement 263
+#define EQ 264
+#define INT 265
+#define DOUBLE 266
+#define BOOL 267
+#define SEMI 268
+#define COMMA 269
+#define COLON 270
+#define IF 271
+#define FOR 272
+#define FUNC 273
+#define ADD 274
+#define SUB 275
+#define MUL 276
+#define DIV 277
+#define LB 278
+#define RB 279
+#define LCB 280
+#define RCB 281
+#define GT 282
+#define LT 283
+#define GE 284
+#define LE 285
+#define RANGE_UNCLOSE 286
+#define RANGE_CLOSE 287
+#define IN 288
+#define COMMENT_ONE_LINE 289
 
 
 
@@ -112,13 +114,16 @@
 typedef union YYSTYPE
 #line 8 "./bison.y"
 {
-    HTExpression expressionValue;
+    HTExpressionRef expressionValue;
+    HTStringRef stringValue;
     int intValue;
     double  doubleValue;
     unsigned char boolValue;
+    HTStatementRef statementValue;
+    HTDataType dataTypeValue;
 }
 /* Line 1529 of yacc.c.  */
-#line 122 "./src/bison.h"
+#line 127 "./src/bison.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

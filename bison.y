@@ -1,22 +1,26 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-#include "../HTInterpreter.h"
+#include "../src/interpreter/HTInterpreter.h"
 #define YYDEBUG 1
 %}
 
 %union {
-    HTExpression expressionValue;
+    HTExpressionRef expressionValue;
+    HTStringRef stringValue;
     int intValue;
     double  doubleValue;
     unsigned char boolValue;
+    HTStatementRef statementValue;
+    HTDataType dataTypeValue;
 }
 
 %token <intValue>           IntLiteral
 %token <doubleValue>        DoubleLiteral
 %token <boolValue>          BoolLiteral
 %token <expressionValue>    IDENTIFIER
-%token <expressionValue>    ExpressionValue
+%token <expressionValue>    Literal
+%token <statementValue>     Statement
 
 %token EQ INT DOUBLE BOOL SEMI COMMA COLON
 %token IF FOR FUNC
@@ -24,10 +28,14 @@
 %token GT LT GE LE RANGE_UNCLOSE RANGE_CLOSE IN
 %token COMMENT_ONE_LINE
 
-
+%type <dataTypeValue> dataType
+%type <statementValue>  assignStatement declareStatement
 %type <expressionValue> rangeExpression expression term primaryExpression
 
 %%
+
+fragment
+    : statementList
 
 statementList
     : statement
@@ -40,7 +48,13 @@ statement
         printf("This is a pure expr\n");
     }
     | assignStatement
-    | defineStatement
+    {
+        HTInterpreterAddStatement($1);
+    }
+    | declareStatement
+    {
+        HTInterpreterAddStatement($1);
+    }
     | ifStatement
     | forStatement
     | funcDefStatement
@@ -51,16 +65,21 @@ assignStatement
     : IDENTIFIER EQ expression SEMI
     {
         printf("This is a assign statement\n");
+        $$ = HTStatementCreateAssign($1, $3);
     }
 
-defineStatement
+declareStatement
     : dataType IDENTIFIER SEMI
     {
-        printf("This is a int pronunce statement\n");
+        printf("This is a declare statement\n");
+        HTVariableRef variable = HTVariableCreate($1, $2->stringVal->characters);
+        $$ = HTStatementCreateDeclare(variable, NULL);
     }
     | dataType IDENTIFIER EQ expression SEMI
     {
-        printf("This is a int pronunce statement\n");
+        printf("This is a declare statement\n");
+        HTVariableRef variable = HTVariableCreate($1, $2->stringVal->characters);
+        $$ = HTStatementCreateDeclare(variable, $4);
     }
 
 ifStatement
@@ -128,7 +147,7 @@ expression
     }
     | expression SUB term
     {
-        $$ = HTExpressionAdd($1, $3)
+        $$ = HTExpressionSub($1, $3)
     }
     ;
 
@@ -136,16 +155,16 @@ term
     : primaryExpression
     | term MUL primaryExpression
     {
-        $$ = HTExpressionAdd($1, $3)
+        $$ = HTExpressionMul($1, $3)
     }
     | term DIV primaryExpression
     {
-        $$ = HTExpressionAdd($1, $3)
+        $$ = HTExpressionDiv($1, $3)
     }
     ;
 
 primaryExpression
-    : ExpressionValue
+    : Literal
     {
         $$ = $1
     }
@@ -161,8 +180,18 @@ primaryExpression
 
 dataType
     : INT
+    {
+        $$ =   HTDataTypeInt
+    }
     | DOUBLE
+    {
+        $$ = HTDataTypeDouble
+    }
     | BOOL
+    {
+        $$ = HTDataTypeBool
+    }
+    ;
 
 %%
 
@@ -176,8 +205,13 @@ int main() {
     extern int yyparse(void);
     extern FILE *yyin;
 
-    yyin = fopen("./test.ht", "r");
+    yyin = fopen("./AssignTest.ht", "r");
+    HTInterpreterRef interpreter = HTInterpreterCreate();
+    HTInterpreterSetCurrent(interpreter);
     if (yyparse()) {
         fprintf(stderr, "Error! \n");
     }
+    HTInterpreterPrintDebugInfo(interpreter);
+    printf("Begin execution...\n");
+    HTInterpreterExec(interpreter);
 }
