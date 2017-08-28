@@ -59,18 +59,20 @@
      SUB = 275,
      MUL = 276,
      DIV = 277,
-     LB = 278,
-     RB = 279,
-     LCB = 280,
-     RCB = 281,
-     GT = 282,
-     LT = 283,
-     GE = 284,
-     LE = 285,
-     RANGE_UNCLOSE = 286,
-     RANGE_CLOSE = 287,
-     IN = 288,
-     COMMENT_ONE_LINE = 289
+     MOD = 278,
+     POWER = 279,
+     LB = 280,
+     RB = 281,
+     LCB = 282,
+     RCB = 283,
+     GT = 284,
+     LT = 285,
+     GE = 286,
+     LE = 287,
+     RANGE_UNCLOSE = 288,
+     RANGE_CLOSE = 289,
+     IN = 290,
+     COMMENT_ONE_LINE = 291
    };
 #endif
 /* Tokens.  */
@@ -94,25 +96,27 @@
 #define SUB 275
 #define MUL 276
 #define DIV 277
-#define LB 278
-#define RB 279
-#define LCB 280
-#define RCB 281
-#define GT 282
-#define LT 283
-#define GE 284
-#define LE 285
-#define RANGE_UNCLOSE 286
-#define RANGE_CLOSE 287
-#define IN 288
-#define COMMENT_ONE_LINE 289
+#define MOD 278
+#define POWER 279
+#define LB 280
+#define RB 281
+#define LCB 282
+#define RCB 283
+#define GT 284
+#define LT 285
+#define GE 286
+#define LE 287
+#define RANGE_UNCLOSE 288
+#define RANGE_CLOSE 289
+#define IN 290
+#define COMMENT_ONE_LINE 291
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 8 "./bison.y"
+#line 9 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
 {
     HTExpressionRef expressionValue;
     HTStringRef stringValue;
@@ -123,7 +127,7 @@ typedef union YYSTYPE
     HTDataType dataTypeValue;
 }
 /* Line 1529 of yacc.c.  */
-#line 127 "./src/bison.h"
+#line 131 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

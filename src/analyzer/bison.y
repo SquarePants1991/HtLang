@@ -1,7 +1,8 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-#include "../src/interpreter/HTInterpreter.h"
+#include "../src/compiler/HTInterpreter.h"
+#include "../src/executor/HTExecutor.h"
 #define YYDEBUG 1
 %}
 
@@ -24,7 +25,7 @@
 
 %token EQ INT DOUBLE BOOL SEMI COMMA COLON
 %token IF FOR FUNC
-%token ADD SUB MUL DIV LB RB LCB RCB
+%token ADD SUB MUL DIV MOD POWER LB RB LCB RCB
 %token GT LT GE LE RANGE_UNCLOSE RANGE_CLOSE IN
 %token COMMENT_ONE_LINE
 
@@ -71,14 +72,12 @@ assignStatement
 declareStatement
     : dataType IDENTIFIER SEMI
     {
-        printf("This is a declare statement\n");
-        HTVariableRef variable = HTVariableCreate($1, $2->stringVal->characters);
+        HTVariableRef variable = HTVariableCreate($1, $2->u.identifier->characters);
         $$ = HTStatementCreateDeclare(variable, NULL);
     }
     | dataType IDENTIFIER EQ expression SEMI
     {
-        printf("This is a declare statement\n");
-        HTVariableRef variable = HTVariableCreate($1, $2->stringVal->characters);
+        HTVariableRef variable = HTVariableCreate($1, $2->u.identifier->characters);
         $$ = HTStatementCreateDeclare(variable, $4);
     }
 
@@ -110,9 +109,6 @@ funcCallStatement
         printf("This is a function call statement\n");
     }
 
-
-
-
 parameterDefList
     : parameterDef
     | parameterDefList parameterDef
@@ -132,34 +128,42 @@ parameter
 rangeExpression
     : expression RANGE_UNCLOSE expression
     {
-        $$ = HTExpressionAdd($1, $3)
+        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, $1, $3);
     }
     | expression RANGE_CLOSE expression
     {
-        $$ = HTExpressionAdd($1, $3)
+        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, $1, $3);
     }
 
 expression
     : term
     | expression ADD term
     {
-        $$ = HTExpressionAdd($1, $3)
+        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, $1, $3);
     }
     | expression SUB term
     {
-        $$ = HTExpressionSub($1, $3)
+        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorSub, $1, $3);
     }
     ;
 
 term
     : primaryExpression
+    | term POWER primaryExpression
+    {
+        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorPower, $1, $3);
+    }
     | term MUL primaryExpression
     {
-        $$ = HTExpressionMul($1, $3)
+        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMul, $1, $3);
     }
     | term DIV primaryExpression
     {
-        $$ = HTExpressionDiv($1, $3)
+        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorDiv, $1, $3);
+    }
+    | term MOD primaryExpression
+    {
+        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMod, $1, $3);
     }
     ;
 
@@ -181,7 +185,7 @@ primaryExpression
 dataType
     : INT
     {
-        $$ =   HTDataTypeInt
+        $$ = HTDataTypeInt
     }
     | DOUBLE
     {
@@ -205,7 +209,7 @@ int main() {
     extern int yyparse(void);
     extern FILE *yyin;
 
-    yyin = fopen("./AssignTest.ht", "r");
+    yyin = fopen("/Users/wangyang/Documents/Codes/OnGit/HtLang/AssignTest.ht", "r");
     HTInterpreterRef interpreter = HTInterpreterCreate();
     HTInterpreterSetCurrent(interpreter);
     if (yyparse()) {
@@ -213,5 +217,5 @@ int main() {
     }
     HTInterpreterPrintDebugInfo(interpreter);
     printf("Begin execution...\n");
-    HTInterpreterExec(interpreter);
+    HTExecute(interpreter);
 }

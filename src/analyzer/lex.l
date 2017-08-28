@@ -1,7 +1,7 @@
 %{
 
 #include <stdio.h>
-#include "../src/interpreter/HTInterpreter.h"
+#include "../src/compiler/HTInterpreter.h"
 #include "bison.h"
 
 int yywrap(void) {
@@ -24,6 +24,8 @@ int yywrap(void) {
 <INITIAL>"-"                     return SUB;
 <INITIAL>"*"                     return MUL;
 <INITIAL>"/"                     return DIV;
+<INITIAL>"%"                     return MOD;
+<INITIAL>"**"                    return POWER;
 <INITIAL>"("                     return LB;
 <INITIAL>")"                     return RB;
 <INITIAL>"{"                     return LCB;
@@ -44,12 +46,21 @@ int yywrap(void) {
 
 <INITIAL>[ \t\n\r]   ;
 
-<INITIAL>([1-9][0-9]*)|0|([1-9]+\.[0-9]+) {
+<INITIAL>([1-9]+\.[0-9]+) {
     double doubleVal;
     sscanf(yytext, "%lf", &doubleVal);
-    yylval.expressionValue = HTExpressionCreateDouble(doubleVal);
+    yylval.expressionValue = HTExpressionCreateDoubleLiteral(doubleVal);
     return Literal;
 }
+
+<INITIAL>([1-9][0-9]*)|0 {
+    int intVal;
+    sscanf(yytext, "%d", &intVal);
+    yylval.expressionValue = HTExpressionCreateIntLiteral(intVal);
+    return Literal;
+}
+
+
 
 <INITIAL>[a-zA-Z][a-zA-Z0-9]*  {
     yylval.expressionValue = HTExpressionCreateIdentifier(HTStringCreate(yytext));

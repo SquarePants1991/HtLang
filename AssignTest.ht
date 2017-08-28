@@ -1,7 +1,11 @@
-int a;
-a = 2 * 3;
-int c;
-c = 4 / 2.0;
+int a = 101;
 int b;
-b = 1 + c - 6 * a;
-b = b + 1;
+b = 5;
+int c;
+c = a % b + 20;
+int d = 2 * b ** 2;
+
+if 33 {
+    int b;
+    b = 100;
+}
