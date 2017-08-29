@@ -1,4 +1,5 @@
 #include <compiler/HTVariable.h>
+#include <compiler/HTExpression.h>
 #include "HTExpressionEval.h"
 
 HTVariableRef HTExpressionFindVariable(HTStringRef identifier, HTListRef vars) {
@@ -29,6 +30,10 @@ HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTListRef globalVars, H
         case HTExpressionTypeBoolLiteral:
             returnVar->dataType = HTDataTypeBool;
             returnVar->value.boolValue = expr->u.boolVal;
+            break;
+        case HTExpressionTypeStringLiteral:
+            returnVar->dataType = HTDataTypeString;
+            returnVar->value.stringValue = expr->u.stringVal;
             break;
         case HTExpressionTypeIdentifier:
             returnVar->dataType = HTDataTypeDouble;

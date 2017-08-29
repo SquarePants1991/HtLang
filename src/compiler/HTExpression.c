@@ -29,6 +29,25 @@ HTExpressionRef HTExpressionCreateStringLiteral(HTStringRef val) {
     return expr;
 }
 
+void HTExpressionBeginStringLiteral() {
+    currentCollectingStringLiteral = HTStringCreate("");
+}
+
+void HTExpressionAddStringLiteral(const char *str) {
+    HTStringRef newStr = HTStringCreate(str);
+    HTStringRef concatStr = HTStringConcat(currentCollectingStringLiteral, newStr);
+    HTStringFree(newStr);
+    HTStringFree(currentCollectingStringLiteral);
+    currentCollectingStringLiteral = concatStr;
+}
+
+HTExpressionRef HTExpressionEndStringLiteral() {
+    if (currentCollectingStringLiteral) {
+        return HTExpressionCreateStringLiteral(currentCollectingStringLiteral);
+    }
+    currentCollectingStringLiteral = NULL;
+    return HTExpressionCreateStringLiteral(HTStringCreate(""));
+}
 
 HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator operator, HTExpressionRef left, HTExpressionRef right) {
     HTExpressionRef expr = HTMemAlloc(sizeof(HTExpression));

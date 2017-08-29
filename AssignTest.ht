@@ -1,11 +1,8 @@
-int a = 101;
-int b;
-b = 5;
-int c;
-c = a % b + 20;
-int d = 2 * b ** 2;
-
-if 33 {
-    int b;
-    b = 100;
-}
+# 我是主食
+string b = "Hello World";
+# 12321312312
+int c = 2;
+# 12321312312
+string d = c + b;
+int a = 1 - c ** 2 + 1;
+a = a + 11 % 2;

@@ -23,7 +23,7 @@
 %token <expressionValue>    Literal
 %token <statementValue>     Statement
 
-%token EQ INT DOUBLE BOOL SEMI COMMA COLON
+%token EQ INT DOUBLE BOOL STRING SEMI COMMA COLON
 %token IF FOR FUNC
 %token ADD SUB MUL DIV MOD POWER LB RB LCB RCB
 %token GT LT GE LE RANGE_UNCLOSE RANGE_CLOSE IN
@@ -195,6 +195,10 @@ dataType
     {
         $$ = HTDataTypeBool
     }
+    | STRING
+    {
+        $$ = HTDataTypeString
+    }
     ;
 
 %%
@@ -216,6 +220,7 @@ int main() {
         fprintf(stderr, "Error! \n");
     }
     HTInterpreterPrintDebugInfo(interpreter);
+    printf("===============================================================\n");
     printf("Begin execution...\n");
     HTExecute(interpreter);
 }

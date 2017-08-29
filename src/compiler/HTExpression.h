@@ -41,10 +41,15 @@ struct _HTExpression {
 typedef struct _HTExpression HTExpression;
 typedef  HTExpression * HTExpressionRef;
 
+static HTStringRef currentCollectingStringLiteral = NULL;
+
 HTExpressionRef HTExpressionCreateIntLiteral(int val);
 HTExpressionRef HTExpressionCreateDoubleLiteral(double val);
 HTExpressionRef HTExpressionCreateBoolLiteral(unsigned char val);
 HTExpressionRef HTExpressionCreateStringLiteral(HTStringRef val);
+void HTExpressionBeginStringLiteral();
+void HTExpressionAddStringLiteral(const char *str);
+HTExpressionRef HTExpressionEndStringLiteral();
 HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator operator, HTExpressionRef left, HTExpressionRef right);
 HTExpressionRef HTExpressionCreateIdentifier(HTStringRef val);
 void HTExpressionPrintDebugInfo(HTExpressionRef expr);

@@ -54,7 +54,7 @@ static void HTVariablePrintDebugInfo(HTVariableRef ref) {
                 printf("Bool: %s, value: %d\n", ref->identifier->characters, ref->value.boolValue);
                 break;
             case HTDataTypeString:
-                printf("String: %s, value: %s\n", ref->identifier->characters, ref->value.stringValue->characters);
+                printf("String: %s, value: %s\n", ref->identifier->characters, ref->value.stringValue == NULL ? "": ref->value.stringValue->characters);
                 break;}
     }
 }

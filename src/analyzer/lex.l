@@ -10,11 +10,14 @@ int yywrap(void) {
 
 %}
 
+%start STRING_LITERAL COMMENT
+
 %%
 <INITIAL>"="                     return EQ;
 <INITIAL>"int"                   return INT;
 <INITIAL>"double"                return DOUBLE;
 <INITIAL>"bool"                  return BOOL;
+<INITIAL>"string"                return STRING;
 
 <INITIAL>"if"                    return IF;
 <INITIAL>"for"                   return FOR;
@@ -41,6 +44,28 @@ int yywrap(void) {
 <INITIAL>"..<"                   return RANGE_UNCLOSE;
 <INITIAL>"..."                   return RANGE_CLOSE;
 <INITIAL>"in"                    return IN;
+
+<INITIAL>"\""                    {
+    HTExpressionBeginStringLiteral();
+    BEGIN STRING_LITERAL;
+}
+
+<INITIAL>"#"                    {
+    BEGIN COMMENT;
+}
+
+<STRING_LITERAL>"\""             {
+    yylval.expressionValue = HTExpressionEndStringLiteral();
+    BEGIN INITIAL;
+    return Literal;
+}
+
+<STRING_LITERAL>.   {
+    HTExpressionAddStringLiteral(yytext);
+}
+
+<COMMENT>"\n"       BEGIN INITIAL;
+<COMMENT>.  ;
 
 
 

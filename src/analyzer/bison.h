@@ -49,30 +49,31 @@
      INT = 265,
      DOUBLE = 266,
      BOOL = 267,
-     SEMI = 268,
-     COMMA = 269,
-     COLON = 270,
-     IF = 271,
-     FOR = 272,
-     FUNC = 273,
-     ADD = 274,
-     SUB = 275,
-     MUL = 276,
-     DIV = 277,
-     MOD = 278,
-     POWER = 279,
-     LB = 280,
-     RB = 281,
-     LCB = 282,
-     RCB = 283,
-     GT = 284,
-     LT = 285,
-     GE = 286,
-     LE = 287,
-     RANGE_UNCLOSE = 288,
-     RANGE_CLOSE = 289,
-     IN = 290,
-     COMMENT_ONE_LINE = 291
+     STRING = 268,
+     SEMI = 269,
+     COMMA = 270,
+     COLON = 271,
+     IF = 272,
+     FOR = 273,
+     FUNC = 274,
+     ADD = 275,
+     SUB = 276,
+     MUL = 277,
+     DIV = 278,
+     MOD = 279,
+     POWER = 280,
+     LB = 281,
+     RB = 282,
+     LCB = 283,
+     RCB = 284,
+     GT = 285,
+     LT = 286,
+     GE = 287,
+     LE = 288,
+     RANGE_UNCLOSE = 289,
+     RANGE_CLOSE = 290,
+     IN = 291,
+     COMMENT_ONE_LINE = 292
    };
 #endif
 /* Tokens.  */
@@ -86,30 +87,31 @@
 #define INT 265
 #define DOUBLE 266
 #define BOOL 267
-#define SEMI 268
-#define COMMA 269
-#define COLON 270
-#define IF 271
-#define FOR 272
-#define FUNC 273
-#define ADD 274
-#define SUB 275
-#define MUL 276
-#define DIV 277
-#define MOD 278
-#define POWER 279
-#define LB 280
-#define RB 281
-#define LCB 282
-#define RCB 283
-#define GT 284
-#define LT 285
-#define GE 286
-#define LE 287
-#define RANGE_UNCLOSE 288
-#define RANGE_CLOSE 289
-#define IN 290
-#define COMMENT_ONE_LINE 291
+#define STRING 268
+#define SEMI 269
+#define COMMA 270
+#define COLON 271
+#define IF 272
+#define FOR 273
+#define FUNC 274
+#define ADD 275
+#define SUB 276
+#define MUL 277
+#define DIV 278
+#define MOD 279
+#define POWER 280
+#define LB 281
+#define RB 282
+#define LCB 283
+#define RCB 284
+#define GT 285
+#define LT 286
+#define GE 287
+#define LE 288
+#define RANGE_UNCLOSE 289
+#define RANGE_CLOSE 290
+#define IN 291
+#define COMMENT_ONE_LINE 292
 
 
 
@@ -127,7 +129,7 @@ typedef union YYSTYPE
     HTDataType dataTypeValue;
 }
 /* Line 1529 of yacc.c.  */
-#line 131 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
+#line 133 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
