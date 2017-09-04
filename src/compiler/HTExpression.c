@@ -1,77 +1,93 @@
 #include "HTExpression.h"
-#include <stdio.h>
+#include "../utils/HTString.h"
+
+void HTExpressionAlloc(HTExpressionRef self) {
+
+}
+
+void HTExpressionDealloc(HTExpressionRef self) {
+    HTPropAssignStrong(self, stringVal, NULL);
+    HTPropAssignStrong(self, identifier, NULL);
+    HTPropAssignStrong(self, binaryOpExpression.left, NULL);
+    HTPropAssignStrong(self, binaryOpExpression.right, NULL);
+}
 
 HTExpressionRef HTExpressionCreateIntLiteral(int val) {
-    HTExpressionRef expr = HTMemAlloc(sizeof(HTExpression));
-    expr->type = HTExpressionTypeIntLiteral;
-    expr->u.intVal = val;
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeIntLiteral);
+    HTPropAssignWeak(expr, value.intVal, val);
     return expr;
 }
 
 HTExpressionRef HTExpressionCreateDoubleLiteral(double val) {
-    HTExpressionRef expr = HTMemAlloc(sizeof(HTExpression));
-    expr->type = HTExpressionTypeDoubleLiteral;
-    expr->u.doubleVal = val;
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeDoubleLiteral);
+    HTPropAssignWeak(expr, value.doubleVal, val);
     return expr;
 }
 
 HTExpressionRef HTExpressionCreateBoolLiteral(unsigned char val) {
-    HTExpressionRef expr = HTMemAlloc(sizeof(HTExpression));
-    expr->type = HTExpressionTypeBoolLiteral;
-    expr->u.boolVal = val;
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeBoolLiteral);
+    HTPropAssignWeak(expr, value.boolVal, val);
     return expr;
 }
 
 HTExpressionRef HTExpressionCreateStringLiteral(HTStringRef val) {
-    HTExpressionRef expr = HTMemAlloc(sizeof(HTExpression));
-    expr->type = HTExpressionTypeStringLiteral;
-    expr->u.stringVal = val;
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeStringLiteral);
+    HTPropAssignStrong(expr, stringVal, val);
     return expr;
 }
 
 void HTExpressionBeginStringLiteral() {
-    currentCollectingStringLiteral = HTStringCreate("");
+    currentCollectingStringLiteral = HTStringCreateWithChars("");
 }
 
 void HTExpressionAddStringLiteral(const char *str) {
-    HTStringRef newStr = HTStringCreate(str);
+    HTStringRef newStr = HTStringCreateWithChars(str);
     HTStringRef concatStr = HTStringConcat(currentCollectingStringLiteral, newStr);
-    HTStringFree(newStr);
-    HTStringFree(currentCollectingStringLiteral);
+    HTTypeRelease(newStr);
+    HTTypeRelease(currentCollectingStringLiteral);
     currentCollectingStringLiteral = concatStr;
 }
 
 HTExpressionRef HTExpressionEndStringLiteral() {
     if (currentCollectingStringLiteral) {
-        return HTExpressionCreateStringLiteral(currentCollectingStringLiteral);
+        HTExpressionRef expr = HTExpressionCreateStringLiteral(currentCollectingStringLiteral);
+        HTTypeRelease(currentCollectingStringLiteral);
+        return expr;
     }
     currentCollectingStringLiteral = NULL;
-    return HTExpressionCreateStringLiteral(HTStringCreate(""));
+    HTStringRef emptyStr = HTStringCreateWithChars("");
+    HTExpressionRef emptyStringExpr = HTExpressionCreateStringLiteral(emptyStr);
+    HTTypeRelease(emptyStr);
+    return emptyStringExpr;
 }
 
 HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator operator, HTExpressionRef left, HTExpressionRef right) {
-    HTExpressionRef expr = HTMemAlloc(sizeof(HTExpression));
-    expr->type = HTExpressionTypeBinaryOperation;
-    expr->u.binaryOpExpression.right = right;
-    expr->u.binaryOpExpression.left = left;
-    expr->u.binaryOpExpression.operator = operator;
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeBinaryOperation);
+    HTPropAssignStrong(expr, binaryOpExpression.right, right);
+    HTPropAssignStrong(expr, binaryOpExpression.left, left);
+    HTPropAssignWeak(expr, binaryOpExpression.operator, operator);
     return expr;
 }
 
 HTExpressionRef HTExpressionCreateIdentifier(HTStringRef val) {
-    HTExpressionRef expr = HTMemAlloc(sizeof(HTExpression));
-    expr->type = HTExpressionTypeIdentifier;
-    expr->u.identifier = val;
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeIdentifier);
+    HTPropAssignStrong(expr, identifier, val);
     return expr;
 }
 
 void HTExpressionPrintDebugInfo(HTExpressionRef expr) {
-    switch (expr->type) {
+    switch (expr->impl->type) {
         case HTExpressionTypeDoubleLiteral:
-            printf("Double Literal: %lf \n", expr->u.doubleVal);
+            printf("Double Literal: %lf \n", expr->impl->value.doubleVal);
             break;
         case HTExpressionTypeIdentifier:
-            printf("Identifier: %s \n", expr->u.stringVal->characters);
+            printf("Identifier: %s \n", expr->impl->identifier->impl->characters);
             break;
         default:
             break;

@@ -1,7 +1,7 @@
 %{
 
 #include <stdio.h>
-#include "../src/compiler/HTInterpreter.h"
+#include "../src/compiler/HTCompiler.h"
 #include "bison.h"
 
 int yywrap(void) {
@@ -88,7 +88,9 @@ int yywrap(void) {
 
 
 <INITIAL>[a-zA-Z][a-zA-Z0-9]*  {
-    yylval.expressionValue = HTExpressionCreateIdentifier(HTStringCreate(yytext));
+    HTStringRef str = HTStringCreateWithChars(yytext);
+    yylval.expressionValue = HTExpressionCreateIdentifier(str);
+    HTTypeRelease(str);
     return IDENTIFIER;
 }
 

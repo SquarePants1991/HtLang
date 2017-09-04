@@ -1,7 +1,6 @@
 #ifndef __HTExpression_H_
 #define __HTExpression_H_
 
-#include "../utils/HTString.h"
 #include "HTVariable.h"
 
 typedef enum {
@@ -22,24 +21,21 @@ typedef enum {
     HTExpressionBinaryOperatorPower,
 } HTExpressionBinaryOperator;
 
-struct _HTExpression {
+HTClassBegin
     HTExpressionType type;
     union {
         int intVal;
         double doubleVal;
         unsigned char boolVal;
-        HTStringRef stringVal;
-        HTStringRef identifier;
-        struct {
-            struct _HTExpression * left;
-            struct _HTExpression * right;
-            HTExpressionBinaryOperator operator;
-        } binaryOpExpression;
-    } u;
-};
-
-typedef struct _HTExpression HTExpression;
-typedef  HTExpression * HTExpressionRef;
+    } value;
+    HTStringRef stringVal;
+    HTStringRef identifier;
+    struct {
+        struct HTExpression * left;
+        struct HTExpression * right;
+        HTExpressionBinaryOperator operator;
+    } binaryOpExpression;
+HTClassEnd(HTExpression)
 
 static HTStringRef currentCollectingStringLiteral = NULL;
 

@@ -4,5 +4,8 @@ string b = "Hello World";
 int c = 2;
 # 12321312312
 string d = c + b;
-int a = 1 - c ** 2 + 1;
-a = a + 11 % 2;
+int a = c + 1 + c ** 2;
+a = c ** 3;
+int cc = c * c + 2;
+c = c + 6;
+int dd = "C ** C = " + c ** c;

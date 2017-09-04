@@ -500,7 +500,7 @@ char *yytext;
 #line 2 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 
 #include <stdio.h>
-#include "../src/compiler/HTInterpreter.h"
+#include "../src/compiler/HTCompiler.h"
 #include "bison.h"
 
 int yywrap(void) {
@@ -989,13 +989,15 @@ case 38:
 YY_RULE_SETUP
 #line 90 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
-    yylval.expressionValue = HTExpressionCreateIdentifier(HTStringCreate(yytext));
+    HTStringRef str = HTStringCreateWithChars(yytext);
+    yylval.expressionValue = HTExpressionCreateIdentifier(str);
+    HTTypeRelease(str);
     return IDENTIFIER;
 }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 95 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 97 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     fprintf(stderr, "lex parse error! \n");
     exit(1);
@@ -1003,10 +1005,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 100 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 102 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 ECHO;
 	YY_BREAK
-#line 1010 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
+#line 1012 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING_LITERAL):
 case YY_STATE_EOF(COMMENT):
@@ -2005,6 +2007,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 100 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 102 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 
 

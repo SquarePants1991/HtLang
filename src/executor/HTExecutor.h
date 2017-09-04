@@ -2,14 +2,14 @@
 #define __HTExecutor_H__
 
 #include <compiler/HTExpression.h>
-#include "../compiler/HTInterpreter.h"
+#include "compiler/HTCompiler.h"
 #include "HTExpressionEval.h"
 
 // Variable Related
-HTVariableRef HTInterpreterFindVariable(HTInterpreterRef interpreter, HTStringRef identifier);
+HTVariableRef HTExecutorFindVariable(HTCompilerRef compiler, HTStringRef identifier);
 // Statement Execution
-void HTInterpreterExecAssignStatement(HTInterpreterRef interpreter, HTStatementRef statement);
-void HTInterpreterExecDeclareStatement(HTInterpreterRef interpreter, HTStatementRef statement);
-void HTExecute(HTInterpreterRef interpreter);
+void HTExecutorExecAssignStatement(HTCompilerRef compiler, HTStatementRef statement);
+void HTExecutorExecDeclareStatement(HTCompilerRef compiler, HTStatementRef statement);
+void HTExecute(HTCompilerRef compiler);
 
 #endif

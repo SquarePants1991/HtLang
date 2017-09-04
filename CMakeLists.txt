@@ -11,7 +11,8 @@ file(GLOB MainSrc
         ./src/*.c
         ./src/**/*.h
         ./src/**/*.c
-        ./src/analyzer/bison.c)
+        ./src/analyzer/bison.c
+        src/htlang.c)
 
 add_executable(HTLang ${MainSrc})
 add_dependencies(HTLang CompileCC)
@@ -22,3 +23,42 @@ file(GLOB UtilsSrc
 
 include_directories(./src)
 add_executable(HTStringTest ./test/HTStringTest.c ${UtilsSrc})
+
+add_executable(HTTypeTest ./test/HTTypeTest.c ${UtilsSrc})
+
+add_executable(HTListTest ./test/HTListTest.c ${UtilsSrc})
+
+add_executable(HTVariableTest ./test/HTVariableTest.c src/compiler/HTVariable.c ${UtilsSrc})
+
+add_executable(HTExpressionTest ./test/HTExpressionTest.c src/compiler/HTVariable.h src/compiler/HTExpression.c ${UtilsSrc})
+
+add_executable(HTStatementTest ./test/HTStatementTest.c src/compiler/HTExpression.c src/compiler/HTStatement.c src/compiler/HTVariable.c ${UtilsSrc})
+
+add_executable(HTCompilerTest
+        ./test/HTCompilerTest.c
+        src/compiler/HTVariable.h
+        src/compiler/HTExpression.c
+        src/compiler/HTStatement.c
+        src/compiler/HTCompiler.c ${UtilsSrc})
+
+
+
+### Test Executor
+add_executable(HTExpressionEvalTest
+        ./test/HTExpressionEvalTest.c
+        src/compiler/HTVariable.c
+        src/compiler/HTExpression.c
+        src/compiler/HTStatement.c
+        src/compiler/HTCompiler.c
+        src/executor/HTExpressionEval.c
+        ${UtilsSrc})
+
+add_executable(HTExecutorTest
+        ./test/HTExecutorTest.c
+        src/compiler/HTVariable.c
+        src/compiler/HTExpression.c
+        src/compiler/HTStatement.c
+        src/compiler/HTCompiler.c
+        src/executor/HTExpressionEval.c
+        src/executor/HTExecutor.c
+        ${UtilsSrc})

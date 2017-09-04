@@ -21,15 +21,13 @@ typedef struct {
 	HTExpressionRef expression;
 } HTStatementDeclare;
 
-typedef struct {
+HTClassBegin
 	enum HTStatementType type;
 	union {
 		HTStatementAssign assignStatement;
 		HTStatementDeclare declareStatement;
 	} u;
-} HTStatement;
-
-typedef HTStatement * HTStatementRef;
+HTClassEnd(HTStatement)
 
 HTStatementRef HTStatementCreateAssign(HTExpressionRef identifier, HTExpressionRef expression);
 HTStatementRef HTStatementCreateDeclare(HTVariableRef variable, HTExpressionRef expression);

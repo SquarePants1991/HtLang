@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-#include "../src/compiler/HTInterpreter.h"
+#include "../src/compiler/HTCompiler.h"
 #include "../src/executor/HTExecutor.h"
 #define YYDEBUG 1
 %}
@@ -50,11 +50,13 @@ statement
     }
     | assignStatement
     {
-        HTInterpreterAddStatement($1);
+        HTCompilerAddStatement($1);
+        HTTypeRelease($1);
     }
     | declareStatement
     {
-        HTInterpreterAddStatement($1);
+        HTCompilerAddStatement($1);
+        HTTypeRelease($1);
     }
     | ifStatement
     | forStatement
@@ -67,18 +69,25 @@ assignStatement
     {
         printf("This is a assign statement\n");
         $$ = HTStatementCreateAssign($1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
 
 declareStatement
     : dataType IDENTIFIER SEMI
     {
-        HTVariableRef variable = HTVariableCreate($1, $2->u.identifier->characters);
+        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->identifier->impl->characters);
         $$ = HTStatementCreateDeclare(variable, NULL);
+        HTTypeRelease($2);
+        HTTypeRelease(variable);
     }
     | dataType IDENTIFIER EQ expression SEMI
     {
-        HTVariableRef variable = HTVariableCreate($1, $2->u.identifier->characters);
+        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->identifier->impl->characters);
         $$ = HTStatementCreateDeclare(variable, $4);
+        HTTypeRelease(variable);
+        HTTypeRelease($2);
+        HTTypeRelease($4);
     }
 
 ifStatement
@@ -129,10 +138,14 @@ rangeExpression
     : expression RANGE_UNCLOSE expression
     {
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
     | expression RANGE_CLOSE expression
     {
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
 
 expression
@@ -140,10 +153,14 @@ expression
     | expression ADD term
     {
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
     | expression SUB term
     {
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorSub, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
     ;
 
@@ -152,18 +169,26 @@ term
     | term POWER primaryExpression
     {
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorPower, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
     | term MUL primaryExpression
     {
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMul, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
     | term DIV primaryExpression
     {
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorDiv, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
     | term MOD primaryExpression
     {
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMod, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
     ;
 
@@ -207,20 +232,4 @@ int yyerror(char const * str) {
     extern char * yytext;
     fprintf(stderr, "parse error near %s \n", yytext);
     return 0;
-}
-
-int main() {
-    extern int yyparse(void);
-    extern FILE *yyin;
-
-    yyin = fopen("/Users/wangyang/Documents/Codes/OnGit/HtLang/AssignTest.ht", "r");
-    HTInterpreterRef interpreter = HTInterpreterCreate();
-    HTInterpreterSetCurrent(interpreter);
-    if (yyparse()) {
-        fprintf(stderr, "Error! \n");
-    }
-    HTInterpreterPrintDebugInfo(interpreter);
-    printf("===============================================================\n");
-    printf("Begin execution...\n");
-    HTExecute(interpreter);
 }

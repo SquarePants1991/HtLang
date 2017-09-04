@@ -148,7 +148,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../src/compiler/HTInterpreter.h"
+#include "../src/compiler/HTCompiler.h"
 #include "../src/executor/HTExecutor.h"
 #define YYDEBUG 1
 
@@ -501,11 +501,11 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    39,    39,    42,    43,    47,    51,    55,    59,    60,
-      61,    62,    66,    73,    78,    85,    91,    97,   101,   107,
-     113,   114,   117,   118,   121,   122,   125,   126,   129,   133,
-     139,   140,   144,   151,   152,   156,   160,   164,   171,   175,
-     179,   186,   190,   194,   198
+       0,    39,    39,    42,    43,    47,    51,    56,    61,    62,
+      63,    64,    68,    77,    84,    94,   100,   106,   110,   116,
+     122,   123,   126,   127,   130,   131,   134,   135,   138,   144,
+     152,   153,   159,   168,   169,   175,   181,   187,   196,   200,
+     204,   211,   215,   219,   223
 };
 #endif
 
@@ -1487,176 +1487,201 @@ yyreduce:
   case 6:
 #line 52 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        HTInterpreterAddStatement((yyvsp[(1) - (1)].statementValue));
+        HTCompilerAddStatement((yyvsp[(1) - (1)].statementValue));
+        HTTypeRelease((yyvsp[(1) - (1)].statementValue));
     ;}
     break;
 
   case 7:
-#line 56 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 57 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        HTInterpreterAddStatement((yyvsp[(1) - (1)].statementValue));
+        HTCompilerAddStatement((yyvsp[(1) - (1)].statementValue));
+        HTTypeRelease((yyvsp[(1) - (1)].statementValue));
     ;}
     break;
 
   case 12:
-#line 67 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 69 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a assign statement\n");
         (yyval.statementValue) = HTStatementCreateAssign((yyvsp[(1) - (4)].expressionValue), (yyvsp[(3) - (4)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (4)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (4)].expressionValue));
     ;}
     break;
 
   case 13:
-#line 74 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 78 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        HTVariableRef variable = HTVariableCreate((yyvsp[(1) - (3)].dataTypeValue), (yyvsp[(2) - (3)].expressionValue)->u.identifier->characters);
+        HTVariableRef variable = HTVariableCreateWithTypeAndName((yyvsp[(1) - (3)].dataTypeValue), (yyvsp[(2) - (3)].expressionValue)->impl->identifier->impl->characters);
         (yyval.statementValue) = HTStatementCreateDeclare(variable, NULL);
+        HTTypeRelease((yyvsp[(2) - (3)].expressionValue));
+        HTTypeRelease(variable);
     ;}
     break;
 
   case 14:
-#line 79 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 85 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        HTVariableRef variable = HTVariableCreate((yyvsp[(1) - (5)].dataTypeValue), (yyvsp[(2) - (5)].expressionValue)->u.identifier->characters);
+        HTVariableRef variable = HTVariableCreateWithTypeAndName((yyvsp[(1) - (5)].dataTypeValue), (yyvsp[(2) - (5)].expressionValue)->impl->identifier->impl->characters);
         (yyval.statementValue) = HTStatementCreateDeclare(variable, (yyvsp[(4) - (5)].expressionValue));
+        HTTypeRelease(variable);
+        HTTypeRelease((yyvsp[(2) - (5)].expressionValue));
+        HTTypeRelease((yyvsp[(4) - (5)].expressionValue));
     ;}
     break;
 
   case 15:
-#line 86 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 95 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a if statement\n");
     ;}
     break;
 
   case 16:
-#line 92 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 101 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a for statement\n");
     ;}
     break;
 
   case 17:
-#line 98 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 107 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a function statement\n");
     ;}
     break;
 
   case 18:
-#line 102 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 111 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a function with return statement\n");
     ;}
     break;
 
   case 19:
-#line 108 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 117 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a function call statement\n");
     ;}
     break;
 
   case 28:
-#line 130 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 139 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 29:
-#line 134 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 145 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 31:
-#line 141 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 154 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 32:
-#line 145 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 160 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorSub, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 34:
-#line 153 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 170 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorPower, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 35:
-#line 157 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 176 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMul, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 36:
-#line 161 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 182 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorDiv, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 37:
-#line 165 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 188 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMod, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 38:
-#line 172 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 197 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = (yyvsp[(1) - (1)].expressionValue)
     ;}
     break;
 
   case 39:
-#line 176 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 201 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = (yyvsp[(1) - (1)].expressionValue)
     ;}
     break;
 
   case 40:
-#line 180 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 205 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = (yyvsp[(2) - (3)].expressionValue)
     ;}
     break;
 
   case 41:
-#line 187 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 212 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.dataTypeValue) = HTDataTypeInt
     ;}
     break;
 
   case 42:
-#line 191 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 216 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.dataTypeValue) = HTDataTypeDouble
     ;}
     break;
 
   case 43:
-#line 195 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 220 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.dataTypeValue) = HTDataTypeBool
     ;}
     break;
 
   case 44:
-#line 199 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 224 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.dataTypeValue) = HTDataTypeString
     ;}
@@ -1664,7 +1689,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1668 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c"
+#line 1693 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1878,27 +1903,11 @@ yyreturn:
 }
 
 
-#line 204 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 229 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
 
 
 int yyerror(char const * str) {
     extern char * yytext;
     fprintf(stderr, "parse error near %s \n", yytext);
     return 0;
-}
-
-int main() {
-    extern int yyparse(void);
-    extern FILE *yyin;
-
-    yyin = fopen("/Users/wangyang/Documents/Codes/OnGit/HtLang/AssignTest.ht", "r");
-    HTInterpreterRef interpreter = HTInterpreterCreate();
-    HTInterpreterSetCurrent(interpreter);
-    if (yyparse()) {
-        fprintf(stderr, "Error! \n");
-    }
-    HTInterpreterPrintDebugInfo(interpreter);
-    printf("===============================================================\n");
-    printf("Begin execution...\n");
-    HTExecute(interpreter);
 }
