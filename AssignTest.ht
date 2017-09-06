@@ -1,11 +1,8 @@
-# 我是主食
-string b = "Hello World";
-# 12321312312
-int c = 2;
-# 12321312312
-string d = c + b;
-int a = c + 1 + c ** 2;
-a = c ** 3;
-int cc = c * c + 2;
-c = c + 6;
-int dd = "C ** C = " + c ** c;
+# global var a
+int a = 4 * 2 + 2**2**3 + 1 < 2;
+int b = 2 >= 5;
+int c = 8 <=8;
+int d = 2 ** 2 ** 3;
+if a > 3 {
+    double pi = 3.41422412412;
+}

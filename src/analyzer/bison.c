@@ -71,36 +71,39 @@
      BoolLiteral = 260,
      IDENTIFIER = 261,
      Literal = 262,
-     Statement = 263,
-     EQ = 264,
-     INT = 265,
-     DOUBLE = 266,
-     BOOL = 267,
-     STRING = 268,
-     SEMI = 269,
-     COMMA = 270,
-     COLON = 271,
-     IF = 272,
-     FOR = 273,
-     FUNC = 274,
-     ADD = 275,
-     SUB = 276,
-     MUL = 277,
-     DIV = 278,
-     MOD = 279,
-     POWER = 280,
-     LB = 281,
-     RB = 282,
-     LCB = 283,
-     RCB = 284,
-     GT = 285,
-     LT = 286,
-     GE = 287,
-     LE = 288,
-     RANGE_UNCLOSE = 289,
-     RANGE_CLOSE = 290,
-     IN = 291,
-     COMMENT_ONE_LINE = 292
+     BinaryOperator = 263,
+     ADD = 264,
+     SUB = 265,
+     MUL = 266,
+     DIV = 267,
+     MOD = 268,
+     POWER = 269,
+     EQ = 270,
+     GT = 271,
+     LT = 272,
+     GE = 273,
+     LE = 274,
+     Statement = 275,
+     List = 276,
+     ASSIGN = 277,
+     INT = 278,
+     DOUBLE = 279,
+     BOOL = 280,
+     STRING = 281,
+     SEMI = 282,
+     COMMA = 283,
+     COLON = 284,
+     IF = 285,
+     FOR = 286,
+     FUNC = 287,
+     LB = 288,
+     RB = 289,
+     LCB = 290,
+     RCB = 291,
+     RANGE_UNCLOSE = 292,
+     RANGE_CLOSE = 293,
+     IN = 294,
+     COMMENT_ONE_LINE = 295
    };
 #endif
 /* Tokens.  */
@@ -109,36 +112,39 @@
 #define BoolLiteral 260
 #define IDENTIFIER 261
 #define Literal 262
-#define Statement 263
-#define EQ 264
-#define INT 265
-#define DOUBLE 266
-#define BOOL 267
-#define STRING 268
-#define SEMI 269
-#define COMMA 270
-#define COLON 271
-#define IF 272
-#define FOR 273
-#define FUNC 274
-#define ADD 275
-#define SUB 276
-#define MUL 277
-#define DIV 278
-#define MOD 279
-#define POWER 280
-#define LB 281
-#define RB 282
-#define LCB 283
-#define RCB 284
-#define GT 285
-#define LT 286
-#define GE 287
-#define LE 288
-#define RANGE_UNCLOSE 289
-#define RANGE_CLOSE 290
-#define IN 291
-#define COMMENT_ONE_LINE 292
+#define BinaryOperator 263
+#define ADD 264
+#define SUB 265
+#define MUL 266
+#define DIV 267
+#define MOD 268
+#define POWER 269
+#define EQ 270
+#define GT 271
+#define LT 272
+#define GE 273
+#define LE 274
+#define Statement 275
+#define List 276
+#define ASSIGN 277
+#define INT 278
+#define DOUBLE 279
+#define BOOL 280
+#define STRING 281
+#define SEMI 282
+#define COMMA 283
+#define COLON 284
+#define IF 285
+#define FOR 286
+#define FUNC 287
+#define LB 288
+#define RB 289
+#define LCB 290
+#define RCB 291
+#define RANGE_UNCLOSE 292
+#define RANGE_CLOSE 293
+#define IN 294
+#define COMMENT_ONE_LINE 295
 
 
 
@@ -182,9 +188,11 @@ typedef union YYSTYPE
     unsigned char boolValue;
     HTStatementRef statementValue;
     HTDataType dataTypeValue;
+    HTListRef listValue;
+    HTExpressionBinaryOperator binaryOperatorValue;
 }
 /* Line 193 of yacc.c.  */
-#line 188 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c"
+#line 196 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -197,7 +205,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 201 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c"
+#line 209 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c"
 
 #ifdef short
 # undef short
@@ -410,22 +418,22 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  31
+#define YYFINAL  30
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   145
+#define YYLAST   248
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  38
+#define YYNTOKENS  41
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  19
+#define YYNNTS  18
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  44
+#define YYNRULES  48
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  92
+#define YYNSTATES  101
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   292
+#define YYMAXUTOK   295
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -462,7 +470,7 @@ static const yytype_uint8 yytranslate[] =
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
       25,    26,    27,    28,    29,    30,    31,    32,    33,    34,
-      35,    36,    37
+      35,    36,    37,    38,    39,    40
 };
 
 #if YYDEBUG
@@ -473,39 +481,41 @@ static const yytype_uint8 yyprhs[] =
        0,     0,     3,     5,     7,    10,    13,    15,    17,    19,
       21,    23,    25,    30,    34,    40,    46,    54,    63,    74,
       80,    82,    85,    88,    92,    94,    97,    99,   102,   106,
-     110,   112,   116,   120,   122,   126,   130,   134,   138,   140,
-     142,   146,   148,   150,   152
+     110,   112,   116,   120,   124,   128,   132,   136,   140,   144,
+     148,   152,   156,   158,   160,   164,   166,   168,   170
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      39,     0,    -1,    40,    -1,    41,    -1,    40,    41,    -1,
-      53,    14,    -1,    42,    -1,    43,    -1,    44,    -1,    45,
-      -1,    46,    -1,    47,    -1,     6,     9,    53,    14,    -1,
-      56,     6,    14,    -1,    56,     6,     9,    53,    14,    -1,
-      17,    53,    28,    40,    29,    -1,    18,     6,    36,    52,
-      28,    40,    29,    -1,    19,     6,    26,    50,    27,    28,
-      40,    29,    -1,    19,     6,    26,    48,    27,    16,    56,
-      28,    40,    29,    -1,     6,    26,    50,    27,    14,    -1,
-      49,    -1,    48,    49,    -1,    10,     6,    -1,    10,     6,
-      15,    -1,    51,    -1,    50,    51,    -1,     6,    -1,     6,
-      15,    -1,    53,    34,    53,    -1,    53,    35,    53,    -1,
-      54,    -1,    53,    20,    54,    -1,    53,    21,    54,    -1,
-      55,    -1,    54,    25,    55,    -1,    54,    22,    55,    -1,
-      54,    23,    55,    -1,    54,    24,    55,    -1,     7,    -1,
-       6,    -1,    26,    53,    27,    -1,    10,    -1,    11,    -1,
-      12,    -1,    13,    -1
+      42,     0,    -1,    43,    -1,    44,    -1,    43,    44,    -1,
+      56,    27,    -1,    45,    -1,    46,    -1,    47,    -1,    48,
+      -1,    49,    -1,    50,    -1,     6,    22,    56,    27,    -1,
+      58,     6,    27,    -1,    58,     6,    22,    56,    27,    -1,
+      30,    56,    35,    43,    36,    -1,    31,     6,    39,    55,
+      35,    43,    36,    -1,    32,     6,    33,    53,    34,    35,
+      43,    36,    -1,    32,     6,    33,    51,    34,    29,    58,
+      35,    43,    36,    -1,     6,    33,    53,    34,    27,    -1,
+      52,    -1,    51,    52,    -1,    23,     6,    -1,    23,     6,
+      28,    -1,    54,    -1,    53,    54,    -1,     6,    -1,     6,
+      28,    -1,    56,    37,    56,    -1,    56,    38,    56,    -1,
+      57,    -1,    56,     9,    56,    -1,    56,    10,    56,    -1,
+      56,    11,    56,    -1,    56,    12,    56,    -1,    56,    13,
+      56,    -1,    56,    14,    56,    -1,    56,    15,    56,    -1,
+      56,    16,    56,    -1,    56,    18,    56,    -1,    56,    17,
+      56,    -1,    56,    19,    56,    -1,     7,    -1,     6,    -1,
+      33,    56,    34,    -1,    23,    -1,    24,    -1,    25,    -1,
+      26,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_uint16 yyrline[] =
 {
-       0,    39,    39,    42,    43,    47,    51,    56,    61,    62,
-      63,    64,    68,    77,    84,    94,   100,   106,   110,   116,
-     122,   123,   126,   127,   130,   131,   134,   135,   138,   144,
-     152,   153,   159,   168,   169,   175,   181,   187,   196,   200,
-     204,   211,   215,   219,   223
+       0,    49,    49,    56,    64,    73,    77,    81,    85,    86,
+      87,    88,    92,   101,   108,   118,   127,   133,   137,   143,
+     149,   150,   153,   154,   157,   158,   161,   162,   165,   171,
+     179,   180,   186,   192,   198,   204,   210,   216,   222,   228,
+     234,   240,   249,   253,   257,   264,   268,   272,   276
 };
 #endif
 
@@ -515,15 +525,15 @@ static const yytype_uint8 yyrline[] =
 static const char *const yytname[] =
 {
   "$end", "error", "$undefined", "IntLiteral", "DoubleLiteral",
-  "BoolLiteral", "IDENTIFIER", "Literal", "Statement", "EQ", "INT",
-  "DOUBLE", "BOOL", "STRING", "SEMI", "COMMA", "COLON", "IF", "FOR",
-  "FUNC", "ADD", "SUB", "MUL", "DIV", "MOD", "POWER", "LB", "RB", "LCB",
-  "RCB", "GT", "LT", "GE", "LE", "RANGE_UNCLOSE", "RANGE_CLOSE", "IN",
-  "COMMENT_ONE_LINE", "$accept", "fragment", "statementList", "statement",
-  "assignStatement", "declareStatement", "ifStatement", "forStatement",
-  "funcDefStatement", "funcCallStatement", "parameterDefList",
-  "parameterDef", "parameterList", "parameter", "rangeExpression",
-  "expression", "term", "primaryExpression", "dataType", 0
+  "BoolLiteral", "IDENTIFIER", "Literal", "BinaryOperator", "ADD", "SUB",
+  "MUL", "DIV", "MOD", "POWER", "EQ", "GT", "LT", "GE", "LE", "Statement",
+  "List", "ASSIGN", "INT", "DOUBLE", "BOOL", "STRING", "SEMI", "COMMA",
+  "COLON", "IF", "FOR", "FUNC", "LB", "RB", "LCB", "RCB", "RANGE_UNCLOSE",
+  "RANGE_CLOSE", "IN", "COMMENT_ONE_LINE", "$accept", "fragment",
+  "statementList", "statement", "assignStatement", "declareStatement",
+  "ifStatement", "forStatement", "funcDefStatement", "funcCallStatement",
+  "parameterDefList", "parameterDef", "parameterList", "parameter",
+  "rangeExpression", "expression", "primaryExpression", "dataType", 0
 };
 #endif
 
@@ -535,18 +545,19 @@ static const yytype_uint16 yytoknum[] =
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     285,   286,   287,   288,   289,   290,   291,   292
+     285,   286,   287,   288,   289,   290,   291,   292,   293,   294,
+     295
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    38,    39,    40,    40,    41,    41,    41,    41,    41,
-      41,    41,    42,    43,    43,    44,    45,    46,    46,    47,
-      48,    48,    49,    49,    50,    50,    51,    51,    52,    52,
-      53,    53,    53,    54,    54,    54,    54,    54,    55,    55,
-      55,    56,    56,    56,    56
+       0,    41,    42,    43,    43,    44,    44,    44,    44,    44,
+      44,    44,    45,    46,    46,    47,    48,    49,    49,    50,
+      51,    51,    52,    52,    53,    53,    54,    54,    55,    55,
+      56,    56,    56,    56,    56,    56,    56,    56,    56,    56,
+      56,    56,    57,    57,    57,    58,    58,    58,    58
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
@@ -555,8 +566,8 @@ static const yytype_uint8 yyr2[] =
        0,     2,     1,     1,     2,     2,     1,     1,     1,     1,
        1,     1,     4,     3,     5,     5,     7,     8,    10,     5,
        1,     2,     2,     3,     1,     2,     1,     2,     3,     3,
-       1,     3,     3,     1,     3,     3,     3,     3,     1,     1,
-       3,     1,     1,     1,     1
+       1,     3,     3,     3,     3,     3,     3,     3,     3,     3,
+       3,     3,     1,     1,     3,     1,     1,     1,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -564,47 +575,49 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,    39,    38,    41,    42,    43,    44,     0,     0,     0,
+       0,    43,    42,    45,    46,    47,    48,     0,     0,     0,
        0,     0,     2,     3,     6,     7,     8,     9,    10,    11,
-       0,    30,    33,     0,     0,     0,    39,     0,     0,     0,
-       0,     1,     4,     5,     0,     0,     0,     0,     0,     0,
-       0,     0,    26,     0,    24,     0,     0,     0,    40,    31,
-      32,    35,    36,    37,    34,     0,    13,    12,    27,     0,
-      25,     0,     0,     0,     0,     0,    20,     0,     0,    19,
-      15,     0,     0,     0,    22,     0,    21,     0,    14,     0,
-      28,    29,    23,     0,     0,    16,     0,     0,     0,    17,
-       0,    18
+       0,    30,     0,     0,     0,    43,     0,     0,     0,     0,
+       1,     4,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     5,     0,     0,    26,     0,    24,     0,
+       0,     0,    44,    31,    32,    33,    34,    35,    36,    37,
+      38,    40,    39,    41,     0,    13,    12,    27,     0,    25,
+       0,     0,     0,     0,     0,    20,     0,     0,    19,    15,
+       0,     0,     0,    22,     0,    21,     0,    14,     0,    28,
+      29,    23,     0,     0,    16,     0,     0,     0,    17,     0,
+      18
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
       -1,    11,    12,    13,    14,    15,    16,    17,    18,    19,
-      65,    66,    43,    44,    62,    20,    21,    22,    23
+      74,    75,    47,    48,    71,    20,    21,    22
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -45
-static const yytype_int8 yypact[] =
+#define YYPACT_NINF -42
+static const yytype_int16 yypact[] =
 {
-     115,     9,   -45,   -45,   -45,   -45,   -45,     6,     2,    13,
-       6,    31,   115,   -45,   -45,   -45,   -45,   -45,   -45,   -45,
-      67,    92,   -45,    30,     6,    33,   -45,    17,     7,    24,
-      50,   -45,   -45,   -45,     6,     6,     6,     6,     6,     6,
-      20,    75,    37,    -2,   -45,   115,     6,    -1,   -45,    92,
-      92,   -45,   -45,   -45,   -45,     6,   -45,   -45,   -45,    32,
-     -45,     4,    44,    27,    57,    14,   -45,     1,    89,   -45,
-     -45,   115,     6,     6,    82,    58,   -45,    54,   -45,    47,
-      35,    35,   -45,   125,   115,   -45,    70,    73,   115,   -45,
-      94,   -45
+     131,   -20,   -42,   -42,   -42,   -42,   -42,    73,     1,     3,
+      73,    11,   131,   -42,   -42,   -42,   -42,   -42,   -42,   -42,
+     168,   -42,     6,    73,     8,   -42,   130,   -23,   -16,   157,
+     -42,   -42,    73,    73,    73,    73,    73,    73,    73,    73,
+      73,    73,    73,   -42,   -17,   187,    -8,    20,   -42,   131,
+      73,    -5,   -42,   215,   215,     7,     7,     7,     7,   198,
+     198,   198,   198,   198,    73,   -42,   -42,   -42,    -2,   -42,
+      17,    22,   115,    53,   -19,   -42,    21,   206,   -42,   -42,
+     131,    73,    73,    37,    46,   -42,    31,   -42,    38,   225,
+     225,   -42,   222,   131,   -42,    32,    66,   131,   -42,    87,
+     -42
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-     -45,   -45,   -44,   -12,   -45,   -45,   -45,   -45,   -45,   -45,
-     -45,    43,    71,   -41,   -45,    -4,    59,   106,    36
+     -42,   -42,   -41,   -12,   -42,   -42,   -42,   -42,   -42,   -42,
+     -42,     9,    30,   -25,   -42,    -4,   -42,   -10
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -614,56 +627,77 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-      32,    61,    60,    27,    42,    42,    30,    42,    28,    64,
-       1,     2,    26,     2,     3,     4,     5,     6,    24,    29,
-      41,     7,     8,     9,    64,    59,    60,    79,    77,    55,
-      10,    31,    10,    70,    56,    25,    40,    34,    35,    42,
-      87,    75,    63,    46,    90,    45,    69,    34,    35,    32,
-      47,    68,    58,     1,     2,    34,    35,     3,     4,     5,
-       6,    72,    73,    74,     7,     8,     9,    32,    80,    81,
-      34,    35,    71,    10,    83,    32,    85,    48,    32,     1,
-       2,    33,    84,     3,     4,     5,     6,    34,    35,    57,
-       7,     8,     9,    49,    50,    34,    35,    82,    88,    10,
-       1,     2,    89,    78,     3,     4,     5,     6,    76,    34,
-      35,     7,     8,     9,    36,    37,    38,    39,    67,    86,
-      10,     1,     2,    91,     0,     3,     4,     5,     6,     0,
-       0,     0,     7,     8,     9,     3,     4,     5,     6,     0,
-       0,    10,    51,    52,    53,    54
+      31,    46,    23,    26,    73,    64,    29,    27,    70,    28,
+      65,    30,    44,    24,    46,    84,    50,    51,    73,    45,
+      67,    37,    69,     1,     2,    78,    46,    46,    53,    54,
+      55,    56,    57,    58,    59,    60,    61,    62,    63,    88,
+       3,     4,     5,     6,     1,     2,    72,     7,     8,     9,
+      10,    69,    96,    79,    68,    86,    99,    80,    31,    83,
+      77,     3,     4,     5,     6,    91,    93,    97,     7,     8,
+       9,    10,     1,     2,    94,    92,    31,    89,    90,    25,
+       2,    76,    95,    85,    31,     0,     0,    31,     0,     3,
+       4,     5,     6,     1,     2,     0,     7,     8,     9,    10,
+       0,     0,    98,     0,     0,     0,    10,     0,     0,     0,
+       3,     4,     5,     6,     0,     0,     0,     7,     8,     9,
+      10,     0,     0,   100,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    42,     0,     0,     1,     2,    32,
+      33,    34,    35,    36,    37,    38,    39,    40,    41,    42,
+       0,     0,    81,    82,     3,     4,     5,     6,     0,     0,
+       0,     7,     8,     9,    10,    49,    32,    33,    34,    35,
+      36,    37,    38,    39,    40,    41,    42,    32,    33,    34,
+      35,    36,    37,    38,    39,    40,    41,    42,     0,     0,
+       0,    52,     0,     0,     0,    43,    32,    33,    34,    35,
+      36,    37,    38,    39,    40,    41,    42,    32,    33,    34,
+      35,    36,    37,     0,    66,    32,    33,    34,    35,    36,
+      37,    38,    39,    40,    41,    42,    34,    35,    36,    37,
+       0,     0,     0,    87,    32,    33,    34,    35,    36,    37,
+      38,    39,    40,    41,    42,     3,     4,     5,     6
 };
 
 static const yytype_int8 yycheck[] =
 {
-      12,    45,    43,     7,     6,     6,    10,     6,     6,    10,
-       6,     7,     6,     7,    10,    11,    12,    13,     9,     6,
-      24,    17,    18,    19,    10,    27,    67,    71,    27,     9,
-      26,     0,    26,    29,    14,    26,     6,    20,    21,     6,
-      84,    27,    46,    36,    88,    28,    14,    20,    21,    61,
-      26,    55,    15,     6,     7,    20,    21,    10,    11,    12,
-      13,    34,    35,     6,    17,    18,    19,    79,    72,    73,
-      20,    21,    28,    26,    16,    87,    29,    27,    90,     6,
-       7,    14,    28,    10,    11,    12,    13,    20,    21,    14,
-      17,    18,    19,    34,    35,    20,    21,    15,    28,    26,
-       6,     7,    29,    14,    10,    11,    12,    13,    65,    20,
-      21,    17,    18,    19,    22,    23,    24,    25,    47,    83,
-      26,     6,     7,    29,    -1,    10,    11,    12,    13,    -1,
-      -1,    -1,    17,    18,    19,    10,    11,    12,    13,    -1,
-      -1,    26,    36,    37,    38,    39
+      12,     6,    22,     7,    23,    22,    10,     6,    49,     6,
+      27,     0,     6,    33,     6,    34,    39,    33,    23,    23,
+      28,    14,    47,     6,     7,    27,     6,     6,    32,    33,
+      34,    35,    36,    37,    38,    39,    40,    41,    42,    80,
+      23,    24,    25,    26,     6,     7,    50,    30,    31,    32,
+      33,    76,    93,    36,    34,    34,    97,    35,    70,     6,
+      64,    23,    24,    25,    26,    28,    35,    35,    30,    31,
+      32,    33,     6,     7,    36,    29,    88,    81,    82,     6,
+       7,    51,    92,    74,    96,    -1,    -1,    99,    -1,    23,
+      24,    25,    26,     6,     7,    -1,    30,    31,    32,    33,
+      -1,    -1,    36,    -1,    -1,    -1,    33,    -1,    -1,    -1,
+      23,    24,    25,    26,    -1,    -1,    -1,    30,    31,    32,
+      33,    -1,    -1,    36,     9,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    -1,    -1,     6,     7,     9,
+      10,    11,    12,    13,    14,    15,    16,    17,    18,    19,
+      -1,    -1,    37,    38,    23,    24,    25,    26,    -1,    -1,
+      -1,    30,    31,    32,    33,    35,     9,    10,    11,    12,
+      13,    14,    15,    16,    17,    18,    19,     9,    10,    11,
+      12,    13,    14,    15,    16,    17,    18,    19,    -1,    -1,
+      -1,    34,    -1,    -1,    -1,    27,     9,    10,    11,    12,
+      13,    14,    15,    16,    17,    18,    19,     9,    10,    11,
+      12,    13,    14,    -1,    27,     9,    10,    11,    12,    13,
+      14,    15,    16,    17,    18,    19,    11,    12,    13,    14,
+      -1,    -1,    -1,    27,     9,    10,    11,    12,    13,    14,
+      15,    16,    17,    18,    19,    23,    24,    25,    26
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     6,     7,    10,    11,    12,    13,    17,    18,    19,
-      26,    39,    40,    41,    42,    43,    44,    45,    46,    47,
-      53,    54,    55,    56,     9,    26,     6,    53,     6,     6,
-      53,     0,    41,    14,    20,    21,    22,    23,    24,    25,
-       6,    53,     6,    50,    51,    28,    36,    26,    27,    54,
-      54,    55,    55,    55,    55,     9,    14,    14,    15,    27,
-      51,    40,    52,    53,    10,    48,    49,    50,    53,    14,
-      29,    28,    34,    35,     6,    27,    49,    27,    14,    40,
-      53,    53,    15,    16,    28,    29,    56,    40,    28,    29,
-      40,    29
+       0,     6,     7,    23,    24,    25,    26,    30,    31,    32,
+      33,    42,    43,    44,    45,    46,    47,    48,    49,    50,
+      56,    57,    58,    22,    33,     6,    56,     6,     6,    56,
+       0,    44,     9,    10,    11,    12,    13,    14,    15,    16,
+      17,    18,    19,    27,     6,    56,     6,    53,    54,    35,
+      39,    33,    34,    56,    56,    56,    56,    56,    56,    56,
+      56,    56,    56,    56,    22,    27,    27,    28,    34,    54,
+      43,    55,    56,    23,    51,    52,    53,    56,    27,    36,
+      35,    37,    38,     6,    34,    52,    34,    27,    43,    56,
+      56,    28,    29,    35,    36,    58,    43,    35,    36,    43,
+      36
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1477,31 +1511,57 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 5:
-#line 48 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+        case 2:
+#line 50 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+    {
+        HTPropAssignStrong(HTCompilerGetCurrent(), statementList, (yyvsp[(1) - (1)].listValue));
+        HTTypeRelease((yyvsp[(1) - (1)].listValue));
+    ;}
+    break;
+
+  case 3:
+#line 57 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+    {
+        printf("statement list begin.\n");
+        HTListRef statementList = HTListCreate();
+        HTListAppend(statementList, (yyvsp[(1) - (1)].statementValue));
+        HTTypeRelease((yyvsp[(1) - (1)].statementValue));
+        (yyval.listValue) = statementList;
+    ;}
+    break;
+
+  case 4:
+#line 65 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+    {
+        printf("statement list collect.\n");
+        HTListAppend((yyvsp[(1) - (2)].listValue), (yyvsp[(2) - (2)].statementValue));
+        HTTypeRelease((yyvsp[(2) - (2)].statementValue));
+    ;}
+    break;
+
+  case 5:
+#line 74 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a pure expr\n");
     ;}
     break;
 
   case 6:
-#line 52 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 78 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        HTCompilerAddStatement((yyvsp[(1) - (1)].statementValue));
-        HTTypeRelease((yyvsp[(1) - (1)].statementValue));
+        (yyval.statementValue) = (yyvsp[(1) - (1)].statementValue);
     ;}
     break;
 
   case 7:
-#line 57 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 82 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        HTCompilerAddStatement((yyvsp[(1) - (1)].statementValue));
-        HTTypeRelease((yyvsp[(1) - (1)].statementValue));
+        (yyval.statementValue) = (yyvsp[(1) - (1)].statementValue);
     ;}
     break;
 
   case 12:
-#line 69 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 93 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a assign statement\n");
         (yyval.statementValue) = HTStatementCreateAssign((yyvsp[(1) - (4)].expressionValue), (yyvsp[(3) - (4)].expressionValue));
@@ -1511,7 +1571,7 @@ yyreduce:
     break;
 
   case 13:
-#line 78 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 102 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         HTVariableRef variable = HTVariableCreateWithTypeAndName((yyvsp[(1) - (3)].dataTypeValue), (yyvsp[(2) - (3)].expressionValue)->impl->identifier->impl->characters);
         (yyval.statementValue) = HTStatementCreateDeclare(variable, NULL);
@@ -1521,7 +1581,7 @@ yyreduce:
     break;
 
   case 14:
-#line 85 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 109 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         HTVariableRef variable = HTVariableCreateWithTypeAndName((yyvsp[(1) - (5)].dataTypeValue), (yyvsp[(2) - (5)].expressionValue)->impl->identifier->impl->characters);
         (yyval.statementValue) = HTStatementCreateDeclare(variable, (yyvsp[(4) - (5)].expressionValue));
@@ -1532,42 +1592,45 @@ yyreduce:
     break;
 
   case 15:
-#line 95 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 119 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a if statement\n");
+        (yyval.statementValue) = HTStatementCreateIf((yyvsp[(2) - (5)].expressionValue), (yyvsp[(4) - (5)].listValue));
+        HTTypeRelease((yyvsp[(2) - (5)].expressionValue));
+        HTTypeRelease((yyvsp[(4) - (5)].listValue));
     ;}
     break;
 
   case 16:
-#line 101 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 128 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a for statement\n");
     ;}
     break;
 
   case 17:
-#line 107 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 134 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a function statement\n");
     ;}
     break;
 
   case 18:
-#line 111 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 138 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a function with return statement\n");
     ;}
     break;
 
   case 19:
-#line 117 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 144 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         printf("This is a function call statement\n");
     ;}
     break;
 
   case 28:
-#line 139 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 166 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
@@ -1576,7 +1639,7 @@ yyreduce:
     break;
 
   case 29:
-#line 145 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 172 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
@@ -1585,103 +1648,148 @@ yyreduce:
     break;
 
   case 31:
-#line 154 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 181 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 32:
-#line 160 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 187 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorSub, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+            (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+            HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+            HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
+        ;}
+    break;
+
+  case 33:
+#line 193 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+    {
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 34:
-#line 170 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 199 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorPower, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 35:
-#line 176 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 205 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMul, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 36:
-#line 182 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 211 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorDiv, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 37:
-#line 188 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 217 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        (yyval.expressionValue) = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMod, (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
         HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 38:
-#line 197 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 223 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
-        (yyval.expressionValue) = (yyvsp[(1) - (1)].expressionValue)
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
     ;}
     break;
 
   case 39:
-#line 201 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 229 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+    {
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
+    ;}
+    break;
+
+  case 40:
+#line 235 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+    {
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
+    ;}
+    break;
+
+  case 41:
+#line 241 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+    {
+        (yyval.expressionValue) = HTExpressionCreateBinaryOperation((yyvsp[(2) - (3)].binaryOperatorValue), (yyvsp[(1) - (3)].expressionValue), (yyvsp[(3) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(1) - (3)].expressionValue));
+        HTTypeRelease((yyvsp[(3) - (3)].expressionValue));
+    ;}
+    break;
+
+  case 42:
+#line 250 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = (yyvsp[(1) - (1)].expressionValue)
     ;}
     break;
 
-  case 40:
-#line 205 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+  case 43:
+#line 254 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+    {
+        (yyval.expressionValue) = (yyvsp[(1) - (1)].expressionValue)
+    ;}
+    break;
+
+  case 44:
+#line 258 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.expressionValue) = (yyvsp[(2) - (3)].expressionValue)
     ;}
     break;
 
-  case 41:
-#line 212 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+  case 45:
+#line 265 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.dataTypeValue) = HTDataTypeInt
     ;}
     break;
 
-  case 42:
-#line 216 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+  case 46:
+#line 269 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.dataTypeValue) = HTDataTypeDouble
     ;}
     break;
 
-  case 43:
-#line 220 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+  case 47:
+#line 273 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.dataTypeValue) = HTDataTypeBool
     ;}
     break;
 
-  case 44:
-#line 224 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+  case 48:
+#line 277 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
     {
         (yyval.dataTypeValue) = HTDataTypeString
     ;}
@@ -1689,7 +1797,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1693 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c"
+#line 1801 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1903,7 +2011,7 @@ yyreturn:
 }
 
 
-#line 229 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+#line 282 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
 
 
 int yyerror(char const * str) {

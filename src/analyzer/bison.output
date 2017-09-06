@@ -3,11 +3,9 @@ Terminals which are not used
    IntLiteral
    DoubleLiteral
    BoolLiteral
+   BinaryOperator
    Statement
-   GT
-   LT
-   GE
-   LE
+   List
    COMMENT_ONE_LINE
 
 
@@ -28,10 +26,10 @@ Grammar
     9          | funcDefStatement
    10          | funcCallStatement
 
-   11 assignStatement: IDENTIFIER EQ expression SEMI
+   11 assignStatement: IDENTIFIER ASSIGN expression SEMI
 
    12 declareStatement: dataType IDENTIFIER SEMI
-   13                 | dataType IDENTIFIER EQ expression SEMI
+   13                 | dataType IDENTIFIER ASSIGN expression SEMI
 
    14 ifStatement: IF expression LCB statementList RCB
 
@@ -57,24 +55,27 @@ Grammar
    27 rangeExpression: expression RANGE_UNCLOSE expression
    28                | expression RANGE_CLOSE expression
 
-   29 expression: term
-   30           | expression ADD term
-   31           | expression SUB term
+   29 expression: primaryExpression
+   30           | expression ADD expression
+   31           | expression SUB expression
+   32           | expression MUL expression
+   33           | expression DIV expression
+   34           | expression MOD expression
+   35           | expression POWER expression
+   36           | expression EQ expression
+   37           | expression GT expression
+   38           | expression GE expression
+   39           | expression LT expression
+   40           | expression LE expression
 
-   32 term: primaryExpression
-   33     | term POWER primaryExpression
-   34     | term MUL primaryExpression
-   35     | term DIV primaryExpression
-   36     | term MOD primaryExpression
+   41 primaryExpression: Literal
+   42                  | IDENTIFIER
+   43                  | LB expression RB
 
-   37 primaryExpression: Literal
-   38                  | IDENTIFIER
-   39                  | LB expression RB
-
-   40 dataType: INT
-   41         | DOUBLE
-   42         | BOOL
-   43         | STRING
+   44 dataType: INT
+   45         | DOUBLE
+   46         | BOOL
+   47         | STRING
 
 
 Terminals, with rules where they appear
@@ -84,80 +85,82 @@ error (256)
 IntLiteral (258)
 DoubleLiteral (259)
 BoolLiteral (260)
-IDENTIFIER (261) 11 12 13 15 16 17 18 21 22 25 26 38
-Literal (262) 37
-Statement (263)
-EQ (264) 11 13
-INT (265) 21 22 40
-DOUBLE (266) 41
-BOOL (267) 42
-STRING (268) 43
-SEMI (269) 4 11 12 13 18
-COMMA (270) 22 26
-COLON (271) 17
-IF (272) 14
-FOR (273) 15
-FUNC (274) 16 17
-ADD (275) 30
-SUB (276) 31
-MUL (277) 34
-DIV (278) 35
-MOD (279) 36
-POWER (280) 33
-LB (281) 16 17 18 39
-RB (282) 16 17 18 39
-LCB (283) 14 15 16 17
-RCB (284) 14 15 16 17
-GT (285)
-LT (286)
-GE (287)
-LE (288)
-RANGE_UNCLOSE (289) 27
-RANGE_CLOSE (290) 28
-IN (291) 15
-COMMENT_ONE_LINE (292)
+IDENTIFIER (261) 11 12 13 15 16 17 18 21 22 25 26 42
+Literal (262) 41
+BinaryOperator (263)
+ADD (264) 30
+SUB (265) 31
+MUL (266) 32
+DIV (267) 33
+MOD (268) 34
+POWER (269) 35
+EQ (270) 36
+GT (271) 37
+LT (272) 39
+GE (273) 38
+LE (274) 40
+Statement (275)
+List (276)
+ASSIGN (277) 11 13
+INT (278) 21 22 44
+DOUBLE (279) 45
+BOOL (280) 46
+STRING (281) 47
+SEMI (282) 4 11 12 13 18
+COMMA (283) 22 26
+COLON (284) 17
+IF (285) 14
+FOR (286) 15
+FUNC (287) 16 17
+LB (288) 16 17 18 43
+RB (289) 16 17 18 43
+LCB (290) 14 15 16 17
+RCB (291) 14 15 16 17
+RANGE_UNCLOSE (292) 27
+RANGE_CLOSE (293) 28
+IN (294) 15
+COMMENT_ONE_LINE (295)
 
 
 Nonterminals, with rules where they appear
 
-$accept (38)
+$accept (41)
     on left: 0
-fragment (39)
+fragment (42)
     on left: 1, on right: 0
-statementList (40)
+statementList (43)
     on left: 2 3, on right: 1 3 14 15 16 17
-statement (41)
+statement (44)
     on left: 4 5 6 7 8 9 10, on right: 2 3
-assignStatement (42)
+assignStatement (45)
     on left: 11, on right: 5
-declareStatement (43)
+declareStatement (46)
     on left: 12 13, on right: 6
-ifStatement (44)
+ifStatement (47)
     on left: 14, on right: 7
-forStatement (45)
+forStatement (48)
     on left: 15, on right: 8
-funcDefStatement (46)
+funcDefStatement (49)
     on left: 16 17, on right: 9
-funcCallStatement (47)
+funcCallStatement (50)
     on left: 18, on right: 10
-parameterDefList (48)
+parameterDefList (51)
     on left: 19 20, on right: 17 20
-parameterDef (49)
+parameterDef (52)
     on left: 21 22, on right: 19 20
-parameterList (50)
+parameterList (53)
     on left: 23 24, on right: 16 18 24
-parameter (51)
+parameter (54)
     on left: 25 26, on right: 23 24
-rangeExpression (52)
+rangeExpression (55)
     on left: 27 28, on right: 15
-expression (53)
-    on left: 29 30 31, on right: 4 11 13 14 27 28 30 31 39
-term (54)
-    on left: 32 33 34 35 36, on right: 29 30 31 33 34 35 36
-primaryExpression (55)
-    on left: 37 38 39, on right: 32 33 34 35 36
-dataType (56)
-    on left: 40 41 42 43, on right: 12 13 17
+expression (56)
+    on left: 29 30 31 32 33 34 35 36 37 38 39 40, on right: 4 11 13
+    14 27 28 30 31 32 33 34 35 36 37 38 39 40 43
+primaryExpression (57)
+    on left: 41 42 43, on right: 29
+dataType (58)
+    on left: 44 45 46 47, on right: 12 13 17
 
 
 state 0
@@ -185,76 +188,74 @@ state 0
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
 state 1
 
-   11 assignStatement: IDENTIFIER . EQ expression SEMI
+   11 assignStatement: IDENTIFIER . ASSIGN expression SEMI
    18 funcCallStatement: IDENTIFIER . LB parameterList RB SEMI
-   38 primaryExpression: IDENTIFIER .
+   42 primaryExpression: IDENTIFIER .
 
-    EQ  shift, and go to state 24
-    LB  shift, and go to state 25
+    ASSIGN  shift, and go to state 23
+    LB      shift, and go to state 24
 
-    $default  reduce using rule 38 (primaryExpression)
+    $default  reduce using rule 42 (primaryExpression)
 
 
 state 2
 
-   37 primaryExpression: Literal .
+   41 primaryExpression: Literal .
 
-    $default  reduce using rule 37 (primaryExpression)
+    $default  reduce using rule 41 (primaryExpression)
 
 
 state 3
 
-   40 dataType: INT .
+   44 dataType: INT .
 
-    $default  reduce using rule 40 (dataType)
+    $default  reduce using rule 44 (dataType)
 
 
 state 4
 
-   41 dataType: DOUBLE .
+   45 dataType: DOUBLE .
 
-    $default  reduce using rule 41 (dataType)
+    $default  reduce using rule 45 (dataType)
 
 
 state 5
 
-   42 dataType: BOOL .
+   46 dataType: BOOL .
 
-    $default  reduce using rule 42 (dataType)
+    $default  reduce using rule 46 (dataType)
 
 
 state 6
 
-   43 dataType: STRING .
+   47 dataType: STRING .
 
-    $default  reduce using rule 43 (dataType)
+    $default  reduce using rule 47 (dataType)
 
 
 state 7
 
    14 ifStatement: IF . expression LCB statementList RCB
 
-    IDENTIFIER  shift, and go to state 26
+    IDENTIFIER  shift, and go to state 25
     Literal     shift, and go to state 2
     LB          shift, and go to state 10
 
-    expression         go to state 27
-    term               go to state 21
-    primaryExpression  go to state 22
+    expression         go to state 26
+    primaryExpression  go to state 21
 
 
 state 8
 
    15 forStatement: FOR . IDENTIFIER IN rangeExpression LCB statementList RCB
 
-    IDENTIFIER  shift, and go to state 28
+    IDENTIFIER  shift, and go to state 27
 
 
 state 9
@@ -262,27 +263,26 @@ state 9
    16 funcDefStatement: FUNC . IDENTIFIER LB parameterList RB LCB statementList RCB
    17                 | FUNC . IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB
 
-    IDENTIFIER  shift, and go to state 29
+    IDENTIFIER  shift, and go to state 28
 
 
 state 10
 
-   39 primaryExpression: LB . expression RB
+   43 primaryExpression: LB . expression RB
 
-    IDENTIFIER  shift, and go to state 26
+    IDENTIFIER  shift, and go to state 25
     Literal     shift, and go to state 2
     LB          shift, and go to state 10
 
-    expression         go to state 30
-    term               go to state 21
-    primaryExpression  go to state 22
+    expression         go to state 29
+    primaryExpression  go to state 21
 
 
 state 11
 
     0 $accept: fragment . $end
 
-    $end  shift, and go to state 31
+    $end  shift, and go to state 30
 
 
 state 12
@@ -303,7 +303,7 @@ state 12
 
     $default  reduce using rule 1 (fragment)
 
-    statement          go to state 32
+    statement          go to state 31
     assignStatement    go to state 14
     declareStatement   go to state 15
     ifStatement        go to state 16
@@ -311,9 +311,8 @@ state 12
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
 state 13
@@ -368,250 +367,369 @@ state 19
 state 20
 
     4 statement: expression . SEMI
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
 
-    SEMI  shift, and go to state 33
-    ADD   shift, and go to state 34
-    SUB   shift, and go to state 35
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+    EQ     shift, and go to state 38
+    GT     shift, and go to state 39
+    LT     shift, and go to state 40
+    GE     shift, and go to state 41
+    LE     shift, and go to state 42
+    SEMI   shift, and go to state 43
 
 
 state 21
 
-   29 expression: term .
-   33 term: term . POWER primaryExpression
-   34     | term . MUL primaryExpression
-   35     | term . DIV primaryExpression
-   36     | term . MOD primaryExpression
-
-    MUL    shift, and go to state 36
-    DIV    shift, and go to state 37
-    MOD    shift, and go to state 38
-    POWER  shift, and go to state 39
+   29 expression: primaryExpression .
 
     $default  reduce using rule 29 (expression)
 
 
 state 22
 
-   32 term: primaryExpression .
+   12 declareStatement: dataType . IDENTIFIER SEMI
+   13                 | dataType . IDENTIFIER ASSIGN expression SEMI
 
-    $default  reduce using rule 32 (term)
+    IDENTIFIER  shift, and go to state 44
 
 
 state 23
 
-   12 declareStatement: dataType . IDENTIFIER SEMI
-   13                 | dataType . IDENTIFIER EQ expression SEMI
+   11 assignStatement: IDENTIFIER ASSIGN . expression SEMI
 
-    IDENTIFIER  shift, and go to state 40
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 45
+    primaryExpression  go to state 21
 
 
 state 24
 
-   11 assignStatement: IDENTIFIER EQ . expression SEMI
+   18 funcCallStatement: IDENTIFIER LB . parameterList RB SEMI
 
-    IDENTIFIER  shift, and go to state 26
-    Literal     shift, and go to state 2
-    LB          shift, and go to state 10
+    IDENTIFIER  shift, and go to state 46
 
-    expression         go to state 41
-    term               go to state 21
-    primaryExpression  go to state 22
+    parameterList  go to state 47
+    parameter      go to state 48
 
 
 state 25
 
-   18 funcCallStatement: IDENTIFIER LB . parameterList RB SEMI
+   42 primaryExpression: IDENTIFIER .
 
-    IDENTIFIER  shift, and go to state 42
-
-    parameterList  go to state 43
-    parameter      go to state 44
+    $default  reduce using rule 42 (primaryExpression)
 
 
 state 26
 
-   38 primaryExpression: IDENTIFIER .
+   14 ifStatement: IF expression . LCB statementList RCB
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
 
-    $default  reduce using rule 38 (primaryExpression)
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+    EQ     shift, and go to state 38
+    GT     shift, and go to state 39
+    LT     shift, and go to state 40
+    GE     shift, and go to state 41
+    LE     shift, and go to state 42
+    LCB    shift, and go to state 49
 
 
 state 27
 
-   14 ifStatement: IF expression . LCB statementList RCB
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   15 forStatement: FOR IDENTIFIER . IN rangeExpression LCB statementList RCB
 
-    ADD  shift, and go to state 34
-    SUB  shift, and go to state 35
-    LCB  shift, and go to state 45
+    IN  shift, and go to state 50
 
 
 state 28
 
-   15 forStatement: FOR IDENTIFIER . IN rangeExpression LCB statementList RCB
+   16 funcDefStatement: FUNC IDENTIFIER . LB parameterList RB LCB statementList RCB
+   17                 | FUNC IDENTIFIER . LB parameterDefList RB COLON dataType LCB statementList RCB
 
-    IN  shift, and go to state 46
+    LB  shift, and go to state 51
 
 
 state 29
 
-   16 funcDefStatement: FUNC IDENTIFIER . LB parameterList RB LCB statementList RCB
-   17                 | FUNC IDENTIFIER . LB parameterDefList RB COLON dataType LCB statementList RCB
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
+   43 primaryExpression: LB expression . RB
 
-    LB  shift, and go to state 47
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+    EQ     shift, and go to state 38
+    GT     shift, and go to state 39
+    LT     shift, and go to state 40
+    GE     shift, and go to state 41
+    LE     shift, and go to state 42
+    RB     shift, and go to state 52
 
 
 state 30
-
-   30 expression: expression . ADD term
-   31           | expression . SUB term
-   39 primaryExpression: LB expression . RB
-
-    ADD  shift, and go to state 34
-    SUB  shift, and go to state 35
-    RB   shift, and go to state 48
-
-
-state 31
 
     0 $accept: fragment $end .
 
     $default  accept
 
 
-state 32
+state 31
 
     3 statementList: statementList statement .
 
     $default  reduce using rule 3 (statementList)
 
 
+state 32
+
+   30 expression: expression ADD . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 53
+    primaryExpression  go to state 21
+
+
 state 33
+
+   31 expression: expression SUB . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 54
+    primaryExpression  go to state 21
+
+
+state 34
+
+   32 expression: expression MUL . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 55
+    primaryExpression  go to state 21
+
+
+state 35
+
+   33 expression: expression DIV . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 56
+    primaryExpression  go to state 21
+
+
+state 36
+
+   34 expression: expression MOD . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 57
+    primaryExpression  go to state 21
+
+
+state 37
+
+   35 expression: expression POWER . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 58
+    primaryExpression  go to state 21
+
+
+state 38
+
+   36 expression: expression EQ . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 59
+    primaryExpression  go to state 21
+
+
+state 39
+
+   37 expression: expression GT . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 60
+    primaryExpression  go to state 21
+
+
+state 40
+
+   39 expression: expression LT . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 61
+    primaryExpression  go to state 21
+
+
+state 41
+
+   38 expression: expression GE . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 62
+    primaryExpression  go to state 21
+
+
+state 42
+
+   40 expression: expression LE . expression
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 63
+    primaryExpression  go to state 21
+
+
+state 43
 
     4 statement: expression SEMI .
 
     $default  reduce using rule 4 (statement)
 
 
-state 34
-
-   30 expression: expression ADD . term
-
-    IDENTIFIER  shift, and go to state 26
-    Literal     shift, and go to state 2
-    LB          shift, and go to state 10
-
-    term               go to state 49
-    primaryExpression  go to state 22
-
-
-state 35
-
-   31 expression: expression SUB . term
-
-    IDENTIFIER  shift, and go to state 26
-    Literal     shift, and go to state 2
-    LB          shift, and go to state 10
-
-    term               go to state 50
-    primaryExpression  go to state 22
-
-
-state 36
-
-   34 term: term MUL . primaryExpression
-
-    IDENTIFIER  shift, and go to state 26
-    Literal     shift, and go to state 2
-    LB          shift, and go to state 10
-
-    primaryExpression  go to state 51
-
-
-state 37
-
-   35 term: term DIV . primaryExpression
-
-    IDENTIFIER  shift, and go to state 26
-    Literal     shift, and go to state 2
-    LB          shift, and go to state 10
-
-    primaryExpression  go to state 52
-
-
-state 38
-
-   36 term: term MOD . primaryExpression
-
-    IDENTIFIER  shift, and go to state 26
-    Literal     shift, and go to state 2
-    LB          shift, and go to state 10
-
-    primaryExpression  go to state 53
-
-
-state 39
-
-   33 term: term POWER . primaryExpression
-
-    IDENTIFIER  shift, and go to state 26
-    Literal     shift, and go to state 2
-    LB          shift, and go to state 10
-
-    primaryExpression  go to state 54
-
-
-state 40
+state 44
 
    12 declareStatement: dataType IDENTIFIER . SEMI
-   13                 | dataType IDENTIFIER . EQ expression SEMI
+   13                 | dataType IDENTIFIER . ASSIGN expression SEMI
 
-    EQ    shift, and go to state 55
-    SEMI  shift, and go to state 56
-
-
-state 41
-
-   11 assignStatement: IDENTIFIER EQ expression . SEMI
-   30 expression: expression . ADD term
-   31           | expression . SUB term
-
-    SEMI  shift, and go to state 57
-    ADD   shift, and go to state 34
-    SUB   shift, and go to state 35
+    ASSIGN  shift, and go to state 64
+    SEMI    shift, and go to state 65
 
 
-state 42
+state 45
+
+   11 assignStatement: IDENTIFIER ASSIGN expression . SEMI
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
+
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+    EQ     shift, and go to state 38
+    GT     shift, and go to state 39
+    LT     shift, and go to state 40
+    GE     shift, and go to state 41
+    LE     shift, and go to state 42
+    SEMI   shift, and go to state 66
+
+
+state 46
 
    25 parameter: IDENTIFIER .
    26          | IDENTIFIER . COMMA
 
-    COMMA  shift, and go to state 58
+    COMMA  shift, and go to state 67
 
     $default  reduce using rule 25 (parameter)
 
 
-state 43
+state 47
 
    18 funcCallStatement: IDENTIFIER LB parameterList . RB SEMI
    24 parameterList: parameterList . parameter
 
-    IDENTIFIER  shift, and go to state 42
-    RB          shift, and go to state 59
+    IDENTIFIER  shift, and go to state 46
+    RB          shift, and go to state 68
 
-    parameter  go to state 60
+    parameter  go to state 69
 
 
-state 44
+state 48
 
    23 parameterList: parameter .
 
     $default  reduce using rule 23 (parameterList)
 
 
-state 45
+state 49
 
    14 ifStatement: IF expression LCB . statementList RCB
 
@@ -626,7 +744,7 @@ state 45
     FUNC        shift, and go to state 9
     LB          shift, and go to state 10
 
-    statementList      go to state 61
+    statementList      go to state 70
     statement          go to state 13
     assignStatement    go to state 14
     declareStatement   go to state 15
@@ -635,155 +753,343 @@ state 45
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
-
-
-state 46
-
-   15 forStatement: FOR IDENTIFIER IN . rangeExpression LCB statementList RCB
-
-    IDENTIFIER  shift, and go to state 26
-    Literal     shift, and go to state 2
-    LB          shift, and go to state 10
-
-    rangeExpression    go to state 62
-    expression         go to state 63
-    term               go to state 21
-    primaryExpression  go to state 22
-
-
-state 47
-
-   16 funcDefStatement: FUNC IDENTIFIER LB . parameterList RB LCB statementList RCB
-   17                 | FUNC IDENTIFIER LB . parameterDefList RB COLON dataType LCB statementList RCB
-
-    IDENTIFIER  shift, and go to state 42
-    INT         shift, and go to state 64
-
-    parameterDefList  go to state 65
-    parameterDef      go to state 66
-    parameterList     go to state 67
-    parameter         go to state 44
-
-
-state 48
-
-   39 primaryExpression: LB expression RB .
-
-    $default  reduce using rule 39 (primaryExpression)
-
-
-state 49
-
-   30 expression: expression ADD term .
-   33 term: term . POWER primaryExpression
-   34     | term . MUL primaryExpression
-   35     | term . DIV primaryExpression
-   36     | term . MOD primaryExpression
-
-    MUL    shift, and go to state 36
-    DIV    shift, and go to state 37
-    MOD    shift, and go to state 38
-    POWER  shift, and go to state 39
-
-    $default  reduce using rule 30 (expression)
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
 state 50
 
-   31 expression: expression SUB term .
-   33 term: term . POWER primaryExpression
-   34     | term . MUL primaryExpression
-   35     | term . DIV primaryExpression
-   36     | term . MOD primaryExpression
+   15 forStatement: FOR IDENTIFIER IN . rangeExpression LCB statementList RCB
 
-    MUL    shift, and go to state 36
-    DIV    shift, and go to state 37
-    MOD    shift, and go to state 38
-    POWER  shift, and go to state 39
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
 
-    $default  reduce using rule 31 (expression)
+    rangeExpression    go to state 71
+    expression         go to state 72
+    primaryExpression  go to state 21
 
 
 state 51
 
-   34 term: term MUL primaryExpression .
+   16 funcDefStatement: FUNC IDENTIFIER LB . parameterList RB LCB statementList RCB
+   17                 | FUNC IDENTIFIER LB . parameterDefList RB COLON dataType LCB statementList RCB
 
-    $default  reduce using rule 34 (term)
+    IDENTIFIER  shift, and go to state 46
+    INT         shift, and go to state 73
+
+    parameterDefList  go to state 74
+    parameterDef      go to state 75
+    parameterList     go to state 76
+    parameter         go to state 48
 
 
 state 52
 
-   35 term: term DIV primaryExpression .
+   43 primaryExpression: LB expression RB .
 
-    $default  reduce using rule 35 (term)
+    $default  reduce using rule 43 (primaryExpression)
 
 
 state 53
 
-   36 term: term MOD primaryExpression .
+   30 expression: expression . ADD expression
+   30           | expression ADD expression .
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
 
-    $default  reduce using rule 36 (term)
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 30 (expression)
 
 
 state 54
 
-   33 term: term POWER primaryExpression .
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   31           | expression SUB expression .
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
 
-    $default  reduce using rule 33 (term)
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 31 (expression)
 
 
 state 55
 
-   13 declareStatement: dataType IDENTIFIER EQ . expression SEMI
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   32           | expression MUL expression .
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
 
-    IDENTIFIER  shift, and go to state 26
-    Literal     shift, and go to state 2
-    LB          shift, and go to state 10
+    POWER  shift, and go to state 37
 
-    expression         go to state 68
-    term               go to state 21
-    primaryExpression  go to state 22
+    $default  reduce using rule 32 (expression)
 
 
 state 56
+
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   33           | expression DIV expression .
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
+
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 33 (expression)
+
+
+state 57
+
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   34           | expression MOD expression .
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
+
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 34 (expression)
+
+
+state 58
+
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   35           | expression POWER expression .
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
+
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 35 (expression)
+
+
+state 59
+
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   36           | expression EQ expression .
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
+
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 36 (expression)
+
+
+state 60
+
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   37           | expression GT expression .
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
+
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 37 (expression)
+
+
+state 61
+
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   39           | expression LT expression .
+   40           | expression . LE expression
+
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 39 (expression)
+
+
+state 62
+
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   38           | expression GE expression .
+   39           | expression . LT expression
+   40           | expression . LE expression
+
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 38 (expression)
+
+
+state 63
+
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
+   40           | expression LE expression .
+
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+
+    $default  reduce using rule 40 (expression)
+
+
+state 64
+
+   13 declareStatement: dataType IDENTIFIER ASSIGN . expression SEMI
+
+    IDENTIFIER  shift, and go to state 25
+    Literal     shift, and go to state 2
+    LB          shift, and go to state 10
+
+    expression         go to state 77
+    primaryExpression  go to state 21
+
+
+state 65
 
    12 declareStatement: dataType IDENTIFIER SEMI .
 
     $default  reduce using rule 12 (declareStatement)
 
 
-state 57
+state 66
 
-   11 assignStatement: IDENTIFIER EQ expression SEMI .
+   11 assignStatement: IDENTIFIER ASSIGN expression SEMI .
 
     $default  reduce using rule 11 (assignStatement)
 
 
-state 58
+state 67
 
    26 parameter: IDENTIFIER COMMA .
 
     $default  reduce using rule 26 (parameter)
 
 
-state 59
+state 68
 
    18 funcCallStatement: IDENTIFIER LB parameterList RB . SEMI
 
-    SEMI  shift, and go to state 69
+    SEMI  shift, and go to state 78
 
 
-state 60
+state 69
 
    24 parameterList: parameterList parameter .
 
     $default  reduce using rule 24 (parameterList)
 
 
-state 61
+state 70
 
     3 statementList: statementList . statement
    14 ifStatement: IF expression LCB statementList . RCB
@@ -798,9 +1104,9 @@ state 61
     FOR         shift, and go to state 8
     FUNC        shift, and go to state 9
     LB          shift, and go to state 10
-    RCB         shift, and go to state 70
+    RCB         shift, and go to state 79
 
-    statement          go to state 32
+    statement          go to state 31
     assignStatement    go to state 14
     declareStatement   go to state 15
     ifStatement        go to state 16
@@ -808,94 +1114,129 @@ state 61
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
-state 62
+state 71
 
    15 forStatement: FOR IDENTIFIER IN rangeExpression . LCB statementList RCB
 
-    LCB  shift, and go to state 71
+    LCB  shift, and go to state 80
 
 
-state 63
+state 72
 
    27 rangeExpression: expression . RANGE_UNCLOSE expression
    28                | expression . RANGE_CLOSE expression
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
 
-    ADD            shift, and go to state 34
-    SUB            shift, and go to state 35
-    RANGE_UNCLOSE  shift, and go to state 72
-    RANGE_CLOSE    shift, and go to state 73
+    ADD            shift, and go to state 32
+    SUB            shift, and go to state 33
+    MUL            shift, and go to state 34
+    DIV            shift, and go to state 35
+    MOD            shift, and go to state 36
+    POWER          shift, and go to state 37
+    EQ             shift, and go to state 38
+    GT             shift, and go to state 39
+    LT             shift, and go to state 40
+    GE             shift, and go to state 41
+    LE             shift, and go to state 42
+    RANGE_UNCLOSE  shift, and go to state 81
+    RANGE_CLOSE    shift, and go to state 82
 
 
-state 64
+state 73
 
    21 parameterDef: INT . IDENTIFIER
    22             | INT . IDENTIFIER COMMA
 
-    IDENTIFIER  shift, and go to state 74
+    IDENTIFIER  shift, and go to state 83
 
 
-state 65
+state 74
 
    17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList . RB COLON dataType LCB statementList RCB
    20 parameterDefList: parameterDefList . parameterDef
 
-    INT  shift, and go to state 64
-    RB   shift, and go to state 75
+    INT  shift, and go to state 73
+    RB   shift, and go to state 84
 
-    parameterDef  go to state 76
+    parameterDef  go to state 85
 
 
-state 66
+state 75
 
    19 parameterDefList: parameterDef .
 
     $default  reduce using rule 19 (parameterDefList)
 
 
-state 67
+state 76
 
    16 funcDefStatement: FUNC IDENTIFIER LB parameterList . RB LCB statementList RCB
    24 parameterList: parameterList . parameter
 
-    IDENTIFIER  shift, and go to state 42
-    RB          shift, and go to state 77
+    IDENTIFIER  shift, and go to state 46
+    RB          shift, and go to state 86
 
-    parameter  go to state 60
-
-
-state 68
-
-   13 declareStatement: dataType IDENTIFIER EQ expression . SEMI
-   30 expression: expression . ADD term
-   31           | expression . SUB term
-
-    SEMI  shift, and go to state 78
-    ADD   shift, and go to state 34
-    SUB   shift, and go to state 35
+    parameter  go to state 69
 
 
-state 69
+state 77
+
+   13 declareStatement: dataType IDENTIFIER ASSIGN expression . SEMI
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
+
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+    EQ     shift, and go to state 38
+    GT     shift, and go to state 39
+    LT     shift, and go to state 40
+    GE     shift, and go to state 41
+    LE     shift, and go to state 42
+    SEMI   shift, and go to state 87
+
+
+state 78
 
    18 funcCallStatement: IDENTIFIER LB parameterList RB SEMI .
 
     $default  reduce using rule 18 (funcCallStatement)
 
 
-state 70
+state 79
 
    14 ifStatement: IF expression LCB statementList RCB .
 
     $default  reduce using rule 14 (ifStatement)
 
 
-state 71
+state 80
 
    15 forStatement: FOR IDENTIFIER IN rangeExpression LCB . statementList RCB
 
@@ -910,7 +1251,7 @@ state 71
     FUNC        shift, and go to state 9
     LB          shift, and go to state 10
 
-    statementList      go to state 79
+    statementList      go to state 88
     statement          go to state 13
     assignStatement    go to state 14
     declareStatement   go to state 15
@@ -919,76 +1260,73 @@ state 71
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
-state 72
+state 81
 
    27 rangeExpression: expression RANGE_UNCLOSE . expression
 
-    IDENTIFIER  shift, and go to state 26
+    IDENTIFIER  shift, and go to state 25
     Literal     shift, and go to state 2
     LB          shift, and go to state 10
 
-    expression         go to state 80
-    term               go to state 21
-    primaryExpression  go to state 22
+    expression         go to state 89
+    primaryExpression  go to state 21
 
 
-state 73
+state 82
 
    28 rangeExpression: expression RANGE_CLOSE . expression
 
-    IDENTIFIER  shift, and go to state 26
+    IDENTIFIER  shift, and go to state 25
     Literal     shift, and go to state 2
     LB          shift, and go to state 10
 
-    expression         go to state 81
-    term               go to state 21
-    primaryExpression  go to state 22
+    expression         go to state 90
+    primaryExpression  go to state 21
 
 
-state 74
+state 83
 
    21 parameterDef: INT IDENTIFIER .
    22             | INT IDENTIFIER . COMMA
 
-    COMMA  shift, and go to state 82
+    COMMA  shift, and go to state 91
 
     $default  reduce using rule 21 (parameterDef)
 
 
-state 75
+state 84
 
    17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB . COLON dataType LCB statementList RCB
 
-    COLON  shift, and go to state 83
+    COLON  shift, and go to state 92
 
 
-state 76
+state 85
 
    20 parameterDefList: parameterDefList parameterDef .
 
     $default  reduce using rule 20 (parameterDefList)
 
 
-state 77
+state 86
 
    16 funcDefStatement: FUNC IDENTIFIER LB parameterList RB . LCB statementList RCB
 
-    LCB  shift, and go to state 84
+    LCB  shift, and go to state 93
 
 
-state 78
+state 87
 
-   13 declareStatement: dataType IDENTIFIER EQ expression SEMI .
+   13 declareStatement: dataType IDENTIFIER ASSIGN expression SEMI .
 
     $default  reduce using rule 13 (declareStatement)
 
 
-state 79
+state 88
 
     3 statementList: statementList . statement
    15 forStatement: FOR IDENTIFIER IN rangeExpression LCB statementList . RCB
@@ -1003,9 +1341,9 @@ state 79
     FOR         shift, and go to state 8
     FUNC        shift, and go to state 9
     LB          shift, and go to state 10
-    RCB         shift, and go to state 85
+    RCB         shift, and go to state 94
 
-    statement          go to state 32
+    statement          go to state 31
     assignStatement    go to state 14
     declareStatement   go to state 15
     ifStatement        go to state 16
@@ -1013,43 +1351,78 @@ state 79
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
-state 80
+state 89
 
    27 rangeExpression: expression RANGE_UNCLOSE expression .
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
 
-    ADD  shift, and go to state 34
-    SUB  shift, and go to state 35
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+    EQ     shift, and go to state 38
+    GT     shift, and go to state 39
+    LT     shift, and go to state 40
+    GE     shift, and go to state 41
+    LE     shift, and go to state 42
 
     $default  reduce using rule 27 (rangeExpression)
 
 
-state 81
+state 90
 
    28 rangeExpression: expression RANGE_CLOSE expression .
-   30 expression: expression . ADD term
-   31           | expression . SUB term
+   30 expression: expression . ADD expression
+   31           | expression . SUB expression
+   32           | expression . MUL expression
+   33           | expression . DIV expression
+   34           | expression . MOD expression
+   35           | expression . POWER expression
+   36           | expression . EQ expression
+   37           | expression . GT expression
+   38           | expression . GE expression
+   39           | expression . LT expression
+   40           | expression . LE expression
 
-    ADD  shift, and go to state 34
-    SUB  shift, and go to state 35
+    ADD    shift, and go to state 32
+    SUB    shift, and go to state 33
+    MUL    shift, and go to state 34
+    DIV    shift, and go to state 35
+    MOD    shift, and go to state 36
+    POWER  shift, and go to state 37
+    EQ     shift, and go to state 38
+    GT     shift, and go to state 39
+    LT     shift, and go to state 40
+    GE     shift, and go to state 41
+    LE     shift, and go to state 42
 
     $default  reduce using rule 28 (rangeExpression)
 
 
-state 82
+state 91
 
    22 parameterDef: INT IDENTIFIER COMMA .
 
     $default  reduce using rule 22 (parameterDef)
 
 
-state 83
+state 92
 
    17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON . dataType LCB statementList RCB
 
@@ -1058,10 +1431,10 @@ state 83
     BOOL    shift, and go to state 5
     STRING  shift, and go to state 6
 
-    dataType  go to state 86
+    dataType  go to state 95
 
 
-state 84
+state 93
 
    16 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB . statementList RCB
 
@@ -1076,7 +1449,7 @@ state 84
     FUNC        shift, and go to state 9
     LB          shift, and go to state 10
 
-    statementList      go to state 87
+    statementList      go to state 96
     statement          go to state 13
     assignStatement    go to state 14
     declareStatement   go to state 15
@@ -1085,26 +1458,25 @@ state 84
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
-state 85
+state 94
 
    15 forStatement: FOR IDENTIFIER IN rangeExpression LCB statementList RCB .
 
     $default  reduce using rule 15 (forStatement)
 
 
-state 86
+state 95
 
    17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType . LCB statementList RCB
 
-    LCB  shift, and go to state 88
+    LCB  shift, and go to state 97
 
 
-state 87
+state 96
 
     3 statementList: statementList . statement
    16 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB statementList . RCB
@@ -1119,9 +1491,9 @@ state 87
     FOR         shift, and go to state 8
     FUNC        shift, and go to state 9
     LB          shift, and go to state 10
-    RCB         shift, and go to state 89
+    RCB         shift, and go to state 98
 
-    statement          go to state 32
+    statement          go to state 31
     assignStatement    go to state 14
     declareStatement   go to state 15
     ifStatement        go to state 16
@@ -1129,12 +1501,11 @@ state 87
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
-state 88
+state 97
 
    17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB . statementList RCB
 
@@ -1149,7 +1520,7 @@ state 88
     FUNC        shift, and go to state 9
     LB          shift, and go to state 10
 
-    statementList      go to state 90
+    statementList      go to state 99
     statement          go to state 13
     assignStatement    go to state 14
     declareStatement   go to state 15
@@ -1158,19 +1529,18 @@ state 88
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
-state 89
+state 98
 
    16 funcDefStatement: FUNC IDENTIFIER LB parameterList RB LCB statementList RCB .
 
     $default  reduce using rule 16 (funcDefStatement)
 
 
-state 90
+state 99
 
     3 statementList: statementList . statement
    17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList . RCB
@@ -1185,9 +1555,9 @@ state 90
     FOR         shift, and go to state 8
     FUNC        shift, and go to state 9
     LB          shift, and go to state 10
-    RCB         shift, and go to state 91
+    RCB         shift, and go to state 100
 
-    statement          go to state 32
+    statement          go to state 31
     assignStatement    go to state 14
     declareStatement   go to state 15
     ifStatement        go to state 16
@@ -1195,12 +1565,11 @@ state 90
     funcDefStatement   go to state 18
     funcCallStatement  go to state 19
     expression         go to state 20
-    term               go to state 21
-    primaryExpression  go to state 22
-    dataType           go to state 23
+    primaryExpression  go to state 21
+    dataType           go to state 22
 
 
-state 91
+state 100
 
    17 funcDefStatement: FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB .
 

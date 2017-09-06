@@ -15,6 +15,10 @@ void HTStatementDealloc(HTStatementRef self) {
             HTPropAssignStrong(self, u.declareStatement.variable, NULL);
             HTPropAssignStrong(self, u.declareStatement.expression, NULL);
             break;
+        case HTStatementTypeIf:
+            HTPropAssignStrong(self, u.ifStatement.conditionExpression, NULL);
+            HTPropAssignStrong(self, u.ifStatement.statementList, NULL);
+            break;
     }
 }
 
@@ -32,6 +36,14 @@ HTStatementRef HTStatementCreateDeclare(HTVariableRef variable, HTExpressionRef 
     HTPropAssignWeak(statement, type, HTStatementTypeDeclare);
     HTPropAssignStrong(statement, u.declareStatement.variable, variable);
     HTPropAssignStrong(statement, u.declareStatement.expression, expression);
+    return statement;
+}
+
+HTStatementRef HTStatementCreateIf(HTExpressionRef conditionExpression, HTListRef statementList) {
+    HTStatementRef statement = HTStatementCreate();
+    HTPropAssignWeak(statement, type, HTStatementTypeIf);
+    HTPropAssignStrong(statement, u.ifStatement.conditionExpression, conditionExpression);
+    HTPropAssignStrong(statement, u.ifStatement.statementList, statementList);
     return statement;
 }
 

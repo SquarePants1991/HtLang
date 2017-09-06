@@ -22,7 +22,6 @@ void HTCompilerSetCurrent(HTCompilerRef current);
 HTCompilerRef HTCompilerGetCurrent();
 
 void HTCompilerAddStatement(HTStatementRef statement);
-void HTCompilerAddVariable(HTVariableRef variable);
 void HTCompilerCollectGlobalVaraibles(HTCompilerRef interpreter);
 
 void HTCompilerPrintDebugInfo(HTCompilerRef interpreter);

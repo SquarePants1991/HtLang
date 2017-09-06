@@ -62,3 +62,15 @@ add_executable(HTExecutorTest
         src/executor/HTExpressionEval.c
         src/executor/HTExecutor.c
         ${UtilsSrc})
+
+
+add_executable(HTRuntimeEnvironmentTest
+        ./test/HTRuntimeEnvironmentTest.c
+        src/compiler/HTVariable.c
+        src/compiler/HTExpression.c
+        src/compiler/HTStatement.c
+        src/compiler/HTCompiler.c
+        src/executor/HTExpressionEval.c
+        src/executor/HTExecutor.c
+        src/executor/HTRuntimeEnvironment.c
+        ${UtilsSrc})

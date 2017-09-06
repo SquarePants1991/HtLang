@@ -20,6 +20,9 @@ void HTTypeRetain(HTTypeRef ref) {
 
 void HTTypeRelease(HTTypeRef ref) {
     ref->refCount--;
+    if (ref->refCount < 0) {
+
+    }
     if (ref->refCount <= 0) {
         if (ref->deallocHandler) {
             ref->deallocHandler(ref);

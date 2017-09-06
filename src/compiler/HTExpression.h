@@ -19,6 +19,11 @@ typedef enum {
     HTExpressionBinaryOperatorDiv,
     HTExpressionBinaryOperatorMod,
     HTExpressionBinaryOperatorPower,
+    HTExpressionBinaryOperatorLogicEqual,
+    HTExpressionBinaryOperatorLogicGreater,
+    HTExpressionBinaryOperatorLogicGreaterEqual,
+    HTExpressionBinaryOperatorLogicLess,
+    HTExpressionBinaryOperatorLogicLessEqual,
 } HTExpressionBinaryOperator;
 
 HTClassBegin

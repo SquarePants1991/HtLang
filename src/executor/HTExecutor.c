@@ -1,33 +1,14 @@
 #include "HTExecutor.h"
-#include <stdio.h>
-#include <compiler/HTVariable.h>
-#include <compiler/HTStatement.h>
-#include <utils/HTString.h>
-#include <compiler/HTExpression.h>
-#include <utils/HTList.h>
-
-// Variable Related
-HTVariableRef HTExecutorFindVariable(HTCompilerRef compiler, HTStringRef identifier) {
-    HTListNodeRef node = HTPropGet(HTPropGet(compiler, variableList), head);
-    while (node != NULL) {
-        HTVariableRef variable = HTPropGet(node, ptr);
-        if (variable && HTStringEqual(identifier, HTPropGet(variable, identifier))) {
-            return variable;
-        }
-        node = HTPropGet(node, next);
-    }
-    return NULL;
-}
 
 // Statement Execution
-void HTExecutorExecAssignStatement(HTCompilerRef compiler, HTStatementRef statement) {
+void HTExecutorExecAssignStatement(HTCompilerRef compiler, HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv) {
     HTStringRef identifier = HTPropGet(HTPropGet(statement, u.assignStatement.identifier), identifier);
-    HTVariableRef var = HTExecutorFindVariable(compiler, identifier);
+    HTVariableRef var = HTRuntimeEnvironmentGetVariable(rootEnv, identifier);
     if (var == NULL) {
         printf("不存在变量 <<%s>>.\n", HTPropGet(identifier, characters));
         return;
     }
-    HTVariableRef exprVal = HTExpressionEvaluate(HTPropGet(statement, u.assignStatement.expression), HTPropGet(compiler, variableList), NULL);
+    HTVariableRef exprVal = HTExpressionEvaluate(HTPropGet(statement, u.assignStatement.expression), rootEnv);
     HTVaraibleCopyValue(exprVal, var);
 
     printf("Assign: %s\n", HTPropGet(HTPropGet(var, identifier), characters));
@@ -36,14 +17,14 @@ void HTExecutorExecAssignStatement(HTCompilerRef compiler, HTStatementRef statem
     HTTypeRelease(exprVal);
 }
 
-void HTExecutorExecDeclareStatement(HTCompilerRef compiler, HTStatementRef statement) {
+void HTExecutorExecDeclareStatement(HTCompilerRef compiler, HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv) {
     HTStringRef identifier = HTPropGet(HTPropGet(statement, u.declareStatement.variable), identifier);
     HTVariableRef var = HTVariableCreateWithTypeAndName(HTPropGet(HTPropGet(statement, u.declareStatement.variable), dataType), HTPropGet(identifier, characters));
-    HTCompilerAddVariable(var);
+    HTRuntimeEnvironmentDeclareVariable(rootEnv, var, 0);
     HTTypeRelease(var);
 
     if (HTPropGet(statement, u.declareStatement.expression) != NULL) {
-        HTVariableRef result = HTExpressionEvaluate(HTPropGet(statement, u.declareStatement.expression), HTPropGet(compiler, variableList), NULL);
+        HTVariableRef result = HTExpressionEvaluate(HTPropGet(statement, u.declareStatement.expression), rootEnv);
         HTVaraibleCopyValue(result, var);
         HTTypeRelease(result);
     }
@@ -51,23 +32,47 @@ void HTExecutorExecDeclareStatement(HTCompilerRef compiler, HTStatementRef state
     HTVariablePrintDebugInfo(var);
 }
 
+void HTExecutorExecIfStatement(HTCompilerRef compiler, HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv) {
+    HTVariableRef conditionResult = HTExpressionEvaluate(HTPropGet(statement, u.ifStatement.conditionExpression), rootEnv);
+    if (HTPropGet(conditionResult, value.boolValue)) {
+        HTRuntimeEnvironmentBeginNewEnv(rootEnv);
+        HTListNodeRef statementNode = HTPropGet(HTPropGet(statement, u.ifStatement.statementList), head);
+        while (statementNode) {
+            HTStatementRef statementRef = HTPropGet(statementNode, ptr);
+            HTExecuteStatement(compiler, statementRef, rootEnv);
+            statementNode = HTPropGet(statementNode, next);
+        }
+        HTRuntimeEnvironmentEndCurrentEnv(rootEnv);
+    }
+    HTTypeRelease(conditionResult);
+}
+
 void HTExecute(HTCompilerRef compiler) {
+    HTRuntimeEnvironmentRef rootEnv = HTRuntimeEnvironmentCreate();
     HTListNodeRef statementNode = HTPropGet(HTPropGet(compiler, statementList), head);
     while (statementNode) {
         HTStatementRef statementRef = HTPropGet(statementNode, ptr);
-        if (statementRef == NULL) {
-            break;
-        }
-        switch (HTPropGet(statementRef, type)) {
-            case HTStatementTypeAssign:
-                HTExecutorExecAssignStatement(compiler, statementRef);
-                break;
-            case HTStatementTypeDeclare:
-                HTExecutorExecDeclareStatement(compiler, statementRef);
-                break;
-            default:
-                break;
-        }
+        HTExecuteStatement(compiler, statementRef, rootEnv);
         statementNode = HTPropGet(statementNode, next);
+    }
+    HTTypeRelease(rootEnv);
+}
+
+void HTExecuteStatement(HTCompilerRef compiler, HTStatementRef statementRef, HTRuntimeEnvironmentRef rootEnv) {
+    if (statementRef == NULL) {
+        return;
+    }
+    switch (HTPropGet(statementRef, type)) {
+        case HTStatementTypeAssign:
+            HTExecutorExecAssignStatement(compiler, statementRef, rootEnv);
+            break;
+        case HTStatementTypeDeclare:
+            HTExecutorExecDeclareStatement(compiler, statementRef, rootEnv);
+            break;
+        case HTStatementTypeIf:
+            HTExecutorExecIfStatement(compiler, statementRef, rootEnv);
+            break;
+        default:
+            break;
     }
 }

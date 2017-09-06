@@ -44,36 +44,39 @@
      BoolLiteral = 260,
      IDENTIFIER = 261,
      Literal = 262,
-     Statement = 263,
-     EQ = 264,
-     INT = 265,
-     DOUBLE = 266,
-     BOOL = 267,
-     STRING = 268,
-     SEMI = 269,
-     COMMA = 270,
-     COLON = 271,
-     IF = 272,
-     FOR = 273,
-     FUNC = 274,
-     ADD = 275,
-     SUB = 276,
-     MUL = 277,
-     DIV = 278,
-     MOD = 279,
-     POWER = 280,
-     LB = 281,
-     RB = 282,
-     LCB = 283,
-     RCB = 284,
-     GT = 285,
-     LT = 286,
-     GE = 287,
-     LE = 288,
-     RANGE_UNCLOSE = 289,
-     RANGE_CLOSE = 290,
-     IN = 291,
-     COMMENT_ONE_LINE = 292
+     BinaryOperator = 263,
+     ADD = 264,
+     SUB = 265,
+     MUL = 266,
+     DIV = 267,
+     MOD = 268,
+     POWER = 269,
+     EQ = 270,
+     GT = 271,
+     LT = 272,
+     GE = 273,
+     LE = 274,
+     Statement = 275,
+     List = 276,
+     ASSIGN = 277,
+     INT = 278,
+     DOUBLE = 279,
+     BOOL = 280,
+     STRING = 281,
+     SEMI = 282,
+     COMMA = 283,
+     COLON = 284,
+     IF = 285,
+     FOR = 286,
+     FUNC = 287,
+     LB = 288,
+     RB = 289,
+     LCB = 290,
+     RCB = 291,
+     RANGE_UNCLOSE = 292,
+     RANGE_CLOSE = 293,
+     IN = 294,
+     COMMENT_ONE_LINE = 295
    };
 #endif
 /* Tokens.  */
@@ -82,36 +85,39 @@
 #define BoolLiteral 260
 #define IDENTIFIER 261
 #define Literal 262
-#define Statement 263
-#define EQ 264
-#define INT 265
-#define DOUBLE 266
-#define BOOL 267
-#define STRING 268
-#define SEMI 269
-#define COMMA 270
-#define COLON 271
-#define IF 272
-#define FOR 273
-#define FUNC 274
-#define ADD 275
-#define SUB 276
-#define MUL 277
-#define DIV 278
-#define MOD 279
-#define POWER 280
-#define LB 281
-#define RB 282
-#define LCB 283
-#define RCB 284
-#define GT 285
-#define LT 286
-#define GE 287
-#define LE 288
-#define RANGE_UNCLOSE 289
-#define RANGE_CLOSE 290
-#define IN 291
-#define COMMENT_ONE_LINE 292
+#define BinaryOperator 263
+#define ADD 264
+#define SUB 265
+#define MUL 266
+#define DIV 267
+#define MOD 268
+#define POWER 269
+#define EQ 270
+#define GT 271
+#define LT 272
+#define GE 273
+#define LE 274
+#define Statement 275
+#define List 276
+#define ASSIGN 277
+#define INT 278
+#define DOUBLE 279
+#define BOOL 280
+#define STRING 281
+#define SEMI 282
+#define COMMA 283
+#define COLON 284
+#define IF 285
+#define FOR 286
+#define FUNC 287
+#define LB 288
+#define RB 289
+#define LCB 290
+#define RCB 291
+#define RANGE_UNCLOSE 292
+#define RANGE_CLOSE 293
+#define IN 294
+#define COMMENT_ONE_LINE 295
 
 
 
@@ -127,9 +133,11 @@ typedef union YYSTYPE
     unsigned char boolValue;
     HTStatementRef statementValue;
     HTDataType dataTypeValue;
+    HTListRef listValue;
+    HTExpressionBinaryOperator binaryOperatorValue;
 }
 /* Line 1529 of yacc.c.  */
-#line 133 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
+#line 141 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

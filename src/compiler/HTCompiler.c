@@ -29,10 +29,6 @@ void HTCompilerAddStatement(HTStatementRef statement) {
     HTListAppend(HTPropGet(HTCompilerGetCurrent(), statementList), statement);
 }
 
-void HTCompilerAddVariable(HTVariableRef variable) {
-    HTListAppend(HTPropGet(HTCompilerGetCurrent(), variableList), variable);
-}
-
 void HTCompilerPrintDebugInfo(HTCompilerRef compiler) {
     HTListNodeRef node = HTPropGet(compiler, statementList)->impl->head;
     printf("Has %d statement\n", HTListSize(compiler->impl->statementList));

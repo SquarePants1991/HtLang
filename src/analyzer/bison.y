@@ -14,33 +14,59 @@
     unsigned char boolValue;
     HTStatementRef statementValue;
     HTDataType dataTypeValue;
+    HTListRef listValue;
+    HTExpressionBinaryOperator binaryOperatorValue;
 }
 
-%token <intValue>           IntLiteral
-%token <doubleValue>        DoubleLiteral
-%token <boolValue>          BoolLiteral
-%token <expressionValue>    IDENTIFIER
-%token <expressionValue>    Literal
-%token <statementValue>     Statement
+%token <intValue>               IntLiteral
+%token <doubleValue>            DoubleLiteral
+%token <boolValue>              BoolLiteral
+%token <expressionValue>        IDENTIFIER
+%token <expressionValue>        Literal
+%token <binaryOperatorValue>    BinaryOperator ADD SUB MUL DIV MOD POWER EQ GT LT GE LE
+%token <statementValue>         Statement
+%token <listValue>              List
 
-%token EQ INT DOUBLE BOOL STRING SEMI COMMA COLON
+%token ASSIGN INT DOUBLE BOOL STRING SEMI COMMA COLON
 %token IF FOR FUNC
-%token ADD SUB MUL DIV MOD POWER LB RB LCB RCB
-%token GT LT GE LE RANGE_UNCLOSE RANGE_CLOSE IN
+%token LB RB LCB RCB
+%token EQ GT LT GE LE RANGE_UNCLOSE RANGE_CLOSE IN
 %token COMMENT_ONE_LINE
 
 %type <dataTypeValue> dataType
-%type <statementValue>  assignStatement declareStatement
-%type <expressionValue> rangeExpression expression term primaryExpression
+%type <listValue> statementList
+%type <statementValue>  statement assignStatement declareStatement ifStatement
+%type <expressionValue> rangeExpression expression primaryExpression
+
+%left EQ GT LT GE LE
+%left ADD SUB
+%left MUL DIV MOD
+%right POWER
 
 %%
 
 fragment
     : statementList
+    {
+        HTPropAssignStrong(HTCompilerGetCurrent(), statementList, $1);
+        HTTypeRelease($1);
+    }
 
 statementList
     : statement
+    {
+        printf("statement list begin.\n");
+        HTListRef statementList = HTListCreate();
+        HTListAppend(statementList, $1);
+        HTTypeRelease($1);
+        $$ = statementList;
+    }
     | statementList statement
+    {
+        printf("statement list collect.\n");
+        HTListAppend($1, $2);
+        HTTypeRelease($2);
+    }
     ;
 
 statement
@@ -50,13 +76,11 @@ statement
     }
     | assignStatement
     {
-        HTCompilerAddStatement($1);
-        HTTypeRelease($1);
+        $$ = $1;
     }
     | declareStatement
     {
-        HTCompilerAddStatement($1);
-        HTTypeRelease($1);
+        $$ = $1;
     }
     | ifStatement
     | forStatement
@@ -65,7 +89,7 @@ statement
     ;
 
 assignStatement
-    : IDENTIFIER EQ expression SEMI
+    : IDENTIFIER ASSIGN expression SEMI
     {
         printf("This is a assign statement\n");
         $$ = HTStatementCreateAssign($1, $3);
@@ -81,7 +105,7 @@ declareStatement
         HTTypeRelease($2);
         HTTypeRelease(variable);
     }
-    | dataType IDENTIFIER EQ expression SEMI
+    | dataType IDENTIFIER ASSIGN expression SEMI
     {
         HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->identifier->impl->characters);
         $$ = HTStatementCreateDeclare(variable, $4);
@@ -94,6 +118,9 @@ ifStatement
     : IF expression LCB statementList RCB
     {
         printf("This is a if statement\n");
+        $$ = HTStatementCreateIf($2, $4);
+        HTTypeRelease($2);
+        HTTypeRelease($4);
     }
 
 forStatement
@@ -149,44 +176,70 @@ rangeExpression
     }
 
 expression
-    : term
-    | expression ADD term
-    {
-        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorAdd, $1, $3);
-        HTTypeRelease($1);
-        HTTypeRelease($3);
-    }
-    | expression SUB term
-    {
-        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorSub, $1, $3);
-        HTTypeRelease($1);
-        HTTypeRelease($3);
-    }
-    ;
-
-term
     : primaryExpression
-    | term POWER primaryExpression
+    | expression ADD expression
     {
-        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorPower, $1, $3);
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
         HTTypeRelease($1);
         HTTypeRelease($3);
     }
-    | term MUL primaryExpression
+    | expression SUB expression
+        {
+            $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+            HTTypeRelease($1);
+            HTTypeRelease($3);
+        }
+    | expression MUL expression
     {
-        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMul, $1, $3);
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
         HTTypeRelease($1);
         HTTypeRelease($3);
     }
-    | term DIV primaryExpression
+    | expression DIV expression
     {
-        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorDiv, $1, $3);
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
         HTTypeRelease($1);
         HTTypeRelease($3);
     }
-    | term MOD primaryExpression
+    | expression MOD expression
     {
-        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorMod, $1, $3);
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | expression POWER expression
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | expression EQ expression
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | expression GT expression
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | expression GE expression
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | expression LT expression
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | expression LE expression
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
         HTTypeRelease($1);
         HTTypeRelease($3);
     }
