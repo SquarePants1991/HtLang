@@ -18,8 +18,11 @@ int yywrap(void) {
 <INITIAL>"double"                return DOUBLE;
 <INITIAL>"bool"                  return BOOL;
 <INITIAL>"string"                return STRING;
+<INITIAL>"Array"                 return ARRAY;
 
 <INITIAL>"if"                    return IF;
+<INITIAL>"elif"                  return ELIF;
+<INITIAL>"else"                  return ELSE;
 <INITIAL>"for"                   return FOR;
 <INITIAL>"func"                  return FUNC;
 
@@ -31,6 +34,8 @@ int yywrap(void) {
 <INITIAL>"**"                    { yylval.binaryOperatorValue = HTExpressionBinaryOperatorPower; return POWER; }
 <INITIAL>"("                     return LB;
 <INITIAL>")"                     return RB;
+<INITIAL>"["                     return LSB;
+<INITIAL>"]"                     return RSB;
 <INITIAL>"{"                     return LCB;
 <INITIAL>"}"                     return RCB;
 <INITIAL>";"                     return SEMI;
@@ -42,6 +47,9 @@ int yywrap(void) {
 <INITIAL>">="                    { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicGreaterEqual; return GE; }
 <INITIAL>"<"                     { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicLess; return LT; }
 <INITIAL>"<="                    { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicLessEqual; return LE; }
+<INITIAL>"&&"                    { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicAnd; return AND; }
+<INITIAL>"||"                    { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicOr; return OR; }
+
 <INITIAL>"..<"                   return RANGE_UNCLOSE;
 <INITIAL>"..."                   return RANGE_CLOSE;
 <INITIAL>"in"                    return IN;
@@ -55,6 +63,8 @@ int yywrap(void) {
    yylval.expressionValue = HTExpressionCreateBoolLiteral(0);
    return Literal;
 }
+
+<INITIAL>"return"                 return RETURN;
 
 <INITIAL>"\""                    {
     HTExpressionBeginStringLiteral();
@@ -71,6 +81,10 @@ int yywrap(void) {
     return Literal;
 }
 
+<STRING_LITERAL>"\\n"             {
+    HTExpressionAddStringLiteral("\n");
+}
+
 <STRING_LITERAL>.   {
     HTExpressionAddStringLiteral(yytext);
 }
@@ -82,7 +96,7 @@ int yywrap(void) {
 
 <INITIAL>[ \t\n\r]   ;
 
-<INITIAL>([1-9]+\.[0-9]+) {
+<INITIAL>((0?|[1-9]+)\.[0-9]+) {
     double doubleVal;
     sscanf(yytext, "%lf", &doubleVal);
     yylval.expressionValue = HTExpressionCreateDoubleLiteral(doubleVal);

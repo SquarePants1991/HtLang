@@ -56,27 +56,36 @@
      LT = 272,
      GE = 273,
      LE = 274,
-     Statement = 275,
-     List = 276,
-     ASSIGN = 277,
-     INT = 278,
-     DOUBLE = 279,
-     BOOL = 280,
-     STRING = 281,
-     SEMI = 282,
-     COMMA = 283,
-     COLON = 284,
-     IF = 285,
-     FOR = 286,
-     FUNC = 287,
-     LB = 288,
-     RB = 289,
-     LCB = 290,
-     RCB = 291,
-     RANGE_UNCLOSE = 292,
-     RANGE_CLOSE = 293,
-     IN = 294,
-     COMMENT_ONE_LINE = 295
+     AND = 275,
+     OR = 276,
+     Statement = 277,
+     List = 278,
+     ASSIGN = 279,
+     INT = 280,
+     DOUBLE = 281,
+     BOOL = 282,
+     STRING = 283,
+     ARRAY = 284,
+     SEMI = 285,
+     COMMA = 286,
+     COLON = 287,
+     IF = 288,
+     ELIF = 289,
+     ELSE = 290,
+     FOR = 291,
+     FUNC = 292,
+     RETURN = 293,
+     LB = 294,
+     RB = 295,
+     LCB = 296,
+     RCB = 297,
+     LSB = 298,
+     RSB = 299,
+     RANGE_UNCLOSE = 300,
+     RANGE_CLOSE = 301,
+     IN = 302,
+     COMMENT_ONE_LINE = 303,
+     NEGATIVE = 304
    };
 #endif
 /* Tokens.  */
@@ -97,27 +106,36 @@
 #define LT 272
 #define GE 273
 #define LE 274
-#define Statement 275
-#define List 276
-#define ASSIGN 277
-#define INT 278
-#define DOUBLE 279
-#define BOOL 280
-#define STRING 281
-#define SEMI 282
-#define COMMA 283
-#define COLON 284
-#define IF 285
-#define FOR 286
-#define FUNC 287
-#define LB 288
-#define RB 289
-#define LCB 290
-#define RCB 291
-#define RANGE_UNCLOSE 292
-#define RANGE_CLOSE 293
-#define IN 294
-#define COMMENT_ONE_LINE 295
+#define AND 275
+#define OR 276
+#define Statement 277
+#define List 278
+#define ASSIGN 279
+#define INT 280
+#define DOUBLE 281
+#define BOOL 282
+#define STRING 283
+#define ARRAY 284
+#define SEMI 285
+#define COMMA 286
+#define COLON 287
+#define IF 288
+#define ELIF 289
+#define ELSE 290
+#define FOR 291
+#define FUNC 292
+#define RETURN 293
+#define LB 294
+#define RB 295
+#define LCB 296
+#define RCB 297
+#define LSB 298
+#define RSB 299
+#define RANGE_UNCLOSE 300
+#define RANGE_CLOSE 301
+#define IN 302
+#define COMMENT_ONE_LINE 303
+#define NEGATIVE 304
 
 
 
@@ -135,9 +153,10 @@ typedef union YYSTYPE
     HTDataType dataTypeValue;
     HTListRef listValue;
     HTExpressionBinaryOperator binaryOperatorValue;
+    HTVariableRef variableValue;
 }
 /* Line 1529 of yacc.c.  */
-#line 141 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
+#line 160 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

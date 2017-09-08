@@ -25,6 +25,7 @@ void * HTMemAllocWithIdentifier(size_t memSize, const char *identifier) {
     int idLen = strlen(identifier);
     int totalLen = sizeof(HTMem) + idLen + memSize;
     HTMem *memBlock = (HTMem *)malloc(totalLen);
+    memset(memBlock, 0x00, totalLen);
     memBlock->memTotalSize = totalLen;
     memBlock->identifierSize = idLen;
     memBlock->identifier = (void *)memBlock + sizeof(HTMem) + memSize;

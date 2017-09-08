@@ -17,5 +17,6 @@ void HTExpressionConvertToString(HTExpressionRef expression);
  * 3. 否则结果为int
  */
 HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv);
-
+HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv);
+HTVariableRef HTExpressionEvaluateArray(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv);
 #endif

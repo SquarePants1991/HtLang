@@ -6,10 +6,12 @@
 #include <stdio.h>
 
 typedef enum {
+    HTDataTypeVoid,
     HTDataTypeInt,
     HTDataTypeDouble,
     HTDataTypeBool,
-	HTDataTypeString
+	HTDataTypeString,
+	HTDataTypeArray
 } HTDataType;
 
 HTClassBegin
@@ -21,6 +23,7 @@ HTClassBegin
 		unsigned char boolValue;
 	} value;
 	HTStringRef stringValue;
+	HTListRef arrayValue;
 HTClassEnd(HTVariable)
 
 
@@ -30,13 +33,15 @@ typedef HTVariable * HTVariableRef;
 static HTVariableRef HTVariableCreateWithTypeAndName(HTDataType dataType, const char *name) {
 	HTVariableRef variable = HTVariableCreate();
 	HTStringRef identifierStr = HTStringCreateWithChars(name);
+	HTListRef arrayValue = HTListCreate();
 	HTPropAssignWeak(variable, dataType, dataType);
 	HTPropAssignStrong(variable, identifier, identifierStr);
 	HTPropAssignWeak(variable, value.boolValue, 0);
 	HTPropAssignWeak(variable, value.intValue, 0);
 	HTPropAssignWeak(variable, value.doubleValue, 0);
 	HTPropAssignStrong(variable, stringValue, NULL);
-
+	HTPropAssignStrong(variable, arrayValue, arrayValue);
+	HTTypeRelease(arrayValue);
 	HTTypeRelease(identifierStr);
 	return variable;
 }
@@ -45,7 +50,10 @@ static void HTVaraibleCopyValue(HTVariableRef source, HTVariableRef dst) {
 	HTPropAssignWeak(dst, dataType, HTPropGet(source, dataType));
 	if (HTPropGet(dst, dataType) == HTDataTypeString) {
 		HTPropAssignStrong(dst, stringValue, HTPropGet(source, stringValue));
-	} else {
+	} else if (HTPropGet(dst, dataType) == HTDataTypeArray) {
+		HTPropAssignStrong(dst, arrayValue, HTPropGet(source, arrayValue));
+	}
+	else {
 		HTPropAssignWeak(dst, value, HTPropGet(source, value));
 	}
 }
@@ -67,5 +75,7 @@ static void HTVariablePrintDebugInfo(HTVariableRef ref) {
                 break;}
     }
 }
+
+HTStringRef HTVariableToString(HTVariableRef ref);
 
 #endif

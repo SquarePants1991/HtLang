@@ -5,15 +5,15 @@
       <config projectName="HtLang" targetName="HTLang" />
       <config projectName="HtLang" targetName="HTListTest" />
       <config projectName="HtLang" targetName="CompileCC" />
-      <config projectName="HtLang" targetName="HTExpressionTest" />
-      <config projectName="HtLang" targetName="HTTypeTest" />
-      <config projectName="HtLang" targetName="HTStringTest" />
-      <config projectName="HtLang" targetName="HTExpressionEvalTest" />
-      <config projectName="HtLang" targetName="HTExecutorTest" />
-      <config projectName="HtLang" targetName="HTCompilerTest" />
-      <config projectName="HtLang" targetName="HTRuntimeEnvironmentTest" />
       <config projectName="HtLang" targetName="HTVariableTest" />
+      <config projectName="HtLang" targetName="HTCompilerTest" />
+      <config projectName="HtLang" targetName="HTTypeTest" />
+      <config projectName="HtLang" targetName="HTExecutorTest" />
+      <config projectName="HtLang" targetName="HTStringTest" />
+      <config projectName="HtLang" targetName="HTRuntimeEnvironmentTest" />
       <config projectName="HtLang" targetName="HTStatementTest" />
+      <config projectName="HtLang" targetName="HTExpressionEvalTest" />
+      <config projectName="HtLang" targetName="HTExpressionTest" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -23,28 +23,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8108410e-d71d-48c0-a950-0e0930dd5481" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.c" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.h" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/HTRuntimeEnvironmentTest.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/compiler/HTFunction.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/compiler/HTFunction.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/executor/HTLocalFunctionRegsiter.c" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/executor/HTLocalFunctionRegsiter.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/executor/HTLocalFunctions.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AssignTest.ht" afterPath="$PROJECT_DIR$/AssignTest.ht" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/analyzer/bison.c" afterPath="$PROJECT_DIR$/src/analyzer/bison.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/analyzer/bison.h" afterPath="$PROJECT_DIR$/src/analyzer/bison.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/analyzer/bison.output" afterPath="$PROJECT_DIR$/src/analyzer/bison.output" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/analyzer/bison.y" afterPath="$PROJECT_DIR$/src/analyzer/bison.y" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/analyzer/lex.c" afterPath="$PROJECT_DIR$/src/analyzer/lex.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/analyzer/lex.l" afterPath="$PROJECT_DIR$/src/analyzer/lex.l" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compiler/HTCompiler.c" afterPath="$PROJECT_DIR$/src/compiler/HTCompiler.c" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compiler/HTCompiler.h" afterPath="$PROJECT_DIR$/src/compiler/HTCompiler.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compiler/HTExpression.c" afterPath="$PROJECT_DIR$/src/compiler/HTExpression.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compiler/HTExpression.h" afterPath="$PROJECT_DIR$/src/compiler/HTExpression.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compiler/HTStatement.c" afterPath="$PROJECT_DIR$/src/compiler/HTStatement.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compiler/HTStatement.h" afterPath="$PROJECT_DIR$/src/compiler/HTStatement.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compiler/HTVariable.c" afterPath="$PROJECT_DIR$/src/compiler/HTVariable.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/compiler/HTVariable.h" afterPath="$PROJECT_DIR$/src/compiler/HTVariable.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/executor/HTExecutor.c" afterPath="$PROJECT_DIR$/src/executor/HTExecutor.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/executor/HTExecutor.h" afterPath="$PROJECT_DIR$/src/executor/HTExecutor.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/executor/HTExpressionEval.c" afterPath="$PROJECT_DIR$/src/executor/HTExpressionEval.c" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/executor/HTExpressionEval.h" afterPath="$PROJECT_DIR$/src/executor/HTExpressionEval.h" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/HTType.c" afterPath="$PROJECT_DIR$/src/utils/HTType.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.c" afterPath="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.h" afterPath="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.h" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/htlang.c" afterPath="$PROJECT_DIR$/src/htlang.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/HTList.c" afterPath="$PROJECT_DIR$/src/utils/HTList.c" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/HTMem.c" afterPath="$PROJECT_DIR$/src/utils/HTMem.c" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <ignored path="/tmp/clion/" />
@@ -65,34 +71,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="bison.y" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/analyzer/bison.y">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2824">
-              <caret line="251" column="5" lean-forward="true" selection-start-line="251" selection-start-column="5" selection-end-line="251" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="HTExecutor.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/executor/HTExecutor.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="206">
+              <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#33#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HTExpressionEval.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/executor/HTExpressionEval.c">
+      <file leaf-file-name="htlang.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/htlang.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="238" column="9" lean-forward="true" selection-start-line="238" selection-start-column="9" selection-end-line="238" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="264">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -100,8 +96,40 @@
       <file leaf-file-name="AssignTest.ht" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AssignTest.ht">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state relative-caret-position="212">
+              <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bison.y" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/analyzer/bison.y">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="441">
+              <caret line="171" column="44" lean-forward="true" selection-start-line="171" selection-start-column="44" selection-end-line="171" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HTLocalFunctions.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/executor/HTLocalFunctions.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="447">
+              <caret line="33" column="21" lean-forward="false" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+              <folding>
+                <element signature="e#107#139#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HTLocalFunctionRegsiter.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/executor/HTLocalFunctionRegsiter.c">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="11" column="63" lean-forward="true" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
               <folding />
             </state>
           </provider>
@@ -110,135 +138,39 @@
       <file leaf-file-name="HTExpression.c" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/compiler/HTExpression.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+            <state relative-caret-position="176">
+              <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="45" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HTExpression.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/compiler/HTExpression.h">
+      <file leaf-file-name="HTStatement.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/compiler/HTStatement.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
-              <caret line="21" column="40" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="40" />
+            <state relative-caret-position="404">
+              <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lex.l" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/analyzer/lex.l">
+      <file leaf-file-name="HTVariable.h" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/compiler/HTVariable.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="90" column="0" lean-forward="true" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+            <state relative-caret-position="766">
+              <caret line="40" column="53" lean-forward="true" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="lex.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/analyzer/lex.c">
+      <file leaf-file-name="HTVariable.c" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/compiler/HTVariable.c">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="827" column="53" lean-forward="true" selection-start-line="827" selection-start-column="53" selection-end-line="827" selection-end-column="53" />
-              <folding>
-                <marker date="1504690950000" expanded="true" signature="38509:38556" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="38614:39583" ph="{...}" />
-                <marker date="1504690950000" expanded="false" signature="39628:39653" ph="..." />
-                <marker date="1504690950000" expanded="true" signature="39697:41181" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="39799:39988" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="40304:40616" ph="/.../" />
-                <marker date="1504690950000" expanded="false" signature="40859:40876" ph="..." />
-                <marker date="1504690950000" expanded="true" signature="41215:41388" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="41430:41657" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="41659:41749" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="41811:42591" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="41819:41964" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="42336:42553" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="42634:42846" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="42848:43065" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="43130:43670" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="43331:43456" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="43672:43756" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="43805:44043" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="44121:44281" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="44350:44851" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="44456:44657" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="44853:45014" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="45062:45511" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="45113:45272" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="45513:45700" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="45756:46355" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="46357:46465" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="46497:46766" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="46768:46860" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="46902:48237" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="46964:47159" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="48239:48482" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="48547:49224" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="49226:49555" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="49611:49664" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="49666:49961" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="50044:50660" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="50528:50620" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="50768:50841" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="51331:51371" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="51397:51430" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="51432:51465" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="51489:51513" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="51515:51549" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="51574:51599" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="51601:51649" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="51679:51705" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="51707:51741" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="51768:51794" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="51796:51858" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="51897:51933" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="51935:52083" ph="/**...*/" />
-                <marker date="1504690950000" expanded="true" signature="52116:52143" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="52179:52208" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="52234:52267" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="52301:52337" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="52373:52949" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="52383:52531" ph="/.../" />
-                <marker date="1504690950000" expanded="false" signature="52739:52772" ph="..." />
-                <marker date="1504690950000" expanded="true" signature="52838:52933" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="53047:53516" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="53336:53475" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="53518:53554" ph="/.../" />
-                <marker date="1504690950000" expanded="false" signature="53575:53705" ph="..." />
-                <marker date="1504690950000" expanded="false" signature="53736:53844" ph="..." />
-                <marker date="1504690950000" expanded="true" signature="53886:53922" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="53972:54378" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="53975:54328" ph="/.../" />
-                <marker date="1504690950000" expanded="true" signature="54406:54472" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bison.h" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/analyzer/bison.h">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <marker date="1504690950000" expanded="true" signature="1797:1920" ph="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bison.c" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/analyzer/bison.c">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8499">
-              <caret line="1541" column="0" lean-forward="false" selection-start-line="1541" selection-start-column="0" selection-end-line="1541" selection-end-column="0" />
-              <folding>
-                <marker date="1504690950000" expanded="true" signature="2537:2660" ph="{...}" />
-                <marker date="1504690950000" expanded="true" signature="61864:61962" ph="{...}" />
-              </folding>
+            <state relative-caret-position="327">
+              <caret line="34" column="48" lean-forward="true" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -250,7 +182,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>bison</find>
       <find>HTInter</find>
       <find>HTExpressionAdd</find>
       <find>HTExpressionCreateDouble</find>
@@ -268,6 +199,19 @@
       <find>FindVa</find>
       <find>binaryOperatorValue</find>
       <find>LT</find>
+      <find>Literal</find>
+      <find>parameterList</find>
+      <find>HTExpressionEvaluateFuncCall</find>
+      <find>printdeug</find>
+      <find>parameterDefList</find>
+      <find>compiler</find>
+      <find>COMMA</find>
+      <find>COLON</find>
+      <find>SEM</find>
+      <find>IF</find>
+      <find>arrayLiteral</find>
+      <find>HTExpressionEvaluateArray</find>
+      <find>return statement</find>
     </findStrings>
     <replaceStrings>
       <replace>leftResult-&gt;value.intValue</replace>
@@ -281,24 +225,15 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/bison.y" />
-        <option value="$PROJECT_DIR$/src/interpreter/HTInterpreter.h" />
-        <option value="$PROJECT_DIR$/run.sh" />
-        <option value="$PROJECT_DIR$/src/analyzer/gen_analyzer.sh" />
-        <option value="$PROJECT_DIR$/src/interpreter/HTExpressionBianryOperationImpl.c" />
-        <option value="$PROJECT_DIR$/src/interpreter/HTExpression.h" />
         <option value="$PROJECT_DIR$/src/interpreter/HTExpressionEval.h" />
         <option value="$PROJECT_DIR$/main.c" />
         <option value="$PROJECT_DIR$/src/utils/HTType.h" />
         <option value="$PROJECT_DIR$/src/utils/HTMem.h" />
         <option value="$PROJECT_DIR$/src/utils/HTTypeKit.h" />
-        <option value="$PROJECT_DIR$/src/utils/HTList.c" />
         <option value="$PROJECT_DIR$/test/HTListTest.c" />
-        <option value="$PROJECT_DIR$/src/utils/HTMem.c" />
         <option value="$PROJECT_DIR$/test/HTStringTest.c" />
         <option value="$PROJECT_DIR$/test/HTVariableTest.c" />
         <option value="$PROJECT_DIR$/src/utils/HTString.c" />
-        <option value="$PROJECT_DIR$/src/compiler/HTVariable.c" />
         <option value="$PROJECT_DIR$/test/HTExpressionTest.c" />
         <option value="$PROJECT_DIR$/src/compiler/HTInterpreter.c" />
         <option value="$PROJECT_DIR$/src/compiler/HTInterpreter.h" />
@@ -307,31 +242,40 @@
         <option value="$PROJECT_DIR$/test/HTTypeTest.c" />
         <option value="$PROJECT_DIR$/test/HTExpressionEvalTest.c" />
         <option value="$PROJECT_DIR$/test/HTStatementTest.c" />
-        <option value="$PROJECT_DIR$/src/compiler/HTVariable.h" />
         <option value="$PROJECT_DIR$/src/analyzer/htlang.c" />
         <option value="$PROJECT_DIR$/src/analyzer/bison.c" />
         <option value="$PROJECT_DIR$/src/utils/HTString.h" />
-        <option value="$PROJECT_DIR$/src/compiler/HTExpression.c" />
         <option value="$PROJECT_DIR$/test/HTExecutorTest.c" />
-        <option value="$PROJECT_DIR$/src/htlang.c" />
-        <option value="$PROJECT_DIR$/src/compiler/HTExpression.h" />
-        <option value="$PROJECT_DIR$/src/compiler/HTStatement.h" />
-        <option value="$PROJECT_DIR$/src/compiler/HTStatement.c" />
         <option value="$PROJECT_DIR$/src/utils/HTType.c" />
         <option value="$PROJECT_DIR$/src/executor/HTRuntimeEnv.h" />
-        <option value="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.h" />
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
-        <option value="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.c" />
         <option value="$PROJECT_DIR$/test/HTRuntimeEnvironmentTest.c" />
-        <option value="$PROJECT_DIR$/src/executor/HTExecutor.h" />
-        <option value="$PROJECT_DIR$/src/executor/HTExpressionEval.h" />
         <option value="$PROJECT_DIR$/src/compiler/HTCompiler.c" />
         <option value="$PROJECT_DIR$/src/compiler/HTCompiler.h" />
+        <option value="$PROJECT_DIR$/src/utils/HTList.c" />
+        <option value="$PROJECT_DIR$/src/executor/HTFunction.h" />
+        <option value="$PROJECT_DIR$/src/executor/HTLocalFunctionRegsiter.h" />
+        <option value="$PROJECT_DIR$/src/utils/HTMem.c" />
+        <option value="$PROJECT_DIR$/src/htlang.c" />
+        <option value="$PROJECT_DIR$/src/executor/HTExecutor.h" />
+        <option value="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.h" />
+        <option value="$PROJECT_DIR$/src/compiler/HTFunction.h" />
+        <option value="$PROJECT_DIR$/src/compiler/HTFunction.c" />
+        <option value="$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.c" />
+        <option value="$PROJECT_DIR$/src/compiler/HTStatement.c" />
         <option value="$PROJECT_DIR$/src/executor/HTExecutor.c" />
-        <option value="$PROJECT_DIR$/src/analyzer/bison.y" />
-        <option value="$PROJECT_DIR$/src/executor/HTExpressionEval.c" />
+        <option value="$PROJECT_DIR$/src/compiler/HTExpression.h" />
         <option value="$PROJECT_DIR$/src/analyzer/lex.l" />
+        <option value="$PROJECT_DIR$/src/executor/HTExpressionEval.h" />
+        <option value="$PROJECT_DIR$/src/executor/HTExpressionEval.c" />
+        <option value="$PROJECT_DIR$/src/compiler/HTVariable.h" />
+        <option value="$PROJECT_DIR$/src/compiler/HTExpression.c" />
+        <option value="$PROJECT_DIR$/src/executor/HTLocalFunctions.c" />
+        <option value="$PROJECT_DIR$/src/executor/HTLocalFunctionRegsiter.c" />
+        <option value="$PROJECT_DIR$/src/compiler/HTVariable.c" />
         <option value="$PROJECT_DIR$/AssignTest.ht" />
+        <option value="$PROJECT_DIR$/src/analyzer/bison.y" />
+        <option value="$PROJECT_DIR$/src/compiler/HTStatement.h" />
       </list>
     </option>
   </component>
@@ -484,7 +428,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
     <property name="add_unversioned_files" value="$PROJECT_DIR$/.gitignore&#10;/Users/wangyang/Documents/Projects/On Git/HtLang/src/utils/HTString.h&#10;/Users/wangyang/Documents/Projects/On Git/HtLang/src/interpreter/HTInterpreter.h" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="js.eslint.eslintPackage" value="/usr/local/lib/node_modules/eslint" />
@@ -493,6 +437,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/compiler" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/executor" />
       <recent name="$PROJECT_DIR$/src/analyzer" />
@@ -817,11 +762,13 @@
       <workItem from="1504680268400" duration="2444000" />
       <workItem from="1504683130826" duration="17000" />
       <workItem from="1504683183723" duration="6109000" />
+      <workItem from="1504693162720" duration="14404000" />
+      <workItem from="1504836991117" duration="11169000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="102579000" />
+    <option name="totallyTimeSpent" value="128152000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1916" height="1057" extended-state="6" />
@@ -829,14 +776,14 @@
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16597077" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299595" sideWeight="0.34237996" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299595" sideWeight="0.3810021" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CMake" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32894737" sideWeight="0.49112734" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27732792" sideWeight="0.61482257" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27732792" sideWeight="0.38517746" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3299595" sideWeight="0.5302714" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24595141" sideWeight="0.35229644" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17307693" sideWeight="0.46033403" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.06174089" sideWeight="0.64300627" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.4697286" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -864,7 +811,7 @@
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/analyzer/bison.c</url>
-          <line>2020</line>
+          <line>2278</line>
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
@@ -879,7 +826,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/src/compiler/HTVariable.h</url>
-          <line>62</line>
+          <line>70</line>
           <option name="timeStamp" value="157" />
         </line-breakpoint>
       </breakpoints>
@@ -896,7 +843,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="167" />
+      <option name="time" value="215" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -907,30 +854,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/analyzer/gen_analyzer.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" column="21" lean-forward="false" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/interpreter/HTExpressionBinaryOperationCreateImpl.c" />
-    <entry file="file://$PROJECT_DIR$/src/interpreter/HTExpressionBinaryOperationEvalImpl.c" />
-    <entry file="file://$PROJECT_DIR$/test.ht">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="14" column="1" lean-forward="false" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.c" />
-    <entry file="file://$PROJECT_DIR$/src/utils/HTType.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="9" column="15" lean-forward="false" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/HTTypeKit.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1078">
@@ -1016,46 +939,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/HTExecutorTest.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="20" column="2" lean-forward="false" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/compiler/HTStatement.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="32" column="40" lean-forward="false" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/htlang.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/HTListTest.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
           <caret line="40" column="26" lean-forward="false" selection-start-line="40" selection-start-column="26" selection-end-line="40" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/HTMem.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1628">
-          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/HTType.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1067,52 +954,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/HTList.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="24" column="5" lean-forward="false" selection-start-line="14" selection-start-column="0" selection-end-line="24" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/executor/HTRuntimeEnv.c" />
     <entry file="file://$PROJECT_DIR$/src/executor/HTRuntimeEnv.h" />
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1012">
-          <caret line="46" column="35" lean-forward="false" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/HTString.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="406">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="20" column="31" lean-forward="false" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
-          <folding>
-            <element signature="e#121#156#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/executor/HTExpressionEval.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="29" lean-forward="true" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
-          <folding>
-            <element signature="e#61#95#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/compiler/HTCompiler.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="121">
@@ -1129,24 +972,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="47" column="32" lean-forward="true" selection-start-line="47" selection-start-column="32" selection-end-line="47" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/executor/HTExecutor.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" column="24" lean-forward="true" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
-          <folding>
-            <element signature="e#51#88#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/HTRuntimeEnvironmentTest.c">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="370">
@@ -1157,184 +982,263 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/compiler/HTVariable.c">
+    <entry file="file://$PROJECT_DIR$/src/analyzer/bison.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="33" lean-forward="false" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="33" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/compiler/HTVariable.h">
+    <entry file="file://$PROJECT_DIR$/src/analyzer/bison.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="878">
-          <caret line="61" column="0" lean-forward="false" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+        <state relative-caret-position="34606">
+          <caret line="1573" column="0" lean-forward="false" selection-start-line="1573" selection-start-column="0" selection-end-line="1573" selection-end-column="0" />
+          <folding>
+            <marker date="1504857475000" expanded="true" signature="2537:2660" ph="{...}" />
+            <marker date="1504857475000" expanded="true" signature="73277:73375" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/executor/HTLocalFunctionRegsiter.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="8" column="33" lean-forward="true" selection-start-line="8" selection-start-column="33" selection-end-line="8" selection-end-column="33" />
+          <folding>
+            <element signature="e#127#162#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/HTExecutorTest.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="20" column="2" lean-forward="false" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/executor/HTExecutor.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="14" column="32" lean-forward="false" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compiler/HTFunction.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="37" column="122" lean-forward="false" selection-start-line="37" selection-start-column="122" selection-end-line="37" selection-end-column="122" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/HTType.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compiler/HTFunction.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="35" column="0" lean-forward="false" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/HTMem.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="75" column="0" lean-forward="false" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/compiler/HTStatement.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="33" column="36" lean-forward="true" selection-start-line="33" selection-start-column="36" selection-end-line="33" selection-end-column="36" />
+        <state relative-caret-position="243">
+          <caret line="59" column="23" lean-forward="false" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/analyzer/bison.h">
+    <entry file="file://$PROJECT_DIR$/src/executor/HTRuntimeEnvironment.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="-1088">
+          <caret line="36" column="5" lean-forward="false" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
           <folding>
-            <marker date="1504690950000" expanded="true" signature="1797:1920" ph="{...}" />
+            <element signature="e#44#69#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/analyzer/bison.c">
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8499">
-          <caret line="1541" column="0" lean-forward="false" selection-start-line="1541" selection-start-column="0" selection-end-line="1541" selection-end-column="0" />
-          <folding>
-            <marker date="1504690950000" expanded="true" signature="2537:2660" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="61864:61962" ph="{...}" />
-          </folding>
+        <state relative-caret-position="568">
+          <caret line="46" column="35" lean-forward="false" selection-start-line="46" selection-start-column="35" selection-end-line="46" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/executor/HTExecutor.c">
+    <entry file="file://$PROJECT_DIR$/src/analyzer/lex.c">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="26" column="0" lean-forward="false" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="722">
+          <caret line="834" column="7" lean-forward="true" selection-start-line="834" selection-start-column="7" selection-end-line="834" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/compiler/HTExpression.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
-          <caret line="21" column="40" lean-forward="false" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="40" />
+        <state relative-caret-position="1298">
+          <caret line="59" column="0" lean-forward="false" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/executor/HTExpressionEval.c">
+    <entry file="file://$PROJECT_DIR$/src/utils/HTString.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="238" column="9" lean-forward="true" selection-start-line="238" selection-start-column="9" selection-end-line="238" selection-end-column="9" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/analyzer/lex.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="827" column="53" lean-forward="true" selection-start-line="827" selection-start-column="53" selection-end-line="827" selection-end-column="53" />
-          <folding>
-            <marker date="1504690950000" expanded="true" signature="38509:38556" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="38614:39583" ph="{...}" />
-            <marker date="1504690950000" expanded="false" signature="39628:39653" ph="..." />
-            <marker date="1504690950000" expanded="true" signature="39697:41181" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="39799:39988" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="40304:40616" ph="/.../" />
-            <marker date="1504690950000" expanded="false" signature="40859:40876" ph="..." />
-            <marker date="1504690950000" expanded="true" signature="41215:41388" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="41430:41657" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="41659:41749" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="41811:42591" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="41819:41964" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="42336:42553" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="42634:42846" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="42848:43065" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="43130:43670" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="43331:43456" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="43672:43756" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="43805:44043" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="44121:44281" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="44350:44851" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="44456:44657" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="44853:45014" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="45062:45511" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="45113:45272" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="45513:45700" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="45756:46355" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="46357:46465" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="46497:46766" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="46768:46860" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="46902:48237" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="46964:47159" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="48239:48482" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="48547:49224" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="49226:49555" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="49611:49664" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="49666:49961" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="50044:50660" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="50528:50620" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="50768:50841" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="51331:51371" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="51397:51430" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="51432:51465" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="51489:51513" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="51515:51549" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="51574:51599" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="51601:51649" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="51679:51705" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="51707:51741" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="51768:51794" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="51796:51858" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="51897:51933" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="51935:52083" ph="/**...*/" />
-            <marker date="1504690950000" expanded="true" signature="52116:52143" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="52179:52208" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="52234:52267" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="52301:52337" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="52373:52949" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="52383:52531" ph="/.../" />
-            <marker date="1504690950000" expanded="false" signature="52739:52772" ph="..." />
-            <marker date="1504690950000" expanded="true" signature="52838:52933" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="53047:53516" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="53336:53475" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="53518:53554" ph="/.../" />
-            <marker date="1504690950000" expanded="false" signature="53575:53705" ph="..." />
-            <marker date="1504690950000" expanded="false" signature="53736:53844" ph="..." />
-            <marker date="1504690950000" expanded="true" signature="53886:53922" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="53972:54378" ph="{...}" />
-            <marker date="1504690950000" expanded="true" signature="53975:54328" ph="/.../" />
-            <marker date="1504690950000" expanded="true" signature="54406:54472" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/compiler/HTExpression.c">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        <state relative-caret-position="-236">
+          <caret line="34" column="19" lean-forward="false" selection-start-line="34" selection-start-column="19" selection-end-line="34" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/analyzer/lex.l">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="90" column="0" lean-forward="true" selection-start-line="90" selection-start-column="0" selection-end-line="90" selection-end-column="0" />
+        <state relative-caret-position="532">
+          <caret line="108" column="57" lean-forward="false" selection-start-line="108" selection-start-column="29" selection-end-line="108" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/executor/HTExpressionEval.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="20" column="39" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/HTList.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/analyzer/gen_analyzer.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/executor/HTExpressionEval.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="340" column="39" lean-forward="false" selection-start-line="340" selection-start-column="14" selection-end-line="340" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compiler/HTExpression.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compiler/HTVariable.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="766">
+          <caret line="40" column="53" lean-forward="true" selection-start-line="40" selection-start-column="53" selection-end-line="40" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/executor/HTLocalFunctions.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="33" column="21" lean-forward="false" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
+          <folding>
+            <element signature="e#107#139#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/executor/HTLocalFunctionRegsiter.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="11" column="63" lean-forward="true" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compiler/HTVariable.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="34" column="48" lean-forward="true" selection-start-line="34" selection-start-column="48" selection-end-line="34" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/compiler/HTStatement.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="56" column="0" lean-forward="true" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/executor/HTExecutor.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="93" column="0" lean-forward="false" selection-start-line="93" selection-start-column="0" selection-end-line="93" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/htlang.c">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/analyzer/bison.y">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2824">
-          <caret line="251" column="5" lean-forward="true" selection-start-line="251" selection-start-column="5" selection-end-line="251" selection-end-column="5" />
+        <state relative-caret-position="441">
+          <caret line="171" column="44" lean-forward="true" selection-start-line="171" selection-start-column="44" selection-end-line="171" selection-end-column="44" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AssignTest.ht">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state relative-caret-position="212">
+          <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
           <folding />
         </state>
       </provider>

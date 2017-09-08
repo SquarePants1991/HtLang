@@ -7,8 +7,9 @@
 
 static HTRuntimeEnvironmentRef rootRuntimeEnvironment = NULL;
 // Statement Execution
-void HTExecutorExecAssignStatement(HTCompilerRef compiler, HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv);
-void HTExecutorExecDeclareStatement(HTCompilerRef compiler, HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv);
+void HTExecutorExecAssignStatement(HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv);
+void HTExecutorExecDeclareStatement(HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv);
 void HTExecute(HTCompilerRef compiler);
-void HTExecuteStatement(HTCompilerRef compiler, HTStatementRef statementRef, HTRuntimeEnvironmentRef rootEnv);
+void HTExecuteStatementList(HTListRef statementList, HTRuntimeEnvironmentRef rootEnv);
+void HTExecuteStatement(HTStatementRef statementRef, HTRuntimeEnvironmentRef rootEnv);
 #endif

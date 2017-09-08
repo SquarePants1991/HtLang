@@ -13,10 +13,10 @@ int main() {
     if (yyparse()) {
         fprintf(stderr, "Error! \n");
     }
-    printf("===============================================================\n");
-    printf("Begin execution...\n");
     HTExecute(compiler);
 
     HTTypeRelease(compiler);
+    printf("=========================================================\n");
+    printf("Check Mem Leak >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
     HTMemPrintAllBlocks();
 }

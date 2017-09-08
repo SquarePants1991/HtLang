@@ -16,6 +16,7 @@
     HTDataType dataTypeValue;
     HTListRef listValue;
     HTExpressionBinaryOperator binaryOperatorValue;
+    HTVariableRef variableValue;
 }
 
 %token <intValue>               IntLiteral
@@ -23,25 +24,27 @@
 %token <boolValue>              BoolLiteral
 %token <expressionValue>        IDENTIFIER
 %token <expressionValue>        Literal
-%token <binaryOperatorValue>    BinaryOperator ADD SUB MUL DIV MOD POWER EQ GT LT GE LE
+%token <binaryOperatorValue>    BinaryOperator ADD SUB MUL DIV MOD POWER EQ GT LT GE LE AND OR
 %token <statementValue>         Statement
 %token <listValue>              List
 
-%token ASSIGN INT DOUBLE BOOL STRING SEMI COMMA COLON
-%token IF FOR FUNC
-%token LB RB LCB RCB
-%token EQ GT LT GE LE RANGE_UNCLOSE RANGE_CLOSE IN
+%token ASSIGN INT DOUBLE BOOL STRING ARRAY SEMI COMMA COLON
+%token IF ELIF ELSE FOR FUNC RETURN
+%token LB RB LCB RCB LSB RSB
+%token RANGE_UNCLOSE RANGE_CLOSE IN
 %token COMMENT_ONE_LINE
 
 %type <dataTypeValue> dataType
-%type <listValue> statementList
-%type <statementValue>  statement assignStatement declareStatement ifStatement
-%type <expressionValue> rangeExpression expression primaryExpression
+%type <listValue> statementList parameterList parameterDefList
+%type <statementValue>  statement assignStatement declareStatement ifStatement pureIfStatement elifStatement elseStatement funcDefStatement returnStatement
+%type <expressionValue> parameter rangeExpression expression primaryExpression arrayLiteral
+%type <variableValue> parameterDef
 
+%left AND OR
 %left EQ GT LT GE LE
 %left ADD SUB
 %left MUL DIV MOD
-%right POWER
+%right POWER NEGATIVE
 
 %%
 
@@ -55,7 +58,6 @@ fragment
 statementList
     : statement
     {
-        printf("statement list begin.\n");
         HTListRef statementList = HTListCreate();
         HTListAppend(statementList, $1);
         HTTypeRelease($1);
@@ -63,7 +65,6 @@ statementList
     }
     | statementList statement
     {
-        printf("statement list collect.\n");
         HTListAppend($1, $2);
         HTTypeRelease($2);
     }
@@ -72,7 +73,8 @@ statementList
 statement
     : expression SEMI
     {
-        printf("This is a pure expr\n");
+        $$ = HTStatementCreatePureExpression($1);
+        HTTypeRelease($1);
     }
     | assignStatement
     {
@@ -83,15 +85,23 @@ statement
         $$ = $1;
     }
     | ifStatement
+    {
+        $$ = $1;
+    }
     | forStatement
     | funcDefStatement
-    | funcCallStatement
+    {
+        $$ = $1;
+    }
+    | returnStatement
+    {
+        $$ = $1;
+    }
     ;
 
 assignStatement
     : IDENTIFIER ASSIGN expression SEMI
     {
-        printf("This is a assign statement\n");
         $$ = HTStatementCreateAssign($1, $3);
         HTTypeRelease($1);
         HTTypeRelease($3);
@@ -115,51 +125,77 @@ declareStatement
     }
 
 ifStatement
+    : pureIfStatement
+    {
+        $$ = $1;
+    }
+    | ifStatement elifStatement
+    {
+        HTStatementSetAsIfBranchStatement($1, $2);
+        $$ = $1;
+        HTTypeRelease($2);
+    }
+    | ifStatement elseStatement
+    {
+        HTStatementSetAsIfBranchStatement($1, $2);
+        $$ = $1;
+        HTTypeRelease($2);
+    }
+    ;
+
+pureIfStatement
     : IF expression LCB statementList RCB
     {
-        printf("This is a if statement\n");
-        $$ = HTStatementCreateIf($2, $4);
+        $$ = HTStatementCreateIf($2, $4, HTIfStatementTypeIf);
         HTTypeRelease($2);
         HTTypeRelease($4);
     }
 
+elifStatement
+    : ELIF expression LCB statementList RCB
+    {
+        $$ = HTStatementCreateIf($2, $4, HTIfStatementTypeElif);
+        HTTypeRelease($2);
+        HTTypeRelease($4);
+    }
+
+elseStatement
+    : ELSE LCB statementList RCB
+    {
+        $$ = HTStatementCreateIf(NULL, $3, HTIfStatementTypeElse);
+        HTTypeRelease($3);
+    }
+
 forStatement
-    : FOR IDENTIFIER IN rangeExpression LCB statementList RCB
+    : FOR IDENTIFIER IN expression LCB statementList RCB
     {
         printf("This is a for statement\n");
     }
 
 funcDefStatement
-    : FUNC IDENTIFIER LB parameterList RB LCB statementList RCB
+    : FUNC IDENTIFIER LB parameterDefList RB LCB statementList RCB
     {
+        $$ = HTStatementCreateFuncDef($2, $4, $7, HTDataTypeVoid);
+        HTTypeRelease($2);
+        HTTypeRelease($4);
+        HTTypeRelease($7);
         printf("This is a function statement\n");
     }
     | FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB
     {
-        printf("This is a function with return statement\n");
+        $$ = HTStatementCreateFuncDef($2, $4, $9, $7);
+        HTTypeRelease($2);
+        HTTypeRelease($4);
+        HTTypeRelease($9);
     }
+    ;
 
-funcCallStatement
-    : IDENTIFIER LB parameterList RB SEMI
+returnStatement
+    : RETURN expression SEMI
     {
-        printf("This is a function call statement\n");
+        $$ = HTStatementCreateReturn($2);
+        HTTypeRelease($2);
     }
-
-parameterDefList
-    : parameterDef
-    | parameterDefList parameterDef
-
-parameterDef
-    : INT IDENTIFIER
-    | INT IDENTIFIER COMMA
-
-parameterList
-    : parameter
-    | parameterList parameter
-
-parameter
-    : IDENTIFIER
-    | IDENTIFIER COMMA
 
 rangeExpression
     : expression RANGE_UNCLOSE expression
@@ -177,6 +213,13 @@ rangeExpression
 
 expression
     : primaryExpression
+    | SUB expression %prec NEGATIVE
+    {
+        HTExpressionRef zeroExpr = HTExpressionCreateDoubleLiteral(0.0);
+        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorSub, zeroExpr, $2);
+        HTTypeRelease(zeroExpr);
+        HTTypeRelease($2);
+    }
     | expression ADD expression
     {
         $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
@@ -184,11 +227,11 @@ expression
         HTTypeRelease($3);
     }
     | expression SUB expression
-        {
-            $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
-            HTTypeRelease($1);
-            HTTypeRelease($3);
-        }
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
     | expression MUL expression
     {
         $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
@@ -243,12 +286,89 @@ expression
         HTTypeRelease($1);
         HTTypeRelease($3);
     }
+    | expression AND expression
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | expression OR expression
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | IDENTIFIER LB parameterList RB
+    {
+        $$ = HTExpressionCreateFuncCall($1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
     ;
+
+parameterDefList
+    : parameterDef
+    {
+        HTListRef list = HTListCreate();
+        HTListAppend(list, $1);
+        HTTypeRelease($1);
+        $$ = list;
+    }
+    | parameterDefList parameterDef
+    {
+         HTListAppend($1, $2);
+         HTTypeRelease($2);
+    }
+    ;
+
+parameterDef
+    : dataType IDENTIFIER
+    {
+        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->identifier->impl->characters);
+        $$ = variable;
+        HTTypeRelease($2);
+    }
+    | dataType IDENTIFIER COMMA
+    {
+        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->identifier->impl->characters);
+        $$ = variable;
+        HTTypeRelease($2);
+    }
+
+parameterList
+    : parameter
+    {
+        HTListRef paramList = HTListCreate();
+        HTListAppend(paramList, $1);
+        $$ = paramList;
+        HTTypeRelease($1);
+    }
+    | parameterList parameter
+    {
+        HTListAppend($1, $2);
+        HTTypeRelease($2);
+        $$ = $1;
+    }
+
+parameter
+    : expression
+    {
+        $$ = $1;
+    }
+    | expression COMMA
+    {
+        $$ = $1;
+    }
 
 primaryExpression
     : Literal
     {
         $$ = $1
+    }
+    | arrayLiteral
+    {
+        $$ = HTExpressionCreateArray($1);
+        HTTypeRelease($1);
     }
     | IDENTIFIER
     {
@@ -259,6 +379,13 @@ primaryExpression
         $$ = $2
     }
     ;
+
+
+arrayLiteral
+    : LSB parameterList RSB
+    {
+        $$ = $2;
+    }
 
 dataType
     : INT
@@ -276,6 +403,10 @@ dataType
     | STRING
     {
         $$ = HTDataTypeString
+    }
+    | ARRAY
+    {
+        $$ = HTDataTypeArray
     }
     ;
 

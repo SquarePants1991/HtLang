@@ -7,9 +7,12 @@ void HTExpressionAlloc(HTExpressionRef self) {
 
 void HTExpressionDealloc(HTExpressionRef self) {
     HTPropAssignStrong(self, stringVal, NULL);
+    HTPropAssignStrong(self, arrayVal, NULL);
     HTPropAssignStrong(self, identifier, NULL);
     HTPropAssignStrong(self, binaryOpExpression.left, NULL);
     HTPropAssignStrong(self, binaryOpExpression.right, NULL);
+    HTPropAssignStrong(self, funcCallExpression.identifier, NULL);
+    HTPropAssignStrong(self, funcCallExpression.parameters, NULL);
 }
 
 HTExpressionRef HTExpressionCreateIntLiteral(int val) {
@@ -37,6 +40,13 @@ HTExpressionRef HTExpressionCreateStringLiteral(HTStringRef val) {
     HTExpressionRef expr = HTExpressionCreate();
     HTPropAssignWeak(expr, type, HTExpressionTypeStringLiteral);
     HTPropAssignStrong(expr, stringVal, val);
+    return expr;
+}
+
+HTExpressionRef HTExpressionCreateArray(HTListRef val) {
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeArray);
+    HTPropAssignStrong(expr, arrayVal, val);
     return expr;
 }
 
@@ -78,6 +88,14 @@ HTExpressionRef HTExpressionCreateIdentifier(HTStringRef val) {
     HTExpressionRef expr = HTExpressionCreate();
     HTPropAssignWeak(expr, type, HTExpressionTypeIdentifier);
     HTPropAssignStrong(expr, identifier, val);
+    return expr;
+}
+
+HTExpressionRef HTExpressionCreateFuncCall(HTExpressionRef identifier, HTListRef parameters) {
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeFuncCall);
+    HTPropAssignStrong(expr, funcCallExpression.identifier, identifier);
+    HTPropAssignStrong(expr, funcCallExpression.parameters, parameters);
     return expr;
 }
 

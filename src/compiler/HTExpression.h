@@ -8,8 +8,10 @@ typedef enum {
     HTExpressionTypeDoubleLiteral,
     HTExpressionTypeBoolLiteral,
     HTExpressionTypeStringLiteral,
+    HTExpressionTypeArray,
     HTExpressionTypeIdentifier,
-    HTExpressionTypeBinaryOperation
+    HTExpressionTypeBinaryOperation,
+    HTExpressionTypeFuncCall,
 } HTExpressionType;
 
 typedef enum {
@@ -24,6 +26,8 @@ typedef enum {
     HTExpressionBinaryOperatorLogicGreaterEqual,
     HTExpressionBinaryOperatorLogicLess,
     HTExpressionBinaryOperatorLogicLessEqual,
+    HTExpressionBinaryOperatorLogicAnd,
+    HTExpressionBinaryOperatorLogicOr,
 } HTExpressionBinaryOperator;
 
 HTClassBegin
@@ -34,12 +38,17 @@ HTClassBegin
         unsigned char boolVal;
     } value;
     HTStringRef stringVal;
+    HTListRef arrayVal;
     HTStringRef identifier;
     struct {
         struct HTExpression * left;
         struct HTExpression * right;
         HTExpressionBinaryOperator operator;
     } binaryOpExpression;
+    struct {
+        struct HTExpression * identifier;
+        HTListRef parameters;
+    } funcCallExpression;
 HTClassEnd(HTExpression)
 
 static HTStringRef currentCollectingStringLiteral = NULL;
@@ -48,11 +57,13 @@ HTExpressionRef HTExpressionCreateIntLiteral(int val);
 HTExpressionRef HTExpressionCreateDoubleLiteral(double val);
 HTExpressionRef HTExpressionCreateBoolLiteral(unsigned char val);
 HTExpressionRef HTExpressionCreateStringLiteral(HTStringRef val);
+HTExpressionRef HTExpressionCreateArray(HTListRef val);
 void HTExpressionBeginStringLiteral();
 void HTExpressionAddStringLiteral(const char *str);
 HTExpressionRef HTExpressionEndStringLiteral();
-HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator operator, HTExpressionRef left, HTExpressionRef right);
 HTExpressionRef HTExpressionCreateIdentifier(HTStringRef val);
+HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator operator, HTExpressionRef left, HTExpressionRef right);
+HTExpressionRef HTExpressionCreateFuncCall(HTExpressionRef identifier, HTListRef parameters);
 void HTExpressionPrintDebugInfo(HTExpressionRef expr);
 
 #endif

@@ -45,10 +45,10 @@ HTTypeRef HTListAt(HTListRef listRef, int index) {
     HTListNodeRef node = HTPropGet(listRef, head);
     int currentIndex = 0;
     while(node) {
-        node = HTPropGet(node, next);
         if (currentIndex == index) {
             return HTPropGet(node, ptr);
         }
+        node = HTPropGet(node, next);
         currentIndex++;
     }
     return NULL;

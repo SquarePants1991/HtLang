@@ -1,6 +1,12 @@
 #include <compiler/HTVariable.h>
+#include <compiler/HTExpression.h>
+#include <utils/HTList.h>
+#include <utils/HTString.h>
+#include <compiler/HTFunction.h>
 #include "../compiler/HTExpression.h"
 #include "HTExpressionEval.h"
+#include "HTExecutor.h"
+#include "HTRuntimeEnvironment.h"
 
 
 HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
@@ -22,10 +28,13 @@ HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef
             HTPropAssignWeak(returnVar, dataType, HTDataTypeString);
             HTPropAssignStrong(returnVar, stringValue, HTPropGet(expr, stringVal));
             break;
+        case HTExpressionTypeArray:
+            HTTypeRelease(returnVar);
+            returnVar = HTExpressionEvaluateArray(expr, rootEnv);
+            break;
         case HTExpressionTypeIdentifier:
             HTPropAssignWeak(returnVar, dataType, HTDataTypeDouble);
             HTPropAssignWeak(returnVar, value.doubleValue, 0.0);
-            // TODO: 未来会有局部变量的考虑在其中
             HTVariableRef variable = HTRuntimeEnvironmentGetVariable(rootEnv, HTPropGet(expr, identifier));
             if (variable) {
                 HTVaraibleCopyValue(variable, returnVar);
@@ -34,6 +43,10 @@ HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef
         case HTExpressionTypeBinaryOperation:
             HTTypeRelease(returnVar);
             returnVar = HTExpressionEvaluateBinaryOperation(expr, rootEnv);
+            break;
+        case HTExpressionTypeFuncCall:
+            HTTypeRelease(returnVar);
+            returnVar = HTExpressionEvaluateFuncCall(expr, rootEnv);
             break;
     }
     return returnVar;
@@ -44,7 +57,7 @@ void HTVariableConvertToDouble(HTVariableRef variable) {
         case HTDataTypeBool:
             HTPropAssignWeak(variable, value.doubleValue, (double)HTPropGet(variable, value.boolValue));
             break;
-        case HTExpressionTypeIntLiteral:
+        case HTDataTypeInt:
             HTPropAssignWeak(variable, value.doubleValue, (double)HTPropGet(variable, value.intValue));
             break;
     }
@@ -228,11 +241,36 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
         }
         case HTExpressionBinaryOperatorLogicLessEqual: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.doubleValue) <= HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.doubleValue) <= HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.intValue) <= HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.intValue) <= HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) <= HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) <= HTPropGet(rightResult, value.boolValue));
+            }
+            HTPropAssignWeak(result, dataType, HTDataTypeBool);
+            break;
+        }
+        case HTExpressionBinaryOperatorLogicAnd: {
+            if (resultDataType == HTDataTypeDouble) {
+                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.doubleValue) && HTPropGet(rightResult, value.doubleValue));
+            } else if (resultDataType == HTDataTypeInt) {
+                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.intValue) && HTPropGet(rightResult, value.intValue));
+            } else if (resultDataType == HTDataTypeBool) {
+                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) && HTPropGet(rightResult, value.boolValue));
+            }
+            HTPropAssignWeak(result, dataType, HTDataTypeBool);
+            break;
+        }
+        case HTExpressionBinaryOperatorLogicOr: {
+            if (resultDataType == HTDataTypeDouble) {
+                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.doubleValue) || HTPropGet(rightResult, value.doubleValue));
+            } else if (resultDataType == HTDataTypeInt) {
+                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.intValue) || HTPropGet(rightResult, value.intValue));
+            } else if (resultDataType == HTDataTypeBool) {
+                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) || HTPropGet(rightResult, value.boolValue));
             }
             HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;
@@ -243,4 +281,73 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
     HTTypeRelease(rightResult);
 
     return result;
+}
+
+HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
+    HTExpressionRef identifierExpr = HTPropGet(expr, funcCallExpression.identifier);
+    HTStringRef funcName = HTPropGet(identifierExpr, identifier);
+    HTListNodeRef paramNode = HTPropGet(HTPropGet(expr, funcCallExpression.parameters), head);
+    HTListRef paramValueList = HTListCreate();
+    while (paramNode) {
+        HTVariableRef expressionResult = HTExpressionEvaluate(HTPropGet(paramNode, ptr), rootEnv);
+        HTListAppend(paramValueList, expressionResult);
+        HTTypeRelease(expressionResult);
+        paramNode = HTPropGet(paramNode, next);
+    }
+
+    // call func
+    HTFunctionRef function = HTRuntimeEnvironmentGetFunction(rootEnv, funcName);
+    HTVariableRef returnVal = HTVariableCreateWithTypeAndName(HTDataTypeDouble, "_");
+    if (HTPropGet(function, functionType) == HTFunctionTypeLocal) {
+        HTFunctionBody funcBody = HTPropGet(function, u.localFunction.functionBody);
+        HTPropAssignWeak(returnVal, value.doubleValue, 0.0);
+        if (funcBody) {
+            funcBody(paramValueList, returnVal);
+        }
+    } else {
+        HTRuntimeEnvironmentBeginNewEnv(rootEnv);
+        HTListNodeRef paramNode = HTPropGet(paramValueList, head);
+        HTListRef defs = HTPropGet(function, u.customFunction.parameterDefList);
+        HTDataType returnType = HTPropGet(function, returnType);
+        if (HTListSize(defs) != HTListSize(paramValueList)) {
+            printf("参数不匹配\n");
+        } else {
+            int index = 0;
+            while (paramNode) {
+                HTVariableRef variableDef =  HTListAt(defs, index);
+                HTVariableRef variable = HTPropGet(paramNode, ptr);
+                HTPropAssignStrong(variable, identifier, HTPropGet(variableDef, identifier));
+                paramNode = HTPropGet(paramNode, next);
+                index++;
+            }
+
+            HTRuntimeEnvironmentDeclareVariables(rootEnv, paramValueList, 0);
+            HTExecuteStatementList(HTPropGet(function, u.customFunction.statementList), rootEnv);
+            HTRuntimeEnvironmentRef currentEnv = HTRuntimeEnvironmentCurrentEnv(rootEnv);
+            HTVariableRef returnVariable = HTPropGet(currentEnv, returnVariable);
+            if (returnVariable) {
+                HTTypeRelease(returnVal);
+                returnVal = returnVariable;
+                HTTypeRetain(returnVal);
+            }
+        }
+        HTRuntimeEnvironmentEndCurrentEnv(rootEnv);
+    }
+
+    HTTypeRelease(paramValueList);
+    return returnVal;
+}
+
+HTVariableRef HTExpressionEvaluateArray(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
+    HTVariableRef arrayVar = HTVariableCreateWithTypeAndName(HTDataTypeArray, "_");
+    HTListRef arrayVarList = HTPropGet(arrayVar, arrayValue);
+    HTListRef exprArray = HTPropGet(expr, arrayVal);
+    HTListNodeRef node = HTPropGet(exprArray, head);
+    while (node) {
+        HTVariableRef var = HTExpressionEvaluate(HTPropGet(node, ptr), rootEnv);
+        HTListAppend(arrayVarList, var);
+        HTTypeRelease(var);
+        node = HTPropGet(node, next);
+    }
+    return arrayVar;
 }
