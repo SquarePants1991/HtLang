@@ -169,7 +169,10 @@ elseStatement
 forStatement
     : FOR IDENTIFIER IN expression LCB statementList RCB
     {
-        printf("This is a for statement\n");
+        $$ = HTStatementCreateFor($2, $4, $6);
+        HTTypeRelease($2);
+        HTTypeRelease($4);
+        HTTypeRelease($5);
     }
 
 funcDefStatement
