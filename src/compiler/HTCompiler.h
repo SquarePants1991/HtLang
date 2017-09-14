@@ -1,16 +1,17 @@
 #ifndef __HTCompiler__H__
 #define __HTCompiler__H__
 
-#include "HTVariable.h"
-#include "HTExpression.h"
-#include "HTStatement.h"
 #include "../utils/HTList.h"
 #include "../utils/HTMem.h"
 #include "../utils/HTString.h"
 
+#include "HTVariable.h"
+#include "HTExpression.h"
+#include "HTStatement.h"
+
+
 HTClassBegin
     HTList * statementList;
-    HTList * variableList;
 HTClassEnd(HTCompiler)
 
 
@@ -20,9 +21,6 @@ HTCompilerRef HTCompilerCreate();
 void HTCompilerSetCurrent(HTCompilerRef current);
 
 HTCompilerRef HTCompilerGetCurrent();
-
-void HTCompilerAddStatement(HTStatementRef statement);
-void HTCompilerCollectGlobalVaraibles(HTCompilerRef interpreter);
 
 void HTCompilerPrintDebugInfo(HTCompilerRef interpreter);
 #endif

@@ -2,9 +2,9 @@
 // Created by wang yang on 2017/9/6.
 //
 
-#include <utils/HTList.h>
+#include "../utils/HTList.h"
+
 #include "HTRuntimeEnvironment.h"
-#include "../compiler/HTFunction.h"
 
 void HTRuntimeEnvironmentAlloc(HTRuntimeEnvironmentRef self) {
     HTListRef variableList = HTListCreate();

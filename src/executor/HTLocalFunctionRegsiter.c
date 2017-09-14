@@ -3,7 +3,6 @@
 //
 
 #include "HTLocalFunctionRegsiter.h"
-#include "HTRuntimeEnvironment.h"
 #include "HTLocalFunctions.c"
 
 void HTLocalFunctionRegisterRegister(HTRuntimeEnvironmentRef rootEnv) {

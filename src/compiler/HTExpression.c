@@ -1,5 +1,4 @@
 #include "HTExpression.h"
-#include "../utils/HTString.h"
 
 void HTExpressionAlloc(HTExpressionRef self) {
 

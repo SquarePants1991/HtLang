@@ -28,6 +28,8 @@ typedef enum {
     HTExpressionBinaryOperatorLogicLessEqual,
     HTExpressionBinaryOperatorLogicAnd,
     HTExpressionBinaryOperatorLogicOr,
+    HTExpressionBinaryOperatorCloseRangeArray,
+    HTExpressionBinaryOperatorUncloseRangeArray,
 } HTExpressionBinaryOperator;
 
 HTClassBegin
@@ -58,12 +60,15 @@ HTExpressionRef HTExpressionCreateDoubleLiteral(double val);
 HTExpressionRef HTExpressionCreateBoolLiteral(unsigned char val);
 HTExpressionRef HTExpressionCreateStringLiteral(HTStringRef val);
 HTExpressionRef HTExpressionCreateArray(HTListRef val);
+
 void HTExpressionBeginStringLiteral();
 void HTExpressionAddStringLiteral(const char *str);
 HTExpressionRef HTExpressionEndStringLiteral();
+
 HTExpressionRef HTExpressionCreateIdentifier(HTStringRef val);
 HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator operator, HTExpressionRef left, HTExpressionRef right);
 HTExpressionRef HTExpressionCreateFuncCall(HTExpressionRef identifier, HTListRef parameters);
+
 void HTExpressionPrintDebugInfo(HTExpressionRef expr);
 
 #endif

@@ -24,7 +24,10 @@ int yywrap(void) {
 <INITIAL>"elif"                  return ELIF;
 <INITIAL>"else"                  return ELSE;
 <INITIAL>"for"                   return FOR;
+<INITIAL>"while"                 return WHILE;
 <INITIAL>"func"                  return FUNC;
+<INITIAL>"break"                 return BREAK;
+<INITIAL>"continue"              return CONTINUE;
 
 <INITIAL>"*"                     { yylval.binaryOperatorValue = HTExpressionBinaryOperatorMul; return MUL; }
 <INITIAL>"/"                     { yylval.binaryOperatorValue = HTExpressionBinaryOperatorDiv; return DIV; }

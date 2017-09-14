@@ -1,12 +1,10 @@
-#include <compiler/HTVariable.h>
-#include <compiler/HTExpression.h>
-#include <utils/HTList.h>
-#include <utils/HTString.h>
-#include <compiler/HTFunction.h>
+#include "../compiler/HTVariable.h"
 #include "../compiler/HTExpression.h"
+#include "../compiler/HTFunction.h"
+
 #include "HTExpressionEval.h"
 #include "HTExecutor.h"
-#include "HTRuntimeEnvironment.h"
+#include "HTVariableForceConvert.h"
 
 
 HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
@@ -52,51 +50,6 @@ HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef
     return returnVar;
 }
 
-void HTVariableConvertToDouble(HTVariableRef variable) {
-    switch (HTPropGet(variable, dataType)) {
-        case HTDataTypeBool:
-            HTPropAssignWeak(variable, value.doubleValue, (double)HTPropGet(variable, value.boolValue));
-            break;
-        case HTDataTypeInt:
-            HTPropAssignWeak(variable, value.doubleValue, (double)HTPropGet(variable, value.intValue));
-            break;
-    }
-    HTPropAssignWeak(variable, dataType, HTDataTypeDouble);
-}
-
-void HTVariableConvertToInt(HTVariableRef variable) {
-    switch (HTPropGet(variable, dataType)) {
-        case HTDataTypeBool:
-            HTPropAssignWeak(variable, value.intValue, (double)HTPropGet(variable, value.boolValue));
-            break;
-    }
-    HTPropAssignWeak(variable, dataType, HTDataTypeInt);
-}
-
-void HTVariableConvertToString(HTVariableRef variable) {
-    switch (HTPropGet(variable, dataType)) {
-        case HTDataTypeBool: {
-            HTStringRef str = HTStringCreateFormat("%d", HTPropGet(variable, value.boolValue));
-            HTPropAssignStrong(variable, stringValue, str);
-            HTTypeRelease(str);
-            break;
-        }
-        case HTDataTypeDouble: {
-            HTStringRef str = HTStringCreateFormat("%lf", HTPropGet(variable, value.doubleValue));
-            HTPropAssignStrong(variable, stringValue, str);
-            HTTypeRelease(str);
-            break;
-        }
-        case HTDataTypeInt: {
-            HTStringRef str = HTStringCreateFormat("%d", HTPropGet(variable, value.intValue));
-            HTPropAssignStrong(variable, stringValue, str);
-            HTTypeRelease(str);
-            break;
-        }
-    }
-    HTPropAssignWeak(variable, dataType, HTDataTypeString);
-}
-
 /** 隐式转换规则。
  * 1. 有一个是字符串，则结果为字符串
  * 2. 有一个是double，则结果为double
@@ -112,18 +65,19 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
 
     HTDataType leftDataType = HTPropGet(leftResult, dataType);
     HTDataType rightDataType = HTPropGet(rightResult, dataType);
+    // TODO: 可操作列表增强，处理数组等情况
     if (leftDataType == HTDataTypeString || rightDataType == HTDataTypeString) {
         HTPropAssignWeak(result, dataType, HTDataTypeString);
-        HTVariableConvertToString(leftResult);
-        HTVariableConvertToString(rightResult);
+        HTVariableConvertToString(leftResult, 1);
+        HTVariableConvertToString(rightResult, 1);
     } else if (leftDataType == HTDataTypeDouble || rightDataType == HTDataTypeDouble) {
         HTPropAssignWeak(result, dataType, HTDataTypeDouble);
-        HTVariableConvertToDouble(leftResult);
-        HTVariableConvertToDouble(rightResult);
+        HTVariableConvertToDouble(leftResult, 1);
+        HTVariableConvertToDouble(rightResult, 1);
     } else if (leftDataType == HTDataTypeInt || rightDataType == HTDataTypeInt) {
         HTPropAssignWeak(result, dataType, HTDataTypeInt);
-        HTVariableConvertToInt(leftResult);
-        HTVariableConvertToInt(rightResult);
+        HTVariableConvertToInt(leftResult, 1);
+        HTVariableConvertToInt(rightResult, 1);
     } else {
         HTPropAssignWeak(result, dataType, HTDataTypeBool);
     }
@@ -137,104 +91,134 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
                 HTPropAssignStrong(result, stringValue, concatStr);
                 HTTypeRelease(concatStr);
             } else if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.doubleValue, HTPropGet(leftResult, value.doubleValue) + HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.doubleValue,
+                                 HTPropGet(leftResult, value.doubleValue) + HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.intValue, HTPropGet(leftResult, value.intValue) + HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.intValue,
+                                 HTPropGet(leftResult, value.intValue) + HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) + HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) + HTPropGet(rightResult, value.boolValue));
             }
             break;
         }
         case HTExpressionBinaryOperatorSub: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.doubleValue, HTPropGet(leftResult, value.doubleValue) - HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.doubleValue,
+                                 HTPropGet(leftResult, value.doubleValue) - HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.intValue, HTPropGet(leftResult, value.intValue) - HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.intValue,
+                                 HTPropGet(leftResult, value.intValue) - HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) - HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) - HTPropGet(rightResult, value.boolValue));
             }
             break;
         }
         case HTExpressionBinaryOperatorMul: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.doubleValue, HTPropGet(leftResult, value.doubleValue) * HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.doubleValue,
+                                 HTPropGet(leftResult, value.doubleValue) * HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.intValue, HTPropGet(leftResult, value.intValue) * HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.intValue,
+                                 HTPropGet(leftResult, value.intValue) * HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) * HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) * HTPropGet(rightResult, value.boolValue));
             }
             break;
         }
         case HTExpressionBinaryOperatorDiv: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.doubleValue, HTPropGet(leftResult, value.doubleValue) / HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.doubleValue,
+                                 HTPropGet(leftResult, value.doubleValue) / HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.intValue, HTPropGet(leftResult, value.intValue) / HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.intValue,
+                                 HTPropGet(leftResult, value.intValue) / HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) / HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) / HTPropGet(rightResult, value.boolValue));
             }
             break;
         }
         case HTExpressionBinaryOperatorMod: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.doubleValue, (int)HTPropGet(leftResult, value.doubleValue) % (int)HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.doubleValue, (int) HTPropGet(leftResult, value.doubleValue) %
+                                                            (int) HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.intValue, HTPropGet(leftResult, value.intValue) % HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.intValue,
+                                 HTPropGet(leftResult, value.intValue) % HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) % HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) % HTPropGet(rightResult, value.boolValue));
             }
             break;
         }
         case HTExpressionBinaryOperatorPower: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.doubleValue, pow(HTPropGet(leftResult, value.doubleValue), HTPropGet(rightResult, value.doubleValue)));
+                HTPropAssignWeak(result, value.doubleValue, pow(HTPropGet(leftResult, value.doubleValue),
+                                                                HTPropGet(rightResult, value.doubleValue)));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.intValue, pow(HTPropGet(leftResult, value.intValue), HTPropGet(rightResult, value.intValue)));
+                HTPropAssignWeak(result, value.intValue,
+                                 pow(HTPropGet(leftResult, value.intValue), HTPropGet(rightResult, value.intValue)));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, pow(HTPropGet(leftResult, value.boolValue), HTPropGet(rightResult, value.boolValue)));
+                HTPropAssignWeak(result, value.boolValue,
+                                 pow(HTPropGet(leftResult, value.boolValue), HTPropGet(rightResult, value.boolValue)));
             }
             break;
         }
         case HTExpressionBinaryOperatorLogicEqual: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.doubleValue) == HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.doubleValue) == HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.intValue) == HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.intValue) == HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) == HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) == HTPropGet(rightResult, value.boolValue));
             }
             HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;
         }
         case HTExpressionBinaryOperatorLogicGreater: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.doubleValue) > HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.doubleValue) > HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.intValue) > HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.intValue) > HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) > HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) > HTPropGet(rightResult, value.boolValue));
             }
             HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;
         }
         case HTExpressionBinaryOperatorLogicGreaterEqual: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.doubleValue) >= HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.doubleValue) >= HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.intValue) >= HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.intValue) >= HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) >= HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) >= HTPropGet(rightResult, value.boolValue));
             }
             HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;
         }
         case HTExpressionBinaryOperatorLogicLess: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.doubleValue) < HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.doubleValue) < HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.intValue) < HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.intValue) < HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) < HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) < HTPropGet(rightResult, value.boolValue));
             }
             HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;
@@ -255,24 +239,57 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
         }
         case HTExpressionBinaryOperatorLogicAnd: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.doubleValue) && HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.doubleValue) && HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.intValue) && HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.intValue) && HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) && HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) && HTPropGet(rightResult, value.boolValue));
             }
             HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;
         }
         case HTExpressionBinaryOperatorLogicOr: {
             if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.doubleValue) || HTPropGet(rightResult, value.doubleValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.doubleValue) || HTPropGet(rightResult, value.doubleValue));
             } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.intValue) || HTPropGet(rightResult, value.intValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.intValue) || HTPropGet(rightResult, value.intValue));
             } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue, HTPropGet(leftResult, value.boolValue) || HTPropGet(rightResult, value.boolValue));
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) || HTPropGet(rightResult, value.boolValue));
             }
             HTPropAssignWeak(result, dataType, HTDataTypeBool);
+            break;
+        }
+        case HTExpressionBinaryOperatorUncloseRangeArray:
+        case HTExpressionBinaryOperatorCloseRangeArray: {
+            HTListRef arr = HTListCreate();
+            if (HTPropGet(leftResult, dataType) == HTDataTypeInt &&
+                HTPropGet(rightResult, dataType) == HTDataTypeInt) {
+                // Array range must be int
+                int rangeStart = HTPropGet(leftResult, value.intValue);
+                int rangeEnd = HTPropGet(rightResult, value.intValue);
+                if (HTPropGet(expr, binaryOpExpression.operator) == HTExpressionBinaryOperatorCloseRangeArray) {
+                    rangeEnd++;
+                }
+                int step = rangeStart < rangeEnd ? 1 : -1;
+                int value = rangeStart;
+                while (value < rangeEnd) {
+                    HTVariableRef variable = HTVariableCreateWithTypeAndName(HTDataTypeInt, "_");
+                    HTPropAssignWeak(variable, value.intValue, value);
+                    HTListAppend(arr, variable);
+                    HTTypeRelease(variable);
+                    value += step;
+                }
+            }
+            HTPropAssignStrong(result, arrayValue, arr);
+            HTPropAssignWeak(result, dataType, HTDataTypeArray);
+
+            HTTypeRelease(arr);
             break;
         }
     }

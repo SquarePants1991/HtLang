@@ -75,17 +75,20 @@
      FOR = 291,
      FUNC = 292,
      RETURN = 293,
-     LB = 294,
-     RB = 295,
-     LCB = 296,
-     RCB = 297,
-     LSB = 298,
-     RSB = 299,
-     RANGE_UNCLOSE = 300,
-     RANGE_CLOSE = 301,
-     IN = 302,
-     COMMENT_ONE_LINE = 303,
-     NEGATIVE = 304
+     WHILE = 294,
+     BREAK = 295,
+     CONTINUE = 296,
+     LB = 297,
+     RB = 298,
+     LCB = 299,
+     RCB = 300,
+     LSB = 301,
+     RSB = 302,
+     RANGE_UNCLOSE = 303,
+     RANGE_CLOSE = 304,
+     IN = 305,
+     COMMENT_ONE_LINE = 306,
+     NEGATIVE = 307
    };
 #endif
 /* Tokens.  */
@@ -125,17 +128,20 @@
 #define FOR 291
 #define FUNC 292
 #define RETURN 293
-#define LB 294
-#define RB 295
-#define LCB 296
-#define RCB 297
-#define LSB 298
-#define RSB 299
-#define RANGE_UNCLOSE 300
-#define RANGE_CLOSE 301
-#define IN 302
-#define COMMENT_ONE_LINE 303
-#define NEGATIVE 304
+#define WHILE 294
+#define BREAK 295
+#define CONTINUE 296
+#define LB 297
+#define RB 298
+#define LCB 299
+#define RCB 300
+#define LSB 301
+#define RSB 302
+#define RANGE_UNCLOSE 303
+#define RANGE_CLOSE 304
+#define IN 305
+#define COMMENT_ONE_LINE 306
+#define NEGATIVE 307
 
 
 
@@ -156,7 +162,7 @@ typedef union YYSTYPE
     HTVariableRef variableValue;
 }
 /* Line 1529 of yacc.c.  */
-#line 160 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
+#line 166 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

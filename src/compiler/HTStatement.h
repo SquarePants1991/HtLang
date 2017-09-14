@@ -9,8 +9,11 @@ enum HTStatementType {
 	HTStatementTypeDeclare,
 	HTStatementTypeIf,
 	HTStatementTypeFor,
+    HTStatementTypeWhile,
 	HTStatementTypeFuncDef,
-    HTStatementTypeReturn
+    HTStatementTypeReturn,
+    HTStatementTypeBreak,
+    HTStatementTypeContinue,
 };
 
 typedef enum {
@@ -52,8 +55,15 @@ typedef struct {
 } HTStatementReturn;
 
 typedef struct {
-	HTExpressionRef expression;
+	HTExpressionRef identifierExpression;
+    HTExpressionRef arrayExpression;
+    HTListRef statementList;
 } HTStatementFor;
+
+typedef struct {
+    HTExpressionRef conditionExpression;
+    HTListRef statementList;
+} HTStatementWhile;
 
 
 HTClassBegin
@@ -65,6 +75,8 @@ HTClassBegin
 		HTStatementIf ifStatement;
 		HTStatementFuncDef funcDefStatement;
         HTStatementReturn returnStatement;
+        HTStatementFor forStatement;
+        HTStatementWhile whileStatement;
 	} u;
 HTClassEnd(HTStatement)
 
@@ -75,6 +87,10 @@ HTStatementRef HTStatementCreateIf(HTExpressionRef conditionExpression, HTListRe
 void HTStatementSetAsIfBranchStatement(HTStatementRef rootIfStatement, HTStatementRef branchIfStatement);
 HTStatementRef HTStatementCreateFuncDef(HTExpressionRef identifier, HTListRef parameterDefList, HTListRef statementList, HTDataType returnType);
 HTStatementRef HTStatementCreateReturn(HTExpressionRef returnExpr);
+HTStatementRef HTStatementCreateFor(HTExpressionRef identifier, HTExpressionRef arrayExpression, HTListRef statementList);
+HTStatementRef HTStatementCreateWhile(HTExpressionRef conditionExpression, HTListRef statementList);
+HTStatementRef HTStatementCreateBreak();
+HTStatementRef HTStatementCreateContinue();
 void HTStatementPrintDebugInfo(HTStatementRef statement);
 
 #endif

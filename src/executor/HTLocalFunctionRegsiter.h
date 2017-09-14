@@ -6,6 +6,7 @@
 #define HTLANG_HTLOCALFUNCTIONREGSITER_H
 
 #include "../compiler/HTFunction.h"
+
 #include "HTRuntimeEnvironment.h"
 
 void HTLocalFunctionRegisterRegister(HTRuntimeEnvironmentRef rootEnv);

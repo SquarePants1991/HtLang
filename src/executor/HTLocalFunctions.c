@@ -5,14 +5,9 @@
 #ifndef __HTLocalFunctions_H__
 #define __HTLocalFunctions_H__
 
-#include <compiler/HTVariable.h>
-#include <utils/HTList.h>
 #include "../compiler/HTVariable.h"
-#include "../utils/HTString.h"
-#include "../utils/HTList.h"
 
 #include <math.h>
-#include <utils/HTString.h>
 
 
 static void HTPrint(HTListRef parameters, HTVariableRef returnVal) {

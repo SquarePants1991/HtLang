@@ -6,7 +6,7 @@ void HTStatementAlloc(HTStatementRef self) {
 }
 
 void HTStatementDealloc(HTStatementRef self) {
-    switch(self->impl->type) {
+    switch(HTPropGet(self, type)) {
         case HTStatementTypePureExpression:
             HTPropAssignStrong(self, u.pureExpressionStatement.expression, NULL);
             break;
@@ -30,6 +30,15 @@ void HTStatementDealloc(HTStatementRef self) {
             break;
         case HTStatementTypeReturn:
             HTPropAssignStrong(self, u.returnStatement.expression, NULL);
+            break;
+        case HTStatementTypeFor:
+            HTPropAssignStrong(self, u.forStatement.identifierExpression, NULL);
+            HTPropAssignStrong(self, u.forStatement.arrayExpression, NULL);
+            HTPropAssignStrong(self, u.forStatement.statementList, NULL);
+            break;
+        case HTStatementTypeWhile:
+            HTPropAssignStrong(self, u.whileStatement.conditionExpression, NULL);
+            HTPropAssignStrong(self, u.whileStatement.statementList, NULL);
             break;
     }
 }
@@ -90,6 +99,35 @@ HTStatementRef HTStatementCreateReturn(HTExpressionRef returnExpr) {
     HTStatementRef statement = HTStatementCreate();
     HTPropAssignWeak(statement, type, HTStatementTypeReturn);
     HTPropAssignStrong(statement, u.returnStatement.expression, returnExpr);
+    return statement;
+}
+
+HTStatementRef HTStatementCreateFor(HTExpressionRef identifier, HTExpressionRef arrayExpression, HTListRef statementList) {
+    HTStatementRef statement = HTStatementCreate();
+    HTPropAssignWeak(statement, type, HTStatementTypeFor);
+    HTPropAssignStrong(statement, u.forStatement.identifierExpression, identifier);
+    HTPropAssignStrong(statement, u.forStatement.arrayExpression, arrayExpression);
+    HTPropAssignStrong(statement, u.forStatement.statementList, statementList);
+    return statement;
+}
+
+HTStatementRef HTStatementCreateWhile(HTExpressionRef conditionExpression, HTListRef statementList) {
+    HTStatementRef statement = HTStatementCreate();
+    HTPropAssignWeak(statement, type, HTStatementTypeWhile);
+    HTPropAssignStrong(statement, u.whileStatement.conditionExpression, conditionExpression);
+    HTPropAssignStrong(statement, u.whileStatement.statementList, statementList);
+    return statement;
+}
+
+HTStatementRef HTStatementCreateBreak() {
+    HTStatementRef statement = HTStatementCreate();
+    HTPropAssignWeak(statement, type, HTStatementTypeBreak);
+    return statement;
+}
+
+HTStatementRef HTStatementCreateContinue() {
+    HTStatementRef statement = HTStatementCreate();
+    HTPropAssignWeak(statement, type, HTStatementTypeContinue);
     return statement;
 }
 
