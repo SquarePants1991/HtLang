@@ -1,3 +1,4 @@
+#include <compiler/HTVariable.h>
 #include "../compiler/HTVariable.h"
 #include "../compiler/HTExpression.h"
 #include "../compiler/HTFunction.h"
@@ -177,6 +178,9 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
             } else if (resultDataType == HTDataTypeBool) {
                 HTPropAssignWeak(result, value.boolValue,
                                  HTPropGet(leftResult, value.boolValue) == HTPropGet(rightResult, value.boolValue));
+            } else if (resultDataType == HTDataTypeString) {
+                unsigned char isEqual = HTStringEqual(HTPropGet(leftResult, stringValue), HTPropGet(rightResult, stringValue));
+                HTPropAssignWeak(result, value.boolValue, isEqual);
             }
             HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;

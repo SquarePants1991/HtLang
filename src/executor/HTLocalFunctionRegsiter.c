@@ -9,6 +9,7 @@ void HTLocalFunctionRegisterRegister(HTRuntimeEnvironmentRef rootEnv) {
     HTLocalFunctionRegisterRegisterFunc(rootEnv, "print", HTPrint);
     HTLocalFunctionRegisterRegisterFunc(rootEnv, "println", HTPrintln);
     HTLocalFunctionRegisterRegisterFunc(rootEnv, "sin", HTSin);
+    HTLocalFunctionRegisterRegisterFunc(rootEnv, "assert", HTAssert);
 }
 
 void HTLocalFunctionRegisterRegisterFunc(HTRuntimeEnvironmentRef rootEnv, const char * identifier, HTFunctionBody funcBody) {

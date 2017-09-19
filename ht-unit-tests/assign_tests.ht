@@ -1,0 +1,12 @@
+int intVal = 100;
+double doubleVal = 10.0;
+string strVal = "Hello";
+
+intVal = 200;
+assert("intVal需要等于200", intVal == 200, 2);
+
+doubleVal = 300.0;
+assert("doubleVal需要等于300.0", doubleVal == 300.0, 2);
+
+strVal = "World";
+assert("strVal需要等于World", strVal == "World", 2);

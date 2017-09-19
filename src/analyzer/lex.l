@@ -99,7 +99,7 @@ int yywrap(void) {
 
 <INITIAL>[ \t\n\r]   ;
 
-<INITIAL>((0?|[1-9]+)\.[0-9]+) {
+<INITIAL>([0-9]+\.[0-9]+) {
     double doubleVal;
     sscanf(yytext, "%lf", &doubleVal);
     yylval.expressionValue = HTExpressionCreateDoubleLiteral(doubleVal);

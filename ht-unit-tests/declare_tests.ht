@@ -1,0 +1,7 @@
+int intVal = 100;
+double doubleVal = 10.0;
+string strVal = "Hello";
+
+assert("intVal需要等于100", intVal == 100, 2);
+assert("doubleVal需要等于10.0", doubleVal == 10.0, 2);
+assert("strVal需要等于Hello", strVal == "Hello", 2);
