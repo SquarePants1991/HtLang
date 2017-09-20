@@ -1,4 +1,5 @@
 #include <compiler/HTVariable.h>
+#include <compiler/HTExpression.h>
 #include "../compiler/HTVariable.h"
 #include "../compiler/HTExpression.h"
 #include "../compiler/HTFunction.h"
@@ -42,6 +43,10 @@ HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef
         case HTExpressionTypeBinaryOperation:
             HTTypeRelease(returnVar);
             returnVar = HTExpressionEvaluateBinaryOperation(expr, rootEnv);
+            break;
+        case HTExpressionTypeUnaryOperation:
+            HTTypeRelease(returnVar);
+            returnVar = HTExpressionEvaluateUnaryOperation(expr, rootEnv);
             break;
         case HTExpressionTypeFuncCall:
             HTTypeRelease(returnVar);
@@ -185,6 +190,23 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
             HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;
         }
+        case HTExpressionBinaryOperatorLogicNotEqual: {
+            if (resultDataType == HTDataTypeDouble) {
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.doubleValue) != HTPropGet(rightResult, value.doubleValue));
+            } else if (resultDataType == HTDataTypeInt) {
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.intValue) != HTPropGet(rightResult, value.intValue));
+            } else if (resultDataType == HTDataTypeBool) {
+                HTPropAssignWeak(result, value.boolValue,
+                                 HTPropGet(leftResult, value.boolValue) != HTPropGet(rightResult, value.boolValue));
+            } else if (resultDataType == HTDataTypeString) {
+                unsigned char isEqual = HTStringEqual(HTPropGet(leftResult, stringValue), HTPropGet(rightResult, stringValue));
+                HTPropAssignWeak(result, value.boolValue, !isEqual);
+            }
+            HTPropAssignWeak(result, dataType, HTDataTypeBool);
+            break;
+        }
         case HTExpressionBinaryOperatorLogicGreater: {
             if (resultDataType == HTDataTypeDouble) {
                 HTPropAssignWeak(result, value.boolValue,
@@ -304,6 +326,32 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
     return result;
 }
 
+HTVariableRef HTExpressionEvaluateUnaryOperation(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
+    HTExpressionRef unaryExpr = HTPropGet(expr, unaryOpExpression.expression);
+    HTVariableRef exprResult = HTExpressionEvaluate(unaryExpr, rootEnv);
+    HTVariableRef result = HTVariableCreateWithTypeAndName(HTPropGet(exprResult, dataType), "_");
+    HTDataType resultDataType = HTPropGet(result, dataType);
+    switch (HTPropGet(expr, unaryOpExpression.operator)) {
+        case HTExpressionUnaryOperatorNeg: {
+            if (resultDataType == HTDataTypeDouble) {
+                HTPropAssignWeak(result, value.doubleValue,
+                                 -HTPropGet(exprResult, value.doubleValue));
+            } else if (resultDataType == HTDataTypeInt) {
+                HTPropAssignWeak(result, value.intValue,
+                                 -HTPropGet(exprResult, value.intValue));
+            } else if (resultDataType == HTDataTypeBool) {
+                HTPropAssignWeak(result, value.boolValue,
+                                 -HTPropGet(exprResult, value.boolValue));
+            }
+            break;
+        }
+    }
+
+    HTTypeRelease(exprResult);
+
+    return result;
+}
+
 HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
     HTExpressionRef identifierExpr = HTPropGet(expr, funcCallExpression.identifier);
     HTStringRef funcName = HTPropGet(identifierExpr, identifier);
@@ -344,8 +392,7 @@ HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnviro
 
             HTRuntimeEnvironmentDeclareVariables(rootEnv, paramValueList, 0);
             HTExecuteStatementList(HTPropGet(function, u.customFunction.statementList), rootEnv);
-            HTRuntimeEnvironmentRef currentEnv = HTRuntimeEnvironmentCurrentEnv(rootEnv);
-            HTVariableRef returnVariable = HTPropGet(currentEnv, returnVariable);
+            HTVariableRef returnVariable = HTPropGet(rootEnv, returnVariable);
             if (returnVariable) {
                 HTTypeRelease(returnVal);
                 returnVal = returnVariable;

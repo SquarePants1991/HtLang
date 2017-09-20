@@ -1,0 +1,30 @@
+int intVal = 100;
+int result = 100;
+if intVal > 50 {
+    result = 50;
+} elif intVal > 20 {
+    result = 20;
+} else {
+    result = 0;
+}
+assert("result 需要等于 50", result == 50);
+
+intVal = 40;
+if intVal > 50 {
+    result = 50;
+} elif intVal > 20 {
+    result = 20;
+} else {
+    result = 0;
+}
+assert("result 需要等于 20", result == 20);
+
+intVal = 10;
+if intVal > 50 {
+    result = 50;
+} elif intVal > 20 {
+    result = 20;
+} else {
+    result = 0;
+}
+assert("result 需要等于 0", result == 0);

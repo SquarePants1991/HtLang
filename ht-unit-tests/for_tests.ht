@@ -1,0 +1,41 @@
+int sum = 0;
+int count = 0;
+for i in 0...10 {
+    sum = sum + i;
+    count = count + 1;
+}
+assert("sum 需要等于55", sum == 55);
+assert("count 需要等于11", count == 11);
+
+sum = 0;
+count = 0;
+for i in 0..<10 {
+    sum = sum + i;
+    count = count + 1;
+}
+assert("sum 需要等于45", sum == 45);
+assert("count 需要等于10", count == 10);
+
+sum = 0;
+count = 0;
+for i in 0..<10 {
+    sum = sum + i;
+    count = count + 1;
+    if i == 5 {
+        break;
+    }
+}
+assert("sum 需要等于15", sum == 15);
+assert("count 需要等于6", count == 6);
+
+sum = 0;
+count = 0;
+for i in 0..<10 {
+    if i == 5 {
+        continue;
+    }
+    sum = sum + i;
+    count = count + 1;
+}
+assert("sum 需要等于40", sum == 40);
+assert("count 需要等于9", count == 9);

@@ -24,7 +24,7 @@
 %token <boolValue>              BoolLiteral
 %token <expressionValue>        IDENTIFIER
 %token <expressionValue>        Literal
-%token <binaryOperatorValue>    BinaryOperator ADD SUB MUL DIV MOD POWER EQ GT LT GE LE AND OR
+%token <binaryOperatorValue>    BinaryOperator ADD SUB MUL DIV MOD POWER EQ NEQ GT LT GE LE AND OR
 %token <statementValue>         Statement
 %token <listValue>              List
 
@@ -253,9 +253,7 @@ expression
     }
     | SUB expression %prec NEGATIVE
     {
-        HTExpressionRef zeroExpr = HTExpressionCreateDoubleLiteral(0.0);
-        $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorSub, zeroExpr, $2);
-        HTTypeRelease(zeroExpr);
+        $$ = HTExpressionCreateUnaryOperation(HTExpressionUnaryOperatorNeg, $2);
         HTTypeRelease($2);
     }
     | expression ADD expression
@@ -289,6 +287,12 @@ expression
         HTTypeRelease($3);
     }
     | expression POWER expression
+    {
+        $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | expression NEQ expression
     {
         $$ = HTExpressionCreateBinaryOperation($2, $1, $3);
         HTTypeRelease($1);

@@ -90,14 +90,15 @@ HTStatementExecuteFinishState HTExecutorExecFuncDefStatement(HTStatementRef stat
 HTStatementExecuteFinishState HTExecutorExecReturnStatement(HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv) {
     HTExpressionRef returnExpr = HTPropGet(statement, u.returnStatement.expression);
     HTVariableRef exprResult = HTExpressionEvaluate(returnExpr, rootEnv);
-    HTRuntimeEnvironmentRef currentEnv = HTRuntimeEnvironmentCurrentEnv(rootEnv);
-    HTPropAssignStrong(currentEnv, returnVariable, exprResult);
+    HTPropAssignStrong(rootEnv, returnVariable, exprResult);
     HTTypeRelease(exprResult);
 
     return HTStatementExecuteFinishStateReturn;
 }
 
 HTStatementExecuteFinishState HTExecutorExecForStatement(HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv) {
+    HTStatementExecuteFinishState returnFinishState = HTStatementExecuteFinishStateNone;
+
     HTStringRef identifierName = HTPropGet(HTPropGet(statement, u.forStatement.identifierExpression), identifier);
     HTVariableRef arrayExprResult = HTExpressionEvaluate(HTPropGet(statement, u.forStatement.arrayExpression), rootEnv);
     HTListRef statementList = HTPropGet(statement, u.forStatement.statementList);
@@ -115,8 +116,11 @@ HTStatementExecuteFinishState HTExecutorExecForStatement(HTStatementRef statemen
 
             node = HTPropGet(node, next);
 
-            if (finishState == HTStatementExecuteFinishStateReturn ||
-                finishState == HTStatementExecuteFinishStateBreak ) {
+            if (finishState == HTStatementExecuteFinishStateReturn) {
+                returnFinishState = HTStatementExecuteFinishStateReturn;
+                break;
+            }
+            if(finishState == HTStatementExecuteFinishStateBreak ) {
                 break;
             } else if (finishState == HTStatementExecuteFinishStateContinue) {
                 continue;
@@ -128,10 +132,12 @@ HTStatementExecuteFinishState HTExecutorExecForStatement(HTStatementRef statemen
 
     HTTypeRelease(arrayExprResult);
 
-    return HTStatementExecuteFinishStateNone;
+    return returnFinishState;
 }
 
 HTStatementExecuteFinishState HTExecutorExecWhileStatement(HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv) {
+    HTStatementExecuteFinishState returnFinishState = HTStatementExecuteFinishStateNone;
+
     HTExpressionRef conditionExpr = HTPropGet(statement, u.whileStatement.conditionExpression);
     HTListRef statementList = HTPropGet(statement, u.whileStatement.statementList);
     while (1) {
@@ -143,8 +149,11 @@ HTStatementExecuteFinishState HTExecutorExecWhileStatement(HTStatementRef statem
                 HTStatementExecuteFinishState finishState = HTExecuteStatementList(statementList, rootEnv);
                 HTRuntimeEnvironmentEndCurrentEnv(rootEnv);
 
-                if (finishState == HTStatementExecuteFinishStateReturn ||
-                    finishState == HTStatementExecuteFinishStateBreak ) {
+                if (finishState == HTStatementExecuteFinishStateReturn) {
+                    returnFinishState = HTStatementExecuteFinishStateReturn;
+                    break;
+                }
+                if (finishState == HTStatementExecuteFinishStateBreak ) {
                     break;
                 } else if (finishState == HTStatementExecuteFinishStateContinue) {
                     continue;
@@ -158,7 +167,7 @@ HTStatementExecuteFinishState HTExecutorExecWhileStatement(HTStatementRef statem
         }
     }
 
-    return HTStatementExecuteFinishStateNone;
+    return returnFinishState;
 }
 
 void HTExecute(HTCompilerRef compiler) {

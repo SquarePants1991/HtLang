@@ -10,6 +10,7 @@ void HTExpressionDealloc(HTExpressionRef self) {
     HTPropAssignStrong(self, identifier, NULL);
     HTPropAssignStrong(self, binaryOpExpression.left, NULL);
     HTPropAssignStrong(self, binaryOpExpression.right, NULL);
+    HTPropAssignStrong(self, unaryOpExpression.expression, NULL);
     HTPropAssignStrong(self, funcCallExpression.identifier, NULL);
     HTPropAssignStrong(self, funcCallExpression.parameters, NULL);
 }
@@ -80,6 +81,14 @@ HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator ope
     HTPropAssignStrong(expr, binaryOpExpression.right, right);
     HTPropAssignStrong(expr, binaryOpExpression.left, left);
     HTPropAssignWeak(expr, binaryOpExpression.operator, operator);
+    return expr;
+}
+
+HTExpressionRef HTExpressionCreateUnaryOperation(HTExpressionUnaryOperator operator, HTExpressionRef expression) {
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeUnaryOperation);
+    HTPropAssignStrong(expr, unaryOpExpression.expression, expression);
+    HTPropAssignWeak(expr, unaryOpExpression.operator, operator);
     return expr;
 }
 

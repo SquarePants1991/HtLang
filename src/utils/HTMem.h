@@ -8,5 +8,6 @@ void * HTMemAllocWithIdentifier(size_t memSize, const char *identifier);
 void HTMemFree(void *ptr);
 void HTMemPrintDebugInfo(void *ptr);
 void HTMemPrintMemBlockDebugInfo(void *block);
+size_t HTMemCurrentBlockCount();
 void HTMemPrintAllBlocks();
 #endif

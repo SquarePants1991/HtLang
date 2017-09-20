@@ -11,6 +11,7 @@ typedef enum {
     HTExpressionTypeArray,
     HTExpressionTypeIdentifier,
     HTExpressionTypeBinaryOperation,
+    HTExpressionTypeUnaryOperation,
     HTExpressionTypeFuncCall,
 } HTExpressionType;
 
@@ -21,6 +22,7 @@ typedef enum {
     HTExpressionBinaryOperatorDiv,
     HTExpressionBinaryOperatorMod,
     HTExpressionBinaryOperatorPower,
+    HTExpressionBinaryOperatorLogicNotEqual,
     HTExpressionBinaryOperatorLogicEqual,
     HTExpressionBinaryOperatorLogicGreater,
     HTExpressionBinaryOperatorLogicGreaterEqual,
@@ -31,6 +33,10 @@ typedef enum {
     HTExpressionBinaryOperatorCloseRangeArray,
     HTExpressionBinaryOperatorUncloseRangeArray,
 } HTExpressionBinaryOperator;
+
+typedef enum {
+    HTExpressionUnaryOperatorNeg
+} HTExpressionUnaryOperator;
 
 HTClassBegin
     HTExpressionType type;
@@ -47,6 +53,10 @@ HTClassBegin
         struct HTExpression * right;
         HTExpressionBinaryOperator operator;
     } binaryOpExpression;
+    struct {
+        struct HTExpression * expression;
+        HTExpressionUnaryOperator operator;
+    } unaryOpExpression;
     struct {
         struct HTExpression * identifier;
         HTListRef parameters;
@@ -67,6 +77,7 @@ HTExpressionRef HTExpressionEndStringLiteral();
 
 HTExpressionRef HTExpressionCreateIdentifier(HTStringRef val);
 HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator operator, HTExpressionRef left, HTExpressionRef right);
+HTExpressionRef HTExpressionCreateUnaryOperation(HTExpressionUnaryOperator operator, HTExpressionRef expression);
 HTExpressionRef HTExpressionCreateFuncCall(HTExpressionRef identifier, HTListRef parameters);
 
 void HTExpressionPrintDebugInfo(HTExpressionRef expr);

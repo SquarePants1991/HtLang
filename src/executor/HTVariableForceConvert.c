@@ -11,7 +11,6 @@ HTVariableRef HTVariableConvertToDouble(HTVariableRef variable, unsigned char us
     if (!useOriginVariable) {
         targetVariable = HTVariableCreateWithTypeAndName(HTPropGet(variable, dataType), HTPropGet(variable, identifier));
     }
-    HTPropAssignWeak(targetVariable, dataType, HTDataTypeDouble);
 
     switch (HTPropGet(variable, dataType)) {
         case HTDataTypeBool:
@@ -23,6 +22,8 @@ HTVariableRef HTVariableConvertToDouble(HTVariableRef variable, unsigned char us
         default:
             return NULL;
     }
+
+    HTPropAssignWeak(targetVariable, dataType, HTDataTypeDouble);
 }
 
 HTVariableRef HTVariableConvertToInt(HTVariableRef variable, unsigned char useOriginVariable) {

@@ -52,43 +52,44 @@
      MOD = 268,
      POWER = 269,
      EQ = 270,
-     GT = 271,
-     LT = 272,
-     GE = 273,
-     LE = 274,
-     AND = 275,
-     OR = 276,
-     Statement = 277,
-     List = 278,
-     ASSIGN = 279,
-     INT = 280,
-     DOUBLE = 281,
-     BOOL = 282,
-     STRING = 283,
-     ARRAY = 284,
-     SEMI = 285,
-     COMMA = 286,
-     COLON = 287,
-     IF = 288,
-     ELIF = 289,
-     ELSE = 290,
-     FOR = 291,
-     FUNC = 292,
-     RETURN = 293,
-     WHILE = 294,
-     BREAK = 295,
-     CONTINUE = 296,
-     LB = 297,
-     RB = 298,
-     LCB = 299,
-     RCB = 300,
-     LSB = 301,
-     RSB = 302,
-     RANGE_UNCLOSE = 303,
-     RANGE_CLOSE = 304,
-     IN = 305,
-     COMMENT_ONE_LINE = 306,
-     NEGATIVE = 307
+     NEQ = 271,
+     GT = 272,
+     LT = 273,
+     GE = 274,
+     LE = 275,
+     AND = 276,
+     OR = 277,
+     Statement = 278,
+     List = 279,
+     ASSIGN = 280,
+     INT = 281,
+     DOUBLE = 282,
+     BOOL = 283,
+     STRING = 284,
+     ARRAY = 285,
+     SEMI = 286,
+     COMMA = 287,
+     COLON = 288,
+     IF = 289,
+     ELIF = 290,
+     ELSE = 291,
+     FOR = 292,
+     FUNC = 293,
+     RETURN = 294,
+     WHILE = 295,
+     BREAK = 296,
+     CONTINUE = 297,
+     LB = 298,
+     RB = 299,
+     LCB = 300,
+     RCB = 301,
+     LSB = 302,
+     RSB = 303,
+     RANGE_UNCLOSE = 304,
+     RANGE_CLOSE = 305,
+     IN = 306,
+     COMMENT_ONE_LINE = 307,
+     NEGATIVE = 308
    };
 #endif
 /* Tokens.  */
@@ -105,43 +106,44 @@
 #define MOD 268
 #define POWER 269
 #define EQ 270
-#define GT 271
-#define LT 272
-#define GE 273
-#define LE 274
-#define AND 275
-#define OR 276
-#define Statement 277
-#define List 278
-#define ASSIGN 279
-#define INT 280
-#define DOUBLE 281
-#define BOOL 282
-#define STRING 283
-#define ARRAY 284
-#define SEMI 285
-#define COMMA 286
-#define COLON 287
-#define IF 288
-#define ELIF 289
-#define ELSE 290
-#define FOR 291
-#define FUNC 292
-#define RETURN 293
-#define WHILE 294
-#define BREAK 295
-#define CONTINUE 296
-#define LB 297
-#define RB 298
-#define LCB 299
-#define RCB 300
-#define LSB 301
-#define RSB 302
-#define RANGE_UNCLOSE 303
-#define RANGE_CLOSE 304
-#define IN 305
-#define COMMENT_ONE_LINE 306
-#define NEGATIVE 307
+#define NEQ 271
+#define GT 272
+#define LT 273
+#define GE 274
+#define LE 275
+#define AND 276
+#define OR 277
+#define Statement 278
+#define List 279
+#define ASSIGN 280
+#define INT 281
+#define DOUBLE 282
+#define BOOL 283
+#define STRING 284
+#define ARRAY 285
+#define SEMI 286
+#define COMMA 287
+#define COLON 288
+#define IF 289
+#define ELIF 290
+#define ELSE 291
+#define FOR 292
+#define FUNC 293
+#define RETURN 294
+#define WHILE 295
+#define BREAK 296
+#define CONTINUE 297
+#define LB 298
+#define RB 299
+#define LCB 300
+#define RCB 301
+#define LSB 302
+#define RSB 303
+#define RANGE_UNCLOSE 304
+#define RANGE_CLOSE 305
+#define IN 306
+#define COMMENT_ONE_LINE 307
+#define NEGATIVE 308
 
 
 
@@ -162,7 +164,7 @@ typedef union YYSTYPE
     HTVariableRef variableValue;
 }
 /* Line 1529 of yacc.c.  */
-#line 166 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
+#line 168 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

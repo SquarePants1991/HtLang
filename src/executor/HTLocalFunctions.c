@@ -6,11 +6,9 @@
 #define __HTLocalFunctions_H__
 
 #include "../compiler/HTVariable.h"
+#include "../htlang_ctrl.h"
 
 #include <math.h>
-#include <compiler/HTVariable.h>
-#include <utils/HTString.h>
-
 
 static void HTPrint(HTListRef parameters, HTVariableRef returnVal) {
     HTListNodeRef node = HTPropGet(parameters, head);
@@ -46,16 +44,15 @@ static void HTSin(HTListRef parameters, HTVariableRef returnVal) {
 static void HTAssert(HTListRef parameters, HTVariableRef returnVal) {
     HTVariableRef descVar = HTListAt(parameters, 0);
     HTVariableRef conditionVar = HTListAt(parameters, 1);
-    HTVariableRef debugLevel = HTListAt(parameters, 2);
     if (HTPropGet(conditionVar, dataType) == HTDataTypeBool && HTPropGet(conditionVar, value.boolValue)) {
-        if (HTPropGet(debugLevel, value.intValue) >= 1) {
-            HTStringRef newStr = HTStringCreateFormat("Success > Test %s.", HTPropGet(HTPropGet(descVar, stringValue), characters));
+        if (CTRL_UnitTestLevel >= HTUnitTestLevelSuccess) {
+            HTStringRef newStr = HTStringCreateFormat("\e[1;92m Success > Test %s. \e[0m", HTPropGet(HTPropGet(descVar, stringValue), characters));
             printf("%s\n", HTPropGet(newStr, characters));
             HTTypeRelease(newStr);
         }
     } else {
-        if (HTPropGet(debugLevel, value.intValue) >= 0) {
-            HTStringRef newStr = HTStringCreateFormat("Failed > Test %s.", HTPropGet(HTPropGet(descVar, stringValue), characters));
+        if (CTRL_UnitTestLevel >= HTUnitTestLevelError) {
+            HTStringRef newStr = HTStringCreateFormat("\e[1;31m Failed > Test %s. \e[0m", HTPropGet(HTPropGet(descVar, stringValue), characters));
             printf("%s\n", HTPropGet(newStr, characters));
             HTTypeRelease(newStr);
         }

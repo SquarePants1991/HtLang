@@ -45,6 +45,7 @@ int yywrap(void) {
 <INITIAL>","                     return COMMA;
 <INITIAL>":"                     return COLON;
 
+<INITIAL>"!="                    { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicNotEqual; return NEQ; }
 <INITIAL>"=="                    { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicEqual; return EQ; }
 <INITIAL>">"                     { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicGreater; return GT; }
 <INITIAL>">="                    { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicGreaterEqual; return GE; }

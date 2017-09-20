@@ -1,0 +1,33 @@
+func check(int input): int {
+    if input > 50 {
+        return 50;
+    } elif input > 20 {
+        return 20;
+    } else {
+        return 0;
+    }
+}
+
+func sum(int count): double {
+    double sum = 0.0;
+    for i in 0...count {
+        sum = sum + i;
+    }
+    return sum;
+}
+
+assert("check 需要等于50", check(60) == 50);
+assert("check 需要等于20", check(30) == 20);
+assert("check 需要等于0", check(10) == 0);
+assert("sum 需要等于55", sum(10) == 55);
+assert("sum 需要等于45", sum(9) == 45);
+
+func iter(double seed): double {
+    if seed > 1 {
+        return seed + iter(seed / 2.0);
+    }
+    return 0;
+}
+
+double result = iter(8.0);
+assert("result 需要等于14", result == 14);

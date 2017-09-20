@@ -74,3 +74,8 @@ add_executable(HTRuntimeEnvironmentTest
         src/executor/HTExecutor.c
         src/executor/HTRuntimeEnvironment.c
         ${UtilsSrc})
+
+### HT unit tests
+add_custom_target(ht-unit-tests)
+add_custom_command(TARGET ht-unit-tests
+        COMMAND sh ${CMAKE_SOURCE_DIR}/ht-unit-tests/unittests.sh ${CMAKE_SOURCE_DIR}/ht-unit-tests/)

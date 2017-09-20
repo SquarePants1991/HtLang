@@ -94,6 +94,16 @@ void HTMemPrintMemBlockDebugInfo(void *block) {
     free(identifier);
 }
 
+size_t HTMemCurrentBlockCount() {
+    HTMemList *node = memList;
+    size_t size = 0;
+    while (node) {
+        size++;
+        node = node->next;
+    }
+    return size;
+}
+
 void HTMemPrintAllBlocks() {
     HTMemList *node = memList;
     size_t size = 0;
