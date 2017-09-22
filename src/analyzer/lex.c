@@ -536,6 +536,7 @@ char *yytext;
 
 #include <stdio.h>
 #include "../src/compiler/HTCompiler.h"
+#include "../src/utils/HTDict.h"
 #include "bison.h"
 
 int yywrap(void) {
@@ -543,7 +544,7 @@ int yywrap(void) {
 }
 
 
-#line 547 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
+#line 548 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
 
 #define INITIAL 0
 #define STRING_LITERAL 1
@@ -727,9 +728,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 15 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 16 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 
-#line 733 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
+#line 734 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
 
 	if ( !(yy_init) )
 		{
@@ -814,207 +815,207 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 16 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 17 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return ASSIGN;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 17 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 18 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return INT;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 18 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 19 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return DOUBLE;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 19 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 20 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return BOOL;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 21 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return STRING;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 22 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return ARRAY;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 23 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 24 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return IF;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 25 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return ELIF;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 25 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 26 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return ELSE;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 26 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 27 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return FOR;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 27 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 28 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return WHILE;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 28 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 29 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return FUNC;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 29 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 30 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return BREAK;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 30 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 31 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return CONTINUE;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 32 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 33 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorMul; return MUL; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 33 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 34 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorDiv; return DIV; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 34 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 35 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorAdd; return ADD; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 35 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 36 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorSub; return SUB; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 36 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 37 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorMod; return MOD; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 37 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 38 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorPower; return POWER; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 38 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 39 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return LB;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 39 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 40 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return RB;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 40 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 41 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return LSB;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 41 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 42 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return RSB;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 42 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 43 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return LCB;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 43 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 44 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return RCB;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 44 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 45 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return SEMI;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 45 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 46 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return COMMA;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 46 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 47 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return COLON;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 48 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 49 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicNotEqual; return NEQ; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 49 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 50 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicEqual; return EQ; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 50 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 51 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicGreater; return GT; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 51 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 52 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicGreaterEqual; return GE; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 52 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 53 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicLess; return LT; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 53 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 54 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicLessEqual; return LE; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 54 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 55 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicAnd; return AND; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 55 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 56 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 { yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicOr; return OR; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 57 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 58 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return RANGE_UNCLOSE;
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 58 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 59 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return RANGE_CLOSE;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 59 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 60 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return IN;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 61 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 62 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
    yylval.expressionValue = HTExpressionCreateBoolLiteral(1);
    return Literal;
@@ -1022,7 +1023,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 66 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 67 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
    yylval.expressionValue = HTExpressionCreateBoolLiteral(0);
    return Literal;
@@ -1030,12 +1031,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 71 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 72 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 return RETURN;
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 73 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 74 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     HTExpressionBeginStringLiteral();
     BEGIN STRING_LITERAL;
@@ -1043,14 +1044,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 78 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 79 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     BEGIN COMMENT;
 }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 82 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 83 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     yylval.expressionValue = HTExpressionEndStringLiteral();
     BEGIN INITIAL;
@@ -1059,14 +1060,14 @@ YY_RULE_SETUP
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 88 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 89 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     HTExpressionAddStringLiteral("\n");
 }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 92 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 93 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     HTExpressionAddStringLiteral(yytext);
 }
@@ -1074,23 +1075,23 @@ YY_RULE_SETUP
 case 49:
 /* rule 49 can match eol */
 YY_RULE_SETUP
-#line 96 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 97 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 BEGIN INITIAL;
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 97 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 98 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 ;
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 101 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 102 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 ;
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 103 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 104 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     double doubleVal;
     sscanf(yytext, "%lf", &doubleVal);
@@ -1100,7 +1101,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 110 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 111 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     int intVal;
     sscanf(yytext, "%d", &intVal);
@@ -1110,11 +1111,10 @@ YY_RULE_SETUP
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 118 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 119 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     HTStringRef str = HTStringCreateWithChars(yytext);
-    yylval.expressionValue = HTExpressionCreateIdentifier(str);
-    HTTypeRelease(str);
+    yylval.stringValue = str;
     return IDENTIFIER;
 }
 	YY_BREAK

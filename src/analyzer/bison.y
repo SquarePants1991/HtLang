@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "../src/compiler/HTCompiler.h"
 #include "../src/executor/HTExecutor.h"
+#include "../src/utils/HTDict.h"
 #define YYDEBUG 1
 %}
 
@@ -17,12 +18,13 @@
     HTListRef listValue;
     HTExpressionBinaryOperator binaryOperatorValue;
     HTVariableRef variableValue;
+    HTDictPairRef dictPairValue;
 }
 
 %token <intValue>               IntLiteral
 %token <doubleValue>            DoubleLiteral
 %token <boolValue>              BoolLiteral
-%token <expressionValue>        IDENTIFIER
+%token <stringValue>            IDENTIFIER
 %token <expressionValue>        Literal
 %token <binaryOperatorValue>    BinaryOperator ADD SUB MUL DIV MOD POWER EQ NEQ GT LT GE LE AND OR
 %token <statementValue>         Statement
@@ -35,17 +37,20 @@
 %token COMMENT_ONE_LINE
 
 %type <dataTypeValue> dataType
-%type <listValue> statementList parameterList parameterDefList
+%type <dictPairValue> pair
+%type <listValue> statementList parameterList parameterDefList pairList arrayLiteral dictLiteral
 %type <statementValue>  statement assignStatement declareStatement ifStatement pureIfStatement elifStatement elseStatement funcDefStatement returnStatement forStatement whileStatement breakStatement continueStatement
-%type <expressionValue> parameter expression primaryExpression arrayLiteral
+%type <expressionValue> expression primaryExpression
 %type <variableValue> parameterDef
 
+%left COLON
 %left RANGE_UNCLOSE RANGE_CLOSE
 %left AND OR
-%left EQ GT LT GE LE
+%left EQ GT LT GE LE NEQ
 %left ADD SUB
 %left MUL DIV MOD
 %right POWER NEGATIVE
+%left BRACE
 
 %%
 
@@ -118,22 +123,24 @@ statement
 assignStatement
     : IDENTIFIER ASSIGN expression SEMI
     {
-        $$ = HTStatementCreateAssign($1, $3);
+        HTExpressionRef identifier = HTExpressionCreateIdentifier($1);
+        $$ = HTStatementCreateAssign(identifier, $3);
         HTTypeRelease($1);
         HTTypeRelease($3);
+        HTTypeRelease(identifier);
     }
 
 declareStatement
     : dataType IDENTIFIER SEMI
     {
-        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->identifier->impl->characters);
+        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->characters);
         $$ = HTStatementCreateDeclare(variable, NULL);
         HTTypeRelease($2);
         HTTypeRelease(variable);
     }
     | dataType IDENTIFIER ASSIGN expression SEMI
     {
-        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->identifier->impl->characters);
+        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->characters);
         $$ = HTStatementCreateDeclare(variable, $4);
         HTTypeRelease(variable);
         HTTypeRelease($2);
@@ -185,10 +192,12 @@ elseStatement
 forStatement
     : FOR IDENTIFIER IN expression LCB statementList RCB
     {
-        $$ = HTStatementCreateFor($2, $4, $6);
+        HTExpressionRef identifier = HTExpressionCreateIdentifier($2);
+        $$ = HTStatementCreateFor(identifier, $4, $6);
         HTTypeRelease($2);
         HTTypeRelease($4);
         HTTypeRelease($6);
+        HTTypeRelease(identifier);
     }
 
 whileStatement
@@ -203,18 +212,22 @@ whileStatement
 funcDefStatement
     : FUNC IDENTIFIER LB parameterDefList RB LCB statementList RCB
     {
-        $$ = HTStatementCreateFuncDef($2, $4, $7, HTDataTypeVoid);
+        HTExpressionRef identifier = HTExpressionCreateIdentifier($2);
+        $$ = HTStatementCreateFuncDef(identifier, $4, $7, HTDataTypeVoid);
         HTTypeRelease($2);
         HTTypeRelease($4);
         HTTypeRelease($7);
+        HTTypeRelease(identifier);
         printf("This is a function statement\n");
     }
     | FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB
     {
-        $$ = HTStatementCreateFuncDef($2, $4, $9, $7);
+        HTExpressionRef identifier = HTExpressionCreateIdentifier($2);
+        $$ = HTStatementCreateFuncDef(identifier, $4, $9, $7);
         HTTypeRelease($2);
         HTTypeRelease($4);
         HTTypeRelease($9);
+        HTTypeRelease(identifier);
     }
     ;
 
@@ -237,6 +250,51 @@ continueStatement
         $$ = HTStatementCreateContinue();
     }
 
+
+parameterDefList
+    : parameterDef
+    {
+        HTListRef list = HTListCreate();
+        HTListAppend(list, $1);
+        HTTypeRelease($1);
+        $$ = list;
+    }
+    | parameterDefList parameterDef
+    {
+         HTListAppend($1, $2);
+         HTTypeRelease($2);
+    }
+    ;
+
+parameterDef
+    : dataType IDENTIFIER
+    {
+        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->characters);
+        $$ = variable;
+        HTTypeRelease($2);
+    }
+    | dataType IDENTIFIER COMMA
+    {
+        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->characters);
+        $$ = variable;
+        HTTypeRelease($2);
+    }
+
+parameterList
+    : expression
+    {
+        HTListRef paramList = HTListCreate();
+        HTListAppend(paramList, $1);
+        $$ = paramList;
+        HTTypeRelease($1);
+    }
+    | parameterList COMMA expression
+    {
+        HTListAppend($1, $3);
+        HTTypeRelease($3);
+        $$ = $1;
+    }
+
 expression
     : primaryExpression
     | expression RANGE_UNCLOSE expression
@@ -250,11 +308,6 @@ expression
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorCloseRangeArray, $1, $3);
         HTTypeRelease($1);
         HTTypeRelease($3);
-    }
-    | SUB expression %prec NEGATIVE
-    {
-        $$ = HTExpressionCreateUnaryOperation(HTExpressionUnaryOperatorNeg, $2);
-        HTTypeRelease($2);
     }
     | expression ADD expression
     {
@@ -340,91 +393,87 @@ expression
         HTTypeRelease($1);
         HTTypeRelease($3);
     }
-    | IDENTIFIER LB parameterList RB
+    | SUB expression %prec NEGATIVE
     {
-        $$ = HTExpressionCreateFuncCall($1, $3);
+        $$ = HTExpressionCreateUnaryOperation(HTExpressionUnaryOperatorNeg, $2);
+        HTTypeRelease($2);
+    }
+    | primaryExpression LB parameterList RB %prec BRACE
+    {
+        HTExpressionRef identifier = HTExpressionCreateIdentifier($1);
+        $$ = HTExpressionCreateFuncCall(identifier, $3);
         HTTypeRelease($1);
         HTTypeRelease($3);
+        HTTypeRelease(identifier);
+    }
+    | LB expression RB %prec NEGATIVE
+    {
+        $$ = $2;
     }
     ;
-
-parameterDefList
-    : parameterDef
-    {
-        HTListRef list = HTListCreate();
-        HTListAppend(list, $1);
-        HTTypeRelease($1);
-        $$ = list;
-    }
-    | parameterDefList parameterDef
-    {
-         HTListAppend($1, $2);
-         HTTypeRelease($2);
-    }
-    ;
-
-parameterDef
-    : dataType IDENTIFIER
-    {
-        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->identifier->impl->characters);
-        $$ = variable;
-        HTTypeRelease($2);
-    }
-    | dataType IDENTIFIER COMMA
-    {
-        HTVariableRef variable = HTVariableCreateWithTypeAndName($1, $2->impl->identifier->impl->characters);
-        $$ = variable;
-        HTTypeRelease($2);
-    }
-
-parameterList
-    : parameter
-    {
-        HTListRef paramList = HTListCreate();
-        HTListAppend(paramList, $1);
-        $$ = paramList;
-        HTTypeRelease($1);
-    }
-    | parameterList parameter
-    {
-        HTListAppend($1, $2);
-        HTTypeRelease($2);
-        $$ = $1;
-    }
-
-parameter
-    : expression
-    {
-        $$ = $1;
-    }
-    | expression COMMA
-    {
-        $$ = $1;
-    }
 
 primaryExpression
     : Literal
     {
-        $$ = $1
+        $$ = $1;
     }
     | arrayLiteral
     {
         $$ = HTExpressionCreateArray($1);
         HTTypeRelease($1);
     }
+    | dictLiteral
+    {
+        $$ = HTExpressionCreateDict($1);
+        HTTypeRelease($1);
+    }
     | IDENTIFIER
     {
-        $$ = $1
-    }
-    | LB expression RB
-    {
-        $$ = $2
+        $$ = HTExpressionCreateIdentifier($1);
+        HTTypeRelease($1);
     }
     ;
 
-
 arrayLiteral
     : LSB parameterList RSB
+    {
+        $$ = $2;
+    }
+
+
+pairList
+    : pair
+    {
+        HTListRef paramList = HTListCreate();
+        HTListAppend(paramList, $1);
+        $$ = paramList;
+        HTTypeRelease($1);
+    }
+    | pairList pair
+    {
+        HTListAppend($1, $2);
+        HTTypeRelease($2);
+        $$ = $1;
+    }
+
+pair
+    : expression COLON expression
+    {
+        HTDictPairRef pair = HTDictPairCreateWithKeyAndValue($1, $3);
+        $$ = pair;
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+    | expression COLON expression COMMA
+    {
+        HTDictPairRef pair = HTDictPairCreateWithKeyAndValue($1, $3);
+        $$ = pair;
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
+
+dictLiteral
+    : LSB pairList RSB
     {
         $$ = $2;
     }

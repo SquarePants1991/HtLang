@@ -26,6 +26,8 @@ add_executable(HTStringTest ./test/HTStringTest.c ${UtilsSrc})
 
 add_executable(HTTypeTest ./test/HTTypeTest.c ${UtilsSrc})
 
+add_executable(HTDictTest ./test/HTDictTest.c ${UtilsSrc})
+
 add_executable(HTListTest ./test/HTListTest.c ${UtilsSrc})
 
 add_executable(HTVariableTest ./test/HTVariableTest.c src/compiler/HTVariable.c ${UtilsSrc})
@@ -74,6 +76,7 @@ add_executable(HTRuntimeEnvironmentTest
         src/executor/HTExecutor.c
         src/executor/HTRuntimeEnvironment.c
         ${UtilsSrc})
+
 
 ### HT unit tests
 add_custom_target(ht-unit-tests)

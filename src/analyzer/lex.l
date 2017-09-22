@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 #include "../src/compiler/HTCompiler.h"
+#include "../src/utils/HTDict.h"
 #include "bison.h"
 
 int yywrap(void) {
@@ -117,8 +118,7 @@ int yywrap(void) {
 
 <INITIAL>[a-zA-Z][a-zA-Z0-9]*  {
     HTStringRef str = HTStringCreateWithChars(yytext);
-    yylval.expressionValue = HTExpressionCreateIdentifier(str);
-    HTTypeRelease(str);
+    yylval.stringValue = str;
     return IDENTIFIER;
 }
 

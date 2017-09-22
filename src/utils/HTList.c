@@ -61,10 +61,15 @@ void HTListRemove(HTListRef listRef, int index) {
         if (currentIndex == index) {
             HTListNodeRef prev = HTPropGet(node, prev);
             HTListNodeRef next = HTPropGet(node, next);
-            HTPropAssignStrong(prev, next, next);
-            HTPropAssignStrong(next, prev, prev);
-            HTPropAssignStrong(node, prev, NULL);
-            HTPropAssignStrong(node, next, NULL);
+            if (prev == NULL && next == NULL) {
+                HTPropAssignStrong(listRef, head, NULL);
+                HTPropAssignStrong(listRef, tail, NULL);
+            } else {
+                HTPropAssignStrong(prev, next, next);
+                HTPropAssignStrong(next, prev, prev);
+                HTPropAssignStrong(node, prev, NULL);
+                HTPropAssignStrong(node, next, NULL);
+            }
             return;
         }
         node = HTPropGet(node, next);

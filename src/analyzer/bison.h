@@ -1,14 +1,13 @@
-/* A Bison parser, made by GNU Bison 2.3.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
-/* Skeleton interface for Bison's Yacc-like parsers in C
+/* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989, 1990, 2000, 2001, 2002, 2003, 2004, 2005, 2006
-   Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
-   This program is free software; you can redistribute it and/or modify
+   This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
-   the Free Software Foundation; either version 2, or (at your option)
-   any later version.
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
    This program is distributed in the hope that it will be useful,
    but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -16,9 +15,7 @@
    GNU General Public License for more details.
 
    You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Fifth Floor,
-   Boston, MA 02110-1301, USA.  */
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.  */
 
 /* As a special exception, you may create a larger work that contains
    part or all of the Bison parser skeleton and distribute that work
@@ -33,125 +30,83 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-/* Tokens.  */
+#ifndef YY_YY_USERS_WANGYANG_DOCUMENTS_CODES_ONGIT_HTLANG_SRC_ANALYZER_BISON_H_INCLUDED
+# define YY_YY_USERS_WANGYANG_DOCUMENTS_CODES_ONGIT_HTLANG_SRC_ANALYZER_BISON_H_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token type.  */
 #ifndef YYTOKENTYPE
 # define YYTOKENTYPE
-   /* Put the tokens into the symbol table, so that GDB and other debuggers
-      know about them.  */
-   enum yytokentype {
-     IntLiteral = 258,
-     DoubleLiteral = 259,
-     BoolLiteral = 260,
-     IDENTIFIER = 261,
-     Literal = 262,
-     BinaryOperator = 263,
-     ADD = 264,
-     SUB = 265,
-     MUL = 266,
-     DIV = 267,
-     MOD = 268,
-     POWER = 269,
-     EQ = 270,
-     NEQ = 271,
-     GT = 272,
-     LT = 273,
-     GE = 274,
-     LE = 275,
-     AND = 276,
-     OR = 277,
-     Statement = 278,
-     List = 279,
-     ASSIGN = 280,
-     INT = 281,
-     DOUBLE = 282,
-     BOOL = 283,
-     STRING = 284,
-     ARRAY = 285,
-     SEMI = 286,
-     COMMA = 287,
-     COLON = 288,
-     IF = 289,
-     ELIF = 290,
-     ELSE = 291,
-     FOR = 292,
-     FUNC = 293,
-     RETURN = 294,
-     WHILE = 295,
-     BREAK = 296,
-     CONTINUE = 297,
-     LB = 298,
-     RB = 299,
-     LCB = 300,
-     RCB = 301,
-     LSB = 302,
-     RSB = 303,
-     RANGE_UNCLOSE = 304,
-     RANGE_CLOSE = 305,
-     IN = 306,
-     COMMENT_ONE_LINE = 307,
-     NEGATIVE = 308
-   };
+  enum yytokentype
+  {
+    IntLiteral = 258,
+    DoubleLiteral = 259,
+    BoolLiteral = 260,
+    IDENTIFIER = 261,
+    Literal = 262,
+    BinaryOperator = 263,
+    ADD = 264,
+    SUB = 265,
+    MUL = 266,
+    DIV = 267,
+    MOD = 268,
+    POWER = 269,
+    EQ = 270,
+    NEQ = 271,
+    GT = 272,
+    LT = 273,
+    GE = 274,
+    LE = 275,
+    AND = 276,
+    OR = 277,
+    Statement = 278,
+    List = 279,
+    ASSIGN = 280,
+    INT = 281,
+    DOUBLE = 282,
+    BOOL = 283,
+    STRING = 284,
+    ARRAY = 285,
+    SEMI = 286,
+    COMMA = 287,
+    COLON = 288,
+    IF = 289,
+    ELIF = 290,
+    ELSE = 291,
+    FOR = 292,
+    FUNC = 293,
+    RETURN = 294,
+    WHILE = 295,
+    BREAK = 296,
+    CONTINUE = 297,
+    LB = 298,
+    RB = 299,
+    LCB = 300,
+    RCB = 301,
+    LSB = 302,
+    RSB = 303,
+    RANGE_UNCLOSE = 304,
+    RANGE_CLOSE = 305,
+    IN = 306,
+    COMMENT_ONE_LINE = 307,
+    NEGATIVE = 308,
+    BRACE = 309
+  };
 #endif
-/* Tokens.  */
-#define IntLiteral 258
-#define DoubleLiteral 259
-#define BoolLiteral 260
-#define IDENTIFIER 261
-#define Literal 262
-#define BinaryOperator 263
-#define ADD 264
-#define SUB 265
-#define MUL 266
-#define DIV 267
-#define MOD 268
-#define POWER 269
-#define EQ 270
-#define NEQ 271
-#define GT 272
-#define LT 273
-#define GE 274
-#define LE 275
-#define AND 276
-#define OR 277
-#define Statement 278
-#define List 279
-#define ASSIGN 280
-#define INT 281
-#define DOUBLE 282
-#define BOOL 283
-#define STRING 284
-#define ARRAY 285
-#define SEMI 286
-#define COMMA 287
-#define COLON 288
-#define IF 289
-#define ELIF 290
-#define ELSE 291
-#define FOR 292
-#define FUNC 293
-#define RETURN 294
-#define WHILE 295
-#define BREAK 296
-#define CONTINUE 297
-#define LB 298
-#define RB 299
-#define LCB 300
-#define RCB 301
-#define LSB 302
-#define RSB 303
-#define RANGE_UNCLOSE 304
-#define RANGE_CLOSE 305
-#define IN 306
-#define COMMENT_ONE_LINE 307
-#define NEGATIVE 308
 
-
-
-
+/* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE
-#line 9 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y"
+
+union YYSTYPE
 {
+#line 10 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1915  */
+
     HTExpressionRef expressionValue;
     HTStringRef stringValue;
     int intValue;
@@ -162,14 +117,19 @@ typedef union YYSTYPE
     HTListRef listValue;
     HTExpressionBinaryOperator binaryOperatorValue;
     HTVariableRef variableValue;
-}
-/* Line 1529 of yacc.c.  */
-#line 168 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h"
-	YYSTYPE;
-# define yystype YYSTYPE /* obsolescent; will be withdrawn */
-# define YYSTYPE_IS_DECLARED 1
+    HTDictPairRef dictPairValue;
+
+#line 123 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h" /* yacc.c:1915  */
+};
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
 #endif
+
 
 extern YYSTYPE yylval;
 
+int yyparse (void);
+
+#endif /* !YY_YY_USERS_WANGYANG_DOCUMENTS_CODES_ONGIT_HTLANG_SRC_ANALYZER_BISON_H_INCLUDED  */
