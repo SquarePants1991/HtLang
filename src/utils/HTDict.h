@@ -29,4 +29,5 @@ void HTDictRemove(HTDictRef dict, HTStringRef key);
 
 HTDictPairRef HTDictPairCreateWithKeyAndValue(HTStringRef key, HTTypeRef value);
 
+void HTDictPrintDebugInfo(HTDictRef dict);
 #endif //HTLANG_HTDICT_H

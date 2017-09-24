@@ -1,6 +1,7 @@
 double doubleValue = 30.0;
 int intValue = 100;
-string strValue = "Hello World";
-Map map = { "intValue": intValue, "doubleValue": doubleValue};
-map["strValue"] = strValue;
-map.remove("strValue");
+string strValue = "Hello 2 World";
+Map map = {"intValue": intValue, "doubleValue": doubleValue, "strValue": strValue};
+map["doubleValue"]  = 200.0;
+println(map["doubleValue"] + map["strValue"]);
+#map.remove("strValue");

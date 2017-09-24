@@ -20,6 +20,7 @@ int yywrap(void) {
 <INITIAL>"bool"                  return BOOL;
 <INITIAL>"string"                return STRING;
 <INITIAL>"Array"                 return ARRAY;
+<INITIAL>"Map"                 return MAP;
 
 <INITIAL>"if"                    return IF;
 <INITIAL>"elif"                  return ELIF;

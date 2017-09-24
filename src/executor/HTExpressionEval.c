@@ -1,5 +1,7 @@
 #include <compiler/HTVariable.h>
 #include <compiler/HTExpression.h>
+#include <utils/HTDict.h>
+#include <utils/HTList.h>
 #include "../compiler/HTVariable.h"
 #include "../compiler/HTExpression.h"
 #include "../compiler/HTFunction.h"
@@ -32,6 +34,10 @@ HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef
             HTTypeRelease(returnVar);
             returnVar = HTExpressionEvaluateArray(expr, rootEnv);
             break;
+        case HTExpressionTypeDict:
+            HTTypeRelease(returnVar);
+            returnVar = HTExpressionEvaluateDict(expr, rootEnv);
+            break;
         case HTExpressionTypeIdentifier:
             HTPropAssignWeak(returnVar, dataType, HTDataTypeDouble);
             HTPropAssignWeak(returnVar, value.doubleValue, 0.0);
@@ -47,6 +53,10 @@ HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef
         case HTExpressionTypeUnaryOperation:
             HTTypeRelease(returnVar);
             returnVar = HTExpressionEvaluateUnaryOperation(expr, rootEnv);
+            break;
+        case HTExpressionTypePostfixOperation:
+            HTTypeRelease(returnVar);
+            returnVar = HTExpressionEvaluatePostfixOperation(expr, rootEnv);
             break;
         case HTExpressionTypeFuncCall:
             HTTypeRelease(returnVar);
@@ -326,6 +336,30 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
     return result;
 }
 
+HTVariableRef HTExpressionEvaluatePostfixOperation(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
+    HTExpressionRef postfixSourceExpr = HTPropGet(expr, postfixOpExpression.expressionSource);
+    HTExpressionRef postfixOpExpr = HTPropGet(expr, postfixOpExpression.expressionOp);
+    HTVariableRef sourceResult = HTExpressionEvaluate(postfixSourceExpr, rootEnv);
+    HTVariableRef opResult = HTExpressionEvaluate(postfixOpExpr, rootEnv);
+    HTVariableRef result = NULL;
+    switch (HTPropGet(expr, postfixOpExpression.operator)) {
+        case HTExpressionPostfixOperatorIndex: {
+            if (HTPropGet(sourceResult, dataType) == HTDataTypeMap &&
+                    HTPropGet(opResult, dataType) == HTDataTypeString) {
+                result = HTDictGet(HTPropGet(sourceResult, dictValue), HTPropGet(opResult, stringValue));
+                if (result) {
+                    HTTypeRetain(result);
+                }
+            }
+            break;
+        }
+    }
+    // TODO: 默认返回nil
+    HTTypeRelease(sourceResult);
+    HTTypeRelease(opResult);
+    return result;
+}
+
 HTVariableRef HTExpressionEvaluateUnaryOperation(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
     HTExpressionRef unaryExpr = HTPropGet(expr, unaryOpExpression.expression);
     HTVariableRef exprResult = HTExpressionEvaluate(unaryExpr, rootEnv);
@@ -418,4 +452,22 @@ HTVariableRef HTExpressionEvaluateArray(HTExpressionRef expr, HTRuntimeEnvironme
         node = HTPropGet(node, next);
     }
     return arrayVar;
+}
+
+HTVariableRef HTExpressionEvaluateDict(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
+    HTVariableRef mapVar = HTVariableCreateWithTypeAndName(HTDataTypeMap, "_");
+    HTDictRef mapVarValue = HTPropGet(mapVar, dictValue);
+    HTListRef exprPairList = HTPropGet(expr, dictPairList);
+    HTListNodeRef node = HTPropGet(exprPairList, head);
+    while (node) {
+        HTDictPairRef pair = HTPropGet(node, ptr);
+        HTVariableRef key = HTExpressionEvaluate(HTPropGet(pair, key), rootEnv);
+        HTVariableRef value = HTExpressionEvaluate(HTPropGet(pair, value), rootEnv);
+        HTStringRef keyString = HTPropGet(key, stringValue);
+        HTDictSet(mapVarValue, keyString, value);
+        HTTypeRelease(key);
+        HTTypeRelease(value);
+        node = HTPropGet(node, next);
+    }
+    return mapVar;
 }

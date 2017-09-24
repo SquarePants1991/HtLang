@@ -144,3 +144,19 @@ HTDictPairRef HTDictPairCreateWithKeyAndValue(HTStringRef key, HTTypeRef value) 
     HTPropAssignStrong(pair, value, value);
     return pair;
 }
+
+void HTDictPrintDebugInfo(HTDictRef dict) {
+    HTListRef list = HTPropGet(dict, buckets);
+    HTListNodeRef bucketsNode = HTPropGet(list, head);
+    while (bucketsNode) {
+        HTListRef bucketList = HTPropGet(bucketsNode, ptr);
+        HTListNodeRef bucketNode = HTPropGet(bucketList, head);
+        while (bucketNode) {
+            HTDictPairRef pair = HTPropGet(bucketNode, ptr);
+            HTStringRef keyStr = HTPropGet(pair, key);
+            printf("key => %s,", HTPropGet(keyStr, characters));
+            bucketNode = HTPropGet(bucketNode, next);
+        }
+        bucketsNode = HTPropGet(bucketsNode, next);
+    }
+}

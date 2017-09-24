@@ -8,11 +8,14 @@ void HTExpressionDealloc(HTExpressionRef self) {
     HTPropAssignStrong(self, stringVal, NULL);
     HTPropAssignStrong(self, arrayVal, NULL);
     HTPropAssignStrong(self, identifier, NULL);
+    HTPropAssignStrong(self, dictPairList, NULL);
     HTPropAssignStrong(self, binaryOpExpression.left, NULL);
     HTPropAssignStrong(self, binaryOpExpression.right, NULL);
     HTPropAssignStrong(self, unaryOpExpression.expression, NULL);
     HTPropAssignStrong(self, funcCallExpression.identifier, NULL);
     HTPropAssignStrong(self, funcCallExpression.parameters, NULL);
+    HTPropAssignStrong(self, postfixOpExpression.expressionSource, NULL);
+    HTPropAssignStrong(self, postfixOpExpression.expressionOp, NULL);
 }
 
 HTExpressionRef HTExpressionCreateIntLiteral(int val) {
@@ -47,6 +50,13 @@ HTExpressionRef HTExpressionCreateArray(HTListRef val) {
     HTExpressionRef expr = HTExpressionCreate();
     HTPropAssignWeak(expr, type, HTExpressionTypeArray);
     HTPropAssignStrong(expr, arrayVal, val);
+    return expr;
+}
+
+HTExpressionRef HTExpressionCreateDict(HTListRef val) {
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeDict);
+    HTPropAssignStrong(expr, dictPairList, val);
     return expr;
 }
 
@@ -89,6 +99,15 @@ HTExpressionRef HTExpressionCreateUnaryOperation(HTExpressionUnaryOperator opera
     HTPropAssignWeak(expr, type, HTExpressionTypeUnaryOperation);
     HTPropAssignStrong(expr, unaryOpExpression.expression, expression);
     HTPropAssignWeak(expr, unaryOpExpression.operator, operator);
+    return expr;
+}
+
+HTExpressionRef HTExpressionCreatePostfixOperation(HTExpressionPostfixOperator operator, HTExpressionRef expressionSource, HTExpressionRef expressionOp) {
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypePostfixOperation);
+    HTPropAssignStrong(expr, postfixOpExpression.expressionSource, expressionSource);
+    HTPropAssignStrong(expr, postfixOpExpression.expressionOp, expressionOp);
+    HTPropAssignWeak(expr, postfixOpExpression.operator, operator);
     return expr;
 }
 

@@ -11,17 +11,16 @@ HTStatementExecuteFinishState HTExecutorExecPureExpressionStatement(HTStatementR
 }
 
 HTStatementExecuteFinishState HTExecutorExecAssignStatement(HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv) {
-    HTStringRef identifier = HTPropGet(HTPropGet(statement, u.assignStatement.identifier), identifier);
-    HTVariableRef var = HTRuntimeEnvironmentGetVariable(rootEnv, identifier);
+    HTVariableRef var = HTExpressionEvaluate(HTPropGet(statement, u.assignStatement.identifier), rootEnv);
     if (var == NULL) {
-        printf("不存在变量 <<%s>>.\n", HTPropGet(identifier, characters));
+        printf("不存在变量.\n");
         return HTStatementExecuteFinishStateNone;
     }
     HTVariableRef exprVal = HTExpressionEvaluate(HTPropGet(statement, u.assignStatement.expression), rootEnv);
     HTVaraibleCopyValue(exprVal, var);
 
     HTTypeRelease(exprVal);
-
+    HTTypeRelease(var);
     return HTStatementExecuteFinishStateNone;
 }
 

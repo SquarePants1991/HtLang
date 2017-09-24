@@ -9,9 +9,11 @@ typedef enum {
     HTExpressionTypeBoolLiteral,
     HTExpressionTypeStringLiteral,
     HTExpressionTypeArray,
+    HTExpressionTypeDict,
     HTExpressionTypeIdentifier,
     HTExpressionTypeBinaryOperation,
     HTExpressionTypeUnaryOperation,
+    HTExpressionTypePostfixOperation,
     HTExpressionTypeFuncCall,
 } HTExpressionType;
 
@@ -38,6 +40,10 @@ typedef enum {
     HTExpressionUnaryOperatorNeg
 } HTExpressionUnaryOperator;
 
+typedef enum {
+    HTExpressionPostfixOperatorIndex
+} HTExpressionPostfixOperator;
+
 HTClassBegin
     HTExpressionType type;
     union {
@@ -47,6 +53,7 @@ HTClassBegin
     } value;
     HTStringRef stringVal;
     HTListRef arrayVal;
+    HTListRef dictPairList;
     HTStringRef identifier;
     struct {
         struct HTExpression * left;
@@ -57,6 +64,11 @@ HTClassBegin
         struct HTExpression * expression;
         HTExpressionUnaryOperator operator;
     } unaryOpExpression;
+    struct {
+        struct HTExpression * expressionSource;
+        struct HTExpression * expressionOp;
+        HTExpressionPostfixOperator operator;
+    } postfixOpExpression;
     struct {
         struct HTExpression * identifier;
         HTListRef parameters;
@@ -70,6 +82,7 @@ HTExpressionRef HTExpressionCreateDoubleLiteral(double val);
 HTExpressionRef HTExpressionCreateBoolLiteral(unsigned char val);
 HTExpressionRef HTExpressionCreateStringLiteral(HTStringRef val);
 HTExpressionRef HTExpressionCreateArray(HTListRef val);
+HTExpressionRef HTExpressionCreateDict(HTListRef val);
 
 void HTExpressionBeginStringLiteral();
 void HTExpressionAddStringLiteral(const char *str);
@@ -78,6 +91,7 @@ HTExpressionRef HTExpressionEndStringLiteral();
 HTExpressionRef HTExpressionCreateIdentifier(HTStringRef val);
 HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator operator, HTExpressionRef left, HTExpressionRef right);
 HTExpressionRef HTExpressionCreateUnaryOperation(HTExpressionUnaryOperator operator, HTExpressionRef expression);
+HTExpressionRef HTExpressionCreatePostfixOperation(HTExpressionPostfixOperator operator, HTExpressionRef expressionSource, HTExpressionRef expressionOp);
 HTExpressionRef HTExpressionCreateFuncCall(HTExpressionRef identifier, HTListRef parameters);
 
 void HTExpressionPrintDebugInfo(HTExpressionRef expr);

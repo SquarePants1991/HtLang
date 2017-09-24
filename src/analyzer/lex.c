@@ -1,6 +1,6 @@
-#line 2 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
+#line 2 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.c"
 
-#line 4 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
+#line 4 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -361,8 +361,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 56
-#define YY_END_OF_BUFFER 57
+#define YY_NUM_RULES 57
+#define YY_END_OF_BUFFER 58
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -370,22 +370,22 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_accept[128] =
+static yyconst flex_int16_t yy_accept[131] =
     {   0,
-        0,    0,    0,    0,    0,    0,   57,   55,   51,   51,
-       55,   44,   45,   19,   55,   21,   22,   15,   17,   28,
-       18,   55,   16,   53,   53,   29,   27,   34,    1,   32,
-       54,   54,   23,   24,   54,   54,   54,   54,   54,   54,
-       54,   54,   54,   54,   25,   55,   26,   48,   56,   46,
-       48,   50,   49,   30,   36,   20,    0,    0,    0,   53,
-       35,   31,   33,   54,   54,   54,   54,   54,   54,   54,
-       54,   54,   54,    7,   40,   54,   54,   54,   54,   37,
-       47,   39,   38,   52,   54,   54,   54,   54,   54,   54,
-       54,   54,   10,   54,    2,   54,   54,   54,   54,   54,
+        0,    0,    0,    0,    0,    0,   58,   56,   52,   52,
+       56,   45,   46,   20,   56,   22,   23,   16,   18,   29,
+       19,   56,   17,   54,   54,   30,   28,   35,    1,   33,
+       55,   55,   55,   24,   25,   55,   55,   55,   55,   55,
+       55,   55,   55,   55,   55,   26,   56,   27,   49,   57,
+       47,   49,   51,   50,   31,   37,   21,    0,    0,    0,
+       54,   36,   32,   34,   55,   55,   55,   55,   55,   55,
+       55,   55,   55,   55,   55,    8,   41,   55,   55,   55,
+       55,   38,   48,   40,   39,   53,   55,    7,   55,   55,
+       55,   55,   55,   55,   55,   11,   55,    2,   55,   55,
 
-        4,   54,   54,   54,    8,    9,   54,   12,   54,   54,
-       41,   54,    6,   13,   54,   54,   42,   54,   54,   11,
-       54,    3,   43,    5,   54,   14,    0
+       55,   55,   55,    4,   55,   55,   55,    9,   10,   55,
+       13,   55,   55,   42,   55,    6,   14,   55,   55,   43,
+       55,   55,   12,   55,    3,   44,    5,   55,   15,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -397,13 +397,13 @@ static yyconst flex_int32_t yy_ec[256] =
        10,   11,   12,   13,   14,   15,   16,   17,   18,   18,
        18,   18,   18,   18,   18,   18,   18,   19,   20,   21,
        22,   23,    1,    1,   24,   25,   25,   25,   25,   25,
+       25,   25,   25,   25,   25,   25,   26,   25,   25,   25,
        25,   25,   25,   25,   25,   25,   25,   25,   25,   25,
-       25,   25,   25,   25,   25,   25,   25,   25,   25,   25,
-       26,   27,   28,    1,    1,    1,   29,   30,   31,   32,
+       27,   28,   29,    1,    1,    1,   30,   31,   32,   33,
 
-       33,   34,   35,   36,   37,   25,   38,   39,   25,   40,
-       41,   25,   25,   42,   43,   44,   45,   25,   46,   25,
-       47,   25,   48,   49,   50,    1,    1,    1,    1,    1,
+       34,   35,   36,   37,   38,   25,   39,   40,   25,   41,
+       42,   43,   25,   44,   45,   46,   47,   25,   48,   25,
+       49,   25,   50,   51,   52,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -420,101 +420,106 @@ static yyconst flex_int32_t yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst flex_int32_t yy_meta[51] =
+static yyconst flex_int32_t yy_meta[53] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    2,    2,    1,    1,
-        1,    1,    1,    2,    2,    1,    1,    1,    2,    2,
+        1,    1,    1,    2,    2,    2,    1,    1,    1,    2,
         2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
-        2,    2,    2,    2,    2,    2,    2,    1,    1,    1
+        2,    2,    2,    2,    2,    2,    2,    2,    2,    1,
+        1,    1
     } ;
 
-static yyconst flex_int16_t yy_base[131] =
+static yyconst flex_int16_t yy_base[134] =
     {   0,
-        0,    0,   48,   49,  145,  144,  146,  149,  149,  149,
-      123,  149,  149,  149,  136,  149,  149,  132,  149,  149,
-      149,  127,  149,   40,   44,  149,  149,  119,  118,  117,
-       96,    0,  149,  149,   22,   96,   95,   96,   27,   26,
-      101,   89,   90,   95,  149,   81,  149,  149,  149,  149,
-       89,  149,  149,  149,  149,  149,   50,   52,   62,   66,
-      149,  149,  149,    0,   86,   86,   93,   85,   79,   30,
-       84,   80,   81,    0,   76,   75,   76,   72,   79,  149,
-      149,  149,  149,   68,   86,   75,   84,   68,   81,   76,
-       76,   65,    0,   76,    0,   61,   68,   71,   64,   55,
+        0,    0,   50,   51,  149,  148,  150,  153,  153,  153,
+      127,  153,  153,  153,  140,  153,  153,  136,  153,  153,
+      153,  131,  153,   42,   46,  153,  153,  123,  122,  121,
+       98,    0,  111,  153,  153,   23,   98,   97,   98,   28,
+       27,  103,   90,   91,   97,  153,   82,  153,  153,  153,
+      153,   91,  153,  153,  153,  153,  153,   51,   56,   65,
+       69,  153,  153,  153,    0,   87,   87,   87,   94,   86,
+       79,   31,   85,   80,   82,    0,   76,   75,   76,   72,
+       80,  153,  153,  153,  153,   71,   87,    0,   76,   85,
+       68,   82,   77,   77,   65,    0,   77,    0,   61,   69,
 
-        0,   63,   63,   60,    0,    0,   65,    0,   55,   56,
-        0,   62,    0,    0,   54,   60,    0,   52,   56,    0,
-       37,    0,    0,    0,   45,    0,  149,   86,   88,   72
+       72,   65,   55,    0,   64,   64,   61,    0,    0,   66,
+        0,   55,   57,    0,   63,    0,    0,   55,   61,    0,
+       53,   49,    0,   34,    0,    0,    0,   43,    0,  153,
+       89,   91,   69
     } ;
 
-static yyconst flex_int16_t yy_def[131] =
+static yyconst flex_int16_t yy_def[134] =
     {   0,
-      127,    1,  128,  128,  129,  129,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      130,  130,  127,  127,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  127,
-      127,  127,  127,  127,  130,  130,  130,  130,  130,  130,
+      130,    1,  131,  131,  132,  132,  130,  130,  130,  130,
       130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      133,  133,  133,  130,  130,  133,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  133,  133,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133,
+      133,  130,  130,  130,  130,  130,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133,
 
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
-      130,  130,  130,  130,  130,  130,    0,  127,  127,  127
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,  133,
+      133,  133,  133,  133,  133,  133,  133,  133,  133,    0,
+      130,  130,  130
     } ;
 
-static yyconst flex_int16_t yy_nxt[200] =
+static yyconst flex_int16_t yy_nxt[206] =
     {   0,
         8,    9,   10,   11,   12,   13,   14,   15,   16,   17,
        18,   19,   20,   21,   22,   23,   24,   25,   26,   27,
-       28,   29,   30,   31,   32,   33,    8,   34,   32,   35,
-       36,   37,   38,   39,   32,   32,   40,   32,   32,   32,
-       32,   41,   42,   43,   32,   44,   32,   45,   46,   47,
-       49,   49,   50,   50,   58,   71,   59,   59,   58,   74,
-       60,   60,   66,   67,   82,   75,   90,   72,   84,   84,
-       83,   73,   91,   64,   51,   51,   58,  126,   59,   59,
-       58,  125,   60,   60,   84,   84,   48,   48,   52,   52,
-      124,  123,  122,  121,  120,  119,  118,  117,  116,  115,
+       28,   29,   30,   31,   32,   33,   34,    8,   35,   32,
+       36,   37,   38,   39,   40,   32,   32,   41,   32,   32,
+       32,   32,   32,   42,   43,   44,   32,   45,   32,   46,
+       47,   48,   50,   50,   51,   51,   59,   73,   60,   60,
+       59,   76,   61,   61,   68,   84,   69,   77,   93,   74,
+       65,   85,   86,   86,   75,   94,  129,   52,   52,   59,
+      128,   60,   60,   59,  127,   61,   61,   86,   86,   49,
+       49,   53,   53,  126,  125,  124,  123,  122,  121,  120,
 
-      114,  113,  112,  111,  110,  109,  108,  107,  106,  105,
-      104,  103,  102,  101,  100,   99,   98,   97,   96,   95,
-       94,   93,   92,   89,   88,   87,   86,   85,   81,   80,
-       79,   78,   77,   76,   70,   69,   68,   65,   63,   62,
-       61,   57,   56,   55,   54,  127,   53,   53,    7,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127
+      119,  118,  117,  116,  115,  114,  113,  112,  111,  110,
+      109,  108,  107,  106,  105,  104,  103,  102,  101,  100,
+       99,   98,   97,   96,   95,   92,   91,   90,   89,   88,
+       87,   83,   82,   81,   80,   79,   78,   72,   71,   70,
+       67,   66,   64,   63,   62,   58,   57,   56,   55,  130,
+       54,   54,    7,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
 
+      130,  130,  130,  130,  130
     } ;
 
-static yyconst flex_int16_t yy_chk[200] =
+static yyconst flex_int16_t yy_chk[206] =
     {   0,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        3,    4,    3,    4,   24,   39,   24,   24,   25,   40,
-       25,   25,   35,   35,   57,   40,   70,   39,   58,   58,
-       57,   39,   70,  130,    3,    4,   59,  125,   59,   59,
-       60,  121,   60,   60,   84,   84,  128,  128,  129,  129,
-      119,  118,  116,  115,  112,  110,  109,  107,  104,  103,
+        1,    1,    3,    4,    3,    4,   24,   40,   24,   24,
+       25,   41,   25,   25,   36,   58,   36,   41,   72,   40,
+      133,   58,   59,   59,   40,   72,  128,    3,    4,   60,
+      124,   60,   60,   61,  122,   61,   61,   86,   86,  131,
+      131,  132,  132,  121,  119,  118,  115,  113,  112,  110,
 
-      102,  100,   99,   98,   97,   96,   94,   92,   91,   90,
-       89,   88,   87,   86,   85,   79,   78,   77,   76,   75,
-       73,   72,   71,   69,   68,   67,   66,   65,   51,   46,
-       44,   43,   42,   41,   38,   37,   36,   31,   30,   29,
-       28,   22,   18,   15,   11,    7,    6,    5,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127,  127,
-      127,  127,  127,  127,  127,  127,  127,  127,  127
+      107,  106,  105,  103,  102,  101,  100,   99,   97,   95,
+       94,   93,   92,   91,   90,   89,   87,   81,   80,   79,
+       78,   77,   75,   74,   73,   71,   70,   69,   68,   67,
+       66,   52,   47,   45,   44,   43,   42,   39,   38,   37,
+       33,   31,   30,   29,   28,   22,   18,   15,   11,    7,
+        6,    5,  130,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
+      130,  130,  130,  130,  130,  130,  130,  130,  130,  130,
 
+      130,  130,  130,  130,  130
     } ;
 
 static yy_state_type yy_last_accepting_state;
@@ -531,8 +536,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-#line 2 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 1 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+#line 2 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 
 #include <stdio.h>
 #include "../src/compiler/HTCompiler.h"
@@ -544,7 +549,7 @@ int yywrap(void) {
 }
 
 
-#line 548 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
+#line 553 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.c"
 
 #define INITIAL 0
 #define STRING_LITERAL 1
@@ -728,9 +733,9 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 16 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 16 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 
-#line 734 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
+#line 739 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.c"
 
 	if ( !(yy_init) )
 		{
@@ -783,13 +788,13 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 128 )
+				if ( yy_current_state >= 131 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 149 );
+		while ( yy_base[yy_current_state] != 153 );
 
 yy_find_action:
 		yy_act = yy_accept[yy_current_state];
@@ -815,283 +820,288 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 17 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 17 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 return ASSIGN;
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 18 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 18 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 return INT;
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 19 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 19 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 return DOUBLE;
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 20 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 20 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 return BOOL;
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 21 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 21 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 return STRING;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 22 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 22 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 return ARRAY;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 24 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return IF;
+#line 23 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return MAP;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 25 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return ELIF;
+#line 25 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return IF;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 26 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return ELSE;
+#line 26 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return ELIF;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 27 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return FOR;
+#line 27 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return ELSE;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 28 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return WHILE;
+#line 28 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return FOR;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 29 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return FUNC;
+#line 29 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return WHILE;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 30 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return BREAK;
+#line 30 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return FUNC;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 31 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return CONTINUE;
+#line 31 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return BREAK;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 33 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorMul; return MUL; }
+#line 32 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return CONTINUE;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 34 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorDiv; return DIV; }
+#line 34 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorMul; return MUL; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 35 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorAdd; return ADD; }
+#line 35 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorDiv; return DIV; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 36 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorSub; return SUB; }
+#line 36 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorAdd; return ADD; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 37 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorMod; return MOD; }
+#line 37 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorSub; return SUB; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 38 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorPower; return POWER; }
+#line 38 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorMod; return MOD; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 39 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return LB;
+#line 39 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorPower; return POWER; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 40 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return RB;
+#line 40 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return LB;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 41 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return LSB;
+#line 41 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return RB;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 42 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return RSB;
+#line 42 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return LSB;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 43 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return LCB;
+#line 43 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return RSB;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 44 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return RCB;
+#line 44 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return LCB;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 45 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return SEMI;
+#line 45 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return RCB;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 46 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return COMMA;
+#line 46 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return SEMI;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 47 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return COLON;
+#line 47 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return COMMA;
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 49 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicNotEqual; return NEQ; }
+#line 48 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return COLON;
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 50 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicEqual; return EQ; }
+#line 50 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicNotEqual; return NEQ; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 51 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicGreater; return GT; }
+#line 51 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicEqual; return EQ; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 52 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicGreaterEqual; return GE; }
+#line 52 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicGreater; return GT; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 53 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicLess; return LT; }
+#line 53 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicGreaterEqual; return GE; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 54 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicLessEqual; return LE; }
+#line 54 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicLess; return LT; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 55 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicAnd; return AND; }
+#line 55 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicLessEqual; return LE; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 56 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicOr; return OR; }
+#line 56 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicAnd; return AND; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 58 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return RANGE_UNCLOSE;
+#line 57 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+{ yylval.binaryOperatorValue = HTExpressionBinaryOperatorLogicOr; return OR; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 59 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return RANGE_CLOSE;
+#line 59 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return RANGE_UNCLOSE;
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 60 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return IN;
+#line 60 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return RANGE_CLOSE;
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 62 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 61 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return IN;
+	YY_BREAK
+case 42:
+YY_RULE_SETUP
+#line 63 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
    yylval.expressionValue = HTExpressionCreateBoolLiteral(1);
    return Literal;
 }
 	YY_BREAK
-case 42:
+case 43:
 YY_RULE_SETUP
-#line 67 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 68 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
    yylval.expressionValue = HTExpressionCreateBoolLiteral(0);
    return Literal;
 }
 	YY_BREAK
-case 43:
-YY_RULE_SETUP
-#line 72 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return RETURN;
-	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 74 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 73 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+return RETURN;
+	YY_BREAK
+case 45:
+YY_RULE_SETUP
+#line 75 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
     HTExpressionBeginStringLiteral();
     BEGIN STRING_LITERAL;
 }
 	YY_BREAK
-case 45:
+case 46:
 YY_RULE_SETUP
-#line 79 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 80 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
     BEGIN COMMENT;
 }
 	YY_BREAK
-case 46:
+case 47:
 YY_RULE_SETUP
-#line 83 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 84 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
     yylval.expressionValue = HTExpressionEndStringLiteral();
     BEGIN INITIAL;
     return Literal;
 }
 	YY_BREAK
-case 47:
+case 48:
 YY_RULE_SETUP
-#line 89 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 90 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
     HTExpressionAddStringLiteral("\n");
 }
 	YY_BREAK
-case 48:
+case 49:
 YY_RULE_SETUP
-#line 93 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 94 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
     HTExpressionAddStringLiteral(yytext);
 }
 	YY_BREAK
-case 49:
-/* rule 49 can match eol */
+case 50:
+/* rule 50 can match eol */
 YY_RULE_SETUP
-#line 97 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 98 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 BEGIN INITIAL;
 	YY_BREAK
-case 50:
-YY_RULE_SETUP
-#line 98 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-;
-	YY_BREAK
 case 51:
-/* rule 51 can match eol */
 YY_RULE_SETUP
-#line 102 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 99 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 ;
 	YY_BREAK
 case 52:
+/* rule 52 can match eol */
 YY_RULE_SETUP
-#line 104 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 103 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
+;
+	YY_BREAK
+case 53:
+YY_RULE_SETUP
+#line 105 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
     double doubleVal;
     sscanf(yytext, "%lf", &doubleVal);
@@ -1099,9 +1109,9 @@ YY_RULE_SETUP
     return Literal;
 }
 	YY_BREAK
-case 53:
+case 54:
 YY_RULE_SETUP
-#line 111 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 112 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
     int intVal;
     sscanf(yytext, "%d", &intVal);
@@ -1109,29 +1119,29 @@ YY_RULE_SETUP
     return Literal;
 }
 	YY_BREAK
-case 54:
+case 55:
 YY_RULE_SETUP
-#line 119 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 120 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
     HTStringRef str = HTStringCreateWithChars(yytext);
     yylval.stringValue = str;
     return IDENTIFIER;
 }
 	YY_BREAK
-case 55:
+case 56:
 YY_RULE_SETUP
-#line 125 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 126 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 {
     fprintf(stderr, "lex parse error! \n");
     exit(1);
 }
 	YY_BREAK
-case 56:
+case 57:
 YY_RULE_SETUP
-#line 130 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 131 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 ECHO;
 	YY_BREAK
-#line 1135 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
+#line 1145 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING_LITERAL):
 case YY_STATE_EOF(COMMENT):
@@ -1425,7 +1435,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 128 )
+			if ( yy_current_state >= 131 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1453,11 +1463,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 128 )
+		if ( yy_current_state >= 131 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 127);
+	yy_is_jam = (yy_current_state == 130);
 
 	return yy_is_jam ? 0 : yy_current_state;
 }
@@ -2130,6 +2140,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 130 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 131 "/Users/yangwang/Documents/Projects/On Git/HtLang/src/analyzer/lex.l"
 
 

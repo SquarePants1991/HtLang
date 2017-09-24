@@ -3,6 +3,7 @@
 
 #include "../utils/HTString.h"
 #include "../utils/HTMem.h"
+#include "../utils/HTDict.h"
 
 #include <stdio.h>
 
@@ -12,7 +13,8 @@ typedef enum {
     HTDataTypeDouble,
     HTDataTypeBool,
 	HTDataTypeString,
-	HTDataTypeArray
+	HTDataTypeArray,
+    HTDataTypeMap
 } HTDataType;
 
 HTClassBegin
@@ -25,6 +27,7 @@ HTClassBegin
 	} value;
 	HTStringRef stringValue;
 	HTListRef arrayValue;
+    HTDictRef dictValue;
 HTClassEnd(HTVariable)
 
 

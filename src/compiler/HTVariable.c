@@ -8,12 +8,14 @@ void HTVariableDealloc(HTVariableRef self) {
     HTPropAssignStrong(self, identifier, NULL);
     HTPropAssignStrong(self, stringValue, NULL);
     HTPropAssignStrong(self, arrayValue, NULL);
+    HTPropAssignStrong(self, dictValue, NULL);
 }
 
 HTVariableRef HTVariableCreateWithTypeAndName(HTDataType dataType, const char *name) {
     HTVariableRef variable = HTVariableCreate();
     HTStringRef identifierStr = HTStringCreateWithChars(name);
     HTListRef arrayValue = HTListCreate();
+    HTDictRef dictValue = HTDictCreateWithBucketCount(100);
     HTPropAssignWeak(variable, dataType, dataType);
     HTPropAssignStrong(variable, identifier, identifierStr);
     HTPropAssignWeak(variable, value.boolValue, 0);
@@ -21,8 +23,10 @@ HTVariableRef HTVariableCreateWithTypeAndName(HTDataType dataType, const char *n
     HTPropAssignWeak(variable, value.doubleValue, 0);
     HTPropAssignStrong(variable, stringValue, NULL);
     HTPropAssignStrong(variable, arrayValue, arrayValue);
+    HTPropAssignStrong(variable, dictValue, dictValue);
     HTTypeRelease(arrayValue);
     HTTypeRelease(identifierStr);
+    HTTypeRelease(dictValue);
     return variable;
 }
 
@@ -32,6 +36,8 @@ void HTVaraibleCopyValue(HTVariableRef source, HTVariableRef dst) {
         HTPropAssignStrong(dst, stringValue, HTPropGet(source, stringValue));
     } else if (HTPropGet(dst, dataType) == HTDataTypeArray) {
         HTPropAssignStrong(dst, arrayValue, HTPropGet(source, arrayValue));
+    } else if (HTPropGet(dst, dataType) == HTDataTypeMap) {
+        HTPropAssignStrong(dst, dictValue, HTPropGet(source, dictValue));
     }
     else {
         HTPropAssignWeak(dst, value, HTPropGet(source, value));

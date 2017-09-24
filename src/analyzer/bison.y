@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "../src/compiler/HTCompiler.h"
 #include "../src/executor/HTExecutor.h"
-#include "../src/utils/HTDict.h"
 #define YYDEBUG 1
 %}
 
@@ -30,17 +29,16 @@
 %token <statementValue>         Statement
 %token <listValue>              List
 
-%token ASSIGN INT DOUBLE BOOL STRING ARRAY SEMI COMMA COLON
+%token ASSIGN INT DOUBLE BOOL STRING ARRAY MAP SEMI COMMA COLON
 %token IF ELIF ELSE FOR FUNC RETURN WHILE BREAK CONTINUE
 %token LB RB LCB RCB LSB RSB
 %token RANGE_UNCLOSE RANGE_CLOSE IN
 %token COMMENT_ONE_LINE
 
 %type <dataTypeValue> dataType
-%type <dictPairValue> pair
 %type <listValue> statementList parameterList parameterDefList pairList arrayLiteral dictLiteral
 %type <statementValue>  statement assignStatement declareStatement ifStatement pureIfStatement elifStatement elseStatement funcDefStatement returnStatement forStatement whileStatement breakStatement continueStatement
-%type <expressionValue> expression primaryExpression
+%type <expressionValue> expression postfixExpression primaryExpression
 %type <variableValue> parameterDef
 
 %left COLON
@@ -121,13 +119,11 @@ statement
     ;
 
 assignStatement
-    : IDENTIFIER ASSIGN expression SEMI
+    : postfixExpression ASSIGN expression SEMI
     {
-        HTExpressionRef identifier = HTExpressionCreateIdentifier($1);
-        $$ = HTStatementCreateAssign(identifier, $3);
+        $$ = HTStatementCreateAssign($1, $3);
         HTTypeRelease($1);
         HTTypeRelease($3);
-        HTTypeRelease(identifier);
     }
 
 declareStatement
@@ -296,7 +292,7 @@ parameterList
     }
 
 expression
-    : primaryExpression
+    : postfixExpression
     | expression RANGE_UNCLOSE expression
     {
         $$ = HTExpressionCreateBinaryOperation(HTExpressionBinaryOperatorUncloseRangeArray, $1, $3);
@@ -398,7 +394,7 @@ expression
         $$ = HTExpressionCreateUnaryOperation(HTExpressionUnaryOperatorNeg, $2);
         HTTypeRelease($2);
     }
-    | primaryExpression LB parameterList RB %prec BRACE
+    | IDENTIFIER LB parameterList RB
     {
         HTExpressionRef identifier = HTExpressionCreateIdentifier($1);
         $$ = HTExpressionCreateFuncCall(identifier, $3);
@@ -406,9 +402,15 @@ expression
         HTTypeRelease($3);
         HTTypeRelease(identifier);
     }
-    | LB expression RB %prec NEGATIVE
+    ;
+
+postfixExpression
+    : primaryExpression
+    | primaryExpression LSB expression RSB
     {
-        $$ = $2;
+        $$ = HTExpressionCreatePostfixOperation(HTExpressionPostfixOperatorIndex, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
     }
     ;
 
@@ -432,6 +434,10 @@ primaryExpression
         $$ = HTExpressionCreateIdentifier($1);
         HTTypeRelease($1);
     }
+    | LB expression RB
+    {
+        $$ = $2;
+    }
     ;
 
 arrayLiteral
@@ -442,38 +448,28 @@ arrayLiteral
 
 
 pairList
-    : pair
-    {
-        HTListRef paramList = HTListCreate();
-        HTListAppend(paramList, $1);
-        $$ = paramList;
-        HTTypeRelease($1);
-    }
-    | pairList pair
-    {
-        HTListAppend($1, $2);
-        HTTypeRelease($2);
-        $$ = $1;
-    }
-
-pair
     : expression COLON expression
     {
         HTDictPairRef pair = HTDictPairCreateWithKeyAndValue($1, $3);
-        $$ = pair;
         HTTypeRelease($1);
         HTTypeRelease($3);
+        HTListRef paramList = HTListCreate();
+        HTListAppend(paramList, pair);
+        $$ = paramList;
+        HTTypeRelease(pair);
     }
-    | expression COLON expression COMMA
+    | pairList COMMA Literal COLON expression
     {
-        HTDictPairRef pair = HTDictPairCreateWithKeyAndValue($1, $3);
-        $$ = pair;
-        HTTypeRelease($1);
+        HTDictPairRef pair = HTDictPairCreateWithKeyAndValue($3, $5);
         HTTypeRelease($3);
+        HTTypeRelease($5);
+        HTListAppend($1, pair);
+        HTTypeRelease(pair);
+        $$ = $1;
     }
 
 dictLiteral
-    : LSB pairList RSB
+    : LCB pairList RCB
     {
         $$ = $2;
     }
@@ -498,6 +494,10 @@ dataType
     | ARRAY
     {
         $$ = HTDataTypeArray
+    }
+    | MAP
+    {
+        $$ = HTDataTypeMap
     }
     ;
 
