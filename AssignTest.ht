@@ -1,7 +1,20 @@
-double doubleValue = 30.0;
-int intValue = 100;
-string strValue = "Hello 2 World";
-Map map = {"intValue": intValue, "doubleValue": doubleValue, "strValue": strValue};
-map["doubleValue"]  = 200.0;
-println(map["doubleValue"] + map["strValue"]);
-#map.remove("strValue");
+##double doubleValue = 30.0;
+##int intValue = 100;
+##string strValue = "Hello 2 World";
+##Map map = {"intValue": intValue, "doubleValue": doubleValue, "strValue": strValue};
+##map["doubleValue"]  = 200.0;
+##println(map["doubleValue"] + map["strValue"]);
+###map.remove("strValue");
+#
+#int intvalue = 10;
+#intvalue = 100;
+#println(intvalue + "");
+
+func passRefArg(int mutableInt) {
+    mutableInt = 20;
+}
+
+int mutableIntOrigin = 10;
+#assert("mutableIntOrigin 需要等于10", mutableIntOrigin == 10);
+passRefArg(mutableIntOrigin);
+assert("mutableIntOrigin 需要等于20", mutableIntOrigin == 20);

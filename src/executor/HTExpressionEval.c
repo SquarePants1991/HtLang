@@ -43,7 +43,9 @@ HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef
             HTPropAssignWeak(returnVar, value.doubleValue, 0.0);
             HTVariableRef variable = HTRuntimeEnvironmentGetVariable(rootEnv, HTPropGet(expr, identifier));
             if (variable) {
-                HTVaraibleCopyValue(variable, returnVar);
+                HTTypeRelease(returnVar);
+                HTTypeRetain(variable);
+                return variable;
             }
             break;
         case HTExpressionTypeBinaryOperation:
@@ -401,13 +403,16 @@ HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnviro
     // call func
     HTFunctionRef function = HTRuntimeEnvironmentGetFunction(rootEnv, funcName);
     HTVariableRef returnVal = HTVariableCreateWithTypeAndName(HTDataTypeDouble, "_");
+
     if (HTPropGet(function, functionType) == HTFunctionTypeLocal) {
+        // 执行本地方法
         HTFunctionBody funcBody = HTPropGet(function, u.localFunction.functionBody);
         HTPropAssignWeak(returnVal, value.doubleValue, 0.0);
         if (funcBody) {
             funcBody(paramValueList, returnVal);
         }
     } else {
+        // 执行HTLang编写的方法
         HTRuntimeEnvironmentBeginNewEnv(rootEnv);
         HTListNodeRef paramNode = HTPropGet(paramValueList, head);
         HTListRef defs = HTPropGet(function, u.customFunction.parameterDefList);
@@ -419,6 +424,7 @@ HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnviro
             while (paramNode) {
                 HTVariableRef variableDef =  HTListAt(defs, index);
                 HTVariableRef variable = HTPropGet(paramNode, ptr);
+                // TODO: 形参名字和实参名字需要关联，使用函数栈的方式管理参数的传递。以形参的名字为key，指向实参的地址
                 HTPropAssignStrong(variable, identifier, HTPropGet(variableDef, identifier));
                 paramNode = HTPropGet(paramNode, next);
                 index++;

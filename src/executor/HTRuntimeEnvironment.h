@@ -13,6 +13,7 @@ HTClassBegin
     HTListRef variables;
     HTListRef functions;
     HTVariableRef returnVariable;       // 用来存放return statement的返回值
+    HTDictRef functionStack;            // 函数栈，顶级环境独有，保存当前函数参数。
     struct HTRuntimeEnvironment *prev;
     struct HTRuntimeEnvironment *next;
 HTClassEnd(HTRuntimeEnvironment)

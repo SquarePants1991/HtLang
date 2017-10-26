@@ -31,3 +31,12 @@ func iter(double seed): double {
 
 double result = iter(8.0);
 assert("result 需要等于14", result == 14);
+
+func passRefArg(int mutableInt) {
+    mutableInt = 20;
+}
+
+int mutableIntOrigin = 10;
+assert("mutableIntOrigin 需要等于10", mutableIntOrigin == 10);
+passRefArg(mutableIntOrigin);
+assert("mutableIntOrigin 需要等于20", mutableIntOrigin == 20);

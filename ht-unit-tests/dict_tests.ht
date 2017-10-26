@@ -1,10 +1,10 @@
-#double doubleValue = 30.0;
-#int intValue = 100;
-#string strValue = "Hello World";
-#Map map = { "intValue": intValue, "doubleValue": doubleValue};
-#map["strValue"] = strValue;
-#
-#assert("map[intValue]等于100", map["intValue"] == 100);
-#assert("map[doubleValue]等于30.0", map["doubleValue"] == 30.0);
-#assert("map[strValue]等于Hello World", map["strValue"] == "Hello World");
+double doubleValue = 30.0;
+int intValue = 100;
+string strValue = "Hello World";
+Map map = { "intValue": intValue, "doubleValue": doubleValue};
+map["strValue"] = strValue;
+
+assert("map[intValue]等于100", map["intValue"] == 100);
+assert("map[doubleValue]等于30.0", map["doubleValue"] == 30.0);
+assert("map[strValue]等于Hello World", map["strValue"] == "Hello World");
 #assert("map的长度等于3", map.size());
