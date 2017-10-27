@@ -23,7 +23,6 @@ int main() {
     HTListAppend(list, vector1);
     HTTypeRelease(vector1);
     printf("After Append1.List Len is %d \n", HTListSize(list));
-    HTMemPrintAllBlocks();
 
     HTVectorRef vector2 = HTVectorCreate();
     HTPropAssignWeak(vector2, x, 10);
@@ -31,11 +30,12 @@ int main() {
     HTListAppend(list, vector2);
     HTTypeRelease(vector2);
     printf("After Append2.List Len is %d \n", HTListSize(list));
-    HTMemPrintAllBlocks();
 
     HTListRemove(list, 0);
     printf("After Remove.List Len is %d \n", HTListSize(list));
-    HTMemPrintAllBlocks();
+
+    HTListClear(list);
+    printf("After Clear.List Len is %d \n", HTListSize(list));
 
     HTTypeRelease(list);
     HTMemPrintAllBlocks();

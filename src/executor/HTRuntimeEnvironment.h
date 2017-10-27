@@ -24,6 +24,8 @@ HTVariableRef HTRuntimeEnvironmentGetVariable(HTRuntimeEnvironmentRef env, HTStr
 HTFunctionRef HTRuntimeEnvironmentGetFunction(HTRuntimeEnvironmentRef env, HTStringRef identifier);
 void HTRuntimeEnvironmentDeclareVariable(HTRuntimeEnvironmentRef env, HTVariableRef variable, unsigned char isGlobalVar);
 void HTRuntimeEnvironmentDeclareVariables(HTRuntimeEnvironmentRef env, HTListRef variables, unsigned char isGlobalVar);
+void HTRuntimeEnvironmentClearStack(HTRuntimeEnvironmentRef env);
+void HTRuntimeEnvironmentPushVariableToStack(HTRuntimeEnvironmentRef env, HTVariableRef variable, HTStringRef refName);
 HTRuntimeEnvironmentRef HTRuntimeEnvironmentCurrentEnv(HTRuntimeEnvironmentRef env);
 
 void HTRuntimeEnvironmentPrintDebugInfo(HTRuntimeEnvironmentRef env);

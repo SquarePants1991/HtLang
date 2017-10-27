@@ -14,7 +14,16 @@ func passRefArg(int mutableInt) {
     mutableInt = 20;
 }
 
+func passRefStr(string mutableStr) {
+    mutableStr = "YES";
+}
+
 int mutableIntOrigin = 10;
-#assert("mutableIntOrigin 需要等于10", mutableIntOrigin == 10);
+assert("mutableIntOrigin 需要等于10", mutableIntOrigin == 10);
 passRefArg(mutableIntOrigin);
 assert("mutableIntOrigin 需要等于20", mutableIntOrigin == 20);
+
+string mutableStringOrigin = "NO";
+assert("mutableStringOrigin 需要等于NO", mutableStringOrigin == "NO");
+passRefStr(mutableStringOrigin);
+assert("mutableStringOrigin 需要等于YES", mutableStringOrigin == "YES");

@@ -6,7 +6,7 @@
 #include "utils/HTDict.h"
 
 void batchTest() {
-    size_t dataCount = 10000;
+    size_t dataCount = 100;
     HTDictRef dict = HTDictCreateWithBucketCount(1000);
     for (int i = 0; i < dataCount; ++i) {
         HTStringRef key = HTStringCreateFormat("%d", i);
@@ -29,6 +29,11 @@ void batchTest() {
         HTTypeRelease(key);
         HTTypeRelease(val);
     }
+
+    printf("Before Clear.Dict Len is %d \n", HTDictSize(dict));
+    HTDictClear(dict);
+    printf("After Clear.Dict Len is %d \n", HTDictSize(dict));
+
     HTTypeRelease(dict);
 }
 

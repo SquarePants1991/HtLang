@@ -9,13 +9,16 @@
 void HTRuntimeEnvironmentAlloc(HTRuntimeEnvironmentRef self) {
     HTListRef variableList = HTListCreate();
     HTListRef functionList = HTListCreate();
+    HTDictRef functionStack = HTDictCreateWithBucketCount(50);
     HTPropAssignStrong(self, variables, variableList);
     HTPropAssignStrong(self, functions, functionList);
+    HTPropAssignStrong(self, functionStack, functionStack);
     HTPropAssignWeak(self, next, NULL);
     HTPropAssignWeak(self, prev, NULL);
 
     HTTypeRelease(variableList);
     HTTypeRelease(functionList);
+    HTTypeRelease(functionStack);
 }
 
 void HTRuntimeEnvironmentDealloc(HTRuntimeEnvironmentRef self) {
@@ -24,6 +27,7 @@ void HTRuntimeEnvironmentDealloc(HTRuntimeEnvironmentRef self) {
     HTPropAssignStrong(self, returnVariable, NULL);
     HTPropAssignStrong(self, next, NULL);
     HTPropAssignStrong(self, prev, NULL);
+    HTPropAssignStrong(self, functionStack, NULL);
 }
 
 void HTRuntimeEnvironmentBeginNewEnv(HTRuntimeEnvironmentRef env) {
@@ -54,11 +58,20 @@ HTVariableRef HTRuntimeEnvironmentGetVariable(HTRuntimeEnvironmentRef env, HTStr
             if (variable && HTStringEqual(identifier, HTPropGet(variable, identifier))) {
                 return variable;
             }
+
             node = HTPropGet(node, next);
+        }
+
+        // 局部变量将会覆盖函数栈上的参数
+        HTDictRef stack = HTPropGet(currentSearchEnv, functionStack);
+        HTTypeRef var = HTDictGet(stack, identifier);
+        if (var) {
+            return (HTVariableRef)var;
         }
 
         currentSearchEnv = HTPropGet(currentSearchEnv, prev);
     }
+
     return NULL;
 }
 
@@ -94,6 +107,18 @@ void HTRuntimeEnvironmentDeclareVariables(HTRuntimeEnvironmentRef env, HTListRef
         HTRuntimeEnvironmentDeclareVariable(env, HTPropGet(node, ptr), isGlobalVar);
         node = HTPropGet(node, next);
     }
+}
+
+void HTRuntimeEnvironmentClearStack(HTRuntimeEnvironmentRef env) {
+    HTRuntimeEnvironmentRef currentOperationEnv = HTRuntimeEnvironmentCurrentEnv(env);
+    HTDictRef stack = HTPropGet(currentOperationEnv, functionStack);
+    HTDictClear(stack);
+}
+
+void HTRuntimeEnvironmentPushVariableToStack(HTRuntimeEnvironmentRef env, HTVariableRef variable, HTStringRef refName) {
+    HTRuntimeEnvironmentRef currentOperationEnv = HTRuntimeEnvironmentCurrentEnv(env);
+    HTDictRef stack = HTPropGet(currentOperationEnv, functionStack);
+    HTDictSet(stack, refName, (HTTypeRef)variable);
 }
 
 HTRuntimeEnvironmentRef HTRuntimeEnvironmentCurrentEnv(HTRuntimeEnvironmentRef env) {

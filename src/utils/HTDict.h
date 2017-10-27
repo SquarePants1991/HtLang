@@ -24,6 +24,7 @@ unsigned long HTDictHash(HTDictRef dict, const char * key);
 void HTDictSet(HTDictRef dict, HTStringRef key, HTTypeRef value);
 HTTypeRef HTDictGet(HTDictRef dict, HTStringRef key);
 size_t HTDictSize(HTDictRef dict);
+void HTDictClear(HTDictRef dict);
 HTListRef HTDictMakeKeys(HTDictRef dict);
 void HTDictRemove(HTDictRef dict, HTStringRef key);
 

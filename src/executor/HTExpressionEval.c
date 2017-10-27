@@ -414,6 +414,7 @@ HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnviro
     } else {
         // 执行HTLang编写的方法
         HTRuntimeEnvironmentBeginNewEnv(rootEnv);
+        HTRuntimeEnvironmentClearStack(rootEnv);
         HTListNodeRef paramNode = HTPropGet(paramValueList, head);
         HTListRef defs = HTPropGet(function, u.customFunction.parameterDefList);
         HTDataType returnType = HTPropGet(function, returnType);
@@ -424,13 +425,11 @@ HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnviro
             while (paramNode) {
                 HTVariableRef variableDef =  HTListAt(defs, index);
                 HTVariableRef variable = HTPropGet(paramNode, ptr);
-                // TODO: 形参名字和实参名字需要关联，使用函数栈的方式管理参数的传递。以形参的名字为key，指向实参的地址
-                HTPropAssignStrong(variable, identifier, HTPropGet(variableDef, identifier));
+                HTRuntimeEnvironmentPushVariableToStack(rootEnv, variable, HTPropGet(variableDef, identifier));
                 paramNode = HTPropGet(paramNode, next);
                 index++;
             }
 
-            HTRuntimeEnvironmentDeclareVariables(rootEnv, paramValueList, 0);
             HTExecuteStatementList(HTPropGet(function, u.customFunction.statementList), rootEnv);
             HTVariableRef returnVariable = HTPropGet(rootEnv, returnVariable);
             if (returnVariable) {

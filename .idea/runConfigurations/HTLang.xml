@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="HTLang" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="../AssignTest.ht 1 0" WORKING_DIR="" PASS_PARENT_ENVS_2="true" PROJECT_NAME="HtLang" TARGET_NAME="HTLang" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="HtLang" RUN_TARGET_NAME="HTLang">
+  <configuration default="false" name="HTLang" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="../AssignTest.ht 1 0" PASS_PARENT_ENVS_2="true" PROJECT_NAME="HtLang" TARGET_NAME="HTLang" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="HtLang" RUN_TARGET_NAME="HTLang">
     <envs />
     <method />
   </configuration>

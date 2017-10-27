@@ -477,27 +477,27 @@ dictLiteral
 dataType
     : INT
     {
-        $$ = HTDataTypeInt
+        $$ = HTDataTypeInt;
     }
     | DOUBLE
     {
-        $$ = HTDataTypeDouble
+        $$ = HTDataTypeDouble;
     }
     | BOOL
     {
-        $$ = HTDataTypeBool
+        $$ = HTDataTypeBool;
     }
     | STRING
     {
-        $$ = HTDataTypeString
+        $$ = HTDataTypeString;
     }
     | ARRAY
     {
-        $$ = HTDataTypeArray
+        $$ = HTDataTypeArray;
     }
     | MAP
     {
-        $$ = HTDataTypeMap
+        $$ = HTDataTypeMap;
     }
     ;
 

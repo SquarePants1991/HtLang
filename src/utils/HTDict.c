@@ -109,6 +109,16 @@ size_t HTDictSize(HTDictRef dict) {
     return sumSize;
 }
 
+void HTDictClear(HTDictRef dict) {
+    HTListRef list = HTPropGet(dict, buckets);
+    HTListNodeRef bucketsNode = HTPropGet(list, head);
+    while (bucketsNode) {
+        HTListRef bucketList = HTPropGet(bucketsNode, ptr);
+        HTListClear(bucketList);
+        bucketsNode = HTPropGet(bucketsNode, next);
+    }
+}
+
 HTListRef HTDictMakeKeys(HTDictRef dict) {
     HTListRef keys = HTListCreate();
 

@@ -77,6 +77,18 @@ void HTListRemove(HTListRef listRef, int index) {
     }
 }
 
+void HTListClear(HTListRef listRef) {
+    HTListNodeRef node = HTPropGet(listRef, head);
+    while(node) {
+        HTListNodeRef next = (HTListNodeRef)HTPropGet(node, next);
+        HTPropAssignStrong(node, next, NULL);
+        HTPropAssignStrong(node, prev, NULL);
+        node = next;
+    }
+    HTPropAssignStrong(listRef, head, NULL);
+    HTPropAssignStrong(listRef, tail, NULL);
+}
+
 size_t HTListSize(HTListRef listRef) {
     size_t size = 0;
     HTListNodeRef node = HTPropGet(listRef, head);
