@@ -70,6 +70,7 @@ HTClassBegin
         HTExpressionPostfixOperator operator;
     } postfixOpExpression;
     struct {
+        struct HTExpression * owner;
         struct HTExpression * identifier;
         HTListRef parameters;
     } funcCallExpression;
@@ -93,6 +94,7 @@ HTExpressionRef HTExpressionCreateBinaryOperation(HTExpressionBinaryOperator ope
 HTExpressionRef HTExpressionCreateUnaryOperation(HTExpressionUnaryOperator operator, HTExpressionRef expression);
 HTExpressionRef HTExpressionCreatePostfixOperation(HTExpressionPostfixOperator operator, HTExpressionRef expressionSource, HTExpressionRef expressionOp);
 HTExpressionRef HTExpressionCreateFuncCall(HTExpressionRef identifier, HTListRef parameters);
+HTExpressionRef HTExpressionCreateMemberFuncCall(HTExpressionRef owner, HTExpressionRef identifier, HTListRef parameters);
 
 void HTExpressionPrintDebugInfo(HTExpressionRef expr);
 

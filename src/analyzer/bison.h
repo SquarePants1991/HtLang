@@ -92,12 +92,13 @@ extern int yydebug;
     RCB = 302,
     LSB = 303,
     RSB = 304,
-    RANGE_UNCLOSE = 305,
-    RANGE_CLOSE = 306,
-    IN = 307,
-    COMMENT_ONE_LINE = 308,
-    NEGATIVE = 309,
-    BRACE = 310
+    DOT = 305,
+    RANGE_UNCLOSE = 306,
+    RANGE_CLOSE = 307,
+    IN = 308,
+    COMMENT_ONE_LINE = 309,
+    NEGATIVE = 310,
+    BRACE = 311
   };
 #endif
 
@@ -120,7 +121,7 @@ union YYSTYPE
     HTVariableRef variableValue;
     HTDictPairRef dictPairValue;
 
-#line 124 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h" /* yacc.c:1915  */
+#line 125 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h" /* yacc.c:1915  */
 };
 
 typedef union YYSTYPE YYSTYPE;

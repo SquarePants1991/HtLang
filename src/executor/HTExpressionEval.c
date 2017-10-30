@@ -2,6 +2,8 @@
 #include <compiler/HTExpression.h>
 #include <utils/HTDict.h>
 #include <utils/HTList.h>
+#include <compiler/HTFunction.h>
+#include <utils/HTString.h>
 #include "../compiler/HTVariable.h"
 #include "../compiler/HTExpression.h"
 #include "../compiler/HTFunction.h"
@@ -389,10 +391,22 @@ HTVariableRef HTExpressionEvaluateUnaryOperation(HTExpressionRef expr, HTRuntime
 }
 
 HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
+    HTExpressionRef funcOwner = HTPropGet(expr, funcCallExpression.owner);
     HTExpressionRef identifierExpr = HTPropGet(expr, funcCallExpression.identifier);
-    HTStringRef funcName = HTPropGet(identifierExpr, identifier);
-    HTListNodeRef paramNode = HTPropGet(HTPropGet(expr, funcCallExpression.parameters), head);
+    HTStringRef funcName = NULL;
     HTListRef paramValueList = HTListCreate();
+    if (funcOwner) {
+        HTVariableRef funcOwnerVar = HTExpressionEvaluate(funcOwner, rootEnv);
+        funcName = HTStringCreateFormat("%d$%s", HTPropGet(funcOwnerVar, dataType), HTPropGet(HTPropGet(identifierExpr, identifier), characters));
+        HTListAppend(paramValueList, funcOwnerVar);
+        HTTypeRelease(funcOwnerVar);
+    } else {
+        funcName = HTPropGet(identifierExpr, identifier);
+        HTTypeRetain(funcName);
+    }
+
+    HTListNodeRef paramNode = HTPropGet(HTPropGet(expr, funcCallExpression.parameters), head);
+
     while (paramNode) {
         HTVariableRef expressionResult = HTExpressionEvaluate(HTPropGet(paramNode, ptr), rootEnv);
         HTListAppend(paramValueList, expressionResult);
@@ -402,6 +416,7 @@ HTVariableRef HTExpressionEvaluateFuncCall(HTExpressionRef expr, HTRuntimeEnviro
 
     // call func
     HTFunctionRef function = HTRuntimeEnvironmentGetFunction(rootEnv, funcName);
+    HTTypeRelease(funcName);
     HTVariableRef returnVal = HTVariableCreateWithTypeAndName(HTDataTypeDouble, "_");
 
     if (HTPropGet(function, functionType) == HTFunctionTypeLocal) {

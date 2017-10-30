@@ -361,8 +361,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 57
-#define YY_END_OF_BUFFER 58
+#define YY_NUM_RULES 58
+#define YY_END_OF_BUFFER 59
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -372,20 +372,20 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[131] =
     {   0,
-        0,    0,    0,    0,    0,    0,   58,   56,   52,   52,
-       56,   45,   46,   20,   56,   22,   23,   16,   18,   29,
-       19,   56,   17,   54,   54,   30,   28,   35,    1,   33,
-       55,   55,   55,   24,   25,   55,   55,   55,   55,   55,
-       55,   55,   55,   55,   55,   26,   56,   27,   49,   57,
-       47,   49,   51,   50,   31,   37,   21,    0,    0,    0,
-       54,   36,   32,   34,   55,   55,   55,   55,   55,   55,
-       55,   55,   55,   55,   55,    8,   41,   55,   55,   55,
-       55,   38,   48,   40,   39,   53,   55,    7,   55,   55,
-       55,   55,   55,   55,   55,   11,   55,    2,   55,   55,
+        0,    0,    0,    0,    0,    0,   59,   57,   53,   53,
+       57,   46,   47,   20,   57,   22,   23,   16,   18,   29,
+       19,   42,   17,   55,   55,   30,   28,   35,    1,   33,
+       56,   56,   56,   24,   25,   56,   56,   56,   56,   56,
+       56,   56,   56,   56,   56,   26,   57,   27,   50,   58,
+       48,   50,   52,   51,   31,   37,   21,    0,    0,    0,
+       55,   36,   32,   34,   56,   56,   56,   56,   56,   56,
+       56,   56,   56,   56,   56,    8,   41,   56,   56,   56,
+       56,   38,   49,   40,   39,   54,   56,    7,   56,   56,
+       56,   56,   56,   56,   56,   11,   56,    2,   56,   56,
 
-       55,   55,   55,    4,   55,   55,   55,    9,   10,   55,
-       13,   55,   55,   42,   55,    6,   14,   55,   55,   43,
-       55,   55,   12,   55,    3,   44,    5,   55,   15,    0
+       56,   56,   56,    4,   56,   56,   56,    9,   10,   56,
+       13,   56,   56,   43,   56,    6,   14,   56,   56,   44,
+       56,   56,   12,   56,    3,   45,    5,   56,   15,    0
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -1026,82 +1026,87 @@ return IN;
 case 42:
 YY_RULE_SETUP
 #line 63 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+return DOT;
+	YY_BREAK
+case 43:
+YY_RULE_SETUP
+#line 65 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
    yylval.expressionValue = HTExpressionCreateBoolLiteral(1);
    return Literal;
 }
 	YY_BREAK
-case 43:
+case 44:
 YY_RULE_SETUP
-#line 68 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 70 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
    yylval.expressionValue = HTExpressionCreateBoolLiteral(0);
    return Literal;
 }
 	YY_BREAK
-case 44:
-YY_RULE_SETUP
-#line 73 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-return RETURN;
-	YY_BREAK
 case 45:
 YY_RULE_SETUP
 #line 75 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+return RETURN;
+	YY_BREAK
+case 46:
+YY_RULE_SETUP
+#line 77 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     HTExpressionBeginStringLiteral();
     BEGIN STRING_LITERAL;
 }
 	YY_BREAK
-case 46:
+case 47:
 YY_RULE_SETUP
-#line 80 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 82 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     BEGIN COMMENT;
 }
 	YY_BREAK
-case 47:
+case 48:
 YY_RULE_SETUP
-#line 84 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 86 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     yylval.expressionValue = HTExpressionEndStringLiteral();
     BEGIN INITIAL;
     return Literal;
 }
 	YY_BREAK
-case 48:
+case 49:
 YY_RULE_SETUP
-#line 90 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 92 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     HTExpressionAddStringLiteral("\n");
 }
 	YY_BREAK
-case 49:
+case 50:
 YY_RULE_SETUP
-#line 94 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 96 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     HTExpressionAddStringLiteral(yytext);
 }
 	YY_BREAK
-case 50:
-/* rule 50 can match eol */
+case 51:
+/* rule 51 can match eol */
 YY_RULE_SETUP
-#line 98 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 100 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 BEGIN INITIAL;
 	YY_BREAK
-case 51:
-YY_RULE_SETUP
-#line 99 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
-;
-	YY_BREAK
 case 52:
-/* rule 52 can match eol */
 YY_RULE_SETUP
-#line 103 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 101 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 ;
 	YY_BREAK
 case 53:
+/* rule 53 can match eol */
 YY_RULE_SETUP
 #line 105 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+;
+	YY_BREAK
+case 54:
+YY_RULE_SETUP
+#line 107 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     double doubleVal;
     sscanf(yytext, "%lf", &doubleVal);
@@ -1109,9 +1114,9 @@ YY_RULE_SETUP
     return Literal;
 }
 	YY_BREAK
-case 54:
+case 55:
 YY_RULE_SETUP
-#line 112 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 114 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     int intVal;
     sscanf(yytext, "%d", &intVal);
@@ -1119,29 +1124,29 @@ YY_RULE_SETUP
     return Literal;
 }
 	YY_BREAK
-case 55:
+case 56:
 YY_RULE_SETUP
-#line 120 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 122 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     HTStringRef str = HTStringCreateWithChars(yytext);
     yylval.stringValue = str;
     return IDENTIFIER;
 }
 	YY_BREAK
-case 56:
+case 57:
 YY_RULE_SETUP
-#line 126 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 128 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 {
     fprintf(stderr, "lex parse error! \n");
     exit(1);
 }
 	YY_BREAK
-case 57:
+case 58:
 YY_RULE_SETUP
-#line 131 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 133 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 ECHO;
 	YY_BREAK
-#line 1145 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
+#line 1150 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.c"
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(STRING_LITERAL):
 case YY_STATE_EOF(COMMENT):
@@ -2140,6 +2145,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 131 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
+#line 133 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/lex.l"
 
 

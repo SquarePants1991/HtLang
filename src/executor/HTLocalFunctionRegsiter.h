@@ -11,5 +11,5 @@
 
 void HTLocalFunctionRegisterRegister(HTRuntimeEnvironmentRef rootEnv);
 void HTLocalFunctionRegisterRegisterFunc(HTRuntimeEnvironmentRef rootEnv, const char * identifier, HTFunctionBody funcBody);
-
+void HTLocalFunctionRegisterRegisterFuncForClass(HTRuntimeEnvironmentRef rootEnv, const char * identifier, HTFunctionBody funcBody, HTDataType dataType);
 #endif //HTLANG_HTLOCALFUNCTIONREGSITER_H

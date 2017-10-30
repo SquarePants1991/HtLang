@@ -31,7 +31,7 @@
 
 %token ASSIGN INT DOUBLE BOOL STRING ARRAY MAP SEMI COMMA COLON
 %token IF ELIF ELSE FOR FUNC RETURN WHILE BREAK CONTINUE
-%token LB RB LCB RCB LSB RSB
+%token LB RB LCB RCB LSB RSB DOT
 %token RANGE_UNCLOSE RANGE_CLOSE IN
 %token COMMENT_ONE_LINE
 
@@ -47,7 +47,7 @@
 %left EQ GT LT GE LE NEQ
 %left ADD SUB
 %left MUL DIV MOD
-%right POWER NEGATIVE
+%right POWER NEGATIVE DOT
 %left BRACE
 
 %%
@@ -394,6 +394,16 @@ expression
         $$ = HTExpressionCreateUnaryOperation(HTExpressionUnaryOperatorNeg, $2);
         HTTypeRelease($2);
     }
+    ;
+
+postfixExpression
+    : primaryExpression
+    | postfixExpression LSB expression RSB
+    {
+        $$ = HTExpressionCreatePostfixOperation(HTExpressionPostfixOperatorIndex, $1, $3);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+    }
     | IDENTIFIER LB parameterList RB
     {
         HTExpressionRef identifier = HTExpressionCreateIdentifier($1);
@@ -402,15 +412,14 @@ expression
         HTTypeRelease($3);
         HTTypeRelease(identifier);
     }
-    ;
-
-postfixExpression
-    : primaryExpression
-    | primaryExpression LSB expression RSB
+    | postfixExpression DOT IDENTIFIER LB parameterList RB
     {
-        $$ = HTExpressionCreatePostfixOperation(HTExpressionPostfixOperatorIndex, $1, $3);
+        HTExpressionRef identifier = HTExpressionCreateIdentifier($3);
+        $$ = HTExpressionCreateMemberFuncCall($1, identifier, $5);
         HTTypeRelease($1);
         HTTypeRelease($3);
+        HTTypeRelease($5);
+        HTTypeRelease(identifier);
     }
     ;
 

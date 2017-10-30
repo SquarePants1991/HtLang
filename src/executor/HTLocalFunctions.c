@@ -9,6 +9,7 @@
 #include "../htlang_ctrl.h"
 
 #include <math.h>
+#include <compiler/HTVariable.h>
 
 static void HTPrint(HTListRef parameters, HTVariableRef returnVal) {
     HTListNodeRef node = HTPropGet(parameters, head);
@@ -56,6 +57,26 @@ static void HTAssert(HTListRef parameters, HTVariableRef returnVal) {
             printf("%s\n", HTPropGet(newStr, characters));
             HTTypeRelease(newStr);
         }
+    }
+}
+
+// Map Local Funcs
+static void HTMapRemove(HTListRef parameters, HTVariableRef returnVal) {
+    HTVariableRef mapVar = HTListAt(parameters, 0);
+    HTVariableRef keyVar = HTListAt(parameters, 1);
+    HTStringRef keyString = HTPropGet(keyVar, stringValue);
+    HTDictRef map = HTPropGet(mapVar, dictValue);
+    if (map && keyString) {
+        HTDictRemove(map, keyString);
+    }
+}
+
+static void HTMapSize(HTListRef parameters, HTVariableRef returnVal) {
+    HTVariableRef mapVar = HTListAt(parameters, 0);
+    HTDictRef map = HTPropGet(mapVar, dictValue);
+    if (map) {
+        HTPropAssignWeak(returnVal, dataType, HTDataTypeInt);
+        HTPropAssignWeak(returnVal, value.intValue, HTDictSize(map));
     }
 }
 

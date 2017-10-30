@@ -60,6 +60,8 @@ int yywrap(void) {
 <INITIAL>"..."                   return RANGE_CLOSE;
 <INITIAL>"in"                    return IN;
 
+<INITIAL>"."                    return DOT;
+
 <INITIAL>"true" {
    yylval.expressionValue = HTExpressionCreateBoolLiteral(1);
    return Literal;

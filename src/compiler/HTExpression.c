@@ -12,6 +12,7 @@ void HTExpressionDealloc(HTExpressionRef self) {
     HTPropAssignStrong(self, binaryOpExpression.left, NULL);
     HTPropAssignStrong(self, binaryOpExpression.right, NULL);
     HTPropAssignStrong(self, unaryOpExpression.expression, NULL);
+    HTPropAssignStrong(self, funcCallExpression.owner, NULL);
     HTPropAssignStrong(self, funcCallExpression.identifier, NULL);
     HTPropAssignStrong(self, funcCallExpression.parameters, NULL);
     HTPropAssignStrong(self, postfixOpExpression.expressionSource, NULL);
@@ -121,6 +122,15 @@ HTExpressionRef HTExpressionCreateIdentifier(HTStringRef val) {
 HTExpressionRef HTExpressionCreateFuncCall(HTExpressionRef identifier, HTListRef parameters) {
     HTExpressionRef expr = HTExpressionCreate();
     HTPropAssignWeak(expr, type, HTExpressionTypeFuncCall);
+    HTPropAssignStrong(expr, funcCallExpression.identifier, identifier);
+    HTPropAssignStrong(expr, funcCallExpression.parameters, parameters);
+    return expr;
+}
+
+HTExpressionRef HTExpressionCreateMemberFuncCall(HTExpressionRef owner, HTExpressionRef identifier, HTListRef parameters) {
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeFuncCall);
+    HTPropAssignStrong(expr, funcCallExpression.owner, owner);
     HTPropAssignStrong(expr, funcCallExpression.identifier, identifier);
     HTPropAssignStrong(expr, funcCallExpression.parameters, parameters);
     return expr;
