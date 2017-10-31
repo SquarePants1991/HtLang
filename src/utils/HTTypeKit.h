@@ -15,6 +15,7 @@ typedef struct {\
     int refCount;\
     className##Impl *impl;\
     DeallocHandler deallocHandler;\
+    IsNULLHandler isNULLHandler;\
 } className;\
 typedef className * className##Ref;\
 \

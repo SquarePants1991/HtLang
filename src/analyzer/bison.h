@@ -74,31 +74,32 @@ extern int yydebug;
     STRING = 284,
     ARRAY = 285,
     MAP = 286,
-    SEMI = 287,
-    COMMA = 288,
-    COLON = 289,
-    IF = 290,
-    ELIF = 291,
-    ELSE = 292,
-    FOR = 293,
-    FUNC = 294,
-    RETURN = 295,
-    WHILE = 296,
-    BREAK = 297,
-    CONTINUE = 298,
-    LB = 299,
-    RB = 300,
-    LCB = 301,
-    RCB = 302,
-    LSB = 303,
-    RSB = 304,
-    DOT = 305,
-    RANGE_UNCLOSE = 306,
-    RANGE_CLOSE = 307,
-    IN = 308,
-    COMMENT_ONE_LINE = 309,
-    NEGATIVE = 310,
-    BRACE = 311
+    NIL = 287,
+    SEMI = 288,
+    COMMA = 289,
+    COLON = 290,
+    IF = 291,
+    ELIF = 292,
+    ELSE = 293,
+    FOR = 294,
+    FUNC = 295,
+    RETURN = 296,
+    WHILE = 297,
+    BREAK = 298,
+    CONTINUE = 299,
+    LB = 300,
+    RB = 301,
+    LCB = 302,
+    RCB = 303,
+    LSB = 304,
+    RSB = 305,
+    DOT = 306,
+    RANGE_UNCLOSE = 307,
+    RANGE_CLOSE = 308,
+    IN = 309,
+    COMMENT_ONE_LINE = 310,
+    NEGATIVE = 311,
+    BRACE = 312
   };
 #endif
 
@@ -121,7 +122,7 @@ union YYSTYPE
     HTVariableRef variableValue;
     HTDictPairRef dictPairValue;
 
-#line 125 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h" /* yacc.c:1915  */
+#line 126 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.h" /* yacc.c:1915  */
 };
 
 typedef union YYSTYPE YYSTYPE;

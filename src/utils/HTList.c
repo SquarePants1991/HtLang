@@ -1,4 +1,5 @@
 #include "HTList.h"
+#include "HTType.h"
 
 void HTListNodeAlloc(HTListNodeRef self) {
     HTPropAssignStrong(self, ptr, NULL);
@@ -93,6 +94,12 @@ size_t HTListSize(HTListRef listRef) {
     size_t size = 0;
     HTListNodeRef node = HTPropGet(listRef, head);
     while(node) {
+        if (HTPropGet(node, ptr)->isNULLHandler) {
+            if (HTPropGet(node, ptr)->isNULLHandler(HTPropGet(node, ptr))) {
+                node = HTPropGet(node, next);
+                continue;
+            }
+        }
         size++;
         node = HTPropGet(node, next);
     }

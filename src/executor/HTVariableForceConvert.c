@@ -2,6 +2,7 @@
 // Created by wang yang on 2017/9/14.
 //
 
+#include <compiler/HTVariable.h>
 #include "../compiler/HTVariable.h"
 
 #include "HTVariableForceConvert.h"
@@ -20,10 +21,12 @@ HTVariableRef HTVariableConvertToDouble(HTVariableRef variable, unsigned char us
             HTPropAssignWeak(targetVariable, value.doubleValue, (double)HTPropGet(variable, value.intValue));
             return targetVariable;
         default:
-            return NULL;
+            HTPropAssignWeak(targetVariable, value.doubleValue, (int)HTPropGet(variable, value.doubleValue));
+            break;
     }
 
     HTPropAssignWeak(targetVariable, dataType, HTDataTypeDouble);
+    return targetVariable;
 }
 
 HTVariableRef HTVariableConvertToInt(HTVariableRef variable, unsigned char useOriginVariable) {
@@ -39,7 +42,8 @@ HTVariableRef HTVariableConvertToInt(HTVariableRef variable, unsigned char useOr
             HTPropAssignWeak(targetVariable, value.intValue, (int)HTPropGet(variable, value.doubleValue));
             break;
         default:
-            return NULL;
+            HTPropAssignWeak(targetVariable, value.intValue, (int)HTPropGet(variable, value.intValue));
+            break;
     }
     HTPropAssignWeak(targetVariable, dataType, HTDataTypeInt);
 
@@ -73,7 +77,8 @@ HTVariableRef HTVariableConvertToBool(HTVariableRef variable, unsigned char useO
             HTPropAssignWeak(targetVariable, value.boolValue, (unsigned char)HTPropGet(variable, value.doubleValue));
             break;
         default:
-            return NULL;
+            HTPropAssignWeak(targetVariable, value.boolValue, (int)HTPropGet(variable, value.boolValue));
+            break;
     }
     HTPropAssignWeak(targetVariable, dataType, HTDataTypeBool);
     return targetVariable;

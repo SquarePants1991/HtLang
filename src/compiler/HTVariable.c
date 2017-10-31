@@ -11,11 +11,21 @@ void HTVariableDealloc(HTVariableRef self) {
     HTPropAssignStrong(self, dictValue, NULL);
 }
 
+unsigned char HTVariableIsNull(HTVariableRef variable) {
+    return (unsigned char)(HTPropGet(variable, dataType) == HTDataTypeNil);
+}
+
 HTVariableRef HTVariableCreateWithTypeAndName(HTDataType dataType, const char *name) {
     HTVariableRef variable = HTVariableCreate();
+    variable->isNULLHandler = (IsNULLHandler)HTVariableIsNull;
     HTStringRef identifierStr = HTStringCreateWithChars(name);
     HTListRef arrayValue = HTListCreate();
-    HTDictRef dictValue = HTDictCreateWithBucketCount(100);
+    // TODO: 此处是优化重点
+    int bucketCount = 0;
+    if (dataType == HTDataTypeMap) {
+        bucketCount = 10;
+    }
+    HTDictRef dictValue = HTDictCreateWithBucketCount(bucketCount);
     HTPropAssignWeak(variable, dataType, dataType);
     HTPropAssignStrong(variable, identifier, identifierStr);
     HTPropAssignWeak(variable, value.boolValue, 0);

@@ -12,6 +12,8 @@ void HTLocalFunctionRegisterRegister(HTRuntimeEnvironmentRef rootEnv) {
     HTLocalFunctionRegisterRegisterFunc(rootEnv, "assert", HTAssert);
     HTLocalFunctionRegisterRegisterFuncForClass(rootEnv, "remove", HTMapRemove, HTDataTypeMap);
     HTLocalFunctionRegisterRegisterFuncForClass(rootEnv, "size", HTMapSize, HTDataTypeMap);
+    HTLocalFunctionRegisterRegisterFuncForClass(rootEnv, "containsKey", HTMapContainsKey, HTDataTypeMap);
+    HTLocalFunctionRegisterRegisterFuncForClass(rootEnv, "clear", HTMapClear, HTDataTypeMap);
 }
 
 void HTLocalFunctionRegisterRegisterFunc(HTRuntimeEnvironmentRef rootEnv, const char * identifier, HTFunctionBody funcBody) {

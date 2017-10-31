@@ -1,10 +1,22 @@
 double doubleValue = 30.0;
 int intValue = 100;
 string strValue = "Hello World";
+Map emptyMap = {};
+assert("emptyMap的长度等于0", emptyMap.size() == 0);
 Map map = { "intValue": intValue, "doubleValue": doubleValue};
+assert("map的长度等于2", map.size() == 2);
 map["strValue"] = strValue;
+assert("map的长度等于3", map.size() == 3);
 
 assert("map[intValue]等于100", map["intValue"] == 100);
+map["intValue"] = 200;
+assert("map[intValue]等于200", map["intValue"] == 200);
 assert("map[doubleValue]等于30.0", map["doubleValue"] == 30.0);
 assert("map[strValue]等于Hello World", map["strValue"] == "Hello World");
-#assert("map的长度等于3", map.size());
+
+assert("map包含strValue", map.containsKey("strValue"));
+map.remove("strValue");
+assert("map不包含strValue", map.containsKey("strValue") == false);
+
+map.clear();
+assert("map的长度等于0", map.size() == 0);

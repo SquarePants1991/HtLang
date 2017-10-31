@@ -19,6 +19,8 @@ HTClassBegin
     HTTypeRef value;
 HTClassEnd(HTDictPair)
 
+unsigned char HTDictPairIsNull(HTDictPairRef instance);
+
 HTDictRef HTDictCreateWithBucketCount(size_t bucketCount);
 unsigned long HTDictHash(HTDictRef dict, const char * key);
 void HTDictSet(HTDictRef dict, HTStringRef key, HTTypeRef value);

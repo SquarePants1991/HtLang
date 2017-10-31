@@ -14,7 +14,8 @@ typedef enum {
     HTDataTypeBool,
 	HTDataTypeString,
 	HTDataTypeArray,
-    HTDataTypeMap
+    HTDataTypeMap,
+	HTDataTypeNil
 } HTDataType;
 
 HTClassBegin
@@ -30,6 +31,7 @@ HTClassBegin
     HTDictRef dictValue;
 HTClassEnd(HTVariable)
 
+unsigned char HTVariableIsNull(HTVariableRef variable);
 
 typedef HTVariable * HTVariableRef;
 

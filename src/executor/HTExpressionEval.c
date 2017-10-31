@@ -86,21 +86,30 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
     HTDataType leftDataType = HTPropGet(leftResult, dataType);
     HTDataType rightDataType = HTPropGet(rightResult, dataType);
     // TODO: 可操作列表增强，处理数组等情况
+    HTVariableRef oldLeftResult = leftResult;
+    HTVariableRef oldRightResult = rightResult;
     if (leftDataType == HTDataTypeString || rightDataType == HTDataTypeString) {
         HTPropAssignWeak(result, dataType, HTDataTypeString);
-        HTVariableConvertToString(leftResult, 1);
-        HTVariableConvertToString(rightResult, 1);
+        leftResult = HTVariableConvertToString(leftResult, 0);
+        rightResult = HTVariableConvertToString(rightResult, 0);
+        HTTypeRelease(oldLeftResult);
+        HTTypeRelease(oldRightResult);
     } else if (leftDataType == HTDataTypeDouble || rightDataType == HTDataTypeDouble) {
         HTPropAssignWeak(result, dataType, HTDataTypeDouble);
-        HTVariableConvertToDouble(leftResult, 1);
-        HTVariableConvertToDouble(rightResult, 1);
+        leftResult = HTVariableConvertToDouble(leftResult, 0);
+        rightResult = HTVariableConvertToDouble(rightResult, 0);
+        HTTypeRelease(oldLeftResult);
+        HTTypeRelease(oldRightResult);
     } else if (leftDataType == HTDataTypeInt || rightDataType == HTDataTypeInt) {
         HTPropAssignWeak(result, dataType, HTDataTypeInt);
-        HTVariableConvertToInt(leftResult, 1);
-        HTVariableConvertToInt(rightResult, 1);
+        leftResult = HTVariableConvertToInt(leftResult, 0);
+        rightResult = HTVariableConvertToInt(rightResult, 0);
+        HTTypeRelease(oldLeftResult);
+        HTTypeRelease(oldRightResult);
     } else {
         HTPropAssignWeak(result, dataType, HTDataTypeBool);
     }
+
 
     HTDataType resultDataType = HTPropGet(result, dataType);
     switch (HTPropGet(expr, binaryOpExpression.operator)) {
@@ -353,6 +362,10 @@ HTVariableRef HTExpressionEvaluatePostfixOperation(HTExpressionRef expr, HTRunti
                 result = HTDictGet(HTPropGet(sourceResult, dictValue), HTPropGet(opResult, stringValue));
                 if (result) {
                     HTTypeRetain(result);
+                } else {
+                    // if no entry,insert a nil one
+                    result = HTVariableCreateWithTypeAndName(HTDataTypeNil, "_");
+                    HTDictSet(HTPropGet(sourceResult, dictValue), HTPropGet(opResult, stringValue), result);
                 }
             }
             break;

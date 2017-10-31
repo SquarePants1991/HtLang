@@ -1,33 +1,22 @@
-##double doubleValue = 30.0;
-##int intValue = 100;
-##string strValue = "Hello 2 World";
-##Map map = {"intValue": intValue, "doubleValue": doubleValue, "strValue": strValue};
-##map["doubleValue"]  = 200.0;
-##println(map["doubleValue"] + map["strValue"]);
-###map.remove("strValue");
-#
-#int intvalue = 10;
-#intvalue = 100;
-#println(intvalue + "");
+double doubleValue = 30.0;
+int intValue = 100;
+string strValue = "Hello World";
+Map emptyMap = {};
+assert("emptyMap的长度等于0", emptyMap.size() == 0);
+Map map = { "intValue": intValue, "doubleValue": doubleValue};
+assert("map的长度等于2", map.size() == 2);
+map["strValue"] = strValue;
+assert("map的长度等于3", map.size() == 3);
 
-#func passRefArg(int mutableInt) {
-#    mutableInt = 20;
-#}
-#
-#func passRefStr(string mutableStr) {
-#    mutableStr = "YES";
-#}
-#
-#int mutableIntOrigin = 10;
-#assert("mutableIntOrigin 需要等于10", mutableIntOrigin == 10);
-#passRefArg(mutableIntOrigin);
-#assert("mutableIntOrigin 需要等于20", mutableIntOrigin == 20);
-#
-#string mutableStringOrigin = "NO";
-#assert("mutableStringOrigin 需要等于NO", mutableStringOrigin == "NO");
-#passRefStr(mutableStringOrigin);
-#assert("mutableStringOrigin 需要等于YES", mutableStringOrigin == "YES");
+assert("map[intValue]等于100", map["intValue"] == 100);
+map["intValue"] = 200;
+assert("map[intValue]等于200", map["intValue"] == 200);
+assert("map[doubleValue]等于30.0", map["doubleValue"] == 30.0);
+assert("map[strValue]等于Hello World", map["strValue"] == "Hello World");
 
-Map map = {"intValue": intValue, "doubleValue": doubleValue, "strValue": strValue};
-println(map.size());
-map.remove("intValue");
+assert("map包含strValue", map.containsKey("strValue"));
+map.remove("strValue");
+assert("map不包含strValue", map.containsKey("strValue") == false);
+
+map.clear();
+assert("map的长度等于0", map.size() == 0);

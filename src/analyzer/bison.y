@@ -29,7 +29,7 @@
 %token <statementValue>         Statement
 %token <listValue>              List
 
-%token ASSIGN INT DOUBLE BOOL STRING ARRAY MAP SEMI COMMA COLON
+%token ASSIGN INT DOUBLE BOOL STRING ARRAY MAP NIL SEMI COMMA COLON
 %token IF ELIF ELSE FOR FUNC RETURN WHILE BREAK CONTINUE
 %token LB RB LCB RCB LSB RSB DOT
 %token RANGE_UNCLOSE RANGE_CLOSE IN
@@ -214,7 +214,6 @@ funcDefStatement
         HTTypeRelease($4);
         HTTypeRelease($7);
         HTTypeRelease(identifier);
-        printf("This is a function statement\n");
     }
     | FUNC IDENTIFIER LB parameterDefList RB COLON dataType LCB statementList RCB
     {
@@ -404,6 +403,15 @@ postfixExpression
         HTTypeRelease($1);
         HTTypeRelease($3);
     }
+    | IDENTIFIER LB RB
+    {
+        HTExpressionRef identifier = HTExpressionCreateIdentifier($1);
+        HTListRef parameterList = HTListCreate();
+        $$ = HTExpressionCreateFuncCall(identifier, parameterList);
+        HTTypeRelease($1);
+        HTTypeRelease(parameterList);
+        HTTypeRelease(identifier);
+    }
     | IDENTIFIER LB parameterList RB
     {
         HTExpressionRef identifier = HTExpressionCreateIdentifier($1);
@@ -419,6 +427,16 @@ postfixExpression
         HTTypeRelease($1);
         HTTypeRelease($3);
         HTTypeRelease($5);
+        HTTypeRelease(identifier);
+    }
+    | postfixExpression DOT IDENTIFIER LB RB
+    {
+        HTExpressionRef identifier = HTExpressionCreateIdentifier($3);
+        HTListRef parameterList = HTListCreate();
+        $$ = HTExpressionCreateMemberFuncCall($1, identifier, parameterList);
+        HTTypeRelease($1);
+        HTTypeRelease($3);
+        HTTypeRelease(parameterList);
         HTTypeRelease(identifier);
     }
     ;
@@ -482,6 +500,11 @@ dictLiteral
     {
         $$ = $2;
     }
+    | LCB RCB
+    {
+        HTListRef paramList = HTListCreate();
+        $$ = paramList;
+    }
 
 dataType
     : INT
@@ -507,6 +530,10 @@ dataType
     | MAP
     {
         $$ = HTDataTypeMap;
+    }
+    | NIL
+    {
+        $$ = HTDataTypeNil;
     }
     ;
 

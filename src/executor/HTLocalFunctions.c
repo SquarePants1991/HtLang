@@ -80,4 +80,29 @@ static void HTMapSize(HTListRef parameters, HTVariableRef returnVal) {
     }
 }
 
+static void HTMapClear(HTListRef parameters, HTVariableRef returnVal) {
+    HTVariableRef mapVar = HTListAt(parameters, 0);
+    HTDictRef map = HTPropGet(mapVar, dictValue);
+    if (map) {
+        HTDictClear(map);
+    }
+}
+
+static void HTMapContainsKey(HTListRef parameters, HTVariableRef returnVal) {
+    HTVariableRef mapVar = HTListAt(parameters, 0);
+    HTVariableRef keyVar = HTListAt(parameters, 1);
+    HTDictRef map = HTPropGet(mapVar, dictValue);
+    HTStringRef key = HTPropGet(keyVar, stringValue);
+    if (map) {
+        HTVariableRef var = HTDictGet(map, key);
+        if (var && HTPropGet(var, dataType) != HTDataTypeNil) {
+            HTPropAssignWeak(returnVal, dataType, HTDataTypeBool);
+            HTPropAssignWeak(returnVal, value.boolValue, 1);
+            return;
+        }
+    }
+    HTPropAssignWeak(returnVal, dataType, HTDataTypeBool);
+    HTPropAssignWeak(returnVal, value.boolValue, 0);
+}
+
 #endif

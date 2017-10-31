@@ -5,6 +5,7 @@
 #include "HTDict.h"
 #include "HTString.h"
 #include "HTList.h"
+#include "HTType.h"
 #include <limits.h>
 
 void HTDictAlloc(HTDictRef self) {
@@ -139,8 +140,15 @@ HTListRef HTDictMakeKeys(HTDictRef dict) {
     return keys;
 }
 
-void HTDictPairAlloc(HTDictPairRef self) {
+unsigned char HTDictPairIsNull(HTDictPairRef instance) {
+    if (HTPropGet(instance, value)->isNULLHandler) {
+        return HTPropGet(instance, value)->isNULLHandler(HTPropGet(instance, value));
+    }
+    return 0;
+}
 
+void HTDictPairAlloc(HTDictPairRef self) {
+    self->isNULLHandler = HTDictPairIsNull;
 }
 
 void HTDictPairDealloc(HTDictPairRef self) {
