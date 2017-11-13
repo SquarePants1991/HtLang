@@ -10,6 +10,7 @@ typedef enum {
     HTExpressionTypeStringLiteral,
     HTExpressionTypeArray,
     HTExpressionTypeDict,
+    HTExpressionTypeNil,
     HTExpressionTypeIdentifier,
     HTExpressionTypeBinaryOperation,
     HTExpressionTypeUnaryOperation,
@@ -84,6 +85,7 @@ HTExpressionRef HTExpressionCreateBoolLiteral(unsigned char val);
 HTExpressionRef HTExpressionCreateStringLiteral(HTStringRef val);
 HTExpressionRef HTExpressionCreateArray(HTListRef val);
 HTExpressionRef HTExpressionCreateDict(HTListRef val);
+HTExpressionRef HTExpressionCreateNil();
 
 void HTExpressionBeginStringLiteral();
 void HTExpressionAddStringLiteral(const char *str);

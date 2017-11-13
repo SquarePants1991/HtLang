@@ -441,7 +441,7 @@ union yyalloc
 /* YYFINAL -- State number of the termination state.  */
 #define YYFINAL  56
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   740
+#define YYLAST   767
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  58
@@ -508,8 +508,8 @@ static const yytype_uint16 yyrline[] =
      243,   250,   257,   265,   271,   279,   286,   294,   295,   301,
      307,   313,   319,   325,   331,   337,   343,   349,   355,   361,
      367,   373,   379,   385,   391,   399,   400,   406,   415,   423,
-     432,   445,   449,   454,   459,   464,   471,   478,   488,   499,
-     503,   510,   514,   518,   522,   526,   530,   534
+     432,   445,   449,   453,   458,   463,   468,   475,   482,   492,
+     503,   507,   514,   518,   522,   526,   530,   534
 };
 #endif
 
@@ -564,22 +564,22 @@ static const yytype_uint16 yytoknum[] =
      STATE-NUM.  */
 static const yytype_int16 yypact[] =
 {
-     691,   -35,   -85,    77,   -85,   -85,   -85,   -85,   -85,   -85,
-     -85,    77,     7,    10,    77,    77,     6,     8,    77,    14,
-      77,    49,   691,   -85,   -85,   -85,    -1,   -85,   -85,   -85,
-     -85,   -85,   -85,   -85,   170,   -18,   -85,   -85,   -85,    44,
-      -2,    40,   -32,   195,     4,    15,   216,   241,   -85,   -85,
-     261,   -85,   306,   -22,   -25,   466,   -85,   -85,    77,    18,
-     -85,   -85,    77,    77,    77,    77,    77,    77,    77,    77,
-      77,    77,    77,    77,    77,    77,   -85,    77,    77,    77,
-      77,    64,     9,   -85,   -23,   691,    77,   135,   -85,   691,
-     -85,    77,    65,   -85,    77,   -85,   333,   691,    67,    67,
-      40,    40,    40,    40,   184,   184,   184,   184,   184,   184,
-     286,   286,   487,   487,   351,   378,    28,    77,   -85,   -85,
-     485,   396,   393,   -85,    69,   529,   466,    41,   466,   691,
-     556,   -85,   -85,    22,   441,   -85,   691,   -20,   -85,    48,
-     -85,    77,   583,   -85,   -85,   -16,   -85,   610,   135,   691,
-     -85,   466,   -85,   -85,   -85,    39,   637,   691,   -85,   664,
+     691,   -33,   -85,   718,   -85,   -85,   -85,   -85,   -85,   -85,
+     -85,   718,     7,    33,   718,   718,    17,    35,   718,    22,
+     718,    65,   691,   -85,   -85,   -85,     4,   -85,   -85,   -85,
+     -85,   -85,   -85,   -85,   170,   -18,   -85,   -85,   -85,    66,
+      -2,    62,    24,   195,    30,    41,   216,   241,   -85,   -85,
+     261,   -85,   306,   -24,   -25,   466,   -85,   -85,   718,    40,
+     -85,   -85,   718,   718,   718,   718,   718,   718,   718,   718,
+     718,   718,   718,   718,   718,   718,   -85,   718,   718,   718,
+     718,    82,     1,   -85,   -23,   691,   718,    32,   -85,   691,
+     -85,   718,    89,   -85,   718,   -85,   333,   691,    79,    79,
+      62,    62,    62,    62,    69,    69,    69,    69,    69,    69,
+     286,   286,   531,   531,   351,   378,    53,   718,   -85,   -85,
+     485,   396,   -10,   -85,   107,   529,   466,    83,   466,   691,
+     556,   -85,   -85,   458,   441,   -85,   691,   -20,   -85,    85,
+     -85,   718,   583,   -85,   -85,     3,   -85,   610,    32,   691,
+     -85,   466,   -85,   -85,   -85,    74,   637,   691,   -85,   664,
      -85
 };
 
@@ -588,22 +588,22 @@ static const yytype_int16 yypact[] =
      means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,    64,    61,     0,    71,    72,    73,    74,    75,    76,
-      77,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,    65,    61,     0,    72,    73,    74,    75,    76,    77,
+      62,     0,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     2,     3,     6,     7,     8,    18,     9,    10,
-      11,    12,    13,    14,     0,    37,    55,    62,    63,     0,
+      11,    12,    13,    14,     0,    37,    55,    63,    64,     0,
        0,    54,    37,     0,     0,     0,     0,     0,    29,    30,
-       0,    70,     0,     0,     0,    35,     1,     4,     0,     0,
+       0,    71,     0,     0,     0,    35,     1,     4,     0,     0,
       19,    20,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,     0,     0,     0,     5,     0,     0,     0,
        0,     0,     0,    57,     0,     0,     0,     0,    28,     0,
-      65,     0,     0,    69,     0,    66,     0,     0,    40,    41,
+      66,     0,     0,    70,     0,    67,     0,     0,    40,    41,
       42,    43,    44,    45,    47,    46,    48,    50,    49,    51,
       52,    53,    38,    39,     0,     0,     0,     0,    16,    58,
-       0,     0,     0,    31,     0,     0,    67,     0,    36,     0,
+       0,     0,     0,    31,     0,     0,    68,     0,    36,     0,
        0,    15,    56,     0,     0,    21,     0,     0,    32,    33,
       25,     0,     0,    23,    60,     0,    17,     0,     0,     0,
-      34,    68,    22,    59,    24,     0,     0,     0,    26,     0,
+      34,    69,    22,    59,    24,     0,     0,     0,    26,     0,
       27
 };
 
@@ -611,7 +611,7 @@ static const yytype_uint8 yydefact[] =
 static const yytype_int8 yypgoto[] =
 {
      -85,   -85,   -83,    13,   -85,   -85,   -85,   -85,   -85,   -85,
-     -85,   -85,   -85,   -85,   -85,   -85,   -85,   -34,   -39,    37,
+     -85,   -85,   -85,   -85,   -85,   -85,   -85,     2,   -39,    37,
        0,   -85,   -85,   -85,   -85,   -84
 };
 
@@ -629,25 +629,25 @@ static const yytype_int8 yydefgoto[] =
 static const yytype_uint8 yytable[] =
 {
       35,    84,   120,   124,     1,     2,   125,    79,     3,    94,
-      40,    94,    92,    44,   130,   148,    45,    80,    94,    81,
-       1,     2,    35,   119,     3,    95,    93,   149,     1,     2,
-     153,    80,     3,    81,   117,    57,    58,    59,   124,    48,
-      41,    49,   118,    18,    83,    19,   142,    20,    43,    56,
-      82,    46,    47,   147,    67,    50,    52,    55,    86,    18,
-      87,    19,    51,    20,   155,    97,   156,    18,   144,    19,
-     116,    20,   127,   133,   159,   139,   141,    55,    64,    65,
-      66,    67,   150,     1,     2,    35,   157,     3,   138,    35,
-       0,     0,     0,     0,   145,    96,     0,    35,     0,    98,
+      92,    94,    40,    44,   130,   148,     4,     5,     6,     7,
+       8,     9,    35,   119,    93,    95,   117,   149,     1,     2,
+      10,    80,     3,    81,   118,    57,   137,    94,   124,    45,
+      41,    58,    59,    18,    83,    19,   142,    20,    43,   153,
+      48,    46,    47,   147,    10,    50,    52,    55,     4,     5,
+       6,     7,     8,     9,   155,    56,   156,    18,    49,    19,
+      51,    20,    82,    80,   159,    81,    67,    55,    62,    63,
+      64,    65,    66,    67,    86,    35,    87,    97,   116,    35,
+      64,    65,    66,    67,   145,    96,   127,    35,   133,    98,
       99,   100,   101,   102,   103,   104,   105,   106,   107,   108,
-     109,   110,   111,     0,   112,   113,   114,   115,     0,     0,
-      35,     0,    18,   121,    19,    35,    20,     0,   126,    35,
+     109,   110,   111,   139,   112,   113,   114,   115,   141,   150,
+      35,   157,     0,   121,   138,    35,     0,     0,   126,    35,
       35,   128,     0,    57,     0,     0,    35,     0,    57,     0,
        0,     0,    35,    57,     0,     0,     0,    35,     0,    35,
        0,     0,     0,     0,   134,    57,    35,    35,     0,    35,
-      57,     4,     5,     6,     7,     8,     9,    10,     0,    57,
+      57,     0,     0,     0,     0,     0,     0,     0,     0,    57,
       55,     0,    57,     0,     0,     0,     0,     0,   151,    62,
       63,    64,    65,    66,    67,    68,    69,    70,    71,    72,
-      73,    74,    75,    62,    63,    64,    65,    66,    67,     0,
+      73,    74,    75,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,    76,    62,    63,    64,    65,    66,    67,
       68,    69,    70,    71,    72,    73,    74,    75,     0,     0,
        0,     0,    77,    78,     0,    62,    63,    64,    65,    66,
@@ -669,21 +669,21 @@ static const yytype_uint8 yytable[] =
      129,     0,     0,     0,   131,    77,    78,    62,    63,    64,
       65,    66,    67,    68,    69,    70,    71,    72,    73,    74,
       75,     0,     0,    77,    78,    62,    63,    64,    65,    66,
-      67,    68,    69,    70,    71,    72,    73,    74,    75,     4,
-       5,     6,     7,     8,     9,    10,     0,     0,   132,     0,
-      77,    78,     0,     0,     0,     0,     0,     0,     0,   137,
+      67,    68,    69,    70,    71,    72,    73,    74,    75,     0,
+       0,     0,     0,     0,     0,     0,     0,     0,   132,     0,
+      77,    78,     0,     0,     0,     0,     0,     0,     0,     0,
        0,     0,     0,   136,     0,     0,     0,     0,    77,    78,
       62,    63,    64,    65,    66,    67,    68,    69,    70,    71,
-      72,    73,    74,    75,     0,     0,     0,     0,     0,     0,
+      72,    73,    74,    75,     1,     2,     0,     0,     3,     0,
        0,     0,     0,     0,   146,    62,    63,    64,    65,    66,
       67,    68,    69,    70,    71,    72,    73,    74,    75,     0,
-       0,     1,     2,    77,    78,     3,    62,    63,    64,    65,
-      66,    67,    68,    69,    70,    71,    72,    73,    74,    75,
+      10,     1,     2,    77,    78,     3,     0,     0,     0,     0,
+       0,     0,     0,    18,   144,    19,     0,    20,     0,     0,
        0,     4,     5,     6,     7,     8,     9,    10,    77,    78,
        0,    11,     0,     0,    12,    13,    14,    15,    16,    17,
       18,     0,    19,   135,    20,     1,     2,     0,     0,     3,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     4,     5,     6,     7,     8,
+      62,    63,    64,    65,    66,    67,    68,    69,    70,    71,
+      72,    73,    74,    75,     0,     4,     5,     6,     7,     8,
        9,    10,     1,     2,     0,    11,     3,     0,    12,    13,
       14,    15,    16,    17,    18,     0,    19,   140,    20,     0,
        0,     0,     4,     5,     6,     7,     8,     9,    10,     1,
@@ -700,33 +700,35 @@ static const yytype_uint8 yytable[] =
        4,     5,     6,     7,     8,     9,    10,     1,     2,     0,
       11,     3,     0,    12,    13,    14,    15,    16,    17,    18,
        0,    19,   160,    20,     0,     0,     0,     4,     5,     6,
-       7,     8,     9,    10,     0,     0,     0,    11,     0,     0,
+       7,     8,     9,    10,     1,     2,     0,    11,     3,     0,
       12,    13,    14,    15,    16,    17,    18,     0,    19,     0,
-      20
+      20,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+      10,     0,     0,     0,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,    18,     0,    19,     0,    20
 };
 
 static const yytype_int16 yycheck[] =
 {
        0,    40,    85,    87,     6,     7,    89,    25,    10,    34,
-      45,    34,    34,     6,    97,    35,     6,    49,    34,    51,
-       6,     7,    22,    46,    10,    50,    48,    47,     6,     7,
-      46,    49,    10,    51,    25,    22,    37,    38,   122,    33,
-       3,    33,    33,    45,    46,    47,   129,    49,    11,     0,
-       6,    14,    15,   136,    14,    18,    19,    20,    54,    45,
-      45,    47,    48,    49,   148,    47,   149,    45,    46,    47,
-       6,    49,     7,    45,   157,     6,    35,    40,    11,    12,
-      13,    14,    34,     6,     7,    85,    47,    10,   122,    89,
-      -1,    -1,    -1,    -1,   133,    58,    -1,    97,    -1,    62,
+      34,    34,    45,     6,    97,    35,    26,    27,    28,    29,
+      30,    31,    22,    46,    48,    50,    25,    47,     6,     7,
+      32,    49,    10,    51,    33,    22,    46,    34,   122,     6,
+       3,    37,    38,    45,    46,    47,   129,    49,    11,    46,
+      33,    14,    15,   136,    32,    18,    19,    20,    26,    27,
+      28,    29,    30,    31,   148,     0,   149,    45,    33,    47,
+      48,    49,     6,    49,   157,    51,    14,    40,     9,    10,
+      11,    12,    13,    14,    54,    85,    45,    47,     6,    89,
+      11,    12,    13,    14,   133,    58,     7,    97,    45,    62,
       63,    64,    65,    66,    67,    68,    69,    70,    71,    72,
-      73,    74,    75,    -1,    77,    78,    79,    80,    -1,    -1,
-     120,    -1,    45,    86,    47,   125,    49,    -1,    91,   129,
+      73,    74,    75,     6,    77,    78,    79,    80,    35,    34,
+     120,    47,    -1,    86,   122,   125,    -1,    -1,    91,   129,
      130,    94,    -1,   120,    -1,    -1,   136,    -1,   125,    -1,
       -1,    -1,   142,   130,    -1,    -1,    -1,   147,    -1,   149,
       -1,    -1,    -1,    -1,   117,   142,   156,   157,    -1,   159,
-     147,    26,    27,    28,    29,    30,    31,    32,    -1,   156,
+     147,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,   156,
      133,    -1,   159,    -1,    -1,    -1,    -1,    -1,   141,     9,
       10,    11,    12,    13,    14,    15,    16,    17,    18,    19,
-      20,    21,    22,     9,    10,    11,    12,    13,    14,    -1,
+      20,    21,    22,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
       -1,    -1,    -1,    33,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    -1,    -1,
       -1,    -1,    52,    53,    -1,     9,    10,    11,    12,    13,
@@ -748,21 +750,21 @@ static const yytype_int16 yycheck[] =
       47,    -1,    -1,    -1,    33,    52,    53,     9,    10,    11,
       12,    13,    14,    15,    16,    17,    18,    19,    20,    21,
       22,    -1,    -1,    52,    53,     9,    10,    11,    12,    13,
-      14,    15,    16,    17,    18,    19,    20,    21,    22,    26,
-      27,    28,    29,    30,    31,    32,    -1,    -1,    50,    -1,
-      52,    53,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    46,
+      14,    15,    16,    17,    18,    19,    20,    21,    22,    -1,
+      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    50,    -1,
+      52,    53,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
       -1,    -1,    -1,    47,    -1,    -1,    -1,    -1,    52,    53,
        9,    10,    11,    12,    13,    14,    15,    16,    17,    18,
-      19,    20,    21,    22,    -1,    -1,    -1,    -1,    -1,    -1,
+      19,    20,    21,    22,     6,     7,    -1,    -1,    10,    -1,
       -1,    -1,    -1,    -1,    33,     9,    10,    11,    12,    13,
       14,    15,    16,    17,    18,    19,    20,    21,    22,    -1,
-      -1,     6,     7,    52,    53,    10,     9,    10,    11,    12,
-      13,    14,    15,    16,    17,    18,    19,    20,    21,    22,
+      32,     6,     7,    52,    53,    10,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    45,    46,    47,    -1,    49,    -1,    -1,
       -1,    26,    27,    28,    29,    30,    31,    32,    52,    53,
       -1,    36,    -1,    -1,    39,    40,    41,    42,    43,    44,
       45,    -1,    47,    48,    49,     6,     7,    -1,    -1,    10,
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
-      -1,    -1,    -1,    -1,    -1,    26,    27,    28,    29,    30,
+       9,    10,    11,    12,    13,    14,    15,    16,    17,    18,
+      19,    20,    21,    22,    -1,    26,    27,    28,    29,    30,
       31,    32,     6,     7,    -1,    36,    10,    -1,    39,    40,
       41,    42,    43,    44,    45,    -1,    47,    48,    49,    -1,
       -1,    -1,    26,    27,    28,    29,    30,    31,    32,     6,
@@ -779,9 +781,11 @@ static const yytype_int16 yycheck[] =
       26,    27,    28,    29,    30,    31,    32,     6,     7,    -1,
       36,    10,    -1,    39,    40,    41,    42,    43,    44,    45,
       -1,    47,    48,    49,    -1,    -1,    -1,    26,    27,    28,
-      29,    30,    31,    32,    -1,    -1,    -1,    36,    -1,    -1,
+      29,    30,    31,    32,     6,     7,    -1,    36,    10,    -1,
       39,    40,    41,    42,    43,    44,    45,    -1,    47,    -1,
-      49
+      49,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      32,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,
+      -1,    -1,    -1,    45,    -1,    47,    -1,    49
 };
 
   /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
@@ -816,8 +820,8 @@ static const yytype_uint8 yyr1[] =
       73,    74,    74,    75,    75,    76,    76,    77,    77,    77,
       77,    77,    77,    77,    77,    77,    77,    77,    77,    77,
       77,    77,    77,    77,    77,    78,    78,    78,    78,    78,
-      78,    79,    79,    79,    79,    79,    80,    81,    81,    82,
-      82,    83,    83,    83,    83,    83,    83,    83
+      78,    79,    79,    79,    79,    79,    79,    80,    81,    81,
+      82,    82,    83,    83,    83,    83,    83,    83
 };
 
   /* YYR2[YYN] -- Number of symbols on the right hand side of rule YYN.  */
@@ -829,8 +833,8 @@ static const yytype_uint8 yyr2[] =
        2,     1,     2,     2,     3,     1,     3,     1,     3,     3,
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3,
        3,     3,     3,     3,     2,     1,     4,     3,     4,     6,
-       5,     1,     1,     1,     1,     3,     3,     3,     5,     3,
-       2,     1,     1,     1,     1,     1,     1,     1
+       5,     1,     1,     1,     1,     1,     3,     3,     3,     5,
+       3,     2,     1,     1,     1,     1,     1,     1
 };
 
 
@@ -1512,7 +1516,7 @@ yyreduce:
         HTPropAssignStrong(HTCompilerGetCurrent(), statementList, (yyvsp[0].listValue));
         HTTypeRelease((yyvsp[0].listValue));
     }
-#line 1516 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1520 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 3:
@@ -1523,7 +1527,7 @@ yyreduce:
         HTTypeRelease((yyvsp[0].statementValue));
         (yyval.listValue) = statementList;
     }
-#line 1527 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1531 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 4:
@@ -1532,7 +1536,7 @@ yyreduce:
         HTListAppend((yyvsp[-1].listValue), (yyvsp[0].statementValue));
         HTTypeRelease((yyvsp[0].statementValue));
     }
-#line 1536 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1540 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 5:
@@ -1541,7 +1545,7 @@ yyreduce:
         (yyval.statementValue) = HTStatementCreatePureExpression((yyvsp[-1].expressionValue));
         HTTypeRelease((yyvsp[-1].expressionValue));
     }
-#line 1545 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1549 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 6:
@@ -1549,7 +1553,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1553 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1557 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 7:
@@ -1557,7 +1561,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1561 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1565 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 8:
@@ -1565,7 +1569,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1569 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1573 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 9:
@@ -1573,7 +1577,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1577 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1581 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 10:
@@ -1581,7 +1585,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1585 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1589 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 11:
@@ -1589,7 +1593,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1593 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1597 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 12:
@@ -1597,7 +1601,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1601 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1605 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 13:
@@ -1605,7 +1609,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1609 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1613 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 14:
@@ -1613,7 +1617,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1617 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1621 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 15:
@@ -1623,7 +1627,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-3].expressionValue));
         HTTypeRelease((yyvsp[-1].expressionValue));
     }
-#line 1627 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1631 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 16:
@@ -1634,7 +1638,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-1].stringValue));
         HTTypeRelease(variable);
     }
-#line 1638 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1642 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 17:
@@ -1646,7 +1650,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-3].stringValue));
         HTTypeRelease((yyvsp[-1].expressionValue));
     }
-#line 1650 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1654 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 18:
@@ -1654,7 +1658,7 @@ yyreduce:
     {
         (yyval.statementValue) = (yyvsp[0].statementValue);
     }
-#line 1658 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1662 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 19:
@@ -1664,7 +1668,7 @@ yyreduce:
         (yyval.statementValue) = (yyvsp[-1].statementValue);
         HTTypeRelease((yyvsp[0].statementValue));
     }
-#line 1668 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1672 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 20:
@@ -1674,7 +1678,7 @@ yyreduce:
         (yyval.statementValue) = (yyvsp[-1].statementValue);
         HTTypeRelease((yyvsp[0].statementValue));
     }
-#line 1678 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1682 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 21:
@@ -1684,7 +1688,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-3].expressionValue));
         HTTypeRelease((yyvsp[-1].listValue));
     }
-#line 1688 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1692 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 22:
@@ -1694,7 +1698,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-3].expressionValue));
         HTTypeRelease((yyvsp[-1].listValue));
     }
-#line 1698 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1702 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 23:
@@ -1703,7 +1707,7 @@ yyreduce:
         (yyval.statementValue) = HTStatementCreateIf(NULL, (yyvsp[-1].listValue), HTIfStatementTypeElse);
         HTTypeRelease((yyvsp[-1].listValue));
     }
-#line 1707 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1711 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 24:
@@ -1716,7 +1720,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-1].listValue));
         HTTypeRelease(identifier);
     }
-#line 1720 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1724 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 25:
@@ -1726,7 +1730,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-3].expressionValue));
         HTTypeRelease((yyvsp[-1].listValue));
     }
-#line 1730 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1734 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 26:
@@ -1739,7 +1743,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-1].listValue));
         HTTypeRelease(identifier);
     }
-#line 1743 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1747 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 27:
@@ -1752,7 +1756,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-1].listValue));
         HTTypeRelease(identifier);
     }
-#line 1756 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1760 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 28:
@@ -1761,7 +1765,7 @@ yyreduce:
         (yyval.statementValue) = HTStatementCreateReturn((yyvsp[-1].expressionValue));
         HTTypeRelease((yyvsp[-1].expressionValue));
     }
-#line 1765 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1769 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 29:
@@ -1769,7 +1773,7 @@ yyreduce:
     {
         (yyval.statementValue) = HTStatementCreateBreak();
     }
-#line 1773 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1777 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 30:
@@ -1777,7 +1781,7 @@ yyreduce:
     {
         (yyval.statementValue) = HTStatementCreateContinue();
     }
-#line 1781 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1785 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 31:
@@ -1788,7 +1792,7 @@ yyreduce:
         HTTypeRelease((yyvsp[0].variableValue));
         (yyval.listValue) = list;
     }
-#line 1792 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1796 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 32:
@@ -1797,7 +1801,7 @@ yyreduce:
          HTListAppend((yyvsp[-1].listValue), (yyvsp[0].variableValue));
          HTTypeRelease((yyvsp[0].variableValue));
     }
-#line 1801 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1805 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 33:
@@ -1807,7 +1811,7 @@ yyreduce:
         (yyval.variableValue) = variable;
         HTTypeRelease((yyvsp[0].stringValue));
     }
-#line 1811 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1815 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 34:
@@ -1817,7 +1821,7 @@ yyreduce:
         (yyval.variableValue) = variable;
         HTTypeRelease((yyvsp[-1].stringValue));
     }
-#line 1821 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1825 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 35:
@@ -1828,7 +1832,7 @@ yyreduce:
         (yyval.listValue) = paramList;
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1832 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1836 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 36:
@@ -1838,7 +1842,7 @@ yyreduce:
         HTTypeRelease((yyvsp[0].expressionValue));
         (yyval.listValue) = (yyvsp[-2].listValue);
     }
-#line 1842 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1846 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 38:
@@ -1848,7 +1852,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1852 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1856 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 39:
@@ -1858,7 +1862,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1862 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1866 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 40:
@@ -1868,7 +1872,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1872 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1876 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 41:
@@ -1878,7 +1882,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1882 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1886 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 42:
@@ -1888,7 +1892,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1892 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1896 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 43:
@@ -1898,7 +1902,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1902 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1906 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 44:
@@ -1908,7 +1912,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1912 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1916 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 45:
@@ -1918,7 +1922,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1922 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1926 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 46:
@@ -1928,7 +1932,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1932 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1936 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 47:
@@ -1938,7 +1942,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1942 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1946 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 48:
@@ -1948,7 +1952,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1952 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1956 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 49:
@@ -1958,7 +1962,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1962 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1966 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 50:
@@ -1968,7 +1972,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1972 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1976 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 51:
@@ -1978,7 +1982,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1982 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1986 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 52:
@@ -1988,7 +1992,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 1992 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 1996 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 53:
@@ -1998,7 +2002,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-2].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 2002 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2006 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 54:
@@ -2007,7 +2011,7 @@ yyreduce:
         (yyval.expressionValue) = HTExpressionCreateUnaryOperation(HTExpressionUnaryOperatorNeg, (yyvsp[0].expressionValue));
         HTTypeRelease((yyvsp[0].expressionValue));
     }
-#line 2011 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2015 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 56:
@@ -2017,7 +2021,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-3].expressionValue));
         HTTypeRelease((yyvsp[-1].expressionValue));
     }
-#line 2021 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2025 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 57:
@@ -2030,7 +2034,7 @@ yyreduce:
         HTTypeRelease(parameterList);
         HTTypeRelease(identifier);
     }
-#line 2034 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2038 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 58:
@@ -2042,7 +2046,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-1].listValue));
         HTTypeRelease(identifier);
     }
-#line 2046 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2050 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 59:
@@ -2055,7 +2059,7 @@ yyreduce:
         HTTypeRelease((yyvsp[-1].listValue));
         HTTypeRelease(identifier);
     }
-#line 2059 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2063 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 60:
@@ -2069,7 +2073,7 @@ yyreduce:
         HTTypeRelease(parameterList);
         HTTypeRelease(identifier);
     }
-#line 2073 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2077 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 61:
@@ -2077,54 +2081,62 @@ yyreduce:
     {
         (yyval.expressionValue) = (yyvsp[0].expressionValue);
     }
-#line 2081 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2085 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 62:
 #line 450 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        (yyval.expressionValue) = HTExpressionCreateArray((yyvsp[0].listValue));
-        HTTypeRelease((yyvsp[0].listValue));
+        (yyval.expressionValue) = HTExpressionCreateNil();
     }
-#line 2090 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2093 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 63:
-#line 455 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
+#line 454 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
+    {
+        (yyval.expressionValue) = HTExpressionCreateArray((yyvsp[0].listValue));
+        HTTypeRelease((yyvsp[0].listValue));
+    }
+#line 2102 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+    break;
+
+  case 64:
+#line 459 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
         (yyval.expressionValue) = HTExpressionCreateDict((yyvsp[0].listValue));
         HTTypeRelease((yyvsp[0].listValue));
     }
-#line 2099 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2111 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
-  case 64:
-#line 460 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
+  case 65:
+#line 464 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
         (yyval.expressionValue) = HTExpressionCreateIdentifier((yyvsp[0].stringValue));
         HTTypeRelease((yyvsp[0].stringValue));
     }
-#line 2108 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
-    break;
-
-  case 65:
-#line 465 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
-    {
-        (yyval.expressionValue) = (yyvsp[-1].expressionValue);
-    }
-#line 2116 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2120 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 66:
-#line 472 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
+#line 469 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        (yyval.listValue) = (yyvsp[-1].listValue);
+        (yyval.expressionValue) = (yyvsp[-1].expressionValue);
     }
-#line 2124 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2128 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 67:
-#line 479 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
+#line 476 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
+    {
+        (yyval.listValue) = (yyvsp[-1].listValue);
+    }
+#line 2136 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+    break;
+
+  case 68:
+#line 483 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
         HTDictPairRef pair = HTDictPairCreateWithKeyAndValue((yyvsp[-2].expressionValue), (yyvsp[0].expressionValue));
         HTTypeRelease((yyvsp[-2].expressionValue));
@@ -2134,11 +2146,11 @@ yyreduce:
         (yyval.listValue) = paramList;
         HTTypeRelease(pair);
     }
-#line 2138 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2150 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
-  case 68:
-#line 489 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
+  case 69:
+#line 493 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
         HTDictPairRef pair = HTDictPairCreateWithKeyAndValue((yyvsp[-2].expressionValue), (yyvsp[0].expressionValue));
         HTTypeRelease((yyvsp[-2].expressionValue));
@@ -2147,84 +2159,76 @@ yyreduce:
         HTTypeRelease(pair);
         (yyval.listValue) = (yyvsp[-4].listValue);
     }
-#line 2151 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
-    break;
-
-  case 69:
-#line 500 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
-    {
-        (yyval.listValue) = (yyvsp[-1].listValue);
-    }
-#line 2159 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2163 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 70:
 #line 504 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        HTListRef paramList = HTListCreate();
-        (yyval.listValue) = paramList;
+        (yyval.listValue) = (yyvsp[-1].listValue);
     }
-#line 2168 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2171 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 71:
-#line 511 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
+#line 508 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        (yyval.dataTypeValue) = HTDataTypeInt;
+        HTListRef paramList = HTListCreate();
+        (yyval.listValue) = paramList;
     }
-#line 2176 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2180 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 72:
 #line 515 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        (yyval.dataTypeValue) = HTDataTypeDouble;
+        (yyval.dataTypeValue) = HTDataTypeInt;
     }
-#line 2184 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2188 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 73:
 #line 519 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        (yyval.dataTypeValue) = HTDataTypeBool;
+        (yyval.dataTypeValue) = HTDataTypeDouble;
     }
-#line 2192 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2196 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 74:
 #line 523 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        (yyval.dataTypeValue) = HTDataTypeString;
+        (yyval.dataTypeValue) = HTDataTypeBool;
     }
-#line 2200 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2204 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 75:
 #line 527 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        (yyval.dataTypeValue) = HTDataTypeArray;
+        (yyval.dataTypeValue) = HTDataTypeString;
     }
-#line 2208 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2212 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 76:
 #line 531 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        (yyval.dataTypeValue) = HTDataTypeMap;
+        (yyval.dataTypeValue) = HTDataTypeArray;
     }
-#line 2216 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2220 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
   case 77:
 #line 535 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.y" /* yacc.c:1661  */
     {
-        (yyval.dataTypeValue) = HTDataTypeNil;
+        (yyval.dataTypeValue) = HTDataTypeMap;
     }
-#line 2224 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2228 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
     break;
 
 
-#line 2228 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
+#line 2232 "/Users/wangyang/Documents/Codes/OnGit/HtLang/src/analyzer/bison.c" /* yacc.c:1661  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires

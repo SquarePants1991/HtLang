@@ -56,9 +56,11 @@ HTVariableRef HTVariableConvertToString(HTVariableRef variable, unsigned char us
         targetVariable = HTVariableCreateWithTypeAndName(HTPropGet(variable, dataType), HTPropGet(variable, identifier));
     }
 
-    HTStringRef str = HTVariableToString(variable);
-    HTPropAssignStrong(targetVariable, stringValue, str);
-    HTTypeRelease(str);
+    if (!HTVariableIsNull(variable)) {
+        HTStringRef str = HTVariableToString(variable);
+        HTPropAssignStrong(targetVariable, stringValue, str);
+        HTTypeRelease(str);
+    }
 
     HTPropAssignWeak(targetVariable, dataType, HTDataTypeString);
     return targetVariable;

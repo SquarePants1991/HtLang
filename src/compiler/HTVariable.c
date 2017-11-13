@@ -1,18 +1,33 @@
 #include "HTVariable.h"
 
+void HTVariableClearValueRefs(HTVariableRef self) {
+    HTPropAssignStrong(self, stringValue, NULL);
+    HTPropAssignStrong(self, arrayValue, NULL);
+    HTPropAssignStrong(self, dictValue, NULL);
+}
+
 void HTVariableAlloc(HTVariableRef self) {
 
 }
 
 void HTVariableDealloc(HTVariableRef self) {
     HTPropAssignStrong(self, identifier, NULL);
-    HTPropAssignStrong(self, stringValue, NULL);
-    HTPropAssignStrong(self, arrayValue, NULL);
-    HTPropAssignStrong(self, dictValue, NULL);
+    HTVariableClearValueRefs(self);
 }
 
 unsigned char HTVariableIsNull(HTVariableRef variable) {
-    return (unsigned char)(HTPropGet(variable, dataType) == HTDataTypeNil);
+    if ((HTPropGet(variable, dataType) & HTDataTypeRefMask) == HTDataTypeRefMask) {
+        return (unsigned char)(
+                HTPropGet(variable, stringValue) == NULL &&
+                HTPropGet(variable, arrayValue) == NULL &&
+                HTPropGet(variable, dictValue) == NULL
+        );
+    }
+    return 0;
+}
+
+void HTVariableSetNull(HTVariableRef variable) {
+    HTVariableClearValueRefs(variable);
 }
 
 HTVariableRef HTVariableCreateWithTypeAndName(HTDataType dataType, const char *name) {
@@ -41,6 +56,10 @@ HTVariableRef HTVariableCreateWithTypeAndName(HTDataType dataType, const char *n
 }
 
 void HTVaraibleCopyValue(HTVariableRef source, HTVariableRef dst) {
+    if (HTVariableIsNull(source)) {
+        HTVariableSetNull(dst);
+        return;
+    }
     HTPropAssignWeak(dst, dataType, HTPropGet(source, dataType));
     if (HTPropGet(dst, dataType) == HTDataTypeString) {
         HTPropAssignStrong(dst, stringValue, HTPropGet(source, stringValue));

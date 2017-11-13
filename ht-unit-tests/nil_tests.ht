@@ -1,7 +1,9 @@
 string nilString = nil;
 Map nilMap = nil;
 Array nilArray = nil;
+Array nilDeclare;
 
+assert("nilDeclare 需要等于 nil", nilDeclare == nil);
 assert("nilString 需要等于 nil", nilString == nil);
 assert("nilMap 需要等于 nil", nilMap == nil);
 assert("nilArray 需要等于 nil", nilArray == nil);

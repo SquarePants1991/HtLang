@@ -61,6 +61,12 @@ HTExpressionRef HTExpressionCreateDict(HTListRef val) {
     return expr;
 }
 
+HTExpressionRef HTExpressionCreateNil() {
+    HTExpressionRef expr = HTExpressionCreate();
+    HTPropAssignWeak(expr, type, HTExpressionTypeNil);
+    return expr;
+}
+
 void HTExpressionBeginStringLiteral() {
     currentCollectingStringLiteral = HTStringCreateWithChars("");
 }

@@ -1,3 +1,4 @@
+#include <compiler/HTVariable.h>
 #include "../compiler/HTStatement.h"
 
 #include "HTExecutor.h"
@@ -27,11 +28,13 @@ HTStatementExecuteFinishState HTExecutorExecAssignStatement(HTStatementRef state
 HTStatementExecuteFinishState HTExecutorExecDeclareStatement(HTStatementRef statement, HTRuntimeEnvironmentRef rootEnv) {
     HTStringRef identifier = HTPropGet(HTPropGet(statement, u.declareStatement.variable), identifier);
     HTVariableRef var = HTVariableCreateWithTypeAndName(HTPropGet(HTPropGet(statement, u.declareStatement.variable), dataType), HTPropGet(identifier, characters));
+    HTVariableSetNull(var);
     HTRuntimeEnvironmentDeclareVariable(rootEnv, var, 0);
     HTTypeRelease(var);
 
     if (HTPropGet(statement, u.declareStatement.expression) != NULL) {
         HTVariableRef result = HTExpressionEvaluate(HTPropGet(statement, u.declareStatement.expression), rootEnv);
+        HTPropAssignWeak(result, dataType, HTPropGet(var, dataType));
         HTVaraibleCopyValue(result, var);
         HTTypeRelease(result);
     }

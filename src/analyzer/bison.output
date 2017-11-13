@@ -94,26 +94,26 @@ Grammar
    59                  | postfixExpression DOT IDENTIFIER LB RB
 
    60 primaryExpression: Literal
-   61                  | arrayLiteral
-   62                  | dictLiteral
-   63                  | IDENTIFIER
-   64                  | LB expression RB
+   61                  | NIL
+   62                  | arrayLiteral
+   63                  | dictLiteral
+   64                  | IDENTIFIER
+   65                  | LB expression RB
 
-   65 arrayLiteral: LSB parameterList RSB
+   66 arrayLiteral: LSB parameterList RSB
 
-   66 pairList: expression COLON expression
-   67         | pairList COMMA Literal COLON expression
+   67 pairList: expression COLON expression
+   68         | pairList COMMA Literal COLON expression
 
-   68 dictLiteral: LCB pairList RCB
-   69            | LCB RCB
+   69 dictLiteral: LCB pairList RCB
+   70            | LCB RCB
 
-   70 dataType: INT
-   71         | DOUBLE
-   72         | BOOL
-   73         | STRING
-   74         | ARRAY
-   75         | MAP
-   76         | NIL
+   71 dataType: INT
+   72         | DOUBLE
+   73         | BOOL
+   74         | STRING
+   75         | ARRAY
+   76         | MAP
 
 
 Terminals, with rules where they appear
@@ -123,8 +123,8 @@ error (256)
 IntLiteral (258)
 DoubleLiteral (259)
 BoolLiteral (260)
-IDENTIFIER (261) 15 16 23 25 26 32 33 56 57 58 59 63
-Literal (262) 60 67
+IDENTIFIER (261) 15 16 23 25 26 32 33 56 57 58 59 64
+Literal (262) 60 68
 BinaryOperator (263)
 ADD (264) 39
 SUB (265) 40 53
@@ -143,16 +143,16 @@ OR (277) 52
 Statement (278)
 List (279)
 ASSIGN (280) 14 16
-INT (281) 70
-DOUBLE (282) 71
-BOOL (283) 72
-STRING (284) 73
-ARRAY (285) 74
-MAP (286) 75
-NIL (287) 76
+INT (281) 71
+DOUBLE (282) 72
+BOOL (283) 73
+STRING (284) 74
+ARRAY (285) 75
+MAP (286) 76
+NIL (287) 61
 SEMI (288) 4 14 15 16 27 28 29
-COMMA (289) 33 35 67
-COLON (290) 26 66 67
+COMMA (289) 33 35 68
+COLON (290) 26 67 68
 IF (291) 20
 ELIF (292) 21
 ELSE (293) 22
@@ -162,12 +162,12 @@ RETURN (296) 27
 WHILE (297) 24
 BREAK (298) 28
 CONTINUE (299) 29
-LB (300) 25 26 56 57 58 59 64
-RB (301) 25 26 56 57 58 59 64
-LCB (302) 20 21 22 23 24 25 26 68 69
-RCB (303) 20 21 22 23 24 25 26 68 69
-LSB (304) 55 65
-RSB (305) 55 65
+LB (300) 25 26 56 57 58 59 65
+RB (301) 25 26 56 57 58 59 65
+LCB (302) 20 21 22 23 24 25 26 69 70
+RCB (303) 20 21 22 23 24 25 26 69 70
+LSB (304) 55 66
+RSB (305) 55 66
 DOT (306) 58 59
 RANGE_UNCLOSE (307) 37
 RANGE_CLOSE (308) 38
@@ -216,23 +216,23 @@ parameterDefList (74)
 parameterDef (75)
     on left: 32 33, on right: 30 31
 parameterList (76)
-    on left: 34 35, on right: 35 57 58 65
+    on left: 34 35, on right: 35 57 58 66
 expression (77)
     on left: 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53,
     on right: 4 14 16 20 21 23 24 27 34 35 37 38 39 40 41 42 43 44
-    45 46 47 48 49 50 51 52 53 55 64 66 67
+    45 46 47 48 49 50 51 52 53 55 65 67 68
 postfixExpression (78)
     on left: 54 55 56 57 58 59, on right: 14 36 55 58 59
 primaryExpression (79)
-    on left: 60 61 62 63 64, on right: 54
+    on left: 60 61 62 63 64 65, on right: 54
 arrayLiteral (80)
-    on left: 65, on right: 61
+    on left: 66, on right: 62
 pairList (81)
-    on left: 66 67, on right: 67 68
+    on left: 67 68, on right: 68 69
 dictLiteral (82)
-    on left: 68 69, on right: 62
+    on left: 69 70, on right: 63
 dataType (83)
-    on left: 70 71 72 73 74 75 76, on right: 15 16 26 32 33
+    on left: 71 72 73 74 75 76, on right: 15 16 26 32 33
 
 
 State 0
@@ -285,11 +285,11 @@ State 1
 
    56 postfixExpression: IDENTIFIER . LB RB
    57                  | IDENTIFIER . LB parameterList RB
-   63 primaryExpression: IDENTIFIER .
+   64 primaryExpression: IDENTIFIER .
 
     LB  shift, and go to state 40
 
-    $default  reduce using rule 63 (primaryExpression)
+    $default  reduce using rule 64 (primaryExpression)
 
 
 State 2
@@ -306,6 +306,7 @@ State 3
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -319,51 +320,51 @@ State 3
 
 State 4
 
-   70 dataType: INT .
-
-    $default  reduce using rule 70 (dataType)
-
-
-State 5
-
-   71 dataType: DOUBLE .
+   71 dataType: INT .
 
     $default  reduce using rule 71 (dataType)
 
 
-State 6
+State 5
 
-   72 dataType: BOOL .
+   72 dataType: DOUBLE .
 
     $default  reduce using rule 72 (dataType)
 
 
-State 7
+State 6
 
-   73 dataType: STRING .
+   73 dataType: BOOL .
 
     $default  reduce using rule 73 (dataType)
 
 
-State 8
+State 7
 
-   74 dataType: ARRAY .
+   74 dataType: STRING .
 
     $default  reduce using rule 74 (dataType)
 
 
-State 9
+State 8
 
-   75 dataType: MAP .
+   75 dataType: ARRAY .
 
     $default  reduce using rule 75 (dataType)
 
 
-State 10
+State 9
 
-   76 dataType: NIL .
+   76 dataType: MAP .
 
     $default  reduce using rule 76 (dataType)
+
+
+State 10
+
+   61 primaryExpression: NIL .
+
+    $default  reduce using rule 61 (primaryExpression)
 
 
 State 11
@@ -373,6 +374,7 @@ State 11
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -406,6 +408,7 @@ State 14
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -424,6 +427,7 @@ State 15
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -451,11 +455,12 @@ State 17
 
 State 18
 
-   64 primaryExpression: LB . expression RB
+   65 primaryExpression: LB . expression RB
 
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -469,12 +474,13 @@ State 18
 
 State 19
 
-   68 dictLiteral: LCB . pairList RCB
-   69            | LCB . RCB
+   69 dictLiteral: LCB . pairList RCB
+   70            | LCB . RCB
 
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     RCB         shift, and go to state 51
@@ -490,11 +496,12 @@ State 19
 
 State 20
 
-   65 arrayLiteral: LSB . parameterList RSB
+   66 arrayLiteral: LSB . parameterList RSB
 
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -709,16 +716,16 @@ State 36
 
 State 37
 
-   61 primaryExpression: arrayLiteral .
+   62 primaryExpression: arrayLiteral .
 
-    $default  reduce using rule 61 (primaryExpression)
+    $default  reduce using rule 62 (primaryExpression)
 
 
 State 38
 
-   62 primaryExpression: dictLiteral .
+   63 primaryExpression: dictLiteral .
 
-    $default  reduce using rule 62 (primaryExpression)
+    $default  reduce using rule 63 (primaryExpression)
 
 
 State 39
@@ -737,6 +744,7 @@ State 40
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     RB          shift, and go to state 83
     LCB         shift, and go to state 19
@@ -952,7 +960,7 @@ State 50
    50           | expression . LE expression
    51           | expression . AND expression
    52           | expression . OR expression
-   64 primaryExpression: LB expression . RB
+   65 primaryExpression: LB expression . RB
 
     ADD            shift, and go to state 62
     SUB            shift, and go to state 63
@@ -975,9 +983,9 @@ State 50
 
 State 51
 
-   69 dictLiteral: LCB RCB .
+   70 dictLiteral: LCB RCB .
 
-    $default  reduce using rule 69 (dictLiteral)
+    $default  reduce using rule 70 (dictLiteral)
 
 
 State 52
@@ -998,7 +1006,7 @@ State 52
    50           | expression . LE expression
    51           | expression . AND expression
    52           | expression . OR expression
-   66 pairList: expression . COLON expression
+   67 pairList: expression . COLON expression
 
     ADD            shift, and go to state 62
     SUB            shift, and go to state 63
@@ -1021,8 +1029,8 @@ State 52
 
 State 53
 
-   67 pairList: pairList . COMMA Literal COLON expression
-   68 dictLiteral: LCB pairList . RCB
+   68 pairList: pairList . COMMA Literal COLON expression
+   69 dictLiteral: LCB pairList . RCB
 
     COMMA  shift, and go to state 92
     RCB    shift, and go to state 93
@@ -1031,7 +1039,7 @@ State 53
 State 54
 
    35 parameterList: parameterList . COMMA expression
-   65 arrayLiteral: LSB parameterList . RSB
+   66 arrayLiteral: LSB parameterList . RSB
 
     COMMA  shift, and go to state 94
     RSB    shift, and go to state 95
@@ -1098,6 +1106,7 @@ State 58
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1137,6 +1146,7 @@ State 62
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1155,6 +1165,7 @@ State 63
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1173,6 +1184,7 @@ State 64
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1191,6 +1203,7 @@ State 65
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1209,6 +1222,7 @@ State 66
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1227,6 +1241,7 @@ State 67
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1245,6 +1260,7 @@ State 68
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1263,6 +1279,7 @@ State 69
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1281,6 +1298,7 @@ State 70
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1299,6 +1317,7 @@ State 71
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1317,6 +1336,7 @@ State 72
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1335,6 +1355,7 @@ State 73
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1353,6 +1374,7 @@ State 74
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1371,6 +1393,7 @@ State 75
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1396,6 +1419,7 @@ State 77
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1414,6 +1438,7 @@ State 78
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1432,6 +1457,7 @@ State 79
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1450,6 +1476,7 @@ State 80
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1546,6 +1573,7 @@ State 86
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1568,7 +1596,6 @@ State 87
     STRING  shift, and go to state 7
     ARRAY   shift, and go to state 8
     MAP     shift, and go to state 9
-    NIL     shift, and go to state 10
 
     parameterDefList  go to state 122
     parameterDef      go to state 123
@@ -1629,18 +1656,19 @@ State 89
 
 State 90
 
-   64 primaryExpression: LB expression RB .
+   65 primaryExpression: LB expression RB .
 
-    $default  reduce using rule 64 (primaryExpression)
+    $default  reduce using rule 65 (primaryExpression)
 
 
 State 91
 
-   66 pairList: expression COLON . expression
+   67 pairList: expression COLON . expression
 
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1654,16 +1682,16 @@ State 91
 
 State 92
 
-   67 pairList: pairList COMMA . Literal COLON expression
+   68 pairList: pairList COMMA . Literal COLON expression
 
     Literal  shift, and go to state 127
 
 
 State 93
 
-   68 dictLiteral: LCB pairList RCB .
+   69 dictLiteral: LCB pairList RCB .
 
-    $default  reduce using rule 68 (dictLiteral)
+    $default  reduce using rule 69 (dictLiteral)
 
 
 State 94
@@ -1673,6 +1701,7 @@ State 94
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -1686,9 +1715,9 @@ State 94
 
 State 95
 
-   65 arrayLiteral: LSB parameterList RSB .
+   66 arrayLiteral: LSB parameterList RSB .
 
-    $default  reduce using rule 65 (arrayLiteral)
+    $default  reduce using rule 66 (arrayLiteral)
 
 
 State 96
@@ -2352,6 +2381,7 @@ State 117
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -2474,7 +2504,6 @@ State 122
     STRING  shift, and go to state 7
     ARRAY   shift, and go to state 8
     MAP     shift, and go to state 9
-    NIL     shift, and go to state 10
     RB      shift, and go to state 137
 
     parameterDef  go to state 138
@@ -2560,7 +2589,7 @@ State 126
    50           | expression . LE expression
    51           | expression . AND expression
    52           | expression . OR expression
-   66 pairList: expression COLON expression .
+   67 pairList: expression COLON expression .
 
     ADD            shift, and go to state 62
     SUB            shift, and go to state 63
@@ -2579,12 +2608,12 @@ State 126
     RANGE_UNCLOSE  shift, and go to state 77
     RANGE_CLOSE    shift, and go to state 78
 
-    $default  reduce using rule 66 (pairList)
+    $default  reduce using rule 67 (pairList)
 
 
 State 127
 
-   67 pairList: pairList COMMA Literal . COLON expression
+   68 pairList: pairList COMMA Literal . COLON expression
 
     COLON  shift, and go to state 141
 
@@ -2742,6 +2771,7 @@ State 133
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     RB          shift, and go to state 144
     LCB         shift, and go to state 19
@@ -2881,11 +2911,12 @@ State 140
 
 State 141
 
-   67 pairList: pairList COMMA Literal COLON . expression
+   68 pairList: pairList COMMA Literal COLON . expression
 
     IDENTIFIER  shift, and go to state 1
     Literal     shift, and go to state 2
     SUB         shift, and go to state 3
+    NIL         shift, and go to state 10
     LB          shift, and go to state 18
     LCB         shift, and go to state 19
     LSB         shift, and go to state 20
@@ -3029,7 +3060,6 @@ State 148
     STRING  shift, and go to state 7
     ARRAY   shift, and go to state 8
     MAP     shift, and go to state 9
-    NIL     shift, and go to state 10
 
     dataType  go to state 155
 
@@ -3104,7 +3134,7 @@ State 151
    50           | expression . LE expression
    51           | expression . AND expression
    52           | expression . OR expression
-   67 pairList: pairList COMMA Literal COLON expression .
+   68 pairList: pairList COMMA Literal COLON expression .
 
     ADD            shift, and go to state 62
     SUB            shift, and go to state 63
@@ -3123,7 +3153,7 @@ State 151
     RANGE_UNCLOSE  shift, and go to state 77
     RANGE_CLOSE    shift, and go to state 78
 
-    $default  reduce using rule 67 (pairList)
+    $default  reduce using rule 68 (pairList)
 
 
 State 152

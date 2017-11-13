@@ -14,7 +14,7 @@
 
 
 HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef rootEnv) {
-    HTVariableRef returnVar = HTVariableCreateWithTypeAndName(HTDataTypeDouble, "_");
+    HTVariableRef returnVar = HTVariableCreateWithTypeAndName(HTDataTypeVoid, "_");
     switch(HTPropGet(expr, type)) {
         case HTExpressionTypeIntLiteral:
             HTPropAssignWeak(returnVar, dataType, HTDataTypeInt);
@@ -39,6 +39,9 @@ HTVariableRef HTExpressionEvaluate(HTExpressionRef expr, HTRuntimeEnvironmentRef
         case HTExpressionTypeDict:
             HTTypeRelease(returnVar);
             returnVar = HTExpressionEvaluateDict(expr, rootEnv);
+            break;
+        case HTExpressionTypeNil:
+            HTVariableSetNull(returnVar);
             break;
         case HTExpressionTypeIdentifier:
             HTPropAssignWeak(returnVar, dataType, HTDataTypeDouble);
@@ -197,37 +200,57 @@ HTVariableRef HTExpressionEvaluateBinaryOperation(HTExpressionRef expr, HTRuntim
             break;
         }
         case HTExpressionBinaryOperatorLogicEqual: {
-            if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.boolValue,
-                                 HTPropGet(leftResult, value.doubleValue) == HTPropGet(rightResult, value.doubleValue));
-            } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.boolValue,
-                                 HTPropGet(leftResult, value.intValue) == HTPropGet(rightResult, value.intValue));
-            } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue,
-                                 HTPropGet(leftResult, value.boolValue) == HTPropGet(rightResult, value.boolValue));
-            } else if (resultDataType == HTDataTypeString) {
-                unsigned char isEqual = HTStringEqual(HTPropGet(leftResult, stringValue), HTPropGet(rightResult, stringValue));
-                HTPropAssignWeak(result, value.boolValue, isEqual);
+            if (HTVariableIsNull(leftResult) || HTVariableIsNull(rightResult)) {
+                if (HTVariableIsNull(leftResult)) {
+                    HTPropAssignWeak(result, value.boolValue,  HTVariableIsNull(rightResult));
+                }
+                if (HTVariableIsNull(rightResult)) {
+                    HTPropAssignWeak(result, value.boolValue,  HTVariableIsNull(leftResult));
+                }
+            } else {
+                if (resultDataType == HTDataTypeDouble) {
+                    HTPropAssignWeak(result, value.boolValue,
+                                     HTPropGet(leftResult, value.doubleValue) == HTPropGet(rightResult, value.doubleValue));
+                } else if (resultDataType == HTDataTypeInt) {
+                    HTPropAssignWeak(result, value.boolValue,
+                                     HTPropGet(leftResult, value.intValue) == HTPropGet(rightResult, value.intValue));
+                } else if (resultDataType == HTDataTypeBool) {
+                    HTPropAssignWeak(result, value.boolValue,
+                                     HTPropGet(leftResult, value.boolValue) == HTPropGet(rightResult, value.boolValue));
+                } else if (resultDataType == HTDataTypeString) {
+                    unsigned char isEqual = HTStringEqual(HTPropGet(leftResult, stringValue), HTPropGet(rightResult, stringValue));
+                    HTPropAssignWeak(result, value.boolValue, isEqual);
+                }
+                HTPropAssignWeak(result, dataType, HTDataTypeBool);
             }
-            HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;
         }
         case HTExpressionBinaryOperatorLogicNotEqual: {
-            if (resultDataType == HTDataTypeDouble) {
-                HTPropAssignWeak(result, value.boolValue,
-                                 HTPropGet(leftResult, value.doubleValue) != HTPropGet(rightResult, value.doubleValue));
-            } else if (resultDataType == HTDataTypeInt) {
-                HTPropAssignWeak(result, value.boolValue,
-                                 HTPropGet(leftResult, value.intValue) != HTPropGet(rightResult, value.intValue));
-            } else if (resultDataType == HTDataTypeBool) {
-                HTPropAssignWeak(result, value.boolValue,
-                                 HTPropGet(leftResult, value.boolValue) != HTPropGet(rightResult, value.boolValue));
-            } else if (resultDataType == HTDataTypeString) {
-                unsigned char isEqual = HTStringEqual(HTPropGet(leftResult, stringValue), HTPropGet(rightResult, stringValue));
-                HTPropAssignWeak(result, value.boolValue, !isEqual);
+            if (HTVariableIsNull(leftResult) || HTVariableIsNull(rightResult)) {
+                if (HTVariableIsNull(leftResult)) {
+                    HTPropAssignWeak(result, value.boolValue,  !HTVariableIsNull(rightResult));
+                }
+                if (HTVariableIsNull(rightResult)) {
+                    HTPropAssignWeak(result, value.boolValue,  !HTVariableIsNull(leftResult));
+                }
+            } else {
+                if (resultDataType == HTDataTypeDouble) {
+                    HTPropAssignWeak(result, value.boolValue,
+                                     HTPropGet(leftResult, value.doubleValue) !=
+                                     HTPropGet(rightResult, value.doubleValue));
+                } else if (resultDataType == HTDataTypeInt) {
+                    HTPropAssignWeak(result, value.boolValue,
+                                     HTPropGet(leftResult, value.intValue) != HTPropGet(rightResult, value.intValue));
+                } else if (resultDataType == HTDataTypeBool) {
+                    HTPropAssignWeak(result, value.boolValue,
+                                     HTPropGet(leftResult, value.boolValue) != HTPropGet(rightResult, value.boolValue));
+                } else if (resultDataType == HTDataTypeString) {
+                    unsigned char isEqual = HTStringEqual(HTPropGet(leftResult, stringValue),
+                                                          HTPropGet(rightResult, stringValue));
+                    HTPropAssignWeak(result, value.boolValue, !isEqual);
+                }
+                HTPropAssignWeak(result, dataType, HTDataTypeBool);
             }
-            HTPropAssignWeak(result, dataType, HTDataTypeBool);
             break;
         }
         case HTExpressionBinaryOperatorLogicGreater: {
@@ -364,7 +387,8 @@ HTVariableRef HTExpressionEvaluatePostfixOperation(HTExpressionRef expr, HTRunti
                     HTTypeRetain(result);
                 } else {
                     // if no entry,insert a nil one
-                    result = HTVariableCreateWithTypeAndName(HTDataTypeNil, "_");
+                    result = HTVariableCreateWithTypeAndName(HTDataTypeVoid, "_");
+                    HTVariableSetNull(result);
                     HTDictSet(HTPropGet(sourceResult, dictValue), HTPropGet(opResult, stringValue), result);
                 }
             }

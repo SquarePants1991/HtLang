@@ -95,7 +95,7 @@ static void HTMapContainsKey(HTListRef parameters, HTVariableRef returnVal) {
     HTStringRef key = HTPropGet(keyVar, stringValue);
     if (map) {
         HTVariableRef var = HTDictGet(map, key);
-        if (var && HTPropGet(var, dataType) != HTDataTypeNil) {
+        if (var && !HTVariableIsNull(var)) {
             HTPropAssignWeak(returnVal, dataType, HTDataTypeBool);
             HTPropAssignWeak(returnVal, value.boolValue, 1);
             return;

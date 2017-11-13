@@ -446,6 +446,10 @@ primaryExpression
     {
         $$ = $1;
     }
+    | NIL
+    {
+        $$ = HTExpressionCreateNil();
+    }
     | arrayLiteral
     {
         $$ = HTExpressionCreateArray($1);
@@ -530,10 +534,6 @@ dataType
     | MAP
     {
         $$ = HTDataTypeMap;
-    }
-    | NIL
-    {
-        $$ = HTDataTypeNil;
     }
     ;
 

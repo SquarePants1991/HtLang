@@ -59,10 +59,14 @@ static HTStringRef HTStringConcat(HTStringRef left, HTStringRef right) {
 }
 
 static unsigned char HTStringEqual(HTStringRef left, HTStringRef right) {
-    if (left->impl->length == right->impl->length) {
-        if (strcmp(left->impl->characters, right->impl->characters) == 0) {
-            return 1;
+    if (left != NULL && right != NULL) {
+        if (left->impl->length == right->impl->length) {
+            if (strcmp(left->impl->characters, right->impl->characters) == 0) {
+                return 1;
+            }
         }
+    } else if (left == NULL && right == NULL) {
+        return (unsigned char) (left == right);
     }
     return 0;
 }
